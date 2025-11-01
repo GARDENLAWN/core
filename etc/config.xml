@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © GardenLawn. All rights reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <cms>
+            <wysiwyg>
+                <!-- Add webp, avif, svg to the list of allowed extensions for the WYSIWYG editor -->
+                <allowed_extensions>jpeg,jpg,png,gif,webp,avif,svg</allowed_extensions>
+            </wysiwyg>
+        </cms>
+        <system>
+            <media_storage_configuration>
+                <allowed_resources>
+                    <!-- This allows the file types to be viewed and uploaded in the Media Gallery UI -->
+                    <media_gallery_image_file_types>jpeg,jpg,png,gif,webp,avif,svg</media_gallery_image_file_types>
+                </allowed_resources>
+            </media_storage_configuration>
+        </system>
+    </default>
+</config>
