@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Magento_Config::config">
+                    <resource id="GardenLawn_Core::config" title="GardenLawn Core Config" sortOrder="100">
+                        <!-- Ten zasób kontroluje sekcję 'Database Cleanup' w konfiguracji -->
+                        <resource id="GardenLawn_Core::config_clean" title="GardenLawn Core Cleanup" sortOrder="10">
+                            <!-- Zasób wymagany przez GardenLawn\Core\Controller\Adminhtml\Config\CleanTest -->
+                            <resource id="GardenLawn_Core::run_cleaner_test" title="Run Config Cleaner Test" sortOrder="10"/>
+                            <!-- Zasób wymagany przez GardenLawn\Core\Controller\Adminhtml\Config\Clean -->
+                            <resource id="GardenLawn_Core::run_cleaner" title="Run Config Cleaner" sortOrder="20"/>
+                        </resource>
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

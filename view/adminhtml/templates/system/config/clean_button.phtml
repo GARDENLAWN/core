@@ -1,0 +1,27 @@
+<?php
+/**
+ * @var CleanButton $block
+ */
+
+use GardenLawn\Core\Block\Adminhtml\System\Config\CleanButton;
+
+?>
+<div class="gardenlawn-config-cleaner" style="display: flex; gap: 20px;">
+    <!-- Formularz dla Akcji: CLEANT_TEST (Testowy przebieg) -->
+    <form action="<?= $block->getCleanTestUrl() ?>" method="post" id="clean_test_form">
+        <input name="form_key" type="hidden" value="<?= $block->getFormKey() ?>"/>
+        <div class="test-button">
+            <?= $block->getTestRunButtonHtml() ?>
+            <p class="note">
+                <span><?= __('Click to check how many entries would be deleted without making changes.') ?></span></p>
+        </div>
+    </form>
+    <!-- Formularz dla Akcji: CLEAN (Pełne czyszczenie) -->
+    <form action="<?= $block->getCleanUrl() ?>" method="post" id="clean_run_form">
+        <input name="form_key" type="hidden" value="<?= $block->getFormKey() ?>"/>
+        <div class="clean-button">
+            <?= $block->getRunCleanerButtonHtml() ?>
+            <p class="note"><span><?= __('Click to permanently delete redundant config entries.') ?></span></p>
+        </div>
+    </form>
+</div>

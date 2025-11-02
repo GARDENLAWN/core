@@ -12,57 +12,76 @@ use Magento\Framework\DB\Adapter\AdapterInterface;
 use Magento\Framework\App\Cache\TypeListInterface;
 use Magento\Config\App\Config\Type\System as SystemConfig;
 use Magento\Store\Model\ScopeInterface;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use GardenLawn\Core\Model\Config\Cleaner;
 
 class CleanConfigCommand extends Command
 {
-    private const string DRY_RUN_OPTION = 'dry-run';
+    private const DRY_RUN_OPTION = 'dry-run';
+    private const DEBUG_LOG_FILE = 'gardenlawn_core_debug.log'; // <-- Nazwa naszego pliku logu
 
     /**
      * @var ResourceConnection
      */
-    private ResourceConnection $resourceConnection;
+    private $resourceConnection;
 
     /**
      * @var AdapterInterface
      */
-    private AdapterInterface $connection;
+    private $connection;
 
     /**
      * @var ScopeConfigInterface
      */
-    private ScopeConfigInterface $scopeConfig;
+    private $scopeConfig;
 
     /**
      * @var TypeListInterface
      */
-    private TypeListInterface $cacheTypeList;
+    private $cacheTypeList;
+
+    /**
+     * @var LoggerInterface
+     */
+    private $logger;
+
+    /**
+     * @var Cleaner
+     */
+    private $cleaner;
 
     /**
      * @param ResourceConnection $resourceConnection
      * @param ScopeConfigInterface $scopeConfig
      * @param TypeListInterface $cacheTypeList
+     * @param LoggerInterface $logger
      * @param string|null $name
      */
     public function __construct(
-        ResourceConnection $resourceConnection,
+        ResourceConnection   $resourceConnection,
         ScopeConfigInterface $scopeConfig,
-        TypeListInterface $cacheTypeList,
-        string $name = null
-    ) {
+        TypeListInterface    $cacheTypeList,
+        LoggerInterface      $logger,
+        Cleaner              $cleaner,
+        string               $name = null
+    )
+    {
         $this->resourceConnection = $resourceConnection;
         $this->scopeConfig = $scopeConfig;
         $this->cacheTypeList = $cacheTypeList;
+        $this->logger = $logger;
+        $this->cleaner = $cleaner;
         parent::__construct($name);
     }
 
     /**
      * @inheritdoc
      */
-    protected function configure(): void
+    protected function configure()
     {
         $this->setName('dev:config:clean-redundant');
         $this->setDescription('Removes redundant configuration values from core_config_data.');
@@ -75,81 +94,14 @@ class CleanConfigCommand extends Command
         parent::configure();
     }
 
-    /**
-     * @inheritdoc
-     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $isDryRun = $input->getOption(self::DRY_RUN_OPTION);
-        $this->connection = $this->resourceConnection->getConnection();
-        $tableName = $this->connection->getTableName('core_config_data');
-        $deletedCount = 0;
-        $idsToDelete = [];
 
-        if ($isDryRun) {
-            $output->writeln('<info>Dry run mode enabled. No data will be deleted.</info>');
-        }
+        $result = $this->cleaner->cleanRedundantConfig($isDryRun);
 
-        // --- Process website-level configs ---
-        $output->writeln('Processing website-level configurations...');
-        $websiteConfigs = $this->getConfigData(ScopeInterface::SCOPE_WEBSITES);
-
-        foreach ($websiteConfigs as $config) {
-            $defaultValue = $this->scopeConfig->getValue($config['path']); // Default scope
-            if ((string)$config['value'] === (string)$defaultValue) {
-                $idsToDelete[] = $config['config_id'];
-                $output->writeln(
-                    sprintf(
-                        '  - Found redundant entry for path: <comment>%s</comment> [ID: %d, Scope: website, Scope ID: %d]',
-                        $config['path'],
-                        $config['config_id'],
-                        $config['scope_id']
-                    )
-                );
-            }
-        }
-
-        // --- Process store-level configs ---
-        $output->writeln('Processing store-level configurations...');
-        $storeConfigs = $this->getConfigData(ScopeInterface::SCOPE_STORES);
-
-        foreach ($storeConfigs as $config) {
-            $websiteValue = $this->scopeConfig->getValue(
-                $config['path'],
-                ScopeInterface::SCOPE_WEBSITES,
-                $this->getWebsiteIdForStore($config['scope_id'])
-            );
-
-            if ((string)$config['value'] === (string)$websiteValue) {
-                $idsToDelete[] = $config['config_id'];
-                $output->writeln(
-                    sprintf(
-                        '  - Found redundant entry for path: <comment>%s</comment> [ID: %d, Scope: store, Scope ID: %d]',
-                        $config['path'],
-                        $config['config_id'],
-                        $config['scope_id']
-                    )
-                );
-            }
-        }
-
-        $deletedCount = count($idsToDelete);
-
-        if ($deletedCount > 0 && !$isDryRun) {
-            try {
-                $this->connection->delete($tableName, ['config_id IN (?)' => $idsToDelete]);
-                $output->writeln(sprintf('<info>Successfully deleted %d redundant configuration entries.</info>', $deletedCount));
-                $this->cacheTypeList->invalidate(SystemConfig::CACHE_TYPE);
-                $output->writeln('<info>Configuration cache has been flushed.</info>');
-            } catch (\Exception $e) {
-                $output->writeln('<error>An error occurred while deleting entries:</error>');
-                $output->writeln(sprintf('<error>%s</error>', $e->getMessage()));
-                return 1;
-            }
-        } elseif ($deletedCount > 0 && $isDryRun) {
-            $output->writeln(sprintf('<info>Dry run finished. Found %d entries to delete.</info>', $deletedCount));
-        } else {
-            $output->writeln('<info>No redundant configuration entries found.</info>');
+        foreach ($result['messages'] as $message) {
+            $output->writeln(sprintf('<info>%s</info>', $message));
         }
 
         return 0;
@@ -169,13 +121,10 @@ class CleanConfigCommand extends Command
     }
 
     /**
-     * Get website ID for a given store ID.
-     * Note: This is a simplified helper. A more robust solution might inject StoreManager.
-     *
      * @param int|string $storeId
      * @return int|null
      */
-    private function getWebsiteIdForStore(int|string $storeId): ?int
+    private function getWebsiteIdForStore($storeId): ?int
     {
         $select = $this->connection->select()->from(
             $this->connection->getTableName('store'),
