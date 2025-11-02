@@ -9,11 +9,11 @@ namespace GardenLawn\Core\Controller\Adminhtml\Config;
 use GardenLawn\Core\Model\Config\Cleaner;
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
+use Magento\Framework\Controller\Result\Redirect;
 use Magento\Framework\Controller\Result\RedirectFactory;
-use Magento\Framework\App\ResponseInterface;
 use Magento\Framework\Message\ManagerInterface;
 
-class CleanTest extends Action
+class CleanDry extends Action
 {
     /** @var RedirectFactory */
     protected $resultRedirectFactory;
@@ -37,23 +37,32 @@ class CleanTest extends Action
         $this->cleaner = $cleaner;
     }
 
-    public function execute(): ResponseInterface
+    public function execute(): Redirect
     {
         try {
+            // Wywołanie metody czyszczenia w trybie testowym (dry run: true)
             $result = $this->cleaner->cleanRedundantConfig(true);
             $message = __(
                 "Test run complete. Redundant entries that would be removed: %1.",
                 $result['deleted_count']
             );
-            // Użycie NoticeMessage dla testowego przebiegu
+            // Użycie NoticeMessage (żółte tło) dla testowego przebiegu
             $this->messageManager->addNoticeMessage($message);
         } catch (\Exception $e) {
             $this->messageManager->addErrorMessage(__('An error occurred during test run: %1', $e->getMessage()));
         }
 
-        // Przekierowanie z powrotem do strony konfiguracji
+        // Przekierowanie z powrotem do sekcji konfiguracji 'gardenlawn_core'
         $resultRedirect = $this->resultRedirectFactory->create();
-        return $resultRedirect->setPath('*/*/index');
+
+        // Poprawne przekierowanie do konkretnej sekcji konfiguracji
+        return $resultRedirect->setPath(
+            'adminhtml/system_config/edit',
+            [
+                'section' => 'gardenlawn_core',
+                '_current' => true // Zachowuje aktualny zakres (store/website) i klucz bezpieczeństwa
+            ]
+        );
     }
 
     protected function _isAllowed(): bool

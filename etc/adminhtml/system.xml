@@ -18,10 +18,12 @@
             </group>
             <group id="cleanup" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
                 <label>Database Cleanup</label>
-                <field id="clean_config_button" translate="label" type="button" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
-                    <label>Clean Redundant Config</label>
-                    <frontend_model>GardenLawn\Core\Block\Adminhtml\System\Config\CleanButton</frontend_model>
-                    <comment>This will remove redundant entries from the 'core_config_data' table.</comment>
+                <!-- Zmieniono ID pola na bardziej ogólne, pasujące do dwu-przyciskowej akcji -->
+                <field id="cleanup_actions" translate="label" type="button" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Cleanup Tools</label>
+                    <!-- Frontend model jest blokiem CleanButtons, który renderuje dwa przyciski POST -->
+                    <frontend_model>GardenLawn\Core\Block\Adminhtml\System\Config\CleanButtons</frontend_model>
+                    <comment>This section provides tools to remove redundant entries from the 'core_config_data' table. Use 'Dry Run' first.</comment>
                 </field>
             </group>
         </section>

@@ -1,9 +1,9 @@
 <?php
 /**
- * @var CleanButton $block
+ * @var CleanButtons $block
  */
 
-use GardenLawn\Core\Block\Adminhtml\System\Config\CleanButton;
+use GardenLawn\Core\Block\Adminhtml\System\Config\CleanButtons;
 
 ?>
 <div class="gardenlawn-config-cleaner" style="display: flex; gap: 20px;">
@@ -11,7 +11,7 @@ use GardenLawn\Core\Block\Adminhtml\System\Config\CleanButton;
     <form action="<?= $block->getCleanTestUrl() ?>" method="post" id="clean_test_form">
         <input name="form_key" type="hidden" value="<?= $block->getFormKey() ?>"/>
         <div class="test-button">
-            <?= $block->getTestRunButtonHtml() ?>
+            <?= $block->getRunDryButtonHtml() ?>
             <p class="note">
                 <span><?= __('Click to check how many entries would be deleted without making changes.') ?></span></p>
         </div>

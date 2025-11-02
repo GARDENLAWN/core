@@ -12,7 +12,7 @@ use Magento\Framework\Data\Form\Element\AbstractElement;
 use Magento\Backend\Block\Widget\Button;
 use Magento\Framework\Exception\LocalizedException;
 
-class CleanButton extends Field
+class CleanButtons extends Field
 {
     // Zmieniamy, aby użyć nowego szablonu, który będzie renderował dwa przyciski w formie POST
     protected $_template = 'GardenLawn_Core::system/config/clean_buttons.phtml';
@@ -42,11 +42,11 @@ class CleanButton extends Field
     }
 
     /**
-     * Zwraca URL dla akcji testowej (CleanTest.php)
+     * Zwraca URL dla akcji testowej (CleanDry.php)
      */
     public function getCleanTestUrl(): string
     {
-        return $this->getUrl('gardenlawn_core/config/cleantest');
+        return $this->getUrl('gardenlawn_core/config/clean_dry');
     }
 
     /**
@@ -68,14 +68,14 @@ class CleanButton extends Field
     }
 
     /**
-     * Generuje HTML dla przycisku "Test Run"
+     * Generuje HTML dla przycisku "Run Dry"
      * @throws LocalizedException
      */
-    public function getTestRunButtonHtml(): string
+    public function getRunDryButtonHtml(): string
     {
         $button = $this->getLayout()->createBlock(Button::class)
             ->setData([
-                'id' => 'test_run_button',
+                'id' => 'dry_run_button',
                 'label' => __('Dry Run (Test)'),
                 'class' => 'action-secondary',
                 'title' => __('Calculates redundant entries without deleting.'),

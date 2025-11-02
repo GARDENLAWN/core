@@ -9,8 +9,8 @@ namespace GardenLawn\Core\Controller\Adminhtml\Config;
 use GardenLawn\Core\Model\Config\Cleaner;
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
+use Magento\Framework\Controller\Result\Redirect;
 use Magento\Framework\Controller\Result\RedirectFactory;
-use Magento\Framework\App\ResponseInterface;
 use Magento\Framework\Message\ManagerInterface;
 
 class Clean extends Action
@@ -41,7 +41,7 @@ class Clean extends Action
         return $this->_authorization->isAllowed('GardenLawn_Core::run_cleaner');
     }
 
-    public function execute(): ResponseInterface
+    public function execute(): Redirect
     {
         try {
             $result = $this->cleaner->cleanRedundantConfig();
@@ -56,8 +56,17 @@ class Clean extends Action
             $this->messageManager->addErrorMessage(__('An error occurred during cleanup: %1', $e->getMessage()));
         }
 
-        // Przekierowanie z powrotem do strony konfiguracji
+        // Przekierowanie z powrotem do sekcji konfiguracji 'gardenlawn_core'
         $resultRedirect = $this->resultRedirectFactory->create();
-        return $resultRedirect->setPath('*/*/index');
+
+        // Używamy 'adminhtml/system_config/edit' (co jest domyślnym działaniem dla '*/*/index'),
+        // ale z sekcją i parametrem '_current' aby zachować kontekst i klucz bezpieczeństwa.
+        return $resultRedirect->setPath(
+            'adminhtml/system_config/edit',
+            [
+                'section' => 'gardenlawn_core',
+                '_current' => true // Zachowuje current store/website scope i klucz bezpieczeństwa
+            ]
+        );
     }
 }
