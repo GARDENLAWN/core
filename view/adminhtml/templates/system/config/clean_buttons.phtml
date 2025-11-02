@@ -8,6 +8,7 @@ use GardenLawn\Core\Block\Adminhtml\System\Config\CleanButtons;
 ?>
 <div class="gardenlawn-config-cleaner" style="display: flex; gap: 20px;">
     <!-- Formularz dla Akcji: CLEANT_TEST (Testowy przebieg) -->
+    <form></form>
     <form action="<?= $block->getCleanTestUrl() ?>" method="post" id="clean_test_form">
         <input name="form_key" type="hidden" value="<?= $block->getFormKey() ?>"/>
         <div class="test-button">

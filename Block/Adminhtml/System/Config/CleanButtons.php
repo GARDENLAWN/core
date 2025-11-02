@@ -46,7 +46,7 @@ class CleanButtons extends Field
      */
     public function getCleanTestUrl(): string
     {
-        return $this->getUrl('gardenlawn_core/config/clean_dry');
+        return $this->getUrl('gardenlawn_core/config/cleandry');
     }
 
     /**

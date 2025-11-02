@@ -13,7 +13,7 @@ use Magento\Framework\Controller\Result\Redirect;
 use Magento\Framework\Controller\Result\RedirectFactory;
 use Magento\Framework\Message\ManagerInterface;
 
-class CleanDry extends Action
+class Cleandry extends Action
 {
     /** @var RedirectFactory */
     protected $resultRedirectFactory;
