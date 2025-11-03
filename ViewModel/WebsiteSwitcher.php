@@ -3,42 +3,68 @@ declare(strict_types=1);
 
 namespace GardenLawn\Core\ViewModel;
 
-use Magento\Framework\Exception\NoSuchEntityException;
+use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
+use Magento\Store\Api\Data\WebsiteInterface;
 use Magento\Store\Model\StoreManagerInterface;
+use Magento\Framework\UrlInterface;
 
 class WebsiteSwitcher implements ArgumentInterface
 {
     private StoreManagerInterface $storeManager;
+    private UrlInterface $urlBuilder;
 
-    public function __construct(StoreManagerInterface $storeManager)
-    {
+    public function __construct(
+        StoreManagerInterface $storeManager,
+        UrlInterface $urlBuilder
+    ) {
         $this->storeManager = $storeManager;
+        $this->urlBuilder = $urlBuilder;
     }
 
     /**
-     * @return array
-     * @throws NoSuchEntityException
+     * Pobierz wszystkie dostępne website'y
+     *
+     * @return WebsiteInterface[]
      */
-    public function getWebsites(): array
+    public function getAvailableWebsites(): array
     {
-        $websites = [];
-        $currentWebsiteId = $this->storeManager->getCurrentWebsite()->getId();
+        $allWebsites = $this->storeManager->getWebsites();
 
-        // Pomiń stronę 'admin' (ID 0)
-        foreach ($this->storeManager->getWebsites(false) as $website) {
-            // Pokaż tylko te trzy strony, o które prosiłeś
-            if (!in_array($website->getCode(), ['gardenlawn', 'amrobots', 'finnpolska'])) {
-                continue;
+        return array_filter(
+            $allWebsites,
+            function (WebsiteInterface $website) {
+                return $website->getCode() !== 'base';
             }
+        );
+    }
 
-            $websites[] = [
-                'name' => $website->getName(),
-                'url' => $website->getBaseUrl(),
-                'is_current' => $website->getId() === $currentWebsiteId
-            ];
+    /**
+     * Pobierz aktualny website
+     *
+     * @return WebsiteInterface
+     * @throws LocalizedException
+     */
+    public function getCurrentWebsite(): WebsiteInterface
+    {
+        return $this->storeManager->getWebsite();
+    }
+
+    /**
+     * Pobierz URL dla danego website'u
+     *
+     * @param WebsiteInterface $website
+     * @return string
+     * @throws LocalizedException
+     */
+    public function getWebsiteUrl(WebsiteInterface $website): string
+    {
+        $defaultStore = $this->storeManager->getWebsite($website->getId())->getDefaultStore();
+
+        if (!$defaultStore) {
+            return '#';
         }
 
-        return $websites;
+        return $defaultStore->getBaseUrl();
     }
 }
