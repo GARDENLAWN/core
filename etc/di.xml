@@ -19,4 +19,7 @@
             </argument>
         </arguments>
     </type>
+    <type name="Magento\Framework\Image\Adapter\Gd2\Interceptor">
+        <plugin name="gardenlawn_core_image_webp_generator" type="GardenLawn\Core\Plugin\Image\Adapter\Gd2Plugin" sortOrder="10" />
+    </type>
 </config>
