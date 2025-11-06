@@ -3,7 +3,8 @@
 namespace GardenLawn\Core\Plugin\Image\Adapter;
 
 use Exception;
-use Magento\Framework\Image\Adapter\Gd2\Interceptor;
+use Magento\Framework\Exception\FileSystemException;
+use Magento\Framework\Image\Adapter\Gd2 as Gd2Adapter;
 use Magento\Framework\Filesystem\Driver\File;
 use Psr\Log\LoggerInterface;
 use Magento\Framework\Image\Factory as ImageFactory;
@@ -64,87 +65,118 @@ class Gd2Plugin
     /**
      * After save plugin to generate WebP image
      *
-     * @param Interceptor $subject
-     * @param string $result
+     * @param Gd2Adapter $subject
+     * @param mixed $result
      * @param string|null $destination
-     * @return string
+     * @param string|null $newName
+     * @return mixed
+     * @throws FileSystemException
      */
-    public function afterSave(Interceptor $subject, string $result, ?string $destination = null): string
+    public function afterSave(Gd2Adapter $subject, mixed $result, string $destination = null, string $newName = null): mixed
     {
-        if (!$destination) {
-            $destination = $result;
-        }
-
-        $extension = strtolower(pathinfo($destination, PATHINFO_EXTENSION));
-
-        // Only process if the original image is JPEG, JPG or PNG
-        if (in_array($extension, ['jpeg', 'jpg', 'png'])) {
+        // Resolve final file path written by Gd2::save()
+        $finalPath = null;
+        if ($destination) {
             try {
-                // Sprawdź, czy plik istnieje lokalnie przed próbą otwarcia
-                if (!$this->fileDriver->isExists($destination)) {
-                    $this->logger->warning('Original image file not found for WebP conversion: ' . $destination);
-                    return $result;
-                }
-
-                $imageInfo = getimagesize($destination);
-                if ($imageInfo === false) {
-                    $this->logger->error('Could not get image size for ' . $destination);
-                    return $result;
-                }
-
-                $fileType = $imageInfo[2]; // IMAGETYPE_JPEG, IMAGETYPE_PNG, etc.
-
-                $createFunction = null;
-                switch ($fileType) {
-                    case IMAGETYPE_JPEG:
-                        $createFunction = 'imagecreatefromjpeg';
-                        break;
-                    case IMAGETYPE_PNG:
-                        $createFunction = 'imagecreatefrompng';
-                        break;
-                    case IMAGETYPE_GIF:
-                        $createFunction = 'imagecreatefromgif';
-                        break;
-                    default:
-                        $this->logger->warning('Unsupported MIME type for WebP conversion: ' . $imageInfo['mime'] . ' for file: ' . $destination);
-                        return $result;
-                }
-
-                if ($createFunction && function_exists($createFunction)) {
-                    $sourceImageResource = $createFunction($destination);
-                    if ($sourceImageResource) {
-                        $webpDestination = $this->getWebpDestination($destination);
-                        $quality = 80; // Możesz to uczynić konfigurowalnym
-
-                        // Utwórz nowy obraz GD dla WebP
-                        $webpResource = imagecreatetruecolor(imagesx($sourceImageResource), imagesy($sourceImageResource));
-                        // Zachowaj przezroczystość dla PNG
-                        if ($fileType === IMAGETYPE_PNG) {
-                            imagealphablending($webpResource, false);
-                            imagesavealpha($webpResource, true);
-                        }
-                        imagecopy($webpResource, $sourceImageResource, 0, 0, 0, 0, imagesx($sourceImageResource), imagesy($sourceImageResource));
-
-                        // Zapisz jako WebP
-                        imagewebp($webpResource, $webpDestination, $quality);
-                        imagedestroy($webpResource);
-                        imagedestroy($sourceImageResource); // Zwolnij zasób
-
-                        $this->logger->info('Generated WebP image: ' . $webpDestination);
-
-                        // Oblicz ścieżkę względną do pliku w katalogu mediów
-                        $relativeWebpPath = $this->mediaDirectoryRead->getRelativePath($webpDestination);
-
-                        $this->mediaStorageHelper->saveFile($relativeWebpPath);
-                        $this->logger->info('Uploaded WebP image to S3: ' . $relativeWebpPath);
-
-                        // Usuń tymczasowy plik lokalny po przesłaniu do S3
-                        $this->fileDriver->deleteFile($webpDestination);
-                    }
+                if ($this->fileDriver->isDirectory($destination) && $newName) {
+                    $finalPath = rtrim($destination, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $newName;
+                } else {
+                    $finalPath = $destination;
                 }
             } catch (Exception $e) {
-                $this->logger->error('Error generating or uploading WebP image for ' . $destination . ': ' . $e->getMessage());
+                // If isDirectory throws for non-existing path, assume it's a file path
+                $finalPath = $destination;
             }
+        } else {
+            // When save(null, null) is used, we cannot reliably know the final path here.
+            $this->logger->debug('Gd2Plugin: save() called without destination/newName – skipping WebP generation.');
+            return $result;
+        }
+
+        // Only proceed if we can locate the output file
+        if (!$this->fileDriver->isExists($finalPath)) {
+            $this->logger->warning('Gd2Plugin: output image not found for WebP conversion: ' . $finalPath);
+            return $result;
+        }
+
+        // Skip if WebP already exists
+        $webpDestination = $this->getWebpDestination($finalPath);
+        if ($this->fileDriver->isExists($webpDestination)) {
+            return $result;
+        }
+
+        // Ensure environment supports WebP
+        if (!function_exists('imagewebp')) {
+            $this->logger->warning('Gd2Plugin: GD does not support WebP. Skipping WebP generation.');
+            return $result;
+        }
+
+        try {
+            $imageInfo = @getimagesize($finalPath);
+            if ($imageInfo === false) {
+                $this->logger->error('Gd2Plugin: Could not get image size for ' . $finalPath);
+                return $result;
+            }
+
+            $fileType = $imageInfo[2]; // IMAGETYPE_*
+            switch ($fileType) {
+                case IMAGETYPE_JPEG:
+                    $createFunction = 'imagecreatefromjpeg';
+                    break;
+                case IMAGETYPE_PNG:
+                    $createFunction = 'imagecreatefrompng';
+                    break;
+                case IMAGETYPE_GIF:
+                    $createFunction = 'imagecreatefromgif';
+                    break;
+                default:
+                    $this->logger->debug('Gd2Plugin: Unsupported image type for WebP conversion (' . ($imageInfo['mime'] ?? 'unknown') . ') for file: ' . $finalPath);
+                    return $result;
+            }
+
+            if (!function_exists($createFunction)) {
+                $this->logger->warning('Gd2Plugin: Missing GD function ' . $createFunction . ' – skipping WebP.');
+                return $result;
+            }
+
+            $sourceImageResource = @$createFunction($finalPath);
+            if (!$sourceImageResource) {
+                $this->logger->error('Gd2Plugin: Failed to create image resource for ' . $finalPath);
+                return $result;
+            }
+
+            $width = imagesx($sourceImageResource);
+            $height = imagesy($sourceImageResource);
+            $webpResource = imagecreatetruecolor($width, $height);
+
+            if ($fileType === IMAGETYPE_PNG || $fileType === IMAGETYPE_GIF) {
+                imagealphablending($webpResource, false);
+                imagesavealpha($webpResource, true);
+            }
+
+            imagecopy($webpResource, $sourceImageResource, 0, 0, 0, 0, $width, $height);
+
+            $quality = 89; // could be made configurable
+            if (!@imagewebp($webpResource, $webpDestination, $quality)) {
+                $this->logger->error('Gd2Plugin: imagewebp() failed for ' . $finalPath);
+            } else {
+                $this->logger->info('Gd2Plugin: Generated WebP image: ' . $webpDestination);
+
+                // Try to push to remote storage if configured for DB storage helper
+                try {
+                    $relativeWebpPath = $this->mediaDirectoryRead->getRelativePath($webpDestination);
+                    $this->mediaStorageHelper->saveFile($relativeWebpPath);
+                    $this->logger->info('Gd2Plugin: Saved WebP via media storage helper: ' . $relativeWebpPath);
+                } catch (Exception $e) {
+                    // Non-fatal: environment may not use DB storage
+                    $this->logger->debug('Gd2Plugin: media storage saveFile skipped/failed: ' . $e->getMessage());
+                }
+            }
+
+            imagedestroy($webpResource);
+            imagedestroy($sourceImageResource);
+        } catch (Exception $e) {
+            $this->logger->error('Gd2Plugin: Error generating or uploading WebP image for ' . $finalPath . ': ' . $e->getMessage());
         }
 
         return $result;
