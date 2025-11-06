@@ -40,6 +40,16 @@ class Gd2Plugin
     protected MagentoFilesystem\Directory\ReadInterface $mediaDirectoryRead;
 
     /**
+     * @var MagentoFilesystem\Directory\WriteInterface
+     */
+    protected MagentoFilesystem\Directory\WriteInterface $mediaDirectoryWrite;
+
+    /**
+     * @var DirectoryList
+     */
+    protected DirectoryList $dirList;
+
+    /**
      * Gd2Plugin constructor.
      * @param File $fileDriver
      * @param LoggerInterface $logger
@@ -52,7 +62,8 @@ class Gd2Plugin
         LoggerInterface   $logger,
         ImageFactory      $imageFactory,
         Database          $mediaStorageHelper,
-        MagentoFilesystem $filesystem
+        MagentoFilesystem $filesystem,
+        DirectoryList     $dirList
     )
     {
         $this->fileDriver = $fileDriver;
@@ -60,6 +71,8 @@ class Gd2Plugin
         $this->imageFactory = $imageFactory;
         $this->mediaStorageHelper = $mediaStorageHelper;
         $this->mediaDirectoryRead = $filesystem->getDirectoryRead(DirectoryList::MEDIA);
+        $this->mediaDirectoryWrite = $filesystem->getDirectoryWrite(DirectoryList::MEDIA);
+        $this->dirList = $dirList;
     }
 
     /**
@@ -99,12 +112,6 @@ class Gd2Plugin
             return $result;
         }
 
-        // Skip if WebP already exists
-        $webpDestination = $this->getWebpDestination($finalPath);
-        if ($this->fileDriver->isExists($webpDestination)) {
-            return $result;
-        }
-
         // Ensure environment supports WebP
         if (!function_exists('imagewebp')) {
             $this->logger->warning('Gd2Plugin: GD does not support WebP. Skipping WebP generation.');
@@ -112,13 +119,36 @@ class Gd2Plugin
         }
 
         try {
+            // Determine relative path under MEDIA (handles pub/media and var/tmp/media)
+            $mediaRootPath = rtrim($this->mediaDirectoryRead->getAbsolutePath(), DIRECTORY_SEPARATOR);
+            $tmpMediaRoot  = rtrim($this->dirList->getPath(DirectoryList::VAR_DIR)
+                . DIRECTORY_SEPARATOR . 'tmp' . DIRECTORY_SEPARATOR . 'media', DIRECTORY_SEPARATOR);
+
+            $relativeUnderMedia = null;
+            if (strpos($finalPath, $mediaRootPath . DIRECTORY_SEPARATOR) === 0) {
+                $relativeUnderMedia = ltrim(substr($finalPath, strlen($mediaRootPath)), DIRECTORY_SEPARATOR);
+            } elseif (strpos($finalPath, $tmpMediaRoot . DIRECTORY_SEPARATOR) === 0) {
+                $relativeUnderMedia = ltrim(substr($finalPath, strlen($tmpMediaRoot)), DIRECTORY_SEPARATOR);
+            } else {
+                $this->logger->debug('Gd2Plugin: Unrecognized base path for ' . $finalPath);
+                return $result;
+            }
+
+            // Prepare destination relative WebP path
+            $relativeWebpPath = preg_replace('/\.[^.]+$/', '.webp', $relativeUnderMedia);
+
+            // Skip if WebP already exists (via MEDIA adapter)
+            if ($this->mediaDirectoryWrite->isExist($relativeWebpPath)) {
+                return $result;
+            }
+
+            // Load source
             $imageInfo = @getimagesize($finalPath);
             if ($imageInfo === false) {
                 $this->logger->error('Gd2Plugin: Could not get image size for ' . $finalPath);
                 return $result;
             }
-
-            $fileType = $imageInfo[2]; // IMAGETYPE_*
+            $fileType = $imageInfo[2];
             switch ($fileType) {
                 case IMAGETYPE_JPEG:
                     $createFunction = 'imagecreatefromjpeg';
@@ -133,7 +163,6 @@ class Gd2Plugin
                     $this->logger->debug('Gd2Plugin: Unsupported image type for WebP conversion (' . ($imageInfo['mime'] ?? 'unknown') . ') for file: ' . $finalPath);
                     return $result;
             }
-
             if (!function_exists($createFunction)) {
                 $this->logger->warning('Gd2Plugin: Missing GD function ' . $createFunction . ' – skipping WebP.');
                 return $result;
@@ -148,35 +177,29 @@ class Gd2Plugin
             $width = imagesx($sourceImageResource);
             $height = imagesy($sourceImageResource);
             $webpResource = imagecreatetruecolor($width, $height);
-
             if ($fileType === IMAGETYPE_PNG || $fileType === IMAGETYPE_GIF) {
                 imagealphablending($webpResource, false);
                 imagesavealpha($webpResource, true);
             }
-
             imagecopy($webpResource, $sourceImageResource, 0, 0, 0, 0, $width, $height);
 
-            $quality = 89; // could be made configurable
-            if (!@imagewebp($webpResource, $webpDestination, $quality)) {
+            // Render to buffer and write through MEDIA FS (S3-aware)
+            $quality = 89; // configurable later
+            ob_start();
+            $ok = @imagewebp($webpResource, null, $quality);
+            $webpBinary = ob_get_clean();
+            if (!$ok || $webpBinary === false) {
                 $this->logger->error('Gd2Plugin: imagewebp() failed for ' . $finalPath);
             } else {
-                $this->logger->info('Gd2Plugin: Generated WebP image: ' . $webpDestination);
-
-                // Try to push to remote storage if configured for DB storage helper
-                try {
-                    $relativeWebpPath = $this->mediaDirectoryRead->getRelativePath($webpDestination);
-                    $this->mediaStorageHelper->saveFile($relativeWebpPath);
-                    $this->logger->info('Gd2Plugin: Saved WebP via media storage helper: ' . $relativeWebpPath);
-                } catch (Exception $e) {
-                    // Non-fatal: environment may not use DB storage
-                    $this->logger->debug('Gd2Plugin: media storage saveFile skipped/failed: ' . $e->getMessage());
-                }
+                $this->mediaDirectoryWrite->create(dirname($relativeWebpPath));
+                $this->mediaDirectoryWrite->writeFile($relativeWebpPath, $webpBinary);
+                $this->logger->info('Gd2Plugin: Generated WebP via media FS: ' . $relativeWebpPath);
             }
 
             imagedestroy($webpResource);
             imagedestroy($sourceImageResource);
         } catch (Exception $e) {
-            $this->logger->error('Gd2Plugin: Error generating or uploading WebP image for ' . $finalPath . ': ' . $e->getMessage());
+            $this->logger->error('Gd2Plugin: Error generating WebP for ' . $finalPath . ': ' . $e->getMessage());
         }
 
         return $result;
