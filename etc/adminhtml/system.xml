@@ -23,7 +23,7 @@
                     <label>Cleanup Tools</label>
                     <!-- Frontend model jest blokiem CleanButtons, który renderuje dwa przyciski POST -->
                     <frontend_model>GardenLawn\Core\Block\Adminhtml\System\Config\CleanButtons</frontend_model>
-                    <comment>This section provides tools to remove redundant entries from the 'core_config_data' table. Use 'Dry Run' first.</comment>
+                    <tooltip>This section provides tools to remove redundant entries from the 'core_config_data' table. Use 'Dry Run' first.</tooltip>
                 </field>
             </group>
         </section>

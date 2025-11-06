@@ -6,7 +6,6 @@ declare(strict_types=1);
 
 namespace GardenLawn\Core\Model\Config;
 
-use Hyva\Checkout\ViewModel\SystemConfig;
 use Magento\Framework\App\Cache\Type\Config;
 use Magento\Framework\App\Cache\TypeListInterface;
 use Magento\Framework\App\Config\ScopeConfigInterface;
@@ -14,7 +13,9 @@ use Magento\Framework\App\ResourceConnection;
 use Magento\Framework\DB\Adapter\AdapterInterface;
 use Magento\Store\Model\ScopeInterface;
 use Zend_Log;
+use Zend_Log_Exception;
 use Zend_Log_Writer_Stream;
+use Exception;
 
 class Cleaner
 {
@@ -32,9 +33,6 @@ class Cleaner
     /** @var TypeListInterface */
     private TypeListInterface $cacheTypeList;
 
-    /** @var Zend_Log */
-    private Zend_Log $logger;
-
     public function __construct(
         ResourceConnection $resourceConnection,
         ScopeConfigInterface $scopeConfig,
@@ -43,11 +41,10 @@ class Cleaner
         $this->resourceConnection = $resourceConnection;
         $this->scopeConfig = $scopeConfig;
         $this->cacheTypeList = $cacheTypeList;
-        // Logger jest inicjowany w cleanRedundantConfig()
     }
 
     /**
-     * @throws \Zend_Log_Exception
+     * @throws Zend_Log_Exception
      */
     public function cleanRedundantConfig(bool $isDryRun = false): array
     {
@@ -55,9 +52,8 @@ class Cleaner
         $writer = new Zend_Log_Writer_Stream(BP . '/var/log/' . self::DEBUG_LOG_FILE);
         $logger = new Zend_Log();
         $logger->addWriter($writer);
-        $this->logger = $logger;
 
-        $this->logger->info('--- Starting Redundant Config Cleanup ---');
+        $logger->info('--- Starting Redundant Config Cleanup ---');
 
         $this->connection = $this->resourceConnection->getConnection();
         $tableName = $this->connection->getTableName('core_config_data');
@@ -66,7 +62,7 @@ class Cleaner
 
         if ($isDryRun) {
             $messages[] = 'Dry run mode enabled. No data will be deleted.';
-            $this->logger->info('Dry run mode enabled.');
+            $logger->info('Dry run mode enabled.');
         }
 
         // Process default-level configs (usuwanie wartości, które są puste/null w bazie)
@@ -81,7 +77,7 @@ class Cleaner
             if (empty($config['value'])) {
                 $idsToDelete[] = $config['config_id'];
                 $messages[] = sprintf('Found redundant (empty value) default entry for path: %s [ID: %d]', $config['path'], $config['config_id']);
-                $this->logger->info(sprintf("Marked for deletion (ID: %d) as empty default value | Value: '%s'", $config['config_id'], $config['value']));
+                $logger->info(sprintf("Marked for deletion (ID: %d) as empty default value | Value: '%s'", $config['config_id'], $config['value']));
             }
         }
 
@@ -98,7 +94,7 @@ class Cleaner
             if ((string)$config['value'] === (string)$defaultValue) {
                 $idsToDelete[] = $config['config_id'];
                 $messages[] = sprintf('Found redundant entry for path: %s [ID: %d]', $config['path'], $config['config_id']);
-                $this->logger->info(sprintf("Marked for deletion (ID: %d) | Value: '%s'", $config['config_id'], $config['value']));
+                $logger->info(sprintf("Marked for deletion (ID: %d) | Value: '%s'", $config['config_id'], $config['value']));
             }
         }
 
@@ -110,7 +106,7 @@ class Cleaner
             $websiteId = $this->getWebsiteIdForStore((string)$config['scope_id']);
 
             if ($websiteId === null) {
-                $this->logger->warning(sprintf("Skipping store config (ID: %d) because website ID not found.", $config['config_id']));
+                $logger->warn(sprintf("Skipping store config (ID: %d) because website ID not found.", $config['config_id']));
                 continue;
             }
 
@@ -122,23 +118,23 @@ class Cleaner
             if ((string)$config['value'] === (string)$websiteValue) {
                 $idsToDelete[] = $config['config_id'];
                 $messages[] = sprintf('Found redundant entry for path: %s [ID: %d]', $config['path'], $config['config_id']);
-                $this->logger->info(sprintf("Marked for deletion (ID: %d) | Value: '%s'", $config['config_id'], $config['value']));
+                $logger->info(sprintf("Marked for deletion (ID: %d) | Value: '%s'", $config['config_id'], $config['value']));
             }
         }
 
         $deletedCount = count($idsToDelete);
-        $this->logger->info(sprintf('Total entries marked for deletion: %d', $deletedCount));
+        $logger->info(sprintf('Total entries marked for deletion: %d', $deletedCount));
 
         if ($deletedCount > 0 && !$isDryRun) {
             try {
                 $this->connection->delete($tableName, ['config_id IN (?)' => $idsToDelete]);
                 $messages[] = sprintf('Successfully deleted %d redundant configuration entries.', $deletedCount);
-                $this->logger->info('Successfully deleted entries from database.');
-                $this->cacheTypeList->invalidate(Config::TYPE_IDENTIFIER);;
+                $logger->info('Successfully deleted entries from database.');
+                $this->cacheTypeList->invalidate(Config::TYPE_IDENTIFIER);
                 $messages[] = 'Configuration cache has been flushed.';
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 $messages[] = 'An error occurred while deleting entries: ' . $e->getMessage();
-                $this->logger->error('An error occurred: ' . $e->getMessage());
+                $logger->err('An error occurred: ' . $e->getMessage());
             }
         } elseif ($deletedCount > 0 && $isDryRun) {
             $messages[] = sprintf('Dry run finished. Found %d entries to delete.', $deletedCount);
@@ -146,7 +142,7 @@ class Cleaner
             $messages[] = 'No redundant configuration entries found.';
         }
 
-        $this->logger->info('--- Finished ---');
+        $logger->info('--- Finished ---');
 
         return ['deleted_count' => $deletedCount, 'messages' => $messages];
     }

@@ -4,6 +4,7 @@
  */
 
 use GardenLawn\Core\Block\Adminhtml\System\Config\CleanButtons;
+use Magento\Framework\Exception\LocalizedException;
 
 ?>
 <div class="gardenlawn-config-cleaner" style="display: flex; gap: 20px;">
@@ -12,7 +13,11 @@ use GardenLawn\Core\Block\Adminhtml\System\Config\CleanButtons;
     <form action="<?= $block->getCleanTestUrl() ?>" method="post" id="clean_test_form">
         <input name="form_key" type="hidden" value="<?= $block->getFormKey() ?>"/>
         <div class="test-button">
-            <?= $block->getRunDryButtonHtml() ?>
+            <?php try {
+                echo $block->getRunDryButtonHtml();
+            } catch (LocalizedException $e) {
+                echo __('Error generating button: %1', $e->getMessage());
+            } ?>
             <p class="note">
                 <span><?= __('Click to check how many entries would be deleted without making changes.') ?></span></p>
         </div>
@@ -21,7 +26,11 @@ use GardenLawn\Core\Block\Adminhtml\System\Config\CleanButtons;
     <form action="<?= $block->getCleanUrl() ?>" method="post" id="clean_run_form">
         <input name="form_key" type="hidden" value="<?= $block->getFormKey() ?>"/>
         <div class="clean-button">
-            <?= $block->getRunCleanerButtonHtml() ?>
+            <?php try {
+                echo $block->getRunCleanerButtonHtml();
+            } catch (LocalizedException $e) {
+                echo __('Error generating button: %1', $e->getMessage());
+            } ?>
             <p class="note"><span><?= __('Click to permanently delete redundant config entries.') ?></span></p>
         </div>
     </form>

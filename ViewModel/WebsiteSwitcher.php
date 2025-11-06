@@ -7,19 +7,15 @@ use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
 use Magento\Store\Api\Data\WebsiteInterface;
 use Magento\Store\Model\StoreManagerInterface;
-use Magento\Framework\UrlInterface;
 
 class WebsiteSwitcher implements ArgumentInterface
 {
     private StoreManagerInterface $storeManager;
-    private UrlInterface $urlBuilder;
 
     public function __construct(
-        StoreManagerInterface $storeManager,
-        UrlInterface $urlBuilder
+        StoreManagerInterface $storeManager
     ) {
         $this->storeManager = $storeManager;
-        $this->urlBuilder = $urlBuilder;
     }
 
     /**

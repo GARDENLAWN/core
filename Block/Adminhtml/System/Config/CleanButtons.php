@@ -24,7 +24,7 @@ class CleanButtons extends Field
 
     public function render(AbstractElement $element): string
     {
-        $element->unsScope()->unsCanUseWebsiteValue()->unsCanUseDefaultValue();
+        $element->setScope(false)->unsCanUseWebsiteValue()->unsCanUseDefaultValue();
         return parent::render($element);
     }
 
