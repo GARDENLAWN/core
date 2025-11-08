@@ -19,8 +19,4 @@
             </argument>
         </arguments>
     </type>
-    <preference for="Magento\Framework\Image\Adapter\Gd2" type="GardenLawn\Core\Image\Adapter\Gd2" />
-    <type name="Magento\Framework\Image\Adapter\Gd2">
-        <plugin name="gardenlawn_core_image_webp_generator" type="GardenLawn\Core\Plugin\Image\Adapter\Gd2Plugin" sortOrder="10" />
-    </type>
 </config>
