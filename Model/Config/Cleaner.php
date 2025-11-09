@@ -65,19 +65,19 @@ class Cleaner
             $logger->info('Dry run mode enabled.');
         }
 
-        // Process default-level configs (usuwanie wartości, które są puste/null w bazie)
-        $messages[] = 'Processing default-level configurations (cleaning empty values)...';
+        // Process default-level configs (usuwanie wartości, które są null w bazie)
+        $messages[] = 'Processing default-level configurations (cleaning null values)...';
         $defaultConfigs = $this->getConfigData(ScopeConfigInterface::SCOPE_TYPE_DEFAULT);
 
         foreach ($defaultConfigs as $config) {
             // UWAGA: Czyste wpisy w zakresie 'default' są rzadko usuwane,
             // ponieważ stanowią podstawę konfiguracji.
-            // Usuwamy tylko te, które mają pustą wartość, zakładając, że
-            // pusta wartość oznacza brak intencji ustawienia.
-            if (empty($config['value'])) {
+            // Usuwamy tylko te, które mają wartość null, zakładając, że
+            // wartość null oznacza brak intencji ustawienia.
+            if ($config['value'] === null) {
                 $idsToDelete[] = $config['config_id'];
-                $messages[] = sprintf('Found redundant (empty value) default entry for path: %s [ID: %d]', $config['path'], $config['config_id']);
-                $logger->info(sprintf("Marked for deletion (ID: %d) as empty default value | Value: '%s'", $config['config_id'], $config['value']));
+                $messages[] = sprintf('Found redundant (null value) default entry for path: %s [ID: %d]', $config['path'], $config['config_id']);
+                $logger->info(sprintf("Marked for deletion (ID: %d) as null default value | Value: '%s'", $config['config_id'], $config['value']));
             }
         }
 
@@ -90,8 +90,7 @@ class Cleaner
             $defaultValue = $this->scopeConfig->getValue($config['path']);
 
             // PORÓWNANIE: Czy wartość z bazy jest identyczna z wartością domyślną?
-            // Używamy rzutowania do stringa, aby obsłużyć przypadki null/''
-            if ((string)$config['value'] === (string)$defaultValue) {
+            if ($config['value'] === $defaultValue) {
                 $idsToDelete[] = $config['config_id'];
                 $messages[] = sprintf('Found redundant entry for path: %s [ID: %d]', $config['path'], $config['config_id']);
                 $logger->info(sprintf("Marked for deletion (ID: %d) | Value: '%s'", $config['config_id'], $config['value']));
@@ -114,8 +113,7 @@ class Cleaner
             $websiteValue = $this->scopeConfig->getValue($config['path'], ScopeInterface::SCOPE_WEBSITES, $websiteId);
 
             // PORÓWNANIE: Czy wartość z bazy jest identyczna z wartością nadrzędną (website)?
-            // Używamy rzutowania do stringa, aby obsłużyć przypadki null/''
-            if ((string)$config['value'] === (string)$websiteValue) {
+            if ($config['value'] === $websiteValue) {
                 $idsToDelete[] = $config['config_id'];
                 $messages[] = sprintf('Found redundant entry for path: %s [ID: %d]', $config['path'], $config['config_id']);
                 $logger->info(sprintf("Marked for deletion (ID: %d) | Value: '%s'", $config['config_id'], $config['value']));
