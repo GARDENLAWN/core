@@ -1,0 +1,24 @@
+{
+    "name": "gardenlawn/core",
+    "description": "Core",
+    "type": "magento2-module",
+    "config": {
+        "sort-packages": true
+    },
+    "version": "1.0.0",
+    "require": {
+        "php": ">=8.3.0",
+        "magento/product-community-edition": "^2.4.8"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ]
+    },
+    "authors": [
+        {
+            "name": "Rafał Piechota",
+            "email": "marcin.piechota@gardenlawn.pl"
+        }
+    ]
+}
