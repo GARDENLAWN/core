@@ -4,6 +4,24 @@
         <tab id="gardenlawn" translate="label" sortOrder="100">
             <label>GardenLawn</label>
         </tab>
+        <section id="gardenlawn" translate="label" type="text" sortOrder="320" showInDefault="1" showInWebsite="1"
+                 showInStore="1">
+            <label>Configuration</label>
+            <!-- Assign section to tab -->
+            <tab>gardenlawn</tab>
+            <resource>GardenLawn_Core::configuration</resource>
+            <!-- create group for fields in section -->
+            <group id="core" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>Parameters</label>
+                <!-- create text type field -->
+                <field id="enviroment" translate="label comment" sortOrder="7" type="text" showInDefault="1"
+                       showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Enviroment</label>
+                    <comment>local | production</comment>
+                </field>
+            </group>
+        </section>
         <section id="gardenlawn_core" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
             <class>separator-top</class>
             <label>Core Module</label>

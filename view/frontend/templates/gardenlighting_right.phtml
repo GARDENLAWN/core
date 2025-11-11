@@ -1,0 +1,61 @@
+<?php declare(strict_types=1);
+
+/** @var Template $block */
+/** @var Escaper $escaper */
+/** @var ViewModelRegistry $viewModels */
+
+/** @var Slider $sliderViewModel */
+
+use Hyva\Theme\Model\ViewModelRegistry;
+use Hyva\Theme\ViewModel\Slider;
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+
+$sliderViewModel = $viewModels->require(Slider::class);
+$itemsVideoTemplate = 'GardenLawn_Core::slider-youtube-item.phtml';
+$itemsVideo1 = [
+    ['divId' => 'video1', 'videoId' => '53Iz2uHDYrE'],
+    ['divId' => 'video2', 'videoId' => 'RBrzXBKfZ9s'],
+    ['divId' => 'video3', 'videoId' => 'UtSeV5e1fjU'],
+    ['divId' => 'video4', 'videoId' => 'iGyPUnknuWA']
+];
+?>
+<div class="lg:w-1/3">
+    <div class="div-bordered-blue">
+    <?=
+    $sliderViewModel->getSliderForItems($itemsVideoTemplate, $itemsVideo1, 'Magento_Theme::elements/hyva-slider-php.phtml')
+        //->setData('title', __('Wideo'))
+        ->toHtml()
+    ?></div></div>
+<script>
+    const tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    const firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    let players = [];
+
+    function onYouTubeIframeAPIReady() {
+        <?php foreach ($itemsVideo1 as $video): ?>
+        players.push(
+            new YT.Player('<?php echo $video['divId']; ?>', {
+                videoId: '<?php echo $video['videoId']; ?>',
+                events: {
+                    'onStateChange': onPlayerStateChange
+                }
+            }));
+        <?php endforeach; ?>
+    }
+
+    function onPlayerStateChange(event) {
+        for (let i in players) {
+            if (event.target.getPlayerState() === YT.PlayerState.PLAYING &&
+                players[i].g.id !== event.target.g.id &&
+                players[i].getPlayerState() === YT.PlayerState.PLAYING
+            ) {
+                players[i].stopVideo();
+            }
+        }
+    }
+</script>
+<?php $hyvaCsp->registerInlineScript() ?>

@@ -1,0 +1,68 @@
+<?php declare(strict_types=1);
+
+/** @var Template $block */
+/** @var Escaper $escaper */
+
+/** @var ViewModelRegistry $viewModels */
+
+use GardenLawn\Core\Utils\Utils;
+use Hyva\Theme\Model\ViewModelRegistry;
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+
+?>
+<div class="lg:w-1/3">
+    <div class="div-bordered-blue">
+        <p style="text-align: center">
+            <b>Wyłączny importer</b>
+        </p>
+        <div class="img-container">
+            <div class="img-div">
+                <a href="https://gardenlawn.finndealers.com/" target="_blank" title="https://gardenlawn.finndealers.com/">
+                    <?= Utils::getImg('producers/finn') ?>
+                </a>
+            </div>
+        </div>
+        <div class="img-container">
+            <div class="img-div">
+                <a href="https://am-robots.com/pl/" target="_blank" title="https://am-robots.com/pl/">
+                    <?= Utils::getImg('producers/am-robots') ?>
+                </a>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="div-bordered-blue">
+        <p style="text-align: center">
+            <b>Oficjalny dystrybutor</b>
+        </p>
+        <div class="img-container">
+            <div class="img-div">
+                <a href="https://trawnikproducent.pl/dystrybucja/" target="_blank" title="https://trawnikproducent.pl/dystrybucja/">
+                    <?= Utils::getImg('producers/trawnik_producent') ?>
+                </a>
+            </div>
+        </div>
+        <div class="img-container">
+            <div class="img-div">
+                <a href="https://www.ambrogiorobot.com/pl" target="_blank" title="https://www.ambrogiorobot.com/pl">
+                    <?= Utils::getImg('producers/AmbrogioRobotVerde') ?>
+                </a>
+            </div>
+        </div>
+        <div class="img-container">
+            <div class="img-div">
+                <a href="https://www.techlinerobots.com/pl/" target="_blank" title="https://www.techlinerobots.com/pl/">
+                    <?= Utils::getImg('producers/LOGOTECH') ?>
+                </a>
+            </div>
+        </div>
+        <div class="img-container">
+            <div class="img-div">
+                <a href="https://www.nemorobot.it/pl/" target="_blank" title="https://www.nemorobot.it/pl/">
+                    <?= Utils::getImg('producers/logo nemh2o azzurro') ?>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

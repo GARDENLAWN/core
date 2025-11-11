@@ -1,0 +1,2294 @@
+[
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "gardenlawn/core/enviroment",
+    "value": "local"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "catalog/search/engine",
+    "value": "opensearch"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "catalog/search/opensearch_server_hostname",
+    "value": "localhost"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "catalog/search/opensearch_server_port",
+    "value": "9200"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "web/seo/use_rewrites",
+    "value": "1"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "general/locale/code",
+    "value": "pl_PL"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "web/secure/use_in_frontend",
+    "value": "1"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "web/secure/use_in_adminhtml",
+    "value": "1"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "general/locale/timezone",
+    "value": "Europe/Warsaw"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "currency/options/base",
+    "value": "PLN"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "currency/options/default",
+    "value": "PLN"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "currency/options/allow",
+    "value": "PLN"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "admin/security/use_form_key",
+    "value": "1"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "general/region/display_all",
+    "value": "1"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "general/region/state_required",
+    "value": "AL,AR,AU,BY,BO,BR,BG,CA,CL,CN,CO,CR,HR,CZ,DK,EC,EE,GR,GY,IS,IN,IT,LV,LT,MX,PY,PE,PL,PT,RO,ES,SR,SE,CH,UA,US,UY,VE"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "catalog/category/root_id",
+    "value": "2"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "analytics/subscription/enabled",
+    "value": "1"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "crontab/default/jobs/analytics_subscribe/schedule/cron_expr",
+    "value": "0 * * * *"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "crontab/default/jobs/analytics_collect_data/schedule/cron_expr",
+    "value": "00 02 * * *"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "msp_securitysuite_recaptcha/frontend/enabled",
+    "value": "0"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "msp_securitysuite_recaptcha/backend/enabled",
+    "value": "0"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "catalog/seo/product_url_suffix",
+    "value": ""
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "catalog/seo/category_url_suffix",
+    "value": ""
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_base/cron/feeds_refresh",
+    "value": "47 * * * *"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_base/cron/daily_send_system_info",
+    "value": "14 * * * *"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_base/cron/instance_registration",
+    "value": "16 * * * *"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amgeoip/refresh_ip_database/cron_schedule",
+    "value": "51 3 * * *"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "web/default/front",
+    "value": "o-nas"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "trans_email/ident_general/email",
+    "value": "marcin.piechota@gardenlawn.pl"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "trans_email/ident_sales/email",
+    "value": "marcin.piechota@gardenlawn.pl"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "trans_email/ident_support/email",
+    "value": "marcin.piechota@gardenlawn.pl"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "trans_email/ident_custom1/email",
+    "value": "marcin.piechota@gardenlawn.pl"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "trans_email/ident_custom2/email",
+    "value": "marcin.piechota@gardenlawn.pl"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "system/smtp/transport",
+    "value": "smtp"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "system/smtp/host",
+    "value": "pro2.mail.ovh.net"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "system/smtp/port",
+    "value": "587"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "system/smtp/username",
+    "value": "marcin.piechota@gardenlawn.pl"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "system/smtp/ssl",
+    "value": "tls"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "system/smtp/auth",
+    "value": "login"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "contact/email/recipient_email",
+    "value": "marcin.piechota@gardenlawn.pl"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "recaptcha_frontend/type_for/customer_login",
+    "value": "recaptcha_v3"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "recaptcha_frontend/type_for/customer_forgot_password",
+    "value": "recaptcha_v3"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "recaptcha_frontend/type_for/customer_create",
+    "value": "recaptcha_v3"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "recaptcha_frontend/type_for/customer_edit",
+    "value": "recaptcha_v3"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "recaptcha_frontend/type_for/contact",
+    "value": "recaptcha_v3"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "recaptcha_frontend/type_for/product_review",
+    "value": "recaptcha_v3"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "recaptcha_frontend/type_for/newsletter",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "recaptcha_frontend/type_for/sendfriend",
+    "value": "recaptcha_v3"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "recaptcha_frontend/type_for/place_order",
+    "value": "recaptcha_v3"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "recaptcha_frontend/type_for/coupon_code",
+    "value": "recaptcha_v3"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "recaptcha_frontend/type_for/braintree",
+    "value": "recaptcha_v3"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "admin/usage/enabled",
+    "value": "0"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "system/full_page_cache/varnish/access_list",
+    "value": "http://gardenlawn.s3.eu-central-1.amazonaws.com"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "system/full_page_cache/varnish/backend_host",
+    "value": "http://gardenlawn.s3.eu-central-1.amazonaws.com"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "system/full_page_cache/varnish/backend_port",
+    "value": "8080"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "system/full_page_cache/varnish/grace_period",
+    "value": "300"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "web/unsecure/base_static_url",
+    "value": ""
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "web/unsecure/base_media_url",
+    "value": "http://gardenlawn.s3.eu-central-1.amazonaws.com/pub/media/"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "web/secure/base_static_url",
+    "value": ""
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "web/secure/base_media_url",
+    "value": "https://gardenlawn.s3.eu-central-1.amazonaws.com/pub/media/"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "web/secure/enable_hsts",
+    "value": "0"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "web/secure/enable_upgrade_insecure",
+    "value": "0"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "web/default_layouts/default_product_layout",
+    "value": "product-full-width"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "web/default_layouts/default_category_layout",
+    "value": "category-full-width"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "web/default_layouts/default_cms_layout",
+    "value": "cms-full-width"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "web/cookie/cookie_path",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "web/cookie/cookie_domain",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "web/cookie/cookie_httponly",
+    "value": "1"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "analytics/general/token",
+    "value": "Zhdtc4u-urNqFoXNf8H9pszo_SBqxH9M9-vZ33mWRt4zCJkqLTd1PYxs6KGwt9Id61X13ZaHZvl_agTrTr_oqQ"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "general/country/default",
+    "value": "PL"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "general/country/allow",
+    "value": "PL"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "general/country/destinations",
+    "value": "PL"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "general/locale/weight_unit",
+    "value": "kgs"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "general/locale/firstday",
+    "value": "1"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "general/store_information/name",
+    "value": "Garden Lawn & Irrigation Marcin Piechota"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "general/store_information/phone",
+    "value": "+48 795 997 947"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "general/store_information/hours",
+    "value": "24"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "general/store_information/country_id",
+    "value": "PL"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "general/store_information/region_id",
+    "value": "1025"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "general/store_information/postcode",
+    "value": "46-081"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "general/store_information/city",
+    "value": "Dobrzeń Wielki"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "general/store_information/street_line1",
+    "value": "Namysłowska 2"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "general/store_information/street_line2",
+    "value": ""
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "general/store_information/merchant_vat_number",
+    "value": "9910370112"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "general/single_store_mode/enabled",
+    "value": "0"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "admin/dashboard/enable_charts",
+    "value": "1"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "hyva_react_checkout/general/enable",
+    "value": "1"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "dev/restrict/allow_ips",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "dev/debug/template_hints_storefront",
+    "value": "1"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "dev/debug/template_hints_storefront_show_with_parameter",
+    "value": "1"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "dev/debug/template_hints_admin",
+    "value": "0"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "dev/debug/template_hints_blocks",
+    "value": "1"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "adobe_ims/integration/logging_enabled",
+    "value": "0"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "dev/template/allow_symlink",
+    "value": "0"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "dev/translate_inline/active",
+    "value": "0"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "dev/translate_inline/active_admin",
+    "value": "0"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "customer/online_customers/online_minutes_interval",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "customer/online_customers/section_data_lifetime",
+    "value": "60"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "customer/address/taxvat_show",
+    "value": "opt"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "customer/address/telephone_show",
+    "value": "opt"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "customer/address/company_show",
+    "value": "opt"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "customer/create_account/vat_frontend_visibility",
+    "value": "1"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "cms/wysiwyg/enabled",
+    "value": "enabled"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "cms/pagebuilder/enabled",
+    "value": "1"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "cms/pagebuilder/enable_content_preview",
+    "value": "1"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "cms/pagebuilder/google_maps_api_key",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "cms/pagebuilder/google_maps_style",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "catalog/hyva_breadcrumbs/client_side_enable",
+    "value": "1"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "customer/address/street_lines",
+    "value": "1"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "customer/startup/redirect_dashboard",
+    "value": "1"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "shipping/origin/country_id",
+    "value": "PL"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "shipping/origin/region_id",
+    "value": "1025"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "shipping/origin/postcode",
+    "value": "46-081"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "shipping/origin/city",
+    "value": "Dobrzeń Wielki"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "shipping/origin/street_line1",
+    "value": "Namysłowska 2"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "shipping/origin/street_line2",
+    "value": ""
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "shipping/shipping_policy/shipping_policy_content",
+    "value": "My custom Shipping Policy"
+  },
+  {
+    "scope": "websites",
+    "scope_id": 2,
+    "path": "customer/create_account/vat_frontend_visibility",
+    "value": "1"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "customer/captcha/enable",
+    "value": "0"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "customer/captcha/forms",
+    "value": ""
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "customer/account_information/confirm",
+    "value": "1"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "login_as_customer/general/enabled",
+    "value": "1"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "cataloginventory/item_options/enable_qty_increments",
+    "value": "1"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "cataloginventory/source_selection_distance_based_google/api_key",
+    "value": "AIzaSyAyqdYA2AZtc5Rqmcdn-0uSvdC5GL8mWtk"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "tax/calculation/cross_border_trade_enabled",
+    "value": "0"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "tax/defaults/country",
+    "value": "PL"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "tax/defaults/region",
+    "value": "0"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "tax/defaults/postcode",
+    "value": "*"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "checkout/cart/enable_clear_shopping_cart",
+    "value": "1"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "carriers/instore/active",
+    "value": "1"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "shipping/shipping_policy/enable_shipping_policy",
+    "value": "1"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "checkout/cart_link/use_qty",
+    "value": "0"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "sales/cancellation/enabled",
+    "value": "1"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "sales/identity/address",
+    "value": ""
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "sales/identity/logo",
+    "value": ""
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "sales/identity/logo_html",
+    "value": ""
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "sales/minimum_order/active",
+    "value": "0"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "sales/minimum_order/amount",
+    "value": ""
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "sales/minimum_order/description",
+    "value": ""
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "sales/minimum_order/error_message",
+    "value": ""
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "sales/minimum_order/multi_address",
+    "value": "0"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "sales/minimum_order/multi_address_description",
+    "value": ""
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "sales/minimum_order/multi_address_error_message",
+    "value": "The current cart does not match multi shipping criteria, please review or contact the store administrator"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "checkout/options/enable_guest_checkout_login",
+    "value": "1"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "checkout/options/onepage_checkout_enabled",
+    "value": "1"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "admin/captcha/enable",
+    "value": "0"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "admin/captcha/forms",
+    "value": ""
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "customer/create_account/email_domain",
+    "value": "gardenlawn.pl"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "customer/create_account/generate_human_friendly_id",
+    "value": "1"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "tax/classes/shipping_tax_class",
+    "value": "2"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "tax/classes/default_product_tax_class",
+    "value": "2"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "tax/classes/default_customer_tax_class",
+    "value": "3"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "tax/calculation/algorithm",
+    "value": "UNIT_BASE_CALCULATION"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "tax/calculation/based_on",
+    "value": "billing"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "tax/notification/ignore_discount",
+    "value": "0"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "tax/notification/ignore_price_display",
+    "value": "0"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "tax/notification/ignore_apply_discount",
+    "value": "0"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "tax/calculation/price_includes_tax",
+    "value": "1"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "tax/calculation/shipping_includes_tax",
+    "value": "1"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "tax/calculation/apply_after_discount",
+    "value": "1"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "tax/calculation/discount_tax",
+    "value": "0"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "tax/calculation/apply_tax_on",
+    "value": "0"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "tax/display/type",
+    "value": "3"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "tax/display/shipping",
+    "value": "3"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "tax/cart_display/price",
+    "value": "3"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "tax/cart_display/subtotal",
+    "value": "3"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "tax/cart_display/shipping",
+    "value": "3"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "tax/cart_display/full_summary",
+    "value": "1"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "tax/cart_display/zero_tax",
+    "value": "1"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "tax/sales_display/price",
+    "value": "3"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "tax/sales_display/subtotal",
+    "value": "3"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "tax/sales_display/shipping",
+    "value": "3"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "tax/sales_display/full_summary",
+    "value": "1"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "tax/sales_display/zero_tax",
+    "value": "1"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_policy/bar",
+    "value": "1"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_policy/first_visit_show",
+    "value": "0"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_policy/log_guest",
+    "value": "1"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_bar_customisation/cookies_bar_style",
+    "value": "0"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_bar_customisation/classic_bar/notification_text",
+    "value": "Używamy plików cookie, aby ulepszyć nasze usługi, składać oferty osobiste i ulepszać Twoje doświadczenia. Jeśli nie zaakceptujesz opcjonalnych plików cookie poniżej, Twoje doświadczenia mogą być ograniczone. Jeśli chcesz dowiedzieć się więcej, przeczytaj <a href=\"privacy-policy-cookie-restriction-mode\" title=\"Polityka plików cookie\" target=\"_blank\">Politykę plików cookie</a>"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_bar_customisation/classic_bar/accept_button/button_text",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_bar_customisation/classic_bar/accept_button/button_order",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_bar_customisation/classic_bar/accept_button/button_color",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_bar_customisation/classic_bar/accept_button/button_color_hover",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_bar_customisation/classic_bar/accept_button/text_color",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_bar_customisation/classic_bar/accept_button/text_color_hover",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_bar_customisation/classic_bar/decline_button/enable",
+    "value": "0"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_bar_customisation/classic_bar/settings_button/button_text",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_bar_customisation/classic_bar/settings_button/button_order",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_bar_customisation/classic_bar/settings_button/button_color",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_bar_customisation/classic_bar/settings_button/button_color_hover",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_bar_customisation/classic_bar/settings_button/text_color",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_bar_customisation/classic_bar/settings_button/text_color_hover",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_bar_customisation/sidebar/notification_text",
+    "value": "Używamy plików cookie, aby ulepszyć nasze usługi, składać oferty osobiste i ulepszać Twoje doświadczenia. Jeśli nie zaakceptujesz opcjonalnych plików cookie poniżej, Twoje doświadczenia mogą być ograniczone. Jeśli chcesz dowiedzieć się więcej, przeczytaj <a href=\"privacy-policy-cookie-restriction-mode\" title=\"Polityka plików cookie\" target=\"_blank\">Polityka plików cookie</a>"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_bar_customisation/sidebar/background_color",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_bar_customisation/sidebar/policy_text_color",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_bar_customisation/sidebar/links_color",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_bar_customisation/sidebar/group_title_text_color",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_bar_customisation/sidebar/group_desc_text_color",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_bar_customisation/sidebar/accept_button/button_text",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_bar_customisation/sidebar/accept_button/button_order",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_bar_customisation/sidebar/accept_button/button_color",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_bar_customisation/sidebar/accept_button/button_color_hover",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_bar_customisation/sidebar/accept_button/text_color",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_bar_customisation/sidebar/accept_button/text_color_hover",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_bar_customisation/sidebar/decline_button/enable",
+    "value": "0"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_bar_customisation/sidebar/settings_button/button_text",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_bar_customisation/sidebar/settings_button/button_order",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_bar_customisation/sidebar/settings_button/button_color",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_bar_customisation/sidebar/settings_button/button_color_hover",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_bar_customisation/sidebar/settings_button/text_color",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_bar_customisation/sidebar/settings_button/text_color_hover",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_bar_customisation/popup/notification_text",
+    "value": "Używamy plików cookie, aby ulepszyć nasze usługi, składać oferty osobiste i ulepszać Twoje doświadczenia. Jeśli nie zaakceptujesz opcjonalnych plików cookie poniżej, Twoje doświadczenia mogą być ograniczone. Jeśli chcesz dowiedzieć się więcej, przeczytaj <a href=\"privacy-policy-cookie-restriction-mode\" title=\"Polityka plików cookie\" target=\"_blank\">Politykę plików cookie</a>"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_bar_customisation/popup/decline_button/enable",
+    "value": "0"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_settings_bar_customisation/background_color",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_settings_bar_customisation/group_title_text_color",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_settings_bar_customisation/group_desc_text_color",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_settings_bar_customisation/links_color",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_settings_bar_customisation/done_button/button_text",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_settings_bar_customisation/done_button/button_color",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_settings_bar_customisation/done_button/button_color_hover",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_settings_bar_customisation/done_button/text_color",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_settings_bar_customisation/done_button/text_color_hover",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdpr/general/enabled",
+    "value": "1"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdpr/general/display_pp_popup",
+    "value": "1"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdpr/general/country_restrictions",
+    "value": "1"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdpr/general/log_guest",
+    "value": "1"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdpr/general/auto_cleaning",
+    "value": "0"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdpr/customer_access_control/privacy_settings_tab_name",
+    "value": "Privacy Settings"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdpr/customer_access_control/policies_text_section",
+    "value": "1"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdpr/customer_access_control/download",
+    "value": "1"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdpr/customer_access_control/anonymize",
+    "value": "1"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdpr/customer_access_control/delete",
+    "value": "1"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdpr/customer_access_control/consent_opting",
+    "value": "1"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdpr/customer_access_control/skip_empty_fields",
+    "value": "0"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdpr/general/excluded_fields",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdpr/customer_access_control/display_dpo_info",
+    "value": "0"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdpr/customer_access_control/dpo_info",
+    "value": "Jeśli masz jakiekolwiek pytania lub sugestie, skontaktuj się z naszym Inspektorem Ochrony Danych."
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdpr/personal_data/automatic_personal_data_deletion/personal_data_deletion",
+    "value": "1"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdpr/personal_data/automatic_personal_data_deletion/personal_data_deletion_days",
+    "value": "3650"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdpr/personal_data/anonymization_data/personal_data_stored",
+    "value": "0"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdpr/general/avoid_anonymisation",
+    "value": "0"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdpr/anonymisation_notification/enable_anonymization_notification",
+    "value": "1"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdpr/anonymisation_notification/sender",
+    "value": "general"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdpr/anonymisation_notification/reply_to",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdpr/deletion_notification/enable_admin_notification",
+    "value": "1"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdpr/deletion_notification/admin_reciever",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdpr/deletion_notification/enable_approve_deletion_notification",
+    "value": "1"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdpr/deletion_notification/sender",
+    "value": "general"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdpr/deletion_notification/reply_to",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdpr/deletion_notification/enable_deny_deletion_notification",
+    "value": "1"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdpr/deletion_notification/deny_sender",
+    "value": "general"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdpr/deletion_notification/deny_reply_to",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdpr/policy_change_notification/enable_policy_change_notification",
+    "value": "1"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "recaptcha_backend/type_for/user_login",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "dev/static/sign",
+    "value": "0"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "catalog/productalert_cron/frequency",
+    "value": "D"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "crontab/default/jobs/catalog_product_alert/schedule/cron_expr",
+    "value": "0 0 * * *"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "crontab/default/jobs/catalog_product_alert/run/model",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "catalog/productalert_cron/time",
+    "value": "00,00,00"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "catalog/productalert_cron/error_email",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "catalog/product_video/youtube_api_key",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "catalog/price/scope",
+    "value": "0"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "catalog/search/opensearch_index_prefix",
+    "value": "magento2"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "catalog/search/opensearch_enable_auth",
+    "value": "0"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "catalog/search/opensearch_server_timeout",
+    "value": "15"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "catalog/search/opensearch_minimum_should_match",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "catalog/custom_options/use_calendar",
+    "value": "1"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "catalog/custom_options/year_range",
+    "value": ","
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_policy/bar_visibility",
+    "value": "0"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_policy/auto_cleaning_days",
+    "value": "180"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "cms/wysiwyg/use_static_urls_in_catalog",
+    "value": "0"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "checkout/options/enable_agreements",
+    "value": "1"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdpr/policy_change_notification/sender",
+    "value": "general"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdpr/policy_change_notification/reply_to",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_bar_customisation/classic_bar/cookies_bar_location",
+    "value": "0"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_bar_customisation/classic_bar/background_color",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_bar_customisation/classic_bar/policy_text_color",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_bar_customisation/classic_bar/links_color",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_bar_customisation/classic_bar/decline_button/button_text",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_bar_customisation/classic_bar/decline_button/button_order",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_bar_customisation/classic_bar/decline_button/button_color",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_bar_customisation/classic_bar/decline_button/button_color_hover",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_bar_customisation/classic_bar/decline_button/text_color",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_bar_customisation/classic_bar/decline_button/text_color_hover",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_bar_customisation/popup/policy_text_color",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_bar_customisation/popup/background_color",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_bar_customisation/popup/links_color",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_bar_customisation/popup/accept_button/button_text",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_bar_customisation/popup/accept_button/button_order",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_bar_customisation/popup/accept_button/button_color",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_bar_customisation/popup/accept_button/button_color_hover",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_bar_customisation/popup/accept_button/text_color",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_bar_customisation/popup/accept_button/text_color_hover",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_bar_customisation/popup/decline_button/button_text",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_bar_customisation/popup/decline_button/button_order",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_bar_customisation/popup/decline_button/button_color",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_bar_customisation/popup/decline_button/button_color_hover",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_bar_customisation/popup/decline_button/text_color",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_bar_customisation/popup/decline_button/text_color_hover",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_bar_customisation/popup/settings_button/button_text",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_bar_customisation/popup/settings_button/button_order",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_bar_customisation/popup/settings_button/button_color",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_bar_customisation/popup/settings_button/button_color_hover",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_bar_customisation/popup/settings_button/text_color",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_bar_customisation/popup/settings_button/text_color_hover",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_bar_customisation/sidebar/decline_button/button_text",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_bar_customisation/sidebar/decline_button/button_order",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_bar_customisation/sidebar/decline_button/button_color",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_bar_customisation/sidebar/decline_button/button_color_hover",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_bar_customisation/sidebar/decline_button/text_color",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/cookie_bar_customisation/sidebar/decline_button/text_color_hover",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/consent_mode/enable",
+    "value": "0"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdprcookie/consent_mode/consent_types",
+    "value": "{\"item1\":{\"consent_type\":\"ad_storage\",\"default_status\":\"0\",\"cookie_group\":\"2\"},\"item2\":{\"consent_type\":\"analytics_storage\",\"default_status\":\"0\",\"cookie_group\":\"3\"},\"item3\":{\"consent_type\":\"ad_user_data\",\"default_status\":\"0\",\"cookie_group\":\"2\"},\"item4\":{\"consent_type\":\"ad_personalization\",\"default_status\":\"0\",\"cookie_group\":\"2\"}}"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "system/mysqlmq/successful_messages_lifetime",
+    "value": "10080"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "system/mysqlmq/retry_inprogress_after",
+    "value": "1440"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "system/mysqlmq/failed_messages_lifetime",
+    "value": "10080"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "system/mysqlmq/new_messages_lifetime",
+    "value": "10080"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "system/backup/functionality_enabled",
+    "value": "0"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "system/bulk/lifetime",
+    "value": "60"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "system/media_storage_configuration/media_storage",
+    "value": "0"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "system/upload_configuration/jpeg_quality",
+    "value": "100"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "system/upload_configuration/enable_resize",
+    "value": "0"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "system/media_gallery/enabled",
+    "value": "1"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "system/media_gallery_renditions/enabled",
+    "value": "0"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "system/media_gallery_renditions/width",
+    "value": "1000"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "system/media_gallery_renditions/height",
+    "value": "1000"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "adobe_stock/integration/enabled",
+    "value": "0"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "adobe_ims/integration/admin_enabled",
+    "value": "0"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "cms/wysiwyg/editor",
+    "value": "mage/adminhtml/wysiwyg/tiny_mce/tinymce5Adapter"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amcustomerexport/admin_email/template",
+    "value": "1"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amcustomerimport/admin_email/alert_template",
+    "value": "2"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amorderexport/admin_email/template",
+    "value": "3"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amorderimport/admin_email/alert_template",
+    "value": "4"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amproductexport/admin_email/template",
+    "value": "5"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amproductimport/admin_email/alert_template",
+    "value": "6"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "catalog/custom_options/date_fields_order",
+    "value": "y,m,d"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "catalog/custom_options/time_format",
+    "value": "24h"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "crontab/default/jobs/analytics_update/schedule/cron_expr",
+    "value": "0 * * * *"
+  },
+  {
+    "scope": "stores",
+    "scope_id": 2,
+    "path": "design/theme/theme_id",
+    "value": "6"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amasty_gdpr/deletion_notification/admin_sender",
+    "value": "general"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "tax/cart_display/grandtotal",
+    "value": "1"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "tax/sales_display/grandtotal",
+    "value": "1"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amseohtmlsitemap/general/title",
+    "value": "Mapa strony"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amseohtmlsitemap/general/meta_description",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amseohtmlsitemap/general/layout",
+    "value": "1column"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amseohtmlsitemap/general/show_search_field",
+    "value": "1"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amseohtmlsitemap/general/sort_order",
+    "value": "{\"links\":\"Links\",\"categories\":\"Categories\",\"products\":\"Products\",\"cms_pages\":\"CMS pages\"}"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amseohtmlsitemap/cms/show_cms_pages",
+    "value": "1"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amseohtmlsitemap/cms/cms_title",
+    "value": "Strony"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amseohtmlsitemap/cms/column_number",
+    "value": "5"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amseohtmlsitemap/cms/exclude_cms_pages_values",
+    "value": "no-route,home,enable-cookies,terms|34"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amseohtmlsitemap/categories/show_categories",
+    "value": "1"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amseohtmlsitemap/categories/categories_title",
+    "value": "Kategorie"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amseohtmlsitemap/categories/exclude",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amseohtmlsitemap/categories/show_as",
+    "value": "2"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amseohtmlsitemap/categories/column_number",
+    "value": "5"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amseohtmlsitemap/products/show_products",
+    "value": "1"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amseohtmlsitemap/products/products_title",
+    "value": "Przedmioty"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amseohtmlsitemap/products/column_number",
+    "value": "5"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amseohtmlsitemap/products/split_by_letter",
+    "value": "1"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amseohtmlsitemap/products/hide_out_of_stock",
+    "value": "0"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amseohtmlsitemap/products/maximum_limit",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amseohtmlsitemap/additional/links_title",
+    "value": "Usługi"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amseohtmlsitemap/additional/column_number",
+    "value": "5"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amseohtmlsitemap/additional/additional_links",
+    "value": "Kompleksowe zakładanie ogrodów,kompleksowe-zakladanie-ogrodow\r\nProjektowanie ogrodów,projektowanie-ogrodow\r\nProjektowanie systemów nawadniania,projektowanie-systemow-nawadniania\r\nSystemy nawadniania,systemy-nawadniania\r\nZakładanie trawników z siewu,zakladanie-trawnikow-z-siewu\r\nZakładanie trawników z rolki,zakladanie-trawnikow-z-rolki\r\nSiatka przeciw kretom,siatka-przeciw-kretom\r\nRoboty koszące,roboty-koszace\r\nRoboty basenowe,roboty-basenowe\r\nPielęgnacja ogrodów,pielegnacja-ogrodow\r\nProjektowanie oraz montaż oświetlenia,projektowanie-oraz-montaz-oswietlenia\r\nWycinka drzew oraz karczowanie terenów,wycinka-drzew-oraz-karczowanie-terenow\r\nNasadzenia drzew oraz roślin,nasadzanie-drzew-oraz-roslin\r\nKoszenie terenów zielonych,koszenie-terenow-zielonych\r\nPrace ziemne niwelacja terenów,prace-ziemne-niwelacja-terenow\r\nObrzeża, geokraty, palisady,obrzeza-geokraty-palisady\r\nKrawędziowanie obrzeży trawnika,krawedziowanie-obrzezy-trawnika\r\nPrace brukarskie,prace-brukarskie\r\nZbiornik na deszczówkę, szamba,zbiornik-na-deszczowke\r\nStacje uzdatniania wody, odżelaziacze,stacje-uzdatniania-wody-odzelaziacze\r\nOdśnieżanie,odsniezanie\r\nGaleria,galeria\r\nCennik,cennik\r\nKontakt,kontakt"
+  },
+  {
+    "scope": "websites",
+    "scope_id": 2,
+    "path": "design/theme/theme_id",
+    "value": "6"
+  },
+  {
+    "scope": "stores",
+    "scope_id": 2,
+    "path": "design/theme/theme_id",
+    "value": "6"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "payment/banktransfer/title",
+    "value": "Przelew tradycyjny"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "payment/banktransfer/specificcountry",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "payment/banktransfer/instructions",
+    "value": "Prosimy o wpłatę na konto nr 16 1140 2004 0000 3302 7889 0739 (mBank) w tytule podając nr zamówienia"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "payment/banktransfer/min_order_total",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "payment/banktransfer/max_order_total",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "payment/banktransfer/sort_order",
+    "value": null
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amgooglemap/general/enabled",
+    "value": "1"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amgooglemap/general/api_key",
+    "value": "AIzaSyAyqdYA2AZtc5Rqmcdn-0uSvdC5GL8mWtk"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amgooglemap/general/draggable",
+    "value": "1"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amgooglemap/general/map_type",
+    "value": "roadmap"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amgooglemap/general/display_area",
+    "value": "bottom"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amgooglemap/general/wrap_block",
+    "value": "1"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amgooglemap/coordinates/address",
+    "value": "Garden Lawn & Irrigation Marcin Piechota"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amgooglemap/coordinates/latitude",
+    "value": "50.760640"
+  },
+  {
+    "scope": "default",
+    "scope_id": 0,
+    "path": "amgooglemap/coordinates/longitude",
+    "value": "17.843079"
+  }
+]

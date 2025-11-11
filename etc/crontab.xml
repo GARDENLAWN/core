@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="gardenlawn_base">
+        <job instance="GardenLawn\Core\Cron\Custom" method="execute" name="gardenlawn_custom_cron">
+            <schedule>* * * * *</schedule>
+        </job>
+        <job instance="GardenLawn\Core\Cron\AwsS3Sync" method="execute" name="gardenlawn_awss3sync_cron">
+            <schedule>* * * * *</schedule>
+        </job>
+    </group>
+</config>
