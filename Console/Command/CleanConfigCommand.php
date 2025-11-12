@@ -8,57 +8,30 @@ namespace GardenLawn\Core\Console\Command;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\App\ResourceConnection;
-use Magento\Framework\DB\Adapter\AdapterInterface;
 use Magento\Framework\App\Cache\TypeListInterface;
-use Magento\Config\App\Config\Type\System as SystemConfig;
-use Magento\Store\Model\ScopeInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use GardenLawn\Core\Model\Config\Cleaner;
+use Zend_Log_Exception;
 
 class CleanConfigCommand extends Command
 {
-    private const DRY_RUN_OPTION = 'dry-run';
-    private const DEBUG_LOG_FILE = 'gardenlawn_core_debug.log'; // <-- Nazwa naszego pliku logu
-
-    /**
-     * @var ResourceConnection
-     */
-    private $resourceConnection;
-
-    /**
-     * @var AdapterInterface
-     */
-    private $connection;
-
-    /**
-     * @var ScopeConfigInterface
-     */
-    private $scopeConfig;
-
-    /**
-     * @var TypeListInterface
-     */
-    private $cacheTypeList;
-
-    /**
-     * @var LoggerInterface
-     */
-    private $logger;
+    private const string DRY_RUN_OPTION = 'dry-run';
 
     /**
      * @var Cleaner
      */
-    private $cleaner;
+    private Cleaner $cleaner;
 
     /**
      * @param ResourceConnection $resourceConnection
      * @param ScopeConfigInterface $scopeConfig
      * @param TypeListInterface $cacheTypeList
      * @param LoggerInterface $logger
+     * @param Cleaner $cleaner
      * @param string|null $name
      */
     public function __construct(
@@ -70,10 +43,6 @@ class CleanConfigCommand extends Command
         string               $name = null
     )
     {
-        $this->resourceConnection = $resourceConnection;
-        $this->scopeConfig = $scopeConfig;
-        $this->cacheTypeList = $cacheTypeList;
-        $this->logger = $logger;
         $this->cleaner = $cleaner;
         parent::__construct($name);
     }
@@ -81,7 +50,7 @@ class CleanConfigCommand extends Command
     /**
      * @inheritdoc
      */
-    protected function configure()
+    protected function configure(): void
     {
         $this->setName('dev:config:clean-redundant');
         $this->setDescription('Removes redundant configuration values from core_config_data.');
@@ -94,6 +63,9 @@ class CleanConfigCommand extends Command
         parent::configure();
     }
 
+    /**
+     * @throws Zend_Log_Exception
+     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $isDryRun = $input->getOption(self::DRY_RUN_OPTION);
@@ -105,33 +77,5 @@ class CleanConfigCommand extends Command
         }
 
         return 0;
-    }
-
-    /**
-     * @param string $scope
-     * @return array
-     */
-    private function getConfigData(string $scope): array
-    {
-        $select = $this->connection->select()->from(
-            $this->connection->getTableName('core_config_data')
-        )->where('scope = ?', $scope);
-
-        return $this->connection->fetchAll($select);
-    }
-
-    /**
-     * @param int|string $storeId
-     * @return int|null
-     */
-    private function getWebsiteIdForStore($storeId): ?int
-    {
-        $select = $this->connection->select()->from(
-            $this->connection->getTableName('store'),
-            ['website_id']
-        )->where('store_id = ?', $storeId);
-
-        $websiteId = $this->connection->fetchOne($select);
-        return $websiteId ? (int)$websiteId : null;
     }
 }
