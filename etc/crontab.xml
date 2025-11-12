@@ -5,8 +5,5 @@
         <job instance="GardenLawn\Core\Cron\Custom" method="execute" name="gardenlawn_custom_cron">
             <schedule>* * * * *</schedule>
         </job>
-        <job instance="GardenLawn\Core\Cron\AwsS3Sync" method="execute" name="gardenlawn_awss3sync_cron">
-            <schedule>* * * * *</schedule>
-        </job>
     </group>
 </config>
