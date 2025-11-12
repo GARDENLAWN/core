@@ -32,6 +32,7 @@ class CustomerRegisterSuccessObserver implements ObserverInterface
     protected AddressInterfaceFactory $addressDataFactory;
     protected AddressRepositoryInterface $addressRepository;
     protected CustomerRepositoryInterface $customerRepository;
+    protected CeidgService $ceidgService;
 
     public function __construct(
         RequestInterface            $request,
@@ -41,7 +42,8 @@ class CustomerRegisterSuccessObserver implements ObserverInterface
         UrlInterface                $url,
         AddressRepositoryInterface  $addressRepository,
         AddressInterfaceFactory     $addressDataFactory,
-        CustomerRepositoryInterface $customerRepository
+        CustomerRepositoryInterface $customerRepository,
+        CeidgService                $ceidgService
     )
     {
         $this->request = $request;
@@ -52,6 +54,7 @@ class CustomerRegisterSuccessObserver implements ObserverInterface
         $this->addressRepository = $addressRepository;
         $this->addressDataFactory = $addressDataFactory;
         $this->customerRepository = $customerRepository;
+        $this->ceidgService = $ceidgService;
     }
 
     /**
@@ -74,7 +77,7 @@ class CustomerRegisterSuccessObserver implements ObserverInterface
      */
     public function createCustomerAddresses($customer, ?Grid $company = null): void
     {
-        $data = CeidgService::getDataByNip($customer->getTaxvat());
+        $data = $this->ceidgService->getDataByNip($customer->getTaxvat());
 
         if (property_exists($data, 'firmy')) {
             $owner = $data->firmy[0]->wlasciciel;

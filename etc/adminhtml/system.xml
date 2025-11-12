@@ -45,5 +45,18 @@
                 </field>
             </group>
         </section>
+        <section id="gardenlawn_company" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Company Module</label>
+            <tab>gardenlawn</tab>
+            <resource>GardenLawn_Company::config</resource>
+            <group id="ceidg_service" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>CEIDG Service Settings</label>
+                <field id="xoauth2_bearer" translate="label comment" sortOrder="10" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>CURLOPT_XOAUTH2_BEARER Value</label>
+                    <comment>Enter the value for CURLOPT_XOAUTH2_BEARER</comment>
+                </field>
+            </group>
+        </section>
     </system>
 </config>
