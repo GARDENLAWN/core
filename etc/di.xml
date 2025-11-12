@@ -12,13 +12,6 @@
             </argument>
         </arguments>
     </type>
-    <type name="Magento\Framework\Console\CommandList">
-        <arguments>
-            <argument name="commands" xsi:type="array">
-                <item name="dev_config_clean_redundant" xsi:type="object">GardenLawn\Core\Console\Command\CleanConfigCommand</item>
-            </argument>
-        </arguments>
-    </type>
     <type name="Magento\Catalog\Model\ImageUploader">
         <arguments>
             <argument name="allowedExtensions" xsi:type="array">
