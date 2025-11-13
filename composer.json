@@ -45,7 +45,10 @@
         "aurora/module-santander": "dev-master",
         "gardenlawn/module-hyva-checkout-inpost": "dev-master",
         "gardenlawn/module-hyva-checkout-santander": "dev-master",
-        "gardenlawn/module-hyva-checkout-tpay": "dev-master"
+        "gardenlawn/module-hyva-checkout-tpay": "dev-master",
+        "gardenlawn/hyvatheme": "dev-master",
+        "gardenlawn/amrobotstheme": "dev-master",
+        "gardenlawn/finntheme": "dev-master"
     },
     "autoload": {
         "files": [
