@@ -1,87 +1,70 @@
 <?php
-/**
- * Copyright © GardenLawn. All rights reserved.
- */
 declare(strict_types=1);
 
 namespace GardenLawn\Core\Block\Adminhtml\System\Config;
 
-use Magento\Config\Block\System\Config\Form\Field;
 use Magento\Backend\Block\Template\Context;
+use Magento\Config\Block\System\Config\Form\Field;
 use Magento\Framework\Data\Form\Element\AbstractElement;
-use Magento\Backend\Block\Widget\Button;
-use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\UrlInterface;
 
 class CleanButtons extends Field
 {
-    // Zmieniamy, aby użyć nowego szablonu, który będzie renderował dwa przyciski w formie POST
+    /**
+     * @var string
+     */
     protected $_template = 'GardenLawn_Core::system/config/clean_buttons.phtml';
 
-    public function __construct(Context $context, array $data = [])
-    {
+    /**
+     * @var UrlInterface
+     */
+    protected UrlInterface $urlBuilder;
+
+    /**
+     * @param Context $context
+     * @param UrlInterface $urlBuilder
+     * @param array $data
+     */
+    public function __construct(
+        Context $context,
+        UrlInterface $urlBuilder,
+        array $data = []
+    ) {
+        $this->urlBuilder = $urlBuilder;
         parent::__construct($context, $data);
     }
 
+    /**
+     * Render button
+     *
+     * @param AbstractElement $element
+     * @return string
+     */
     public function render(AbstractElement $element): string
     {
-        $element->setScope(false)->unsCanUseWebsiteValue()->unsCanUseDefaultValue();
+        // Remove scope label
+        $element->unsScope()->unsCanUseWebsiteValue()->unsCanUseDefaultValue();
         return parent::render($element);
     }
 
+    /**
+     * Get the button and scripts contents
+     *
+     * @param AbstractElement $element
+     * @return string
+     */
     protected function _getElementHtml(AbstractElement $element): string
     {
+        $originalData = $element->getOriginalData();
+        $this->addData(
+            [
+                'button_label' => $originalData['button_label'] ?? __('Run Cleanup Now'),
+                'html_id' => $element->getHtmlId(),
+                'ajax_url_dry_run' => $this->urlBuilder->getUrl('gardenlawn_core/config/cleanup', ['is_dry_run' => 1]),
+                'ajax_url_cleanup' => $this->urlBuilder->getUrl('gardenlawn_core/config/cleanup', ['is_dry_run' => 0]),
+            ]
+        );
+
         return $this->_toHtml();
-    }
-
-    /**
-     * Zwraca URL dla akcji czyszczenia (Clean.php)
-     */
-    public function getCleanUrl(): string
-    {
-        return $this->getUrl('gardenlawn_core/config/clean');
-    }
-
-    /**
-     * Zwraca URL dla akcji testowej (CleanDry.php)
-     */
-    public function getCleanTestUrl(): string
-    {
-        return $this->getUrl('gardenlawn_core/config/cleandry');
-    }
-
-    /**
-     * Generuje HTML dla przycisku "Run Cleaner"
-     * @throws LocalizedException
-     */
-    public function getRunCleanerButtonHtml(): string
-    {
-        $button = $this->getLayout()->createBlock(Button::class)
-            ->setData([
-                'id' => 'run_cleaner_button',
-                'label' => __('Run Cleaner'),
-                'class' => 'action-primary', // Używamy action-primary dla głównej akcji
-                'title' => __('Immediately deletes redundant configuration entries.'),
-                'type' => 'submit'
-            ]);
-
-        return $button->toHtml();
-    }
-
-    /**
-     * Generuje HTML dla przycisku "Run Dry"
-     * @throws LocalizedException
-     */
-    public function getRunDryButtonHtml(): string
-    {
-        $button = $this->getLayout()->createBlock(Button::class)
-            ->setData([
-                'id' => 'dry_run_button',
-                'label' => __('Dry Run (Test)'),
-                'class' => 'action-secondary',
-                'title' => __('Calculates redundant entries without deleting.'),
-                'type' => 'submit'
-            ]);
-
-        return $button->toHtml();
     }
 }

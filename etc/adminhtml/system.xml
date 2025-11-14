@@ -34,14 +34,41 @@
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
             </group>
-            <group id="cleanup" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+            <group id="b2b" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>B2B Settings</label>
+                <field id="customer_groups" translate="label comment" type="multiselect" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>B2B Customer Groups</label>
+                    <source_model>GardenLawn\Core\Model\Config\Source\CustomerGroup</source_model>
+                    <comment>Select customer groups that are considered B2B.</comment>
+                </field>
+            </group>
+            <group id="cleanup" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
                 <label>Database Cleanup</label>
-                <!-- Zmieniono ID pola na bardziej ogólne, pasujące do dwu-przyciskowej akcji -->
-                <field id="cleanup_actions" translate="label" type="button" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
-                    <label>Cleanup Tools</label>
-                    <!-- Frontend model jest blokiem CleanButtons, który renderuje dwa przyciski POST -->
+                <field id="enabled" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable Cleaner</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="is_dry_run" translate="label" type="select" sortOrder="2" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Dry Run Mode</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>If 'Yes', no data will be deleted, only reported.</comment>
+                </field>
+                <field id="cleanup_actions" translate="label" type="button" sortOrder="3" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Run Cleanup Now</label>
                     <frontend_model>GardenLawn\Core\Block\Adminhtml\System\Config\CleanButtons</frontend_model>
                     <tooltip>This section provides tools to remove redundant entries from the 'core_config_data' table. Use 'Dry Run' first.</tooltip>
+                </field>
+            </group>
+            <group id="sitemap" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Sitemap Settings</label>
+                <field id="changefreq" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Change Frequency</label>
+                    <source_model>GardenLawn\Core\Model\Config\Source\SitemapChangefreq</source_model>
+                </field>
+                <field id="priority" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Priority</label>
+                    <validate>validate-number validate-number-range number-range-0-1</validate>
+                    <comment>0.0 - 1.0</comment>
                 </field>
             </group>
         </section>

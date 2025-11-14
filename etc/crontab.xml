@@ -1,9 +1,9 @@
 <?xml version="1.0" ?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
-    <group id="gardenlawn_base">
-        <job instance="GardenLawn\Core\Cron\Custom" method="execute" name="gardenlawn_custom_cron">
-            <schedule>* * * * *</schedule>
+    <group id="default">
+        <job name="gardenlawn_core_config_cleaner" instance="GardenLawn\Core\Model\Config\Cleaner" method="cleanRedundantConfig">
+            <schedule>0 0 * * 0</schedule> <!-- Every Sunday at midnight -->
         </job>
     </group>
 </config>

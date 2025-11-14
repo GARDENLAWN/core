@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace GardenLawn\Core\Model\ItemProvider;
 
@@ -6,25 +7,33 @@ use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Sitemap\Model\ItemProvider\ItemProviderInterface;
 use Magento\Sitemap\Model\SitemapItemFactory;
+use Magento\Framework\Module\Dir\Reader as ModuleDirReader;
+use Magento\Framework\Filesystem\Driver\File;
 
 class Pages implements ItemProviderInterface
 {
     protected array $sitemapItems = [];
     private PagesConfigReader $configReader;
     private SitemapItemFactory $itemFactory;
+    private ModuleDirReader $moduleDirReader;
+    private File $fileDriver;
 
     /**
-     * ExamplePages constructor.
      * @param PagesConfigReader $configReader
      * @param SitemapItemFactory $itemFactory
+     * @param ModuleDirReader $moduleDirReader
+     * @param File $fileDriver
      */
     public function __construct(
-        PagesConfigReader  $configReader,
-        SitemapItemFactory $itemFactory
-    )
-    {
+        PagesConfigReader $configReader,
+        SitemapItemFactory $itemFactory,
+        ModuleDirReader $moduleDirReader,
+        File $fileDriver
+    ) {
         $this->configReader = $configReader;
         $this->itemFactory = $itemFactory;
+        $this->moduleDirReader = $moduleDirReader;
+        $this->fileDriver = $fileDriver;
     }
 
     /**
@@ -34,141 +43,54 @@ class Pages implements ItemProviderInterface
      */
     public function getItems($storeId): array
     {
-        $pages = [
-            /*[
-                'name' => 'Kompleksowe zakładanie ogrodów',
-                'id' => 'gardeninstallation',
-                'url' => 'kompleksowe-zakladanie-ogrodow'
-            ],
-            [
-                'name' => 'Projektowanie ogrodów',
-                'id' => 'gardendesign',
-                'url' => 'projektowanie-ogrodow'
-            ],
-            [
-                'name' => 'Projektowanie systemów nawadniania',
-                'id' => 'irrigationdesign',
-                'url' => 'projektowanie-systemow-nawadniania'
-            ],
-            [
-                'name' => 'Systemy nawadniania',
-                'id' => 'irrigation',
-                'url' => 'systemy-nawadniania'
-            ],
-            [
-                'name' => 'Zakładanie trawników z siewu',
-                'id' => 'lawnsseed',
-                'url' => 'zakladanie-trawnikow-z-siewu'
-            ],
-            [
-                'name' => 'Zakładanie trawników z rolki',
-                'id' => 'lawnsroll',
-                'url' => 'zakladanie-trawnikow-z-rolki'
-            ],
-            [
-                'name' => 'Siatka przeciw kretom',
-                'id' => 'antimolenet',
-                'url' => 'siatka-przeciw-kretom'
-            ],
-            [
-                'name' => 'Roboty koszące',
-                'id' => 'robots',
-                'url' => 'roboty-koszace'
-            ],
-            [
-                'name' => 'Roboty basenowe',
-                'id' => 'poolrobots',
-                'url' => 'roboty-basenowe'
-            ],
-            [
-                'name' => 'Pielęgnacja ogrodów',
-                'id' => 'gardencare',
-                'url' => 'pielegnacja-ogrodow'
-            ],
-            [
-                'name' => 'Projektowanie oraz montaż oświetlenia',
-                'id' => 'gardenlighting',
-                'url' => 'projektowanie-oraz-montaz-oswietlenia'
-            ],
-            [
-                'name' => 'Wycinka drzew oraz karczowanie terenów',
-                'id' => 'fellingtrees',
-                'url' => 'wycinka-drzew-oraz-karczowanie-terenow'
-            ],
-            [
-                'name' => 'Nasadzenia drzew oraz roślin',
-                'id' => 'planting',
-                'url' => 'nasadzanie-drzew-oraz-roslin'
-            ],
-            [
-                'name' => 'Koszenie terenów zielonych',
-                'id' => 'mowing',
-                'url' => 'koszenie-terenow-zielonych'
-            ],
-            [
-                'name' => 'Prace ziemne niwelacja terenów',
-                'id' => 'earthworks',
-                'url' => 'prace-ziemne-niwelacja-terenow'
-            ],
-            [
-                'name' => 'Obrzeża, geokraty, palisady',
-                'id' => 'edging',
-                'url' => 'obrzeza-geokraty-palisady'
-            ],
-            [
-                'name' => 'Krawędziowanie obrzeży trawnika',
-                'id' => 'edginglawnedges',
-                'url' => 'krawedziowanie-obrzezy-trawnika'
-            ],
-            [
-                'name' => 'Prace brukarskie',
-                'id' => 'pavingworks',
-                'url' => 'prace-brukarskie'
-            ],
-            [
-                'name' => 'Zbiornik na deszczówkę, szamba',
-                'id' => 'rainwater',
-                'url' => 'zbiornik-na-deszczowke'
-            ],
-            [
-                'name' => 'Stacje uzdatniania wody, odżelaziacze',
-                'id' => 'treatment',
-                'url' => 'stacje-uzdatniania-wody-odzelaziacze'
-            ],
-            [
-                'name' => 'Odśnieżanie',
-                'id' => 'snowremoval',
-                'url' => 'odsniezanie'
-            ],
-            [
-                'name' => 'Galeria',
-                'id' => 'gallery',
-                'url' => 'galeria'
-            ],
-            [
-                'name' => 'Cennik',
-                'id' => 'pricelist',
-                'url' => 'cennik'
-            ],
-            [
-                'name' => 'Kontakt',
-                'id' => 'contact',
-                'url' => 'kontakt'
-            ]*/
-        ];
+        $pages = $this->loadPagesFromFile();
 
         foreach ($pages as $page) {
             $this->sitemapItems[] = $this->itemFactory->create(
                 [
                     'url' => $page['url'],
                     'updatedAt' => date("Y-m-d H:i:s"),
-                    'priority' => /*$this->getPriority($storeId) ?? */ 1.0,
+                    'priority' => $this->getPriority($storeId),
                     'changeFrequency' => $this->getChangeFrequency($storeId)
                 ]
             );
         }
 
         return $this->sitemapItems;
+    }
+
+    /**
+     * Load pages from pages.txt file.
+     *
+     * @return array
+     * @throws LocalizedException
+     */
+    private function loadPagesFromFile(): array
+    {
+        $pages = [];
+        $filePath = $this->moduleDirReader->getModuleDir('', 'GardenLawn_Core') . '/Model/ItemProvider/pages.txt';
+
+        if (!$this->fileDriver->isExists($filePath)) {
+            throw new LocalizedException(__('Sitemap pages file not found: %1', $filePath));
+        }
+
+        $content = $this->fileDriver->fileGetContents($filePath);
+        $lines = explode(PHP_EOL, $content);
+
+        foreach ($lines as $line) {
+            $line = trim($line);
+            if (empty($line)) {
+                continue;
+            }
+            $parts = explode(',', $line, 2); // Limit to 2 parts to handle commas in name
+            if (count($parts) === 2) {
+                $pages[] = [
+                    'name' => $parts[0],
+                    'url' => $parts[1]
+                ];
+            }
+        }
+        return $pages;
     }
 
     /**
@@ -192,5 +114,4 @@ class Pages implements ItemProviderInterface
     {
         return $this->configReader->getPriority($storeId);
     }
-
 }

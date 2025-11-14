@@ -12,20 +12,21 @@ use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\App\ResourceConnection;
 use Magento\Framework\DB\Adapter\AdapterInterface;
 use Magento\Store\Model\ScopeInterface;
-use Zend_Log;
-use Zend_Log_Exception;
-use Zend_Log_Writer_Stream;
+use Psr\Log\LoggerInterface; // Używamy Psr\Log\LoggerInterface
+use Magento\Framework\App\Filesystem\DirectoryList; // Do ścieżki logów
 use Exception;
 
 class Cleaner
 {
     private const string DEBUG_LOG_FILE = 'gardenlawn_core_debug.log';
+    public const XML_PATH_CLEANER_ENABLED = 'gardenlawn_core/cleanup/enabled';
+    public const XML_PATH_CLEANER_DRY_RUN = 'gardenlawn_core/cleanup/is_dry_run';
 
     /** @var ResourceConnection */
     private ResourceConnection $resourceConnection;
 
-    /** @var AdapterInterface|null */
-    private ?AdapterInterface $connection = null; // Ustawione na null, aby było inicjowane w execute()
+    /** @var AdapterInterface */
+    private AdapterInterface $connection; // Inicjalizujemy w konstruktorze
 
     /** @var ScopeConfigInterface */
     private ScopeConfigInterface $scopeConfig;
@@ -33,36 +34,56 @@ class Cleaner
     /** @var TypeListInterface */
     private TypeListInterface $cacheTypeList;
 
+    /** @var LoggerInterface */
+    private LoggerInterface $logger; // Wstrzykujemy logger
+
+    /** @var DirectoryList */
+    private DirectoryList $directoryList; // Wstrzykujemy DirectoryList
+
+    /** @var array|null */
+    private ?array $storeWebsiteMap = null; // Cache dla mapowania store_id na website_id
+
     public function __construct(
         ResourceConnection $resourceConnection,
         ScopeConfigInterface $scopeConfig,
-        TypeListInterface $cacheTypeList
+        TypeListInterface $cacheTypeList,
+        LoggerInterface $logger,
+        DirectoryList $directoryList
     ) {
         $this->resourceConnection = $resourceConnection;
         $this->scopeConfig = $scopeConfig;
         $this->cacheTypeList = $cacheTypeList;
+        $this->logger = $logger;
+        $this->directoryList = $directoryList;
+        $this->connection = $this->resourceConnection->getConnection(); // Inicjalizacja połączenia
     }
 
     /**
-     * @throws Zend_Log_Exception
+     * Clean redundant config entries from core_config_data table.
+     *
+     * @param bool|null $isDryRunOverride
+     * @return array
+     * @throws Exception
      */
-    public function cleanRedundantConfig(bool $isDryRun = false): array
+    public function cleanRedundantConfig(?bool $isDryRunOverride = null): array
     {
-        // Inicjalizacja loggera przed rozpoczęciem pracy
-        $writer = new Zend_Log_Writer_Stream(BP . '/var/log/' . self::DEBUG_LOG_FILE);
-        $logger = new Zend_Log();
-        $logger->addWriter($writer);
+        if (!$this->scopeConfig->isSetFlag(self::XML_PATH_CLEANER_ENABLED)) {
+            $this->logger->info('GardenLawn_Core Cleaner is disabled in system configuration.');
+            return ['deleted_count' => 0, 'messages' => ['Cleaner is disabled.']];
+        }
 
-        $logger->info('--- Starting Redundant Config Cleanup ---');
+        $isDryRun = $isDryRunOverride ?? $this->scopeConfig->isSetFlag(self::XML_PATH_CLEANER_DRY_RUN);
 
-        $this->connection = $this->resourceConnection->getConnection();
+        $this->logger->info('--- Starting Redundant Config Cleanup ---');
+        $this->logger->info(sprintf('Log file: %s', $this->directoryList->getPath(DirectoryList::VAR_DIR) . '/log/' . self::DEBUG_LOG_FILE));
+
         $tableName = $this->connection->getTableName('core_config_data');
         $idsToDelete = [];
         $messages = [];
 
         if ($isDryRun) {
             $messages[] = 'Dry run mode enabled. No data will be deleted.';
-            $logger->info('Dry run mode enabled.');
+            $this->logger->info('Dry run mode enabled.');
         }
 
         // Process default-level configs (usuwanie wartości, które są null w bazie)
@@ -70,14 +91,10 @@ class Cleaner
         $defaultConfigs = $this->getConfigData(ScopeConfigInterface::SCOPE_TYPE_DEFAULT);
 
         foreach ($defaultConfigs as $config) {
-            // UWAGA: Czyste wpisy w zakresie 'default' są rzadko usuwane,
-            // ponieważ stanowią podstawę konfiguracji.
-            // Usuwamy tylko te, które mają wartość null, zakładając, że
-            // wartość null oznacza brak intencji ustawienia.
             if ($config['value'] === null) {
                 $idsToDelete[] = $config['config_id'];
                 $messages[] = sprintf('Found redundant (null value) default entry for path: %s [ID: %d]', $config['path'], $config['config_id']);
-                $logger->info(sprintf("Marked for deletion (ID: %d) as null default value | Value: '%s'", $config['config_id'], $config['value']));
+                $this->logger->info(sprintf("Marked for deletion (ID: %d) as null default value | Value: '%s'", $config['config_id'], $config['value']));
             }
         }
 
@@ -86,53 +103,48 @@ class Cleaner
         $websiteConfigs = $this->getConfigData(ScopeInterface::SCOPE_WEBSITES);
 
         foreach ($websiteConfigs as $config) {
-            // Pobieramy wartość domyślną (scope default)
             $defaultValue = $this->scopeConfig->getValue($config['path']);
-
-            // PORÓWNANIE: Czy wartość z bazy jest identyczna z wartością domyślną?
             if ($config['value'] === $defaultValue) {
                 $idsToDelete[] = $config['config_id'];
                 $messages[] = sprintf('Found redundant entry for path: %s [ID: %d]', $config['path'], $config['config_id']);
-                $logger->info(sprintf("Marked for deletion (ID: %d) | Value: '%s'", $config['config_id'], $config['value']));
+                $this->logger->info(sprintf("Marked for deletion (ID: %d) | Value: '%s'", $config['config_id'], $config['value']));
             }
         }
 
         // Process store-level configs (redundancja względem zakresu website)
         $messages[] = 'Processing store-level configurations...';
         $storeConfigs = $this->getConfigData(ScopeInterface::SCOPE_STORES);
+        $this->buildStoreWebsiteMap(); // Build map once
 
         foreach ($storeConfigs as $config) {
-            $websiteId = $this->getWebsiteIdForStore((string)$config['scope_id']);
+            $websiteId = $this->getWebsiteIdForStore((int)$config['scope_id']);
 
             if ($websiteId === null) {
-                $logger->warn(sprintf("Skipping store config (ID: %d) because website ID not found.", $config['config_id']));
+                $this->logger->warning(sprintf("Skipping store config (ID: %d) because website ID not found for store_id: %s", $config['config_id'], $config['scope_id']));
                 continue;
             }
 
-            // Pobieramy wartość z nadrzędnego zakresu (website)
             $websiteValue = $this->scopeConfig->getValue($config['path'], ScopeInterface::SCOPE_WEBSITES, $websiteId);
-
-            // PORÓWNANIE: Czy wartość z bazy jest identyczna z wartością nadrzędną (website)?
             if ($config['value'] === $websiteValue) {
                 $idsToDelete[] = $config['config_id'];
                 $messages[] = sprintf('Found redundant entry for path: %s [ID: %d]', $config['path'], $config['config_id']);
-                $logger->info(sprintf("Marked for deletion (ID: %d) | Value: '%s'", $config['config_id'], $config['value']));
+                $this->logger->info(sprintf("Marked for deletion (ID: %d) | Value: '%s'", $config['config_id'], $config['value']));
             }
         }
 
         $deletedCount = count($idsToDelete);
-        $logger->info(sprintf('Total entries marked for deletion: %d', $deletedCount));
+        $this->logger->info(sprintf('Total entries marked for deletion: %d', $deletedCount));
 
         if ($deletedCount > 0 && !$isDryRun) {
             try {
                 $this->connection->delete($tableName, ['config_id IN (?)' => $idsToDelete]);
                 $messages[] = sprintf('Successfully deleted %d redundant configuration entries.', $deletedCount);
-                $logger->info('Successfully deleted entries from database.');
+                $this->logger->info('Successfully deleted entries from database.');
                 $this->cacheTypeList->invalidate(Config::TYPE_IDENTIFIER);
                 $messages[] = 'Configuration cache has been flushed.';
             } catch (Exception $e) {
                 $messages[] = 'An error occurred while deleting entries: ' . $e->getMessage();
-                $logger->err('An error occurred: ' . $e->getMessage());
+                $this->logger->error('An error occurred: ' . $e->getMessage());
             }
         } elseif ($deletedCount > 0 && $isDryRun) {
             $messages[] = sprintf('Dry run finished. Found %d entries to delete.', $deletedCount);
@@ -140,11 +152,17 @@ class Cleaner
             $messages[] = 'No redundant configuration entries found.';
         }
 
-        $logger->info('--- Finished ---');
+        $this->logger->info('--- Finished ---');
 
         return ['deleted_count' => $deletedCount, 'messages' => $messages];
     }
 
+    /**
+     * Get config data for a specific scope.
+     *
+     * @param string $scope
+     * @return array
+     */
     private function getConfigData(string $scope): array
     {
         $select = $this->connection->select()->from(
@@ -154,14 +172,30 @@ class Cleaner
         return $this->connection->fetchAll($select);
     }
 
-    private function getWebsiteIdForStore(string $storeId): ?int
+    /**
+     * Build map of store_id to website_id.
+     *
+     * @return void
+     */
+    private function buildStoreWebsiteMap(): void
     {
-        $select = $this->connection->select()->from(
-            $this->connection->getTableName('store'),
-            ['website_id']
-        )->where('store_id = ?', $storeId);
+        if ($this->storeWebsiteMap === null) {
+            $select = $this->connection->select()->from(
+                $this->connection->getTableName('store'),
+                ['store_id', 'website_id']
+            );
+            $this->storeWebsiteMap = $this->connection->fetchPairs($select);
+        }
+    }
 
-        $websiteId = $this->connection->fetchOne($select);
-        return $websiteId ? (int)$websiteId : null;
+    /**
+     * Get website ID for a given store ID.
+     *
+     * @param int $storeId
+     * @return int|null
+     */
+    private function getWebsiteIdForStore(int $storeId): ?int
+    {
+        return $this->storeWebsiteMap[$storeId] ?? null;
     }
 }

@@ -1,37 +1,63 @@
 <?php
-/**
- * @var CleanButtons $block
- */
-
-use GardenLawn\Core\Block\Adminhtml\System\Config\CleanButtons;
-use Magento\Framework\Exception\LocalizedException;
-
+/** @var \GardenLawn\Core\Block\Adminhtml\System\Config\CleanButtons $block */
 ?>
-<div class="gardenlawn-config-cleaner" style="display: flex; gap: 20px;">
-    <!-- Formularz dla Akcji: CLEANT_TEST (Testowy przebieg) -->
-    <form></form>
-    <form action="<?= $block->getCleanTestUrl() ?>" method="post" id="clean_test_form">
-        <input name="form_key" type="hidden" value="<?= $block->getFormKey() ?>"/>
-        <div class="test-button">
-            <?php try {
-                echo $block->getRunDryButtonHtml();
-            } catch (LocalizedException $e) {
-                echo __('Error generating button: %1', $e->getMessage());
-            } ?>
-            <p class="note">
-                <span><?= __('Click to check how many entries would be deleted without making changes.') ?></span></p>
-        </div>
-    </form>
-    <!-- Formularz dla Akcji: CLEAN (Pełne czyszczenie) -->
-    <form action="<?= $block->getCleanUrl() ?>" method="post" id="clean_run_form">
-        <input name="form_key" type="hidden" value="<?= $block->getFormKey() ?>"/>
-        <div class="clean-button">
-            <?php try {
-                echo $block->getRunCleanerButtonHtml();
-            } catch (LocalizedException $e) {
-                echo __('Error generating button: %1', $e->getMessage());
-            } ?>
-            <p class="note"><span><?= __('Click to permanently delete redundant config entries.') ?></span></p>
-        </div>
-    </form>
-</div>
+
+<button type="button"
+        class="action-default scalable action-secondary"
+        id="<?= $block->escapeHtmlAttr($block->getHtmlId()) ?>_dry_run"
+        data-url="<?= $block->escapeUrl($block->getAjaxUrlDryRun()) ?>">
+    <span><?= $block->escapeHtml(__('Run Dry Run')) ?></span>
+</button>
+
+<button type="button"
+        class="action-default scalable action-primary"
+        id="<?= $block->escapeHtmlAttr($block->getHtmlId()) ?>_cleanup"
+        data-url="<?= $block->escapeUrl($block->getAjaxUrlCleanup()) ?>">
+    <span><?= $block->escapeHtml(__('Run Cleanup')) ?></span>
+</button>
+
+<script>
+    require([
+        'jquery',
+        'Magento_Ui/js/modal/alert',
+        'mage/translate'
+    ], function ($, alert, $t) {
+        'use strict';
+
+        $('#<?= $block->escapeJs($block->getHtmlId()) ?>_dry_run, #<?= $block->escapeJs($block->getHtmlId()) ?>_cleanup').on('click', function () {
+            var self = $(this);
+            var url = self.data('url');
+            var isDryRun = url.includes('is_dry_run=1');
+            var confirmMessage = isDryRun
+                ? $t('Are you sure you want to run a dry run? This will only report, not delete.')
+                : $t('Are you sure you want to run the cleanup? This will delete redundant configuration entries.');
+
+            if (!confirm(confirmMessage)) {
+                return;
+            }
+
+            $.ajax({
+                url: url,
+                type: 'POST',
+                dataType: 'json',
+                showLoader: true,
+                success: function (response) {
+                    var message = response.message || $t('Operation completed.');
+                    if (response.messages && response.messages.length > 0) {
+                        message = response.messages.join('<br/>');
+                    }
+                    alert({
+                        title: isDryRun ? $t('Dry Run Results') : $t('Cleanup Results'),
+                        content: message
+                    });
+                },
+                error: function (xhr, status, error) {
+                    alert({
+                        title: $t('Error'),
+                        content: $t('An error occurred: %1').replace('%1', error)
+                    });
+                }
+            });
+        });
+    });
+</script>

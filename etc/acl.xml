@@ -7,11 +7,8 @@
                 <resource id="GardenLawn_Core::config" title="GardenLawn Core Config" sortOrder="100">
                     <!-- Ten zasób kontroluje sekcję 'Database Cleanup' w konfiguracji -->
                     <resource id="GardenLawn_Core::config_clean" title="GardenLawn Core Cleanup" sortOrder="10">
-                        <!-- Zasób wymagany przez GardenLawn\Core\Controller\Adminhtml\Config\CleanDry -->
-                        <resource id="GardenLawn_Core::run_cleaner_test" title="Run Config Cleaner Test"
-                                  sortOrder="10"/>
-                        <!-- Zasób wymagany przez GardenLawn\Core\Controller\Adminhtml\Config\Clean -->
-                        <resource id="GardenLawn_Core::run_cleaner" title="Run Config Cleaner" sortOrder="20"/>
+                        <!-- Zasób wymagany przez GardenLawn\Core\Controller\Adminhtml\Config\Cleanup -->
+                        <resource id="GardenLawn_Core::run_cleanup" title="Run Config Cleaner" sortOrder="10"/>
                     </resource>
                 </resource>
             </resource>
