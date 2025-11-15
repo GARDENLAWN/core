@@ -5,6 +5,13 @@
  */
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!--
+        Workaround for environments where the generated/ directory is read-only and Proxy classes
+        cannot be created at runtime. Mapping the Proxy type directly to the concrete implementation
+        prevents Magento from attempting to generate Magento\Framework\App\ResourceConnection\Proxy.
+        This helps avoid HTTP 500 errors caused by failed Proxy generation.
+    -->
+    <preference for="Magento\Framework\App\ResourceConnection\Proxy" type="Magento\Framework\App\ResourceConnection" />
     <type name="Magento\Theme\Model\View\Design">
         <arguments>
             <argument name="themes" xsi:type="array">
