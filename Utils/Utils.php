@@ -119,11 +119,7 @@ class Utils
             media_gallery_asset a ON REGEXP_REPLACE(a.path, '[.].*', '') LIKE CONCAT('%', REGEXP_REPLACE(g.value, '[.].*', ''))
         WHERE
             REPLACE(p.sku, '-', '_') = '$sku' AND
-            a.enabled = 1 AND
             a.path " . ($thumb ? "LIKE" : "NOT LIKE") . " '%.thumbs%'
-        ORDER BY
-            a.sortorder,
-            a.title
         ";
 
         $result = $connection->fetchAll($sql);
@@ -164,11 +160,7 @@ class Utils
         FROM
             media_gallery_asset a
         WHERE
-            REPLACE(a.path, '-', '_') LIKE '%$key%' AND
-            a.enabled = 1
-        ORDER BY
-            a.sortorder,
-            a.title
+            REPLACE(a.path, '-', '_') LIKE '%$key%'
         ";
         $result = $connection->fetchAll($sql);
         $return = [];
