@@ -5,18 +5,7 @@
  */
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
-    <!--
-        Workaround for environments where the generated/ directory is read-only and Proxy classes
-        cannot be created at runtime. Mapping the Proxy type directly to the concrete implementation
-        prevents Magento from attempting to generate Magento\Framework\App\ResourceConnection\Proxy.
-        This helps avoid HTTP 500 errors caused by failed Proxy generation.
-    -->
     <preference for="Magento\Framework\App\ResourceConnection\Proxy" type="Magento\Framework\App\ResourceConnection" />
-    <!--
-        Additional safeguards for environments blocking generated/ writes.
-        These preferences map Proxy classes directly to their concrete implementations
-        to prevent Magento from attempting to generate them at runtime.
-    -->
     <preference for="Magento\Framework\App\ResourceConnection\Config\Proxy" type="Magento\Framework\App\ResourceConnection\Config" />
     <preference for="Magento\Framework\Event\Manager\Proxy" type="Magento\Framework\Event\Manager" />
     <type name="Magento\Theme\Model\View\Design">
@@ -144,5 +133,8 @@
                 <item name="avif" xsi:type="string">avif</item>
             </argument>
         </arguments>
+    </type>
+    <type name="Magento\Framework\File\Uploader">
+        <plugin name="gardenlawn_core_framework_file_uploader" type="GardenLawn\Core\Plugin\Framework\File\UploaderPlugin" sortOrder="10" />
     </type>
 </config>
