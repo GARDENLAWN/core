@@ -31,7 +31,7 @@ class Custom
     {
         //return;
         //ScraperService::saveAutomowJsonData();
-        ScraperService::prepareAutomowJsonData();
+        //ScraperService::prepareAutomowJsonData();
 
         $string = file_get_contents("/var/www/html/magento/app/code/GardenLawn/Core/Configs/automow_prepared_data.json");
         $string = json_decode($string);
