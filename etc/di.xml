@@ -135,4 +135,10 @@
     <type name="Magento\Framework\Image\Adapter\Gd2">
         <plugin name="gardenlawn_core_framework_image_adapter_gd2" type="GardenLawn\Core\Plugin\Framework\Image\Adapter\Gd2Plugin" sortOrder="10"/>
     </type>
+    <type name="Amasty\ImportCore\Import\Filesystem\FileUploader">
+        <plugin name="gardenlawn_core_amasty_fileuploader_plugin" type="GardenLawn\Core\Plugin\Amasty\FileUploaderPlugin" sortOrder="10" />
+    </type>
+    <type name="Magento\Framework\Image\Adapter\AbstractAdapter">
+        <plugin name="gardenlawn_core_framework_image_adapter_abstractadapter" type="GardenLawn\Core\Plugin\Framework\Image\Adapter\AbstractAdapterPlugin" sortOrder="10" />
+    </type>
 </config>

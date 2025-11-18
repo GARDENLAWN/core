@@ -325,14 +325,15 @@ class Utils
                     mga.width
                 FROM
                     gardenlawn_mediagallery mg JOIN
-                    media_gallery_asset mga on mg.id = mga.mediagallery_id
+                    gardenlawn_mediagallery_asset_link l ON mg.id = l.gallery_id JOIN
+                    media_gallery_asset mga ON mga.id = l.asset_id
                 WHERE
                     mg.name LIKE 'gallery/%' AND
                     mga.path LIKE '%.webp' AND
                     mg.enabled = 1 AND
-                    mga.enabled = 1
+                    l.enabled = 1
                 ORDER BY
-                    mg.sortorder, mg.name, mga.sortorder, mga.path;";
+                    mg.sort_order, l.sort_order";
         $result = $connection->fetchAll($sql);
         $return = [];
         $first = 'first';
