@@ -329,7 +329,7 @@ class Utils
                     media_gallery_asset mga ON mga.id = l.asset_id
                 WHERE
                     mg.name LIKE 'gallery/%' AND
-                    mga.path LIKE '%.webp' AND
+                    --mga.path LIKE '%.webp' AND
                     mg.enabled = 1 AND
                     l.enabled = 1
                 ORDER BY
@@ -455,6 +455,6 @@ class Utils
 
         // If no extension is found, or if the string is just a filename,
         // simply append .webp (e.g., 'image' becomes 'image.webp')
-        return $filePath . '.webp';
+        return $filePath ;//. '.webp';
     }
 }
