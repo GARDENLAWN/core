@@ -95,7 +95,7 @@ $product = $block->getProduct();
                 <?= $block->getChildHtml('product.info') ?>
                 <div id="product-attribute"></div>
                 <div id="yt-video">
-                    <?= $sliderViewModel->getSliderForItems($itemsVideoTemplate, $itemsVideo, 'Magento_Theme::elements/hyva-slider-php.phtml')->toHtml() ?>
+                    <?= $sliderViewModel->getSliderForItems($itemsVideoTemplate, $itemsVideo)->toHtml() ?>
                 </div>
             </div>
         </div>

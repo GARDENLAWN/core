@@ -28,7 +28,7 @@ $itemsVideo1 = [
 <div class="lg:w-1/3">
     <div class="div-bordered-blue">
     <?=
-    $sliderViewModel->getSliderForItems($itemsVideoTemplate, $itemsVideo1, 'Magento_Theme::elements/hyva-slider-php.phtml')
+    $sliderViewModel->getSliderForItems($itemsVideoTemplate, $itemsVideo1)
         ->toHtml()
     ?>
     <?php
@@ -45,7 +45,7 @@ $itemsVideo1 = [
     ];
     ?>
     <?=
-    $sliderViewModel->getSliderForItems($itemsVideoTemplate, $itemsVideo2, 'Magento_Theme::elements/hyva-slider-php.phtml')
+    $sliderViewModel->getSliderForItems($itemsVideoTemplate, $itemsVideo2)
         ->toHtml()
     ?></div></div>
 <script>

@@ -39,7 +39,7 @@ $items = [
     <div class="div-bordered-blue">
     <div id="my-gallery" x-data="gardenLawnCorePoolrobotsRight" x-effect="initPhotoSwipe">
         <?=
-        $sliderViewModel->getSliderForItems($itemsTemplate, $items, 'Magento_Theme::elements/hyva-slider-php.phtml')
+        $sliderViewModel->getSliderForItems($itemsTemplate, $items)
             ->toHtml()
 ?>
     </div>
@@ -54,7 +54,7 @@ $itemsVideo = [
 ];
 ?>
     <?=
-$sliderViewModel->getSliderForItems($itemsVideoTemplate, $itemsVideo, 'Magento_Theme::elements/hyva-slider-php.phtml')
+$sliderViewModel->getSliderForItems($itemsVideoTemplate, $itemsVideo)
     ->toHtml()
 ?></div></div>
 <script>
