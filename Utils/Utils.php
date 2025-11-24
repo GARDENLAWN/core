@@ -318,7 +318,7 @@ class Utils
         $resource = $objectManager->get('Magento\Framework\App\ResourceConnection');
         $connection = $resource->getConnection();
         $sql = "SELECT
-                    REPLACE(mg.name, 'gallery/', '') AS name,
+                    REPLACE(mg.path, 'gallery/', '') AS name,
                     mga.path,
                     mga.title,
                     mga.height,
@@ -328,7 +328,7 @@ class Utils
                     gardenlawn_mediagallery_asset_link l ON mg.id = l.gallery_id JOIN
                     media_gallery_asset mga ON mga.id = l.asset_id
                 WHERE
-                    mg.name LIKE 'gallery/%' AND
+                    mg.path LIKE 'gallery/%' AND
                     --mga.path LIKE '%.webp' AND
                     mg.enabled = 1 AND
                     l.enabled = 1
