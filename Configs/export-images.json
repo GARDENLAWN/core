@@ -1,0 +1,1798 @@
+[
+  {
+    "sku": "AVANT-528",
+    "catalog_product_attribute": [
+      {
+        "image": "\/A\/V\/AVANT_528_001.jpeg",
+        "small_image": "\/A\/V\/AVANT_528_001.jpeg",
+        "thumbnail": "\/A\/V\/AVANT_528_001.jpeg",
+        "swatch_image": "\/A\/V\/AVANT_528_001.jpeg"
+      }
+    ],
+    "catalog_product_entity_media_gallery": [
+      {
+        "attribute_id": "90",
+        "value": "\/A\/V\/AVANT_528_001.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "AVANT-528",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "AVANT-528",
+            "position": "1",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/A\/V\/AVANT_528_002.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "AVANT-528",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "AVANT-528",
+            "position": "2",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/A\/V\/AVANT_528_003.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "AVANT-528",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "AVANT-528",
+            "position": "3",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/A\/V\/AVANT_528_004.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "AVANT-528",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "AVANT-528",
+            "position": "4",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/A\/V\/AVANT_528_006.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "AVANT-528",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "AVANT-528",
+            "position": "5",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/A\/V\/AVANT_528_007.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "AVANT-528",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "AVANT-528",
+            "position": "6",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/A\/V\/AVANT_528_008.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "AVANT-528",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "AVANT-528",
+            "position": "7",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/A\/V\/AVANT_528_009.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "AVANT-528",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "AVANT-528",
+            "position": "8",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/A\/V\/AVANT_528_010.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "AVANT-528",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "AVANT-528",
+            "position": "9",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/A\/V\/AVANT_528_011.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "AVANT-528",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "AVANT-528",
+            "position": "10",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/A\/V\/AVANT_528_012.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "AVANT-528",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "AVANT-528",
+            "position": "11",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/A\/V\/AVANT_528_013.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "AVANT-528",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "AVANT-528",
+            "position": "12",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/A\/V\/AVANT_528_014.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "AVANT-528",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "AVANT-528",
+            "position": "13",
+            "label": ""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "sku": "Birchmeier-REC-15-AC1",
+    "catalog_product_attribute": [
+      {
+        "image": "\/B\/i\/Birchmeier_REC_15_AC1_001.jpeg",
+        "small_image": "\/B\/i\/Birchmeier_REC_15_AC1_001.jpeg",
+        "thumbnail": "\/B\/i\/Birchmeier_REC_15_AC1_001.jpeg",
+        "swatch_image": ""
+      }
+    ],
+    "catalog_product_entity_media_gallery": [
+      {
+        "attribute_id": "90",
+        "value": "\/B\/i\/Birchmeier_REC_15_AC1_001.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "Birchmeier-REC-15-AC1",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "Birchmeier-REC-15-AC1",
+            "position": "1",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/B\/i\/Birchmeier_REC_15_AC1_002.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "Birchmeier-REC-15-AC1",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "Birchmeier-REC-15-AC1",
+            "position": "2",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/B\/i\/Birchmeier_REC_15_AC1_003.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "Birchmeier-REC-15-AC1",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "Birchmeier-REC-15-AC1",
+            "position": "3",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/B\/i\/Birchmeier_REC_15_AC1_004.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "Birchmeier-REC-15-AC1",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "Birchmeier-REC-15-AC1",
+            "position": "4",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/B\/i\/Birchmeier_REC_15_AC1_005.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "Birchmeier-REC-15-AC1",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "Birchmeier-REC-15-AC1",
+            "position": "5",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/B\/i\/Birchmeier_REC_15_AC1_006.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "Birchmeier-REC-15-AC1",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "Birchmeier-REC-15-AC1",
+            "position": "6",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/B\/i\/Birchmeier_REC_15_AC1_007.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "Birchmeier-REC-15-AC1",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "Birchmeier-REC-15-AC1",
+            "position": "7",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/B\/i\/Birchmeier_REC_15_AC1_008.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "Birchmeier-REC-15-AC1",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "Birchmeier-REC-15-AC1",
+            "position": "8",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/B\/i\/Birchmeier_REC_15_AC1_009.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "Birchmeier-REC-15-AC1",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "Birchmeier-REC-15-AC1",
+            "position": "9",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/B\/i\/Birchmeier_REC_15_AC1_010.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "Birchmeier-REC-15-AC1",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "Birchmeier-REC-15-AC1",
+            "position": "10",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/B\/i\/Birchmeier_REC_15_AC1_011.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "Birchmeier-REC-15-AC1",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "Birchmeier-REC-15-AC1",
+            "position": "11",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/B\/i\/Birchmeier_REC_15_AC1_012.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "Birchmeier-REC-15-AC1",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "Birchmeier-REC-15-AC1",
+            "position": "12",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/B\/i\/Birchmeier_REC_15_AC1_013.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "Birchmeier-REC-15-AC1",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "Birchmeier-REC-15-AC1",
+            "position": "13",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/B\/i\/Birchmeier_REC_15_AC1_014.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "Birchmeier-REC-15-AC1",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "Birchmeier-REC-15-AC1",
+            "position": "14",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/B\/i\/Birchmeier_REC_15_AC1_015.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "Birchmeier-REC-15-AC1",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "Birchmeier-REC-15-AC1",
+            "position": "15",
+            "label": ""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "sku": "ELIET-Edge-Styler-PLUS-PRO",
+    "catalog_product_attribute": [
+      {
+        "image": "\/E\/L\/ELIET_Edge_Styler_PLUS_PRO_001.jpeg",
+        "small_image": "\/E\/L\/ELIET_Edge_Styler_PLUS_PRO_001.jpeg",
+        "thumbnail": "\/E\/L\/ELIET_Edge_Styler_PLUS_PRO_001.jpeg",
+        "swatch_image": ""
+      }
+    ],
+    "catalog_product_entity_media_gallery": [
+      {
+        "attribute_id": "90",
+        "value": "\/E\/L\/ELIET_Edge_Styler_PLUS_PRO_001.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "ELIET-Edge-Styler-PLUS-PRO",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "ELIET-Edge-Styler-PLUS-PRO",
+            "position": "1",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/E\/L\/ELIET_Edge_Styler_PLUS_PRO_002.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "ELIET-Edge-Styler-PLUS-PRO",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "ELIET-Edge-Styler-PLUS-PRO",
+            "position": "2",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/E\/L\/ELIET_Edge_Styler_PLUS_PRO_003.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "ELIET-Edge-Styler-PLUS-PRO",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "ELIET-Edge-Styler-PLUS-PRO",
+            "position": "3",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/E\/L\/ELIET_Edge_Styler_PLUS_PRO_004.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "ELIET-Edge-Styler-PLUS-PRO",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "ELIET-Edge-Styler-PLUS-PRO",
+            "position": "4",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/E\/L\/ELIET_Edge_Styler_PLUS_PRO_005.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "ELIET-Edge-Styler-PLUS-PRO",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "ELIET-Edge-Styler-PLUS-PRO",
+            "position": "5",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/E\/L\/ELIET_Edge_Styler_PLUS_PRO_006.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "ELIET-Edge-Styler-PLUS-PRO",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "ELIET-Edge-Styler-PLUS-PRO",
+            "position": "6",
+            "label": ""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "sku": "ICL-SR2000",
+    "catalog_product_attribute": [
+      {
+        "image": "\/I\/C\/ICL_SR2000_001.jpeg",
+        "small_image": "\/I\/C\/ICL_SR2000_001.jpeg",
+        "thumbnail": "\/I\/C\/ICL_SR2000_001.jpeg",
+        "swatch_image": ""
+      }
+    ],
+    "catalog_product_entity_media_gallery": [
+      {
+        "attribute_id": "90",
+        "value": "\/I\/C\/ICL_SR2000_001.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "ICL-SR2000",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "ICL-SR2000",
+            "position": "1",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/I\/C\/ICL_SR2000_002.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "ICL-SR2000",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "ICL-SR2000",
+            "position": "2",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/I\/C\/ICL_SR2000_003.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "ICL-SR2000",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "ICL-SR2000",
+            "position": "3",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/I\/C\/ICL_SR2000_004.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "ICL-SR2000",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "ICL-SR2000",
+            "position": "4",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/I\/C\/ICL_SR2000_005.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "ICL-SR2000",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "ICL-SR2000",
+            "position": "5",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/I\/C\/ICL_SR2000_006.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "ICL-SR2000",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "ICL-SR2000",
+            "position": "6",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/I\/C\/ICL_SR2000_007.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "ICL-SR2000",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "ICL-SR2000",
+            "position": "7",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/I\/C\/ICL_SR2000_008.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "ICL-SR2000",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "ICL-SR2000",
+            "position": "8",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/I\/C\/ICL_SR2000_009.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "ICL-SR2000",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "ICL-SR2000",
+            "position": "9",
+            "label": ""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "sku": "Probst-LEVELFIX-LF-170-310",
+    "catalog_product_attribute": [
+      {
+        "image": "\/P\/r\/Probst_LEVELFIX_LF-170-310_001.jpeg",
+        "small_image": "\/P\/r\/Probst_LEVELFIX_LF-170-310_001.jpeg",
+        "thumbnail": "\/P\/r\/Probst_LEVELFIX_LF-170-310_001.jpeg",
+        "swatch_image": ""
+      }
+    ],
+    "catalog_product_entity_media_gallery": [
+      {
+        "attribute_id": "90",
+        "value": "\/P\/r\/Probst_LEVELFIX_LF-170-310_001.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "Probst-LEVELFIX-LF-170-310",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "Probst-LEVELFIX-LF-170-310",
+            "position": "1",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/P\/r\/Probst_LEVELFIX_LF-170-310_002.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "Probst-LEVELFIX-LF-170-310",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "Probst-LEVELFIX-LF-170-310",
+            "position": "2",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/P\/r\/Probst_LEVELFIX_LF-170-310_003.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "Probst-LEVELFIX-LF-170-310",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "Probst-LEVELFIX-LF-170-310",
+            "position": "3",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/P\/r\/Probst_LEVELFIX_LF-170-310_004.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "Probst-LEVELFIX-LF-170-310",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "Probst-LEVELFIX-LF-170-310",
+            "position": "4",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/P\/r\/Probst_LEVELFIX_LF-170-310_005.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "Probst-LEVELFIX-LF-170-310",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "Probst-LEVELFIX-LF-170-310",
+            "position": "5",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/P\/r\/Probst_LEVELFIX_LF-170-310_006.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "Probst-LEVELFIX-LF-170-310",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "Probst-LEVELFIX-LF-170-310",
+            "position": "6",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/P\/r\/Probst_LEVELFIX_LF-170-310_007.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "Probst-LEVELFIX-LF-170-310",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "Probst-LEVELFIX-LF-170-310",
+            "position": "7",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/P\/r\/Probst_LEVELFIX_LF-170-310_008.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "Probst-LEVELFIX-LF-170-310",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "Probst-LEVELFIX-LF-170-310",
+            "position": "8",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/P\/r\/Probst_LEVELFIX_LF-170-310_009.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "Probst-LEVELFIX-LF-170-310",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "Probst-LEVELFIX-LF-170-310",
+            "position": "9",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/P\/r\/Probst_LEVELFIX_LF-170-310_10.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "Probst-LEVELFIX-LF-170-310",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "Probst-LEVELFIX-LF-170-310",
+            "position": "10",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/P\/r\/Probst_LEVELFIX_LF-170-310_11.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "Probst-LEVELFIX-LF-170-310",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "Probst-LEVELFIX-LF-170-310",
+            "position": "11",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/P\/r\/Probst_LEVELFIX_LF-170-310_12.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "Probst-LEVELFIX-LF-170-310",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "Probst-LEVELFIX-LF-170-310",
+            "position": "12",
+            "label": ""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "sku": "SEMBDNER-HR-60",
+    "catalog_product_attribute": [
+      {
+        "image": "\/S\/E\/SEMBDNER_HR_60_001.jpeg",
+        "small_image": "\/S\/E\/SEMBDNER_HR_60_001.jpeg",
+        "thumbnail": "\/S\/E\/SEMBDNER_HR_60_001.jpeg",
+        "swatch_image": ""
+      }
+    ],
+    "catalog_product_entity_media_gallery": [
+      {
+        "attribute_id": "90",
+        "value": "\/S\/E\/SEMBDNER_HR_60_001.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "SEMBDNER-HR-60",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "SEMBDNER-HR-60",
+            "position": "1",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/S\/E\/SEMBDNER_HR_60_002.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "SEMBDNER-HR-60",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "SEMBDNER-HR-60",
+            "position": "2",
+            "label": ""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "sku": "SEMBDNER-RS-50-E",
+    "catalog_product_attribute": [
+      {
+        "image": "\/S\/E\/SEMBDNER_RS_50_E_001.jpeg",
+        "small_image": "\/S\/E\/SEMBDNER_RS_50_E_001.jpeg",
+        "thumbnail": "\/S\/E\/SEMBDNER_RS_50_E_001.jpeg",
+        "swatch_image": ""
+      }
+    ],
+    "catalog_product_entity_media_gallery": [
+      {
+        "attribute_id": "90",
+        "value": "\/S\/E\/SEMBDNER_RS_50_E_001.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "SEMBDNER-RS-50-E",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "SEMBDNER-RS-50-E",
+            "position": "1",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/S\/E\/SEMBDNER_RS_50_E_002.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "SEMBDNER-RS-50-E",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "SEMBDNER-RS-50-E",
+            "position": "2",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/S\/E\/SEMBDNER_RS_50_E_003.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "SEMBDNER-RS-50-E",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "SEMBDNER-RS-50-E",
+            "position": "3",
+            "label": ""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "sku": "Stihl-MS180",
+    "catalog_product_attribute": [
+      {
+        "image": "\/S\/t\/Stihl_MS180_001.jpeg",
+        "small_image": "\/S\/t\/Stihl_MS180_001.jpeg",
+        "thumbnail": "\/S\/t\/Stihl_MS180_001.jpeg",
+        "swatch_image": ""
+      }
+    ],
+    "catalog_product_entity_media_gallery": [
+      {
+        "attribute_id": "90",
+        "value": "\/S\/t\/Stihl_MS180_001.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "Stihl-MS180",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "Stihl-MS180",
+            "position": "1",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/S\/t\/Stihl_MS180_002.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "Stihl-MS180",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "Stihl-MS180",
+            "position": "2",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/S\/t\/Stihl_MS180_003.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "Stihl-MS180",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "Stihl-MS180",
+            "position": "3",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/S\/t\/Stihl_MS180_004.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "Stihl-MS180",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "Stihl-MS180",
+            "position": "4",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/S\/t\/Stihl_MS180_005.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "Stihl-MS180",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "Stihl-MS180",
+            "position": "5",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/S\/t\/Stihl_MS180_006.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "Stihl-MS180",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "Stihl-MS180",
+            "position": "6",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/S\/t\/Stihl_MS180_007.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "Stihl-MS180",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "Stihl-MS180",
+            "position": "7",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/S\/t\/Stihl_MS180_008.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "Stihl-MS180",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "Stihl-MS180",
+            "position": "8",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/S\/t\/Stihl_MS180_009.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "Stihl-MS180",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "Stihl-MS180",
+            "position": "9",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/S\/t\/Stihl_MS180_010.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "Stihl-MS180",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "Stihl-MS180",
+            "position": "10",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/S\/t\/Stihl_MS180_011.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "Stihl-MS180",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "Stihl-MS180",
+            "position": "11",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/S\/t\/Stihl_MS180_012.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "Stihl-MS180",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "Stihl-MS180",
+            "position": "12",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/S\/t\/Stihl_MS180_013.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "Stihl-MS180",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "Stihl-MS180",
+            "position": "13",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/S\/t\/Stihl_MS180_014.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "Stihl-MS180",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "Stihl-MS180",
+            "position": "14",
+            "label": ""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "sku": "TORO-Prostripe-560",
+    "catalog_product_attribute": [
+      {
+        "image": "\/T\/O\/TORO_Prostripe_560_001.jpeg",
+        "small_image": "\/T\/O\/TORO_Prostripe_560_001.jpeg",
+        "thumbnail": "\/T\/O\/TORO_Prostripe_560_001.jpeg",
+        "swatch_image": ""
+      }
+    ],
+    "catalog_product_entity_media_gallery": [
+      {
+        "attribute_id": "90",
+        "value": "\/T\/O\/TORO_Prostripe_560_001.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "TORO-Prostripe-560",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "TORO-Prostripe-560",
+            "position": "1",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/T\/O\/TORO_Prostripe_560_002.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "TORO-Prostripe-560",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "TORO-Prostripe-560",
+            "position": "2",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/T\/O\/TORO_Prostripe_560_003.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "TORO-Prostripe-560",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "TORO-Prostripe-560",
+            "position": "3",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/T\/O\/TORO_Prostripe_560_004.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "TORO-Prostripe-560",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "TORO-Prostripe-560",
+            "position": "4",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/T\/O\/TORO_Prostripe_560_005.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "TORO-Prostripe-560",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "TORO-Prostripe-560",
+            "position": "5",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/T\/O\/TORO_Prostripe_560_006.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "TORO-Prostripe-560",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "TORO-Prostripe-560",
+            "position": "6",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/T\/O\/TORO_Prostripe_560_007.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "TORO-Prostripe-560",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "TORO-Prostripe-560",
+            "position": "7",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/T\/O\/TORO_Prostripe_560_008.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "TORO-Prostripe-560",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "TORO-Prostripe-560",
+            "position": "8",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/T\/O\/TORO_Prostripe_560_009.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "TORO-Prostripe-560",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "TORO-Prostripe-560",
+            "position": "9",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/T\/O\/TORO_Prostripe_560_010.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "TORO-Prostripe-560",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "TORO-Prostripe-560",
+            "position": "10",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/T\/O\/TORO_Prostripe_560_011.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "TORO-Prostripe-560",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "TORO-Prostripe-560",
+            "position": "11",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/T\/O\/TORO_Prostripe_560_012.jpeg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "TORO-Prostripe-560",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "TORO-Prostripe-560",
+            "position": "12",
+            "label": ""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "sku": "GARDENLAWNS001",
+    "catalog_product_attribute": [
+      {
+        "image": "\/T\/r\/Trawa_w_rolce_1.png",
+        "small_image": "\/T\/r\/Trawa_w_rolce_2.jpg",
+        "thumbnail": "\/T\/r\/Trawa_w_rolce_2.jpg",
+        "swatch_image": ""
+      }
+    ],
+    "catalog_product_entity_media_gallery": [
+      {
+        "attribute_id": "90",
+        "value": "\/T\/r\/Trawa_w_rolce_1.png",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "GARDENLAWNS001",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "GARDENLAWNS001",
+            "position": "1",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/T\/r\/Trawa_w_rolce_11.jpg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "GARDENLAWNS001",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "GARDENLAWNS001",
+            "position": "2",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/T\/r\/Trawa_w_rolce_12.jpg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "GARDENLAWNS001",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "GARDENLAWNS001",
+            "position": "3",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/T\/r\/Trawa_w_rolce_13.jpg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "GARDENLAWNS001",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "GARDENLAWNS001",
+            "position": "4",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/T\/r\/Trawa_w_rolce_14.jpg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "GARDENLAWNS001",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "GARDENLAWNS001",
+            "position": "5",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/T\/r\/Trawa_w_rolce_15.jpg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "GARDENLAWNS001",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "GARDENLAWNS001",
+            "position": "6",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/T\/r\/Trawa_w_rolce_16.jpg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "GARDENLAWNS001",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "GARDENLAWNS001",
+            "position": "7",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/T\/r\/Trawa_w_rolce_17.jpg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "GARDENLAWNS001",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "GARDENLAWNS001",
+            "position": "8",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/T\/r\/Trawa_w_rolce_2.jpg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "GARDENLAWNS001",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "GARDENLAWNS001",
+            "position": "9",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/T\/r\/Trawa_w_rolce_26.jpg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "GARDENLAWNS001",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "GARDENLAWNS001",
+            "position": "10",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/T\/r\/Trawa_w_rolce_27.jpg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "GARDENLAWNS001",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "GARDENLAWNS001",
+            "position": "11",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/T\/r\/Trawa_w_rolce_28.jpg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "GARDENLAWNS001",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "GARDENLAWNS001",
+            "position": "12",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/T\/r\/Trawa_w_rolce_29.jpg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "GARDENLAWNS001",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "GARDENLAWNS001",
+            "position": "13",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/T\/r\/Trawa_w_rolce_3.jpg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "GARDENLAWNS001",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "GARDENLAWNS001",
+            "position": "14",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/T\/r\/Trawa_w_rolce_30.jpg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "GARDENLAWNS001",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "GARDENLAWNS001",
+            "position": "15",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/T\/r\/Trawa_w_rolce_31.jpg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "GARDENLAWNS001",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "GARDENLAWNS001",
+            "position": "16",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/T\/r\/Trawa_w_rolce_32.jpg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "GARDENLAWNS001",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "GARDENLAWNS001",
+            "position": "17",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/T\/r\/Trawa_w_rolce_33.jpg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "GARDENLAWNS001",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "GARDENLAWNS001",
+            "position": "18",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/T\/r\/Trawa_w_rolce_34.jpg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "GARDENLAWNS001",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "GARDENLAWNS001",
+            "position": "19",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/T\/r\/Trawa_w_rolce_35.jpg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "GARDENLAWNS001",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "GARDENLAWNS001",
+            "position": "20",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/T\/r\/Trawa_w_rolce_36.jpg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "GARDENLAWNS001",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "GARDENLAWNS001",
+            "position": "21",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/T\/r\/Trawa_w_rolce_37.jpg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "GARDENLAWNS001",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "GARDENLAWNS001",
+            "position": "22",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/T\/r\/Trawa_w_rolce_38.jpg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "GARDENLAWNS001",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "GARDENLAWNS001",
+            "position": "23",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/T\/r\/Trawa_w_rolce_39.jpg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "GARDENLAWNS001",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "GARDENLAWNS001",
+            "position": "24",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/T\/r\/Trawa_w_rolce_4.jpg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "GARDENLAWNS001",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "GARDENLAWNS001",
+            "position": "25",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/T\/r\/Trawa_w_rolce_40.jpg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "GARDENLAWNS001",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "GARDENLAWNS001",
+            "position": "26",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/T\/r\/Trawa_w_rolce_41.jpg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "GARDENLAWNS001",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "GARDENLAWNS001",
+            "position": "27",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/T\/r\/Trawa_w_rolce_42.png",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "GARDENLAWNS001",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "GARDENLAWNS001",
+            "position": "28",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/T\/r\/Trawa_w_rolce_5.jpg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "GARDENLAWNS001",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "GARDENLAWNS001",
+            "position": "29",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/T\/r\/Trawa_w_rolce_6.jpg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "GARDENLAWNS001",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "GARDENLAWNS001",
+            "position": "30",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/T\/r\/Trawa_w_rolce_7.jpg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "GARDENLAWNS001",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "GARDENLAWNS001",
+            "position": "31",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/T\/r\/Trawa_w_rolce_8.jpg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "GARDENLAWNS001",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "GARDENLAWNS001",
+            "position": "32",
+            "label": ""
+          }
+        ]
+      },
+      {
+        "attribute_id": "90",
+        "value": "\/T\/r\/Trawa_w_rolce_9.jpg",
+        "media_type": "image",
+        "disabled": "0",
+        "product_id": "GARDENLAWNS001",
+        "catalog_product_entity_media_gallery_value": [
+          {
+            "entity_id": "GARDENLAWNS001",
+            "position": "33",
+            "label": ""
+          }
+        ]
+      }
+    ]
+  }
+]
