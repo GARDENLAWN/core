@@ -456,9 +456,9 @@ use Magento\Framework\View\Element\Template;
         }
     }
 
-    ready(function() {
+    window.onload = function() {
         priceTheadResize();
-    });
+    };
     window.onresize = function() {
         priceTheadResize();
     };
