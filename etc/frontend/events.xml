@@ -1,21 +1,4 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
-    <event name="customer_save_before">
-        <observer name="CustomerEditSaveObserver" instance="GardenLawn\Core\Observer\CustomerEditSaveObserver"/>
-    </event>
-    <event name="customer_register_success">
-        <observer name="CustomerRegisterSuccessObserver"
-                  instance="GardenLawn\Core\Observer\CustomerRegisterSuccessObserver"/>
-    </event>
-    <event name="customer_login">
-        <observer name="CustomerLoginObserver" instance="GardenLawn\Core\Observer\CustomerLoginObserver"/>
-    </event>
-    <event name="customer_address_save_before">
-        <observer name="CustomerAddressSaveBeforeObserver"
-                  instance="GardenLawn\Core\Observer\CustomerAddressSaveBeforeObserver"/>
-    </event>
-    <event name="catalog_product_gallery_upload_image_after">
-        <observer name="CatalogProductGalleryUploadImageAfterObserver" instance="GardenLawn\Core\Observer\CatalogProductGalleryUploadImageAfterObserver"/>
-    </event>
 </config>
