@@ -5,6 +5,7 @@ namespace GardenLawn\Core\ViewModel;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\View\Asset\Repository;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
 use Magento\Store\Api\Data\WebsiteInterface;
@@ -91,11 +92,13 @@ class WebsiteSwitcher implements ArgumentInterface
      *
      * @param WebsiteInterface $website
      * @return string
+     * @throws NoSuchEntityException
+     * @throws LocalizedException
      */
     public function getWebsiteLogo(WebsiteInterface $website): string
     {
         $logoMap = [
-            'gardenlawn' => 'https://gardenlawn.pl/static/frontend/GardenLawn/Hyvatheme/pl_PL/images/logo.svg',
+            'gardenlawn' => 'https://pub.gardenlawn.pl/media/images/logo.webp',
             'amrobots' => 'https://pub.am-robots.pl/media/producers/am-robots.webp',
             'finnpolska' => 'https://pub.finnpolska.pl/media/producers/finn.webp'
         ];
@@ -133,7 +136,7 @@ class WebsiteSwitcher implements ArgumentInterface
         return $asset->getUrl();
     }
 
-    private function isSecure()
+    private function isSecure(): bool
     {
         try {
             return $this->storeManager->getStore()->isCurrentlySecure();
