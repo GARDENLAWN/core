@@ -51,7 +51,6 @@
         "amasty/reindex-from-admin": "^1.1",
         "gardenlawn/module-hyva-checkout-inpost": "dev-master",
         "gardenlawn/module-hyva-checkout-santander": "dev-master",
-        "gardenlawn/module-hyva-checkout-tpay": "dev-master",
         "gardenlawn/module-hyva-checkout-paynow": "dev-master",
         "gardenlawn/hyvatheme": "dev-master",
         "gardenlawn/amrobotstheme": "dev-master",
