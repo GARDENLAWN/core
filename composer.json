@@ -49,7 +49,6 @@
         "amasty/module-seo-toolkits-lite": "^1.2",
         "amasty/paction": "^1.3",
         "amasty/reindex-from-admin": "^1.1",
-        "aurora/module-santander": "dev-master",
         "gardenlawn/module-hyva-checkout-inpost": "dev-master",
         "gardenlawn/module-hyva-checkout-santander": "dev-master",
         "gardenlawn/module-hyva-checkout-tpay": "dev-master",
