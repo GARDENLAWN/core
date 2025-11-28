@@ -10,7 +10,6 @@
             <module name="Magento_Backend"/>
             <module name="Magento_Config"/>
             <module name="Magento_Store"/>
-            <module name="Magewirephp_Magewire"/>
             <module name="Magento_Sales"/>
             <module name="Magento_Payment"/>
             <module name="Magento_Checkout"/>
@@ -18,11 +17,6 @@
             <module name="Magento_Csp"/>
             <module name="Hyva_Checkout"/>
             <module name="Hyva_Theme"/>
-            <module name="Magewirephp_Magewire"/>
-            <module name="Paynow_PaymentGateway"/>
-            <module name="Snowdog_HyvaCheckoutInpost"/>
-            <module name="Snowdog_HyvaCheckoutPayNow"/>
-            <module name="Snowdog_HyvaCheckoutSantander"/>
         </sequence>
     </module>
 </config>
