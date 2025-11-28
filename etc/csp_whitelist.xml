@@ -31,7 +31,7 @@
                 <value id="img-src-cloudfront" type="host">*.cloudfront.net</value>
                 <value id="img-src-self" type="host">'self'</value>
                 <value id="img-src-gardenlawn" type="host">*.gardenlawn.pl</value>
-                <va lue id="img-src-amrobots" type="host">*.am-robots.pl</value>
+                <value id="img-src-amrobots" type="host">*.am-robots.pl</value>
                 <value id="img-src-finnpolska" type="host">*.finnpolska.pl</value>
                 <value id="img-src-tpay" type="host">*.tpay.com</value>
                 <value id="img-src-paypal" type="host">*.paypal.com</value>
