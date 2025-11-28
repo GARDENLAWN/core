@@ -20,6 +20,9 @@
             <module name="Hyva_Theme"/>
             <module name="Magewirephp_Magewire"/>
             <module name="Paynow_PaymentGateway"/>
+            <module name="Snowdog_HyvaCheckoutInpost"/>
+            <module name="Snowdog_HyvaCheckoutPayNow"/>
+            <module name="Snowdog_HyvaCheckoutSantander"/>
         </sequence>
     </module>
 </config>
