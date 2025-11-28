@@ -1,8 +1,10 @@
 <?xml version="1.0"?>
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
-    <preference for="Magento\Framework\App\ResourceConnection\Proxy" type="Magento\Framework\App\ResourceConnection" />
-    <preference for="Magento\Framework\App\ResourceConnection\Config\Proxy" type="Magento\Framework\App\ResourceConnection\Config" />
-    <preference for="Magento\Framework\Event\Manager\Proxy" type="Magento\Framework\Event\Manager" />
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magento\Framework\App\ResourceConnection\Proxy" type="Magento\Framework\App\ResourceConnection"/>
+    <preference for="Magento\Framework\App\ResourceConnection\Config\Proxy"
+                type="Magento\Framework\App\ResourceConnection\Config"/>
+    <preference for="Magento\Framework\Event\Manager\Proxy" type="Magento\Framework\Event\Manager"/>
     <type name="Magento\Theme\Model\View\Design">
         <arguments>
             <argument name="themes" xsi:type="array">
@@ -130,15 +132,24 @@
         </arguments>
     </type>
     <type name="Magento\Framework\File\Uploader">
-        <plugin name="gardenlawn_core_framework_file_uploader" type="GardenLawn\Core\Plugin\Framework\File\UploaderPlugin" sortOrder="10" />
+        <plugin name="gardenlawn_core_framework_file_uploader"
+                type="GardenLawn\Core\Plugin\Framework\File\UploaderPlugin" sortOrder="10"/>
     </type>
     <type name="Magento\Framework\Image\Adapter\Gd2">
-        <plugin name="gardenlawn_core_framework_image_adapter_gd2" type="GardenLawn\Core\Plugin\Framework\Image\Adapter\Gd2Plugin" sortOrder="10"/>
+        <plugin name="gardenlawn_core_framework_image_adapter_gd2"
+                type="GardenLawn\Core\Plugin\Framework\Image\Adapter\Gd2Plugin" sortOrder="10"/>
     </type>
     <type name="Amasty\ImportCore\Import\Filesystem\FileUploader">
-        <plugin name="gardenlawn_core_amasty_fileuploader_plugin" type="GardenLawn\Core\Plugin\Amasty\FileUploaderPlugin" sortOrder="10" />
+        <plugin name="gardenlawn_core_amasty_fileuploader_plugin"
+                type="GardenLawn\Core\Plugin\Amasty\FileUploaderPlugin" sortOrder="10"/>
     </type>
     <type name="Magento\Framework\Image\Adapter\AbstractAdapter">
-        <plugin name="gardenlawn_core_framework_image_adapter_abstractadapter" type="GardenLawn\Core\Plugin\Framework\Image\Adapter\AbstractAdapterPlugin" sortOrder="10" />
+        <plugin name="gardenlawn_core_framework_image_adapter_abstractadapter"
+                type="GardenLawn\Core\Plugin\Framework\Image\Adapter\AbstractAdapterPlugin" sortOrder="10"/>
+    </type>
+    <type name="Hyva\Checkout\Model\MethodMetaData\IconRenderer">
+        <plugin name="gardenlawn_core_hyva_checkout_icondrenderer_picture"
+                type="GardenLawn\Core\Plugin\Hyva\Checkout\Model\MethodMetaData\IconRendererPlugin"
+                sortOrder="10"/>
     </type>
 </config>
