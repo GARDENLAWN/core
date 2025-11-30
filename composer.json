@@ -54,7 +54,8 @@
         "gardenlawn/module-hyva-checkout-paynow": "dev-master",
         "gardenlawn/hyvatheme": "dev-master",
         "gardenlawn/amrobotstheme": "dev-master",
-        "gardenlawn/finntheme": "dev-master"
+        "gardenlawn/finntheme": "dev-master",
+        "gardenlawn/magento-2-social-login": "dev-master"
     },
     "autoload": {
         "files": [
