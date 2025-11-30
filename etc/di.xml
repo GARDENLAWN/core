@@ -152,4 +152,7 @@
                 type="GardenLawn\Core\Plugin\Hyva\Checkout\Model\MethodMetaData\IconRendererPlugin"
                 sortOrder="10"/>
     </type>
+    <type name="Mageplaza\SocialLogin\Helper\Social">
+        <plugin name="custom_social_login_plugin" type="GardenLawn\Core\Plugin\Mageplaza\SocialHelperPlugin" sortOrder="10" disabled="false"/>
+    </type>
 </config>
