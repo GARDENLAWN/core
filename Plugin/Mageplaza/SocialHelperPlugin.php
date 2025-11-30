@@ -14,6 +14,8 @@ class SocialHelperPlugin
         }
         if (isset($parts['query'])) {
             $parts['query'] = str_replace(' ', '&', $parts['query']);
+        } else {
+            $parts['query'] = '';
         }
         return $parts['scheme'] . '://' . $parts['host'] . $parts['path'] . '?' . $parts['query'];
     }
