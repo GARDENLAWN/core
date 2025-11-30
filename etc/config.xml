@@ -35,7 +35,7 @@
         </system>
         <payment>
             <paynow_gateway>
-                <title>Zapłać z paynow</title>
+                <title>Płatność paynow</title>
             </paynow_gateway>
         </payment>
     </default>
