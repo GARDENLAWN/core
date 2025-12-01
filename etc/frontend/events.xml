@@ -1,4 +1,7 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="customer_address_save_before">
+        <observer name="copy_customer_taxvat_to_address" instance="GardenLawn\Core\Observer\CopyTaxVat"/>
+    </event>
 </config>
