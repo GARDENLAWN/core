@@ -49,17 +49,44 @@ $itemsVideo1 = [
     $sliderViewModel->getSliderForItems($itemsVideoTemplate, $itemsVideo2)
         ->toHtml()
     ?></div></div>
-<div x-data="gardenLawnCoreRobotsRight">
-<?php /** Moved variables previously here to "./view/frontend/templates/robots_right-csp-js.phtml" */ ?>
-<?php /** References (`$itemsVideo1`, `$video`, `$itemsVideo2`) */ ?>
-</div><?php $hyvaCsp->registerInlineScript() ?>
 <script>
-<?php /** Generated with hyva-csp-helper.php */ ?>
-function gardenLawnCoreRobotsRight() {
-    return Object.assign(
-        viewFrontendTemplatesRobots_rightMovedScript0.call(this)
-    )
-}
-window.addEventListener('alpine:init', () => Alpine.data('gardenLawnCoreRobotsRight', gardenLawnCoreRobotsRight), {once: true});
+    const tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    const firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    let players = [];
+
+    function onYouTubeIframeAPIReady() {
+        <?php foreach ($itemsVideo1 as $video): ?>
+        players.push(
+            new YT.Player('<?php echo $video['divId']; ?>', {
+                videoId: '<?php echo $video['videoId']; ?>',
+                events: {
+                    'onStateChange': onPlayerStateChange
+                }
+            }));
+        <?php endforeach; ?>
+        <?php foreach ($itemsVideo2 as $video): ?>
+        players.push(
+            new YT.Player('<?php echo $video['divId']; ?>', {
+                videoId: '<?php echo $video['videoId']; ?>',
+                events: {
+                    'onStateChange': onPlayerStateChange
+                }
+            }));
+        <?php endforeach; ?>
+    }
+
+    function onPlayerStateChange(event) {
+        for (let i in players) {
+            if (event.target.getPlayerState() === YT.PlayerState.PLAYING &&
+                players[i].g.id !== event.target.g.id &&
+                players[i].getPlayerState() === YT.PlayerState.PLAYING
+            ) {
+                players[i].stopVideo();
+            }
+        }
+    }
 </script>
 <?php $hyvaCsp->registerInlineScript() ?>
