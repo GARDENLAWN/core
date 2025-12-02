@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Hyvä Themes - https://hyva.io
+ * Copyright © Hyvä Themes 2022-present. All rights reserved.
+ * This product is licensed per Magento install
+ * See https://hyva.io/license
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd"
+>
+    <body>
+        <!-- Generated with hyva-csp-helper.php -->
+        <referenceContainer name="magewire.plugin.scripts">
+            <block name="gallery"
+                   template="GardenLawn_Core::gallery-csp-js.phtml"
+            />
+            <block name="gardenlighting_right"
+                   template="GardenLawn_Core::gardenlighting_right-csp-js.phtml"
+            />
+            <block name="grassinfo1"
+                   template="GardenLawn_Core::grassinfo1-csp-js.phtml"
+            />
+            <block name="grassinfo2"
+                   template="GardenLawn_Core::grassinfo2-csp-js.phtml"
+            />
+            <block name="grassinfo3"
+                   template="GardenLawn_Core::grassinfo3-csp-js.phtml"
+            />
+            <block name="grassinfo4"
+                   template="GardenLawn_Core::grassinfo4-csp-js.phtml"
+            />
+            <block name="grassinfo5"
+                   template="GardenLawn_Core::grassinfo5-csp-js.phtml"
+            />
+            <block name="grassinfo6"
+                   template="GardenLawn_Core::grassinfo6-csp-js.phtml"
+            />
+            <block name="grassinfo7"
+                   template="GardenLawn_Core::grassinfo7-csp-js.phtml"
+            />
+            <block name="irrigation_right"
+                   template="GardenLawn_Core::irrigation_right-csp-js.phtml"
+            />
+            <block name="lawnsinroll_description"
+                   template="GardenLawn_Core::lawnsinroll_description-csp-js.phtml"
+            />
+            <block name="lawnsseed_right"
+                   template="GardenLawn_Core::lawnsseed_right-csp-js.phtml"
+            />
+            <block name="poolrobots_right"
+                   template="GardenLawn_Core::poolrobots_right-csp-js.phtml"
+            />
+            <block name="pricelist"
+                   template="GardenLawn_Core::pricelist-csp-js.phtml"
+            />
+            <block name="robots_right"
+                   template="GardenLawn_Core::robots_right-csp-js.phtml"
+            />
+        </referenceContainer>
+    </body>
+</page>

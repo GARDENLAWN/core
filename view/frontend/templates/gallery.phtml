@@ -57,100 +57,24 @@ foreach ($galleries as $key) {
 ?>
 <link rel="stylesheet" type="text/css"
       href="/static/frontend/GardenLawn/Hyvatheme/pl_PL/css/slider-pro.css" media="screen"/>
-<script type="text/javascript"
-        src="/static/frontend/GardenLawn/Hyvatheme/pl_PL/js/jquery-3.7.1.min.js"></script>
 <?php $hyvaCsp->registerInlineScript() ?>
-<script type="text/javascript"
-        src="/static/frontend/GardenLawn/Hyvatheme/pl_PL/js/slider-pro.js"></script>
 <?php $hyvaCsp->registerInlineScript() ?>
-<script>
-    let galleries = JSON.parse('<?= json_encode($worksInfo) ?>');
-
-    function printWork(item) {
-        let gallery =
-            '<div id="my-gallery-' + item['id'] + '" ' +
-            'class="text-center gallery-div column div-bordered-blue" style="margin:5px;">' +
-            '<h1></h1><h2></h2><h3 class="text-2xl font-medium text-gray-900 title-font text-center">' +
-            //item['id'] +
-            '</h3>' +
-            '<div class="slider-pro" id="my-slider-' + item['id'] + '">' +
-            '<div class="sp-slides">';
-        item['images'].forEach((item) => {
-            gallery += '<div class="sp-slide"><img class="sp-image" ' +
-                'data-src="' + item['link'] +
-                '" alt="' + item['title'] + '" height="' + item['height'] + '" width="' + item['width'] + '" /></div>';
-        });
-        gallery += '</div>';
-        gallery += '<div class="sp-thumbnails">';
-        item['images'].forEach((item) => {
-            gallery += '<img class="sp-thumbnail" ' + 'src="' + item['thumb'] +
-                '" alt="' + item['title'] + '" height="' + item['height'] + '" width="' + item['width'] + '" />';
-        });
-        gallery += '</div>';
-        gallery += '</div>';
-        gallery += '</div>';
-
-        let script = document.createElement("script");
-        script.type = "text/javascript";
-        script.innerHTML =
-            '$("#my-slider-' + item['id'] + '").sliderPro({' +
-            '    imageScaleMode: "contain",' +
-            '    arrows: true,' +
-            '    fadeArrows: false,' +
-            '    fullscreen: true,' +
-            '    fadeFullscreen: false,' +
-            '    buttons: false,' +
-            '    waitForLayers: true,' +
-            '    autoplay: false,' +
-            '    autoScaleLayers: false,' +
-            '    thumbnailHeight: 50,' +
-            '    thumbnailsPosition: "bottom",' +
-            '    thumbnailPointer: false,' +
-            '    thumbnailArrows: true,' +
-            '    fadeThumbnailArrows: false,' +
-            '    thumbnailTouchSwipe: true,' +
-            '    fullScreen: true' +
-            '}).resize();' +
-            'jQuery(".slider-pro").each(function () {' +
-            '    let slider = jQuery(this);' +
-            '    let fullscreen = slider.find(".sp-full-screen-button");' +
-            '    fullscreen.css("display", "none");' +
-            '    slider.find(".sp-slide").on("click", function () {' +
-            '    if (!slider.hasClass("sp-swiping")) {' +
-            '        fullscreen.trigger("click");' +
-            '    }' +
-            '});' +
-            '});';
-
-        let sliders = $('#sliders');
-        sliders.append(gallery)
-        sliders.append(script);
-    }
-</script>
-<?php $hyvaCsp->registerInlineScript() ?>
+<div x-data="gardenLawnCoreGallery">
+<?php /** Moved variables previously here to "./view/frontend/templates/gallery-csp-js.phtml" */ ?>
+<?php /** References (`$worksInfo`) */ ?>
+</div><?php $hyvaCsp->registerInlineScript() ?>
 <div id="sliders" class="gallery-grid">
     <div class="row">
     </div>
 </div>
+<?php $hyvaCsp->registerInlineScript() ?>
 <script>
-    function arrange() {
-        let heights = [];
-        for (let element of document.getElementsByClassName('gallery-div')) {
-            if (window.innerWidth > 768) {
-                element.style.width = "45%";
-            }
-            heights.push(element.offsetHeight);
-        }
-    }
-
-    galleries.forEach((item) => {
-        printWork(item);
-    });
-
-    arrange();
-
-    window.onresize = function () {
-        arrange();
-    };
+<?php /** Generated with hyva-csp-helper.php */ ?>
+function gardenLawnCoreGallery() {
+    return Object.assign(
+        viewFrontendTemplatesGalleryMovedScript0.call(this)
+    )
+}
+window.addEventListener('alpine:init', () => Alpine.data('gardenLawnCoreGallery', gardenLawnCoreGallery), {once: true});
 </script>
 <?php $hyvaCsp->registerInlineScript() ?>
