@@ -1,8 +1,30 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Hyva\Checkout\Model\Form\EntityFormSaveService\EavAttributeBillingAddress">
+        <plugin name="GardenLawn_Core_Plugin_Hyva_Checkout_Model_Form_EntityFormSaveService_EavAttributeBillingAddressPlugin"
+                type="GardenLawn\Core\Plugin\Hyva\Checkout\Model\Form\EntityFormSaveService\EavAttributeBillingAddressPlugin"
+                sortOrder="10"
+                disabled="false"/>
+    </type>
     <type name="Magento\Customer\Controller\Address\FormPost">
         <plugin name="GardenLawn_Core_Plugin_Customer_Address_FormPostPlugin"
                 type="GardenLawn\Core\Plugin\Customer\Address\FormPostPlugin"
+                sortOrder="10"
+                disabled="false"/>
+    </type>
+    <type name="Hyva\Checkout\Magewire\Checkout\AddressView\BillingDetails\AddressList">
+        <plugin name="GardenLawn_Core_Plugin_Hyva_Checkout_Magewire_Checkout_AddressView_BillingDetails_AddressListPlugin"
+                type="GardenLawn\Core\Plugin\Hyva\Checkout\Magewire\Checkout\AddressView\BillingDetails\AddressListPlugin"
+                sortOrder="10"
+                disabled="false"/>
+    </type>
+    <type name="Hyva\Checkout\ViewModel\Checkout\AddressView\AddressList\AddressListBilling">
+        <plugin name="GardenLawn_Core_Plugin_Hyva_Checkout_ViewModel_Checkout_AddressView_AddressList_AddressListBillingPlugin"
+                type="GardenLawn\Core\Plugin\Hyva\Checkout\ViewModel\Checkout\AddressView\AddressList\AddressListBillingPlugin"
+                sortOrder="10"
+                disabled="false"/>
+        <plugin name="GardenLawn_Core_Plugin_Hyva_Checkout_ViewModel_Checkout_AddressView_AddressList_AddressListBillingCanCreatePlugin"
+                type="GardenLawn\Core\Plugin\Hyva\Checkout\ViewModel\Checkout\AddressView\AddressList\AddressListBillingCanCreatePlugin"
                 sortOrder="10"
                 disabled="false"/>
     </type>
