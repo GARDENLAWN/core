@@ -28,4 +28,10 @@
                 sortOrder="10"
                 disabled="false"/>
     </type>
+    <type name="Hyva\Checkout\Model\ConfigData\HyvaThemes\SystemConfigBilling">
+        <plugin name="GardenLawn_Core_Plugin_Hyva_Checkout_Model_ConfigData_HyvaThemes_SystemConfigBillingPlugin"
+                type="GardenLawn\Core\Plugin\Hyva\Checkout\Model\ConfigData\HyvaThemes\SystemConfigBillingPlugin"
+                sortOrder="10"
+                disabled="false"/>
+    </type>
 </config>
