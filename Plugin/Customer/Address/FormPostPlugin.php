@@ -59,15 +59,28 @@ class FormPostPlugin
     {
         $addressId = (int) $this->request->getParam('id');
         $customerId = (int) $this->customerSession->getCustomerId();
+        $isB2BCustomer = in_array($this->companyHelper->getCurrentCustomerGroupId(), $this->companyHelper->getB2bCustomerGroups());
+        $isDefaultBillingInRequest = (bool) $this->request->getParam('default_billing');
 
-        if ($addressId && in_array($this->companyHelper->getCurrentCustomerGroupId(), $this->companyHelper->getB2bCustomerGroups())) {
-            try {
-                $address = $this->addressRepository->getById($addressId);
-                if ((int) $address->getCustomerId() === $customerId && $address->isDefaultBilling()) {
-                    throw new LocalizedException(__('B2B customers cannot change their default billing address.'));
+        if ($isB2BCustomer) {
+            // Scenario 1: Attempting to add a new address
+            if ($addressId === 0) {
+                // If it's a new address and marked as default billing, prevent it.
+                if ($isDefaultBillingInRequest) {
+                    throw new LocalizedException(__('B2B customers cannot add new billing addresses from the customer account panel.'));
                 }
-            } catch (NoSuchEntityException $e) {
-                // Address not found, proceed without validation (e.g., new address)
+            } else {
+                // Scenario 2: Attempting to edit an existing address
+                try {
+                    $address = $this->addressRepository->getById($addressId);
+                    // If the existing address is the default billing address, or if the request tries to make it default billing, prevent it.
+                    if ((int) $address->getCustomerId() === $customerId && ($address->isDefaultBilling() || $isDefaultBillingInRequest)) {
+                        throw new LocalizedException(__('B2B customers cannot change their default billing address.'));
+                    }
+                } catch (NoSuchEntityException $e) {
+                    // If an address ID was provided but the address doesn't exist,
+                    // Magento's core will handle the error later.
+                }
             }
         }
     }
