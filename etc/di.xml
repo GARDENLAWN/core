@@ -155,4 +155,21 @@
     <type name="Mageplaza\SocialLogin\Helper\Social">
         <plugin name="custom_social_login_plugin" type="GardenLawn\Core\Plugin\Mageplaza\SocialHelperPlugin" sortOrder="10" disabled="false"/>
     </type>
+    <virtualType name="Magento\Customer\Ui\Component\Form\Address" type="Magento\Ui\Component\Form\Fieldset">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Addresses</item>
+                    <item name="collapsible" xsi:type="boolean">true</item>
+                    <item name="sortOrder" xsi:type="number">100</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Magento\Customer\Model\Customer\DataProviderWithDefaultAddresses">
+        <arguments>
+            <argument name="modifier" xsi:type="object">GardenLawn\Core\Model\Customer\DataProvider\Modifier</argument>
+        </arguments>
+    </type>
 </config>
