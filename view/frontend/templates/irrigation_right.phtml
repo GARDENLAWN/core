@@ -1,127 +1,69 @@
-<?php declare(strict_types=1);
+<?php
 
-/** @var Template $block */
-/** @var Escaper $escaper */
-/** @var ViewModelRegistry $viewModels */
-/** @var HyvaCsp $hyvaCsp */
-/** @var Slider $sliderViewModel */
+declare(strict_types=1);
 
+use GardenLawn\Core\ViewModel\VideoSlider;
 use Hyva\Theme\Model\ViewModelRegistry;
-use Hyva\Theme\ViewModel\HyvaCsp;
 use Hyva\Theme\ViewModel\Slider;
-use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
 
+/** @var Template $block */
+/** @var ViewModelRegistry $viewModels */
+
 $sliderViewModel = $viewModels->require(Slider::class);
-$itemsVideoTemplate = 'GardenLawn_Core::slider-youtube-item.phtml';
+$videoSliderViewModel = $viewModels->require(VideoSlider::class);
+
 $itemsVideo1 = [
     ['divId' => 'video1', 'videoId' => '9B3OeSeHj2E'],
     ['divId' => 'video2', 'videoId' => 'GddYRaUZAR4']
 ];
+$itemsVideo2 = [
+    ['divId' => 'video3', 'videoId' => '2KZ0YCTZD4I'],
+    ['divId' => 'video4', 'videoId' => 'vj_3ifs16Cs'],
+    ['divId' => 'video5', 'videoId' => 'IkP6xPNSMnU'],
+    ['divId' => 'video6', 'videoId' => 'cMbxYqPruSc'],
+    ['divId' => 'video7', 'videoId' => 'AaHyRWbYhLc']
+];
+$itemsVideo3 = [
+    ['divId' => 'video8', 'videoId' => 'jYrCjkKTfdM'],
+    ['divId' => 'video9', 'videoId' => '_-kUrFIZhwE']
+];
+$itemsVideo4 = [
+    ['divId' => 'video10', 'videoId' => 'hanGczLa-Yc'],
+    ['divId' => 'video11', 'videoId' => 'OW7HKXX-Esc'],
+    ['divId' => 'video12', 'videoId' => '271DxnmJ9iw']
+];
 ?>
 <div class="lg:w-1/3">
     <div class="div-bordered-blue">
-    <?=
-    $sliderViewModel->getSliderForItems($itemsVideoTemplate, $itemsVideo1)
-        //->setData('title', __('Wideo'))
-        ->toHtml()
-    ?>
-    <?php
-    $itemsVideo2 = [
-        ['divId' => 'video3', 'videoId' => '2KZ0YCTZD4I'],
-        ['divId' => 'video4', 'videoId' => 'vj_3ifs16Cs'],
-        ['divId' => 'video5', 'videoId' => 'IkP6xPNSMnU'],
-        ['divId' => 'video6', 'videoId' => 'cMbxYqPruSc'],
-        ['divId' => 'video7', 'videoId' => 'AaHyRWbYhLc']
-    ];
-    ?>
-    <?=
-    $sliderViewModel->getSliderForItems($itemsVideoTemplate, $itemsVideo2)
-        //->setData('title', __('Wideo'))
-        ->toHtml()
-    ?>
-    <?php
-    $itemsVideo3 = [
-        ['divId' => 'video8', 'videoId' => 'jYrCjkKTfdM'],
-        ['divId' => 'video9', 'videoId' => '_-kUrFIZhwE']
-    ];
-    ?>
-    <?=
-    $sliderViewModel->getSliderForItems($itemsVideoTemplate, $itemsVideo3)
-        //->setData('title', __('Wideo'))
-        ->toHtml()
-    ?>
-    <?php
-    $itemsVideo4 = [
-        ['divId' => 'video10', 'videoId' => 'hanGczLa-Yc'],
-        ['divId' => 'video11', 'videoId' => 'OW7HKXX-Esc'],
-        ['divId' => 'video12', 'videoId' => '271DxnmJ9iw']
-    ];
-    ?>
-    <?=
-    $sliderViewModel->getSliderForItems($itemsVideoTemplate, $itemsVideo4)
-        //->setData('title', __('Wideo'))
-        ->toHtml()
-    ?></div></div>
-<script>
-    const tag = document.createElement('script');
-    tag.src = "https://www.youtube.com/iframe_api";
-    const firstScriptTag = document.getElementsByTagName('script')[0];
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        <?php
+        echo $block->getLayout()
+            ->createBlock(Template::class)
+            ->setTemplate('GardenLawn_Core::video-slider.phtml')
+            ->setData('sliderViewModel', $sliderViewModel)
+            ->setData('videoSliderViewModel', $videoSliderViewModel->setVideoData($itemsVideo1))
+            ->toHtml();
 
-    let players = [];
+        echo $block->getLayout()
+            ->createBlock(Template::class)
+            ->setTemplate('GardenLawn_Core::video-slider.phtml')
+            ->setData('sliderViewModel', $sliderViewModel)
+            ->setData('videoSliderViewModel', $videoSliderViewModel->setVideoData($itemsVideo2))
+            ->toHtml();
 
-    function onYouTubeIframeAPIReady() {
-        <?php foreach ($itemsVideo1 as $video): ?>
-        players.push(
-            new YT.Player('<?php echo $video['divId']; ?>', {
-                videoId: '<?php echo $video['videoId']; ?>',
-                events: {
-                    'onStateChange': onPlayerStateChange
-                }
-            }));
-        <?php endforeach; ?>
+        echo $block->getLayout()
+            ->createBlock(Template::class)
+            ->setTemplate('GardenLawn_Core::video-slider.phtml')
+            ->setData('sliderViewModel', $sliderViewModel)
+            ->setData('videoSliderViewModel', $videoSliderViewModel->setVideoData($itemsVideo3))
+            ->toHtml();
 
-        <?php foreach ($itemsVideo2 as $video): ?>
-        players.push(
-            new YT.Player('<?php echo $video['divId']; ?>', {
-                videoId: '<?php echo $video['videoId']; ?>',
-                events: {
-                    'onStateChange': onPlayerStateChange
-                }
-            }));
-        <?php endforeach; ?>
-
-        <?php foreach ($itemsVideo3 as $video): ?>
-        players.push(
-            new YT.Player('<?php echo $video['divId']; ?>', {
-                videoId: '<?php echo $video['videoId']; ?>',
-                events: {
-                    'onStateChange': onPlayerStateChange
-                }
-            }));
-        <?php endforeach; ?>
-
-        <?php foreach ($itemsVideo4 as $video): ?>
-        players.push(
-            new YT.Player('<?php echo $video['divId']; ?>', {
-                videoId: '<?php echo $video['videoId']; ?>',
-                events: {
-                    'onStateChange': onPlayerStateChange
-                }
-            }));
-        <?php endforeach; ?>
-    }
-
-    function onPlayerStateChange(event) {
-        for (let i in players) {
-            if (event.target.getPlayerState() === YT.PlayerState.PLAYING &&
-                players[i].g.id !== event.target.g.id &&
-                players[i].getPlayerState() === YT.PlayerState.PLAYING
-            ) {
-                players[i].stopVideo();
-            }
-        }
-    }
-</script>
-<?php $hyvaCsp->registerInlineScript() ?>
+        echo $block->getLayout()
+            ->createBlock(Template::class)
+            ->setTemplate('GardenLawn_Core::video-slider.phtml')
+            ->setData('sliderViewModel', $sliderViewModel)
+            ->setData('videoSliderViewModel', $videoSliderViewModel->setVideoData($itemsVideo4))
+            ->toHtml();
+        ?>
+    </div>
+</div>
