@@ -6,12 +6,14 @@ namespace GardenLawn\Core\Helper;
 use Magento\Customer\Model\Session;
 use Magento\Framework\App\Helper\AbstractHelper;
 use Magento\Framework\App\Helper\Context;
+use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Variable\Model\Variable;
 use Magento\Store\Model\ScopeInterface;
 
 class Data extends AbstractHelper
 {
-    public const XML_PATH_B2B_CUSTOMER_GROUPS = 'gardenlawn_core/b2b/customer_groups';
+    public const string XML_PATH_B2B_CUSTOMER_GROUPS = 'gardenlawn_core/b2b/customer_groups';
 
     protected Variable $variable;
     protected Session $customerSession;
@@ -39,9 +41,8 @@ class Data extends AbstractHelper
     }
 
     /**
-     * Check if current customer is a B2B customer.
-     *
-     * @return bool
+     * @throws NoSuchEntityException
+     * @throws LocalizedException
      */
     public function isCustomerB2B(): bool
     {
