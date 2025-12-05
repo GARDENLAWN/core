@@ -66,10 +66,6 @@
                 <item name="svg" xsi:type="string">image/svg+xml</item>
                 <item name="avif" xsi:type="string">image/avif</item>
             </argument>
-        </arguments>
-    </type>
-    <type name="Magento\Cms\Model\Wysiwyg\Images\Storage">
-        <arguments>
             <argument name="extensions" xsi:type="array">
                 <item name="images" xsi:type="array">
                     <item name="jpg" xsi:type="string">jpg</item>
