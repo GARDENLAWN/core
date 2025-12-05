@@ -132,40 +132,6 @@
                 type="GardenLawn\Core\Plugin\Framework\File\UploaderPlugin" sortOrder="10"/>
     </type>
     <type name="Magento\Framework\Image\Adapter\Gd2">
-        <plugin name="gardenlawn_core_framework_image_adapter_gd2"
-                type="GardenLawn\Core\Plugin\Framework\Image\Adapter\Gd2Plugin" sortOrder="10"/>
-    </type>
-    <type name="Amasty\ImportCore\Import\Filesystem\FileUploader">
-        <plugin name="gardenlawn_core_amasty_fileuploader_plugin"
-                type="GardenLawn\Core\Plugin\Amasty\FileUploaderPlugin" sortOrder="10"/>
-    </type>
-    <type name="Magento\Framework\Image\Adapter\AbstractAdapter">
-        <plugin name="gardenlawn_core_framework_image_adapter_abstractadapter"
-                type="GardenLawn\Core\Plugin\Framework\Image\Adapter\AbstractAdapterPlugin" sortOrder="10"/>
-    </type>
-    <type name="Hyva\Checkout\Model\MethodMetaData\IconRenderer">
-        <plugin name="gardenlawn_core_hyva_checkout_icondrenderer_picture"
-                type="GardenLawn\Core\Plugin\Hyva\Checkout\Model\MethodMetaData\IconRendererPlugin"
-                sortOrder="10"/>
-    </type>
-    <type name="Mageplaza\SocialLogin\Helper\Social">
-        <plugin name="custom_social_login_plugin" type="GardenLawn\Core\Plugin\Mageplaza\SocialHelperPlugin" sortOrder="10" disabled="false"/>
-    </type>
-    <virtualType name="Magento\Customer\Ui\Component\Form\Address" type="Magento\Ui\Component\Form\Fieldset">
-        <arguments>
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="label" xsi:type="string" translate="true">Addresses</item>
-                    <item name="collapsible" xsi:type="boolean">true</item>
-                    <item name="sortOrder" xsi:type="number">100</item>
-                </item>
-            </argument>
-        </arguments>
-    </virtualType>
-
-    <type name="Magento\Customer\Model\Customer\DataProviderWithDefaultAddresses">
-        <arguments>
-            <argument name="modifier" xsi:type="object">GardenLawn\Core\Model\Customer\DataProvider\Modifier</argument>
-        </arguments>
+        <plugin name="gardenlawn_core_webp_support" type="GardenLawn\Core\Plugin\Framework\Image\Adapter\Gd2Plugin" />
     </type>
 </config>
