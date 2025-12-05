@@ -1,0 +1,12 @@
+<?php
+
+use GardenLawn\Company\Cron\CompanyCeidg;
+use Magento\Framework\App\ObjectManager;
+
+$objectManager = ObjectManager::getInstance();
+$companyCeidg = $objectManager->create(CompanyCeidg::class);
+try {
+    $companyCeidg->execute();
+} catch (Exception $e) {
+    var_dump($e);
+}

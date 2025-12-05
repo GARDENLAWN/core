@@ -39,6 +39,13 @@ class Test extends Action implements HttpGetActionInterface
                     'link' => $this->_url->getUrl('/')
                 ]
             );
+            $breadcrumbsBlock->addCrumb(
+                'test',
+                [
+                    'label' => __('Test'),
+                    'link' => $this->_url->getUrl('test')
+                ]
+            );
         }
         return $page;
     }
