@@ -134,4 +134,7 @@
     <type name="Magento\Framework\Image\Adapter\Gd2">
         <plugin name="gardenlawn_core_webp_support" type="GardenLawn\Core\Plugin\Framework\Image\Adapter\Gd2Plugin" />
     </type>
+    <type name="Magento\Catalog\Model\Product\Image">
+        <plugin name="gardenlawn_core_product_image_webp" type="GardenLawn\Core\Plugin\Catalog\Model\Product\ImagePlugin" />
+    </type>
 </config>
