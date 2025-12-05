@@ -140,8 +140,7 @@
         <plugin name="gardenlawn_core_catalog_asset_image_transformation_webp"
                 type="GardenLawn\Core\Plugin\Catalog\Model\View\Asset\ImageTransformationPlugin"/>
     </type>
-    <type name="Magento\MediaStorage\Service\ImageResize">
-        <plugin name="gardenlawn_core_media_storage_image_resize_webp"
-                type="GardenLawn\Core\Plugin\MediaStorage\Service\ImageResizePlugin"/>
+    <type name="Magento\Catalog\Model\View\Asset\ImageFactory">
+        <plugin name="gardenlawn_core_catalog_asset_image_factory_webp" type="GardenLawn\Core\Plugin\Catalog\Model\View\Asset\ImageFactoryPlugin" />
     </type>
 </config>
