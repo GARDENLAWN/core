@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace GardenLawn\Core\Plugin\Catalog\Model\Product;
+namespace GardenLawn\Core\Plugin\Catalog\Model\View\Asset;
 
-use Magento\Catalog\Model\Product\Image;
+use Magento\Catalog\Model\View\Asset\Image;
 
 class ImagePlugin
 {
