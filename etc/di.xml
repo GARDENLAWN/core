@@ -111,7 +111,6 @@
     <type name="Magento\Catalog\Model\View\Asset\ImageFactory">
         <plugin name="gardenlawn_core_catalog_asset_image_factory_webp" type="GardenLawn\Core\Plugin\Catalog\Model\View\Asset\ImageFactoryPlugin" />
     </type>
-
     <!-- Add allowed extensions to WYSIWYG uploader & trigger post-upload sync -->
     <type name="Magento\Cms\Model\Wysiwyg\Images\Storage">
         <plugin name="gardenlawn_core_wysiwyg_storage_plugin"
@@ -119,19 +118,11 @@
         <plugin name="gardenlawn_core_wysiwyg_storage_resize_file_plugin"
                 type="GardenLawn\Core\Plugin\Cms\Model\Wysiwyg\Images\StorageResizeFilePlugin" sortOrder="20"/>
     </type>
-
-    <!-- Add allowed extensions to the new Media Gallery uploader -->
-    <type name="Magento\MediaGalleryUi\Model\Uploader">
-        <plugin name="gardenlawn_core_add_media_gallery_allowed_extensions"
-                type="GardenLawn\Core\Plugin\MediaGalleryUi\Model\UploaderPlugin" sortOrder="10"/>
-    </type>
-
     <!-- Whitelist modern image formats in the protected extension validator -->
     <type name="Magento\MediaStorage\Model\File\Validator\NotProtectedExtension">
         <plugin name="gardenlawn_core_whitelist_modern_image_formats"
                 type="GardenLawn\Core\Plugin\MediaStorage\Model\File\Validator\NotProtectedExtensionPlugin" sortOrder="10"/>
     </type>
-
     <!-- Ensure modern image formats are recognized by the Media Gallery UI -->
     <type name="Magento\MediaGalleryUi\Model\GetAssetHtml">
         <plugin name="gardenlawn_core_recognize_modern_formats_in_gallery"
