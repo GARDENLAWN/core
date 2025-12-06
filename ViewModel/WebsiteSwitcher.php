@@ -136,24 +136,24 @@ class WebsiteSwitcher implements ArgumentInterface
         return $asset->getUrl();
     }
 
-    public function getLogoHeight(WebsiteInterface $website): int
+    public function getLogoHeight(WebsiteInterface $website): float
     {
         $logoMap = [
-            'gardenlawn' => 122,
-            'amrobots' => 2000,
-            'finnpolska' => 992
+            'gardenlawn' => 60.1,
+            'amrobots' => 72.9,
+            'finnpolska' => 61.9
         ];
 
         $websiteCode = $website->getCode();
         return $logoMap[$websiteCode];
     }
 
-    public function getLogoWidth(WebsiteInterface $website): int
+    public function getLogoWidth(WebsiteInterface $website): float
     {
         $logoMap = [
-            'gardenlawn' => 406,
-            'amrobots' => 729,
-            'finnpolska' => 307
+            'gardenlawn' => 200,
+            'amrobots' => 200,
+            'finnpolska' => 200
         ];
 
         $websiteCode = $website->getCode();
