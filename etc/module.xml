@@ -19,6 +19,7 @@
             <module name="Mageplaza_SocialLogin"/>
             <module name="Hyva_Checkout"/>
             <module name="Magento_Cms"/>
+            <module name="Magento_MediaGalleryUi"/>
         </sequence>
     </module>
 </config>
