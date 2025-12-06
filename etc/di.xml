@@ -116,6 +116,8 @@
     <type name="Magento\Cms\Model\Wysiwyg\Images\Storage">
         <plugin name="gardenlawn_core_wysiwyg_storage_plugin"
                 type="GardenLawn\Core\Plugin\Cms\Model\Wysiwyg\Images\StoragePlugin" sortOrder="10"/>
+        <plugin name="gardenlawn_core_wysiwyg_storage_resize_file_plugin"
+                type="GardenLawn\Core\Plugin\Cms\Model\Wysiwyg\Images\StorageResizeFilePlugin" sortOrder="20"/>
     </type>
 
     <!-- Add allowed extensions to the new Media Gallery uploader -->
