@@ -8,7 +8,6 @@ use GardenLawn\MediaGallery\Model\AssetLinker;
 use GardenLawn\MediaGallery\Model\S3AssetSynchronizer;
 use Psr\Log\LoggerInterface;
 use Magento\Framework\App\ResourceConnection;
-use Magento\Framework\Filesystem;
 
 class StoragePlugin
 {
@@ -16,21 +15,17 @@ class StoragePlugin
     private S3AssetSynchronizer $synchronizer;
     private LoggerInterface $logger;
     private ResourceConnection $resourceConnection;
-    private Filesystem $filesystem;
 
     public function __construct(
-        AssetLinker         $assetLinker,
+        AssetLinker $assetLinker,
         S3AssetSynchronizer $synchronizer,
-        LoggerInterface     $logger,
-        ResourceConnection  $resourceConnection,
-        Filesystem          $filesystem
-    )
-    {
+        LoggerInterface $logger,
+        ResourceConnection $resourceConnection
+    ) {
         $this->assetLinker = $assetLinker;
         $this->synchronizer = $synchronizer;
         $this->logger = $logger;
         $this->resourceConnection = $resourceConnection;
-        $this->filesystem = $filesystem;
     }
 
     /**
@@ -58,16 +53,30 @@ class StoragePlugin
     public function afterUploadFile(Storage $subject, array $result): array
     {
         try {
-            $this->logger->info(print_r($result, true));
-            if (empty($result['file'])) {
+            // Check if upload was successful and we have the necessary data
+            if (empty($result['file']) || empty($result['path'])) {
                 return $result;
             }
 
-            $filePath = $result['file'];
-            $extension = strtolower(pathinfo($filePath, PATHINFO_EXTENSION));
+            $fileName = $result['file'];
+            $extension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
             $allowedExtensions = ['webp', 'avif', 'svg'];
 
             if (in_array($extension, $allowedExtensions, true)) {
+                // Correctly construct the relative file path
+                $directoryUrl = $result['path'];
+                $urlPath = parse_url($directoryUrl, PHP_URL_PATH) ?: '';
+                $mediaIdentifier = '/media/';
+                $mediaPos = strpos($urlPath, $mediaIdentifier);
+
+                if ($mediaPos === false) {
+                    $this->logger->warning('[StoragePlugin] Could not determine media relative path from URL: ' . $directoryUrl);
+                    return $result;
+                }
+
+                $relativeDir = substr($urlPath, $mediaPos + strlen($mediaIdentifier));
+                $filePath = rtrim($relativeDir, '/') . '/' . $fileName;
+
                 $this->logger->info('[StoragePlugin] Modern image format uploaded, triggering sync for: ' . $filePath);
 
                 // 1. Sync the single new asset
