@@ -123,9 +123,4 @@
         <plugin name="gardenlawn_core_whitelist_modern_image_formats"
                 type="GardenLawn\Core\Plugin\MediaStorage\Model\File\Validator\NotProtectedExtensionPlugin" sortOrder="10"/>
     </type>
-    <!-- Ensure modern image formats are recognized by the Media Gallery UI -->
-    <type name="Magento\MediaGalleryUi\Model\GetAssetHtml">
-        <plugin name="gardenlawn_core_recognize_modern_formats_in_gallery"
-                type="GardenLawn\Core\Plugin\MediaGalleryUi\Model\GetAssetHtmlPlugin" sortOrder="10"/>
-    </type>
 </config>
