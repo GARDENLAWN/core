@@ -47,39 +47,6 @@
             </argument>
         </arguments>
     </type>
-    <type name="Magento\Cms\Model\Wysiwyg\Images\Storage">
-        <arguments>
-            <argument name="allowedExtensions" xsi:type="array">
-                <item name="jpg" xsi:type="string">jpg</item>
-                <item name="jpeg" xsi:type="string">jpeg</item>
-                <item name="gif" xsi:type="string">gif</item>
-                <item name="png" xsi:type="string">png</item>
-                <item name="svg" xsi:type="string">svg</item>
-                <item name="webp" xsi:type="string">webp</item>
-                <item name="avif" xsi:type="string">avif</item>
-            </argument>
-            <argument name="allowedMimeTypes" xsi:type="array">
-                <item name="jpg" xsi:type="string">image/jpeg</item>
-                <item name="jpeg" xsi:type="string">image/jpeg</item>
-                <item name="gif" xsi:type="string">image/gif</item>
-                <item name="png" xsi:type="string">image/png</item>
-                <item name="webp" xsi:type="string">image/webp</item>
-                <item name="svg" xsi:type="string">image/svg+xml</item>
-                <item name="avif" xsi:type="string">image/avif</item>
-            </argument>
-            <argument name="extensions" xsi:type="array">
-                <item name="images" xsi:type="array">
-                    <item name="jpg" xsi:type="string">jpg</item>
-                    <item name="jpeg" xsi:type="string">jpeg</item>
-                    <item name="gif" xsi:type="string">gif</item>
-                    <item name="png" xsi:type="string">png</item>
-                    <item name="svg" xsi:type="string">svg</item>
-                    <item name="webp" xsi:type="string">webp</item>
-                    <item name="avif" xsi:type="string">avif</item>
-                </item>
-            </argument>
-        </arguments>
-    </type>
     <virtualType name="Magento\Catalog\CategoryImageUpload" type="Magento\Catalog\Model\ImageUploader">
         <arguments>
             <argument name="allowedExtensions" xsi:type="array">
@@ -143,5 +110,11 @@
     </type>
     <type name="Magento\Catalog\Model\View\Asset\ImageFactory">
         <plugin name="gardenlawn_core_catalog_asset_image_factory_webp" type="GardenLawn\Core\Plugin\Catalog\Model\View\Asset\ImageFactoryPlugin" />
+    </type>
+
+    <!-- Add allowed extensions to WYSIWYG uploader -->
+    <type name="Magento\Cms\Model\Wysiwyg\Images\Storage">
+        <plugin name="gardenlawn_core_add_wysiwyg_allowed_extensions"
+                type="GardenLawn\Core\Plugin\Cms\Model\Wysiwyg\Images\StoragePlugin" sortOrder="10"/>
     </type>
 </config>
