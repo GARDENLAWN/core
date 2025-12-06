@@ -3,27 +3,25 @@ declare(strict_types=1);
 
 namespace GardenLawn\Core\Plugin\Cms\Model\Wysiwyg\Images;
 
-use Closure;
-use Exception;
 use Magento\Cms\Model\Wysiwyg\Images\Storage;
-use Magento\Framework\Exception\FileSystemException;
 use Magento\Framework\Filesystem;
 use Psr\Log\LoggerInterface;
+use GardenLawn\MediaGallery\Service\WebpConverter; // Inject WebpConverter
 
 class StorageResizeFilePlugin
 {
     private Filesystem\Directory\WriteInterface $mediaDirectory;
     private LoggerInterface $logger;
+    private WebpConverter $webpConverter; // New dependency
 
-    /**
-     * @throws FileSystemException
-     */
     public function __construct(
         Filesystem $filesystem,
-        LoggerInterface $logger
+        LoggerInterface $logger,
+        WebpConverter $webpConverter // Inject WebpConverter
     ) {
         $this->mediaDirectory = $filesystem->getDirectoryWrite(\Magento\Framework\App\Filesystem\DirectoryList::MEDIA);
         $this->logger = $logger;
+        $this->webpConverter = $webpConverter; // Assign new dependency
     }
 
     /**
@@ -32,12 +30,12 @@ class StorageResizeFilePlugin
      * Prevents resizing of WebP and SVG files, instead copies them directly.
      *
      * @param Storage $subject
-     * @param Closure $proceed
-     * @param string $source
-     * @param bool $keepRatio
+     * @param \Closure $proceed
+     * @param string $source Absolute path to the uploaded file in media directory
+     * @param bool $keepRatio Keep aspect ratio or not
      * @return bool|string
      */
-    public function aroundResizeFile(Storage $subject, Closure $proceed, string $source, bool $keepRatio = true): bool|string
+    public function aroundResizeFile(Storage $subject, \Closure $proceed, $source, $keepRatio = true)
     {
         try {
             $sourceExtension = strtolower(pathinfo($source, PATHINFO_EXTENSION));
@@ -46,25 +44,44 @@ class StorageResizeFilePlugin
             if (in_array($sourceExtension, $copyOnlyExtensions, true)) {
                 $this->logger->info('[StorageResizeFilePlugin] Detected ' . $sourceExtension . ' file. Copying directly instead of resizing.');
 
-                $thumbnailRoot = $subject->getThumbnailRoot();
-                $relativePathToRoot = $this->getRelativePathToRoot($subject, $source);
-                $targetThumbnailPath = $thumbnailRoot . $relativePathToRoot;
+                // Get the storage root (e.g., /var/www/html/magento/pub/media)
+                $storageRoot = $subject->getCmsWysiwygImages()->getStorageRoot();
+                // Get the path of the uploaded file relative to the storage root (e.g., wysiwyg/banners/dealers/baner4_5.webp)
+                $uploadedFileRelativePath = substr($source, strlen($storageRoot));
+                $uploadedFileRelativePath = ltrim($uploadedFileRelativePath, '/'); // Ensure no leading slash
 
-                // Ensure the thumbnail directory exists
-                $targetThumbnailDir = $this->mediaDirectory->getRelativePath(dirname($targetThumbnailPath));
-                if (!$this->mediaDirectory->isExist($targetThumbnailDir)) {
-                    $this->mediaDirectory->create($targetThumbnailDir);
+                // Get the target thumbnail path relative to the media directory (e.g., .thumbs/wysiwyg/banners/dealers/baner4_5.webp)
+                $thumbnailRelativePath = $this->webpConverter->getThumbnailPath($uploadedFileRelativePath);
+
+                if (!$thumbnailRelativePath) {
+                    $this->logger->warning('[StorageResizeFilePlugin] Could not determine thumbnail path for: ' . $source);
+                    return $proceed($source, $keepRatio); // Fallback to original method
+                }
+
+                // For SVG, the thumbnail should retain .svg extension. For WebP, it retains .webp.
+                // The getThumbnailPath already handles the .thumbs prefix.
+                // We need to ensure the extension is correct for the thumbnail.
+                // The getThumbnailPath from WebpConverter already returns the correct extension for the thumbnail based on the source.
+                // So, if source is 'image.svg', thumbnailRelativePath will be '.thumbs/image.svg'.
+                // If source is 'image.webp', thumbnailRelativePath will be '.thumbs/image.webp'.
+
+                // Ensure the thumbnail directory exists (relative path)
+                $targetThumbnailDirRelative = dirname($thumbnailRelativePath);
+                if (!$this->mediaDirectory->isExist($targetThumbnailDirRelative)) {
+                    $this->mediaDirectory->create($targetThumbnailDirRelative);
                 }
 
                 // Copy the original file to the thumbnail location
+                // Both paths are relative to the media directory.
                 $this->mediaDirectory->copyFile(
-                    $this->mediaDirectory->getRelativePath($source),
-                    $this->mediaDirectory->getRelativePath($targetThumbnailPath)
+                    $uploadedFileRelativePath, // Source is the uploaded file in media directory (relative)
+                    $thumbnailRelativePath // Target is the thumbnail path in media directory (relative)
                 );
 
-                return $targetThumbnailPath;
+                // Return the absolute path of the created thumbnail
+                return $storageRoot . '/' . $thumbnailRelativePath;
             }
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $this->logger->error(
                 '[StorageResizeFilePlugin] Error during custom resizeFile logic: ' . $e->getMessage(),
                 ['exception' => $e]
@@ -79,6 +96,8 @@ class StorageResizeFilePlugin
 
     /**
      * Helper to get relative path to storage root, similar to Storage::_getRelativePathToRoot
+     * This method is no longer needed as we are constructing paths differently.
+     * Keeping it for now, but it will be removed.
      *
      * @param Storage $subject
      * @param string $path
