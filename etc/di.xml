@@ -12,17 +12,16 @@
             </argument>
         </arguments>
     </type>
+    <type name="Magento\Catalog\Model\Indexer\Category\Product\Action\Full">
+        <arguments>
+            <argument name="batchRowsCount" xsi:type="number">500</argument>
+        </arguments>
+    </type>
     <type name="Magento\Catalog\Model\ResourceModel\Product\Indexer\Price\BatchSizeCalculator">
         <arguments>
             <argument name="batchRowsCount" xsi:type="array">
+                <item name="default" xsi:type="number">500</item>
                 <item name="configurable" xsi:type="number">500</item>
-            </argument>
-        </arguments>
-    </type>
-    <type name="Magento\CatalogInventory\Model\Indexer\Stock\Action\Full">
-        <arguments>
-            <argument name="batchRowsCount" xsi:type="array">
-                <item name="configurable" xsi:type="number">100</item>
             </argument>
         </arguments>
     </type>
@@ -112,10 +111,14 @@
     <type name="Magento\Catalog\Model\View\Asset\ImageFactory">
         <plugin name="gardenlawn_core_catalog_asset_image_factory_webp" type="GardenLawn\Core\Plugin\Catalog\Model\View\Asset\ImageFactoryPlugin" />
     </type>
-
     <!-- Add allowed extensions to WYSIWYG uploader -->
     <type name="Magento\Cms\Model\Wysiwyg\Images\Storage">
         <plugin name="gardenlawn_core_add_wysiwyg_allowed_extensions"
                 type="GardenLawn\Core\Plugin\Cms\Model\Wysiwyg\Images\StoragePlugin" sortOrder="10"/>
+    </type>
+    <!-- Whitelist modern image formats in the protected extension validator -->
+    <type name="Magento\MediaStorage\Model\File\Validator\NotProtectedExtension">
+        <plugin name="gardenlawn_core_whitelist_modern_image_formats"
+                type="GardenLawn\Core\Plugin\MediaStorage\Model\File\Validator\NotProtectedExtensionPlugin" sortOrder="10"/>
     </type>
 </config>
