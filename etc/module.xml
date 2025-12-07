@@ -20,6 +20,7 @@
             <module name="Hyva_Checkout"/>
             <module name="Magento_Cms"/>
             <module name="Magento_MediaGalleryUi"/>
+            <module name="Magento_AwsS3"/>
         </sequence>
     </module>
 </config>

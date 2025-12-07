@@ -123,4 +123,9 @@
         <plugin name="gardenlawn_core_whitelist_modern_image_formats"
                 type="GardenLawn\Core\Plugin\MediaStorage\Model\File\Validator\NotProtectedExtensionPlugin" sortOrder="10"/>
     </type>
+    <type name="Magento\AwsS3\Driver\AwsS3">
+        <plugin name="vendor-awss3cache-add-cache-control"
+                type="GardenLawn\Core\Plugin\AwsS3\DriverPlugin"
+                sortOrder="10" />
+    </type>
 </config>
