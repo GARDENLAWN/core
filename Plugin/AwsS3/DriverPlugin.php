@@ -15,7 +15,7 @@ use Psr\Log\LoggerInterface;
  */
 class DriverPlugin
 {
-    private const string CACHE_CONTROL = 'public, max-age=31536000';
+    private const string CACHE_CONTROL = 'max-age=31536000';
 
     /**
      * @var LoggerInterface
@@ -70,12 +70,10 @@ class DriverPlugin
         if (false !== ($imageSize = @getimagesizefromstring($content))) {
             $config['Metadata'] = [
                 'image-width' => $imageSize[0],
-                'image-height' => $imageSize[1]
+                'image-height' => $imageSize[1],
+                'CacheControl' => self::CACHE_CONTROL
             ];
         }
-
-        // 4. *** DODANIE TWOJEJ METADANY CacheControl ***
-        $config['CacheControl'] = self::CACHE_CONTROL;
 
         // 5. Pobierz adapter Flysystem
         $adapterProperty = $reflection->getProperty('adapter');
