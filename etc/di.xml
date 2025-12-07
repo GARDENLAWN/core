@@ -126,4 +126,8 @@
                 type="GardenLawn\Core\Plugin\MediaStorage\Model\File\Validator\NotProtectedExtensionPlugin"
                 sortOrder="10"/>
     </type>
+    <type name="Magento\Framework\App\View\Asset\Publisher">
+        <plugin name="gardenlawn_core_s3_asset_publisher"
+                type="GardenLawn\Core\Plugin\Framework\App\View\Asset\PublisherPlugin" sortOrder="10"/>
+    </type>
 </config>
