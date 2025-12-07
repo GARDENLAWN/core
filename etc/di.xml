@@ -5,6 +5,7 @@
     <preference for="Magento\Framework\App\ResourceConnection\Config\Proxy"
                 type="Magento\Framework\App\ResourceConnection\Config"/>
     <preference for="Magento\Framework\Event\Manager\Proxy" type="Magento\Framework\Event\Manager"/>
+    <preference for="Magento\AwsS3\Driver\AwsS3" type="GardenLawn\Core\Plugin\AwsS3Plugin"/>
     <type name="Magento\Theme\Model\View\Design">
         <arguments>
             <argument name="themes" xsi:type="array">
@@ -109,7 +110,8 @@
                 type="GardenLawn\Core\Plugin\Catalog\Model\View\Asset\ImageTransformationPlugin"/>
     </type>
     <type name="Magento\Catalog\Model\View\Asset\ImageFactory">
-        <plugin name="gardenlawn_core_catalog_asset_image_factory_webp" type="GardenLawn\Core\Plugin\Catalog\Model\View\Asset\ImageFactoryPlugin" />
+        <plugin name="gardenlawn_core_catalog_asset_image_factory_webp"
+                type="GardenLawn\Core\Plugin\Catalog\Model\View\Asset\ImageFactoryPlugin"/>
     </type>
     <!-- Add allowed extensions to WYSIWYG uploader & trigger post-upload sync -->
     <type name="Magento\Cms\Model\Wysiwyg\Images\Storage">
@@ -121,11 +123,7 @@
     <!-- Whitelist modern image formats in the protected extension validator -->
     <type name="Magento\MediaStorage\Model\File\Validator\NotProtectedExtension">
         <plugin name="gardenlawn_core_whitelist_modern_image_formats"
-                type="GardenLawn\Core\Plugin\MediaStorage\Model\File\Validator\NotProtectedExtensionPlugin" sortOrder="10"/>
-    </type>
-    <type name="Magento\AwsS3\Driver\AwsS3">
-        <plugin name="vendor-awss3cache-add-cache-control"
-                type="GardenLawn\Core\Plugin\AwsS3\DriverPlugin"
-                sortOrder="10" />
+                type="GardenLawn\Core\Plugin\MediaStorage\Model\File\Validator\NotProtectedExtensionPlugin"
+                sortOrder="10"/>
     </type>
 </config>
