@@ -5,7 +5,7 @@
     <preference for="Magento\Framework\App\ResourceConnection\Config\Proxy"
                 type="Magento\Framework\App\ResourceConnection\Config"/>
     <preference for="Magento\Framework\Event\Manager\Proxy" type="Magento\Framework\Event\Manager"/>
-    <preference for="Magento\AwsS3\Driver\AwsS3" type="GardenLawn\Core\Plugin\AwsS3Plugin"/>
+    <preference for="Magento\AwsS3\Driver\AwsS3" type="GardenLawn\Core\Plugin\AwsS3\Driver\AwsS3Plugin"/>
     <type name="Magento\Theme\Model\View\Design">
         <arguments>
             <argument name="themes" xsi:type="array">

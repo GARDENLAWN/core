@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace GardenLawn\Core\Plugin;
+namespace GardenLawn\Core\Plugin\AwsS3\Driver;
 
 use League\Flysystem\Config;
 use League\Flysystem\FilesystemAdapter;
-use Magento\AwsS3\Driver\AwsS3 as CoreAwsS3;
-use Magento\Framework\Filesystem\DriverInterface;
 use League\Flysystem\FilesystemException as FlysystemFilesystemException;
 use League\Flysystem\UnableToRetrieveMetadata;
+use Magento\AwsS3\Driver\AwsS3 as CoreAwsS3;
+use Magento\Framework\Filesystem\DriverInterface;
 use Psr\Log\LoggerInterface;
 use ReflectionException;
 
