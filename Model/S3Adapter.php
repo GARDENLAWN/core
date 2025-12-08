@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace GardenLawn\Core\Model;
 
+use Aws\CommandPool;
 use Aws\S3\S3Client;
 use Magento\Framework\App\DeploymentConfig;
 use Exception;
@@ -151,6 +152,51 @@ class S3Adapter
                 'CacheControl' => 'public, max-age=31536000'
             ]
         ]);
+    }
+
+    /**
+     * Uploads multiple static asset files concurrently.
+     *
+     * @param array $files An array of files, where each element is an array with 'sourcePath' and 'destinationPath'.
+     * @param callable|null $progressCallback A callback to be invoked as files are uploaded.
+     * @throws Exception
+     */
+    public function uploadStaticFiles(array $files, ?callable $progressCallback = null): void
+    {
+        $s3Client = $this->getS3Client();
+
+        $commands = function () use ($s3Client, $files) {
+            foreach ($files as $file) {
+                $fullKey = $this->getPrefixedPath('static', $file['destinationPath']);
+                yield $s3Client->getCommand('PutObject', [
+                    'Bucket' => $this->bucket,
+                    'Key' => $fullKey,
+                    'SourceFile' => $file['sourcePath'],
+                    'ContentType' => $this->getContentTypeByPath($file['destinationPath']),
+                    'Metadata' => [
+                        'CacheControl' => 'public, max-age=31536000'
+                    ]
+                ]);
+            }
+        };
+
+        $pool = new CommandPool($s3Client, $commands(), [
+            'concurrency' => 25, // Can be adjusted
+            'fulfilled' => function ($result, $index) use ($progressCallback) {
+                if (is_callable($progressCallback)) {
+                    $progressCallback();
+                }
+            },
+            'rejected' => function ($reason, $index) {
+                // For simplicity, we'll throw an exception. In a real-world scenario,
+                // you might want to log this and continue, or implement a retry mechanism.
+                throw new Exception("Failed to upload file with index {$index}. Reason: {$reason}");
+            },
+        ]);
+
+        // Initiate the transfer and wait for it to complete.
+        $promise = $pool->promise();
+        $promise->wait();
     }
 
     /**

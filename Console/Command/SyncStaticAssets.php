@@ -87,7 +87,10 @@ class SyncStaticAssets extends Command
                 $files = $staticDir->readRecursively($themePath);
                 foreach ($files as $file) {
                     if ($staticDir->isFile($file)) {
-                        $filesToUpload[] = $file;
+                        $filesToUpload[] = [
+                            'sourcePath' => $staticDir->getAbsolutePath($file),
+                            'destinationPath' => 'static/version' . $version . '/' . $file,
+                        ];
                     }
                 }
             }
@@ -102,13 +105,9 @@ class SyncStaticAssets extends Command
             $progressBar = new ProgressBar($output, count($filesToUpload));
             $progressBar->start();
 
-            foreach ($filesToUpload as $file) {
-                $sourcePath = $staticDir->getAbsolutePath($file);
-                $destinationKey = 'static/version' . $version . '/' . $file;
-
-                $this->s3Adapter->uploadStaticFile($sourcePath, $destinationKey);
+            $this->s3Adapter->uploadStaticFiles($filesToUpload, function () use ($progressBar) {
                 $progressBar->advance();
-            }
+            });
 
             $progressBar->finish();
             $output->writeln("\n<info>Synchronization complete.</info>");
