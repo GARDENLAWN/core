@@ -1,7 +1,9 @@
 <?php
 namespace GardenLawn\Core\Plugin\Framework\App\View\Asset;
 
-use GardenLawn\MediaGallery\Model\S3Adapter;
+use Closure;
+use Exception;
+use GardenLawn\Core\Model\S3Adapter; // Zmieniona przestrzeń nazw
 use Magento\Framework\App\View\Asset\Publisher as Subject;
 use Magento\Framework\View\Asset\File;
 use Magento\Framework\View\Asset;
@@ -24,12 +26,12 @@ class PublisherPlugin
      * Intercept asset publishing and upload to S3 instead.
      *
      * @param Subject $subject
-     * @param \Closure $proceed
+     * @param Closure $proceed
      * @param File $asset
      * @return bool
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    public function aroundPublish(Subject $subject, \Closure $proceed, Asset\LocalInterface $asset): bool
+    public function aroundPublish(Subject $subject, Closure $proceed, Asset\LocalInterface $asset): bool
     {
         try {
             $filePath = $asset->getPath();
@@ -43,7 +45,7 @@ class PublisherPlugin
 
             // Return true to indicate success, preventing the original method from running.
             return true;
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $this->logger->error('S3 Static Content Deployment Error: ' . $e->getMessage());
             // In case of an error, we can either log it and proceed with the original method,
             // or we can stop the process. For now, we'll log and let it fail silently
