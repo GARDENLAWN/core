@@ -6,6 +6,7 @@ namespace GardenLawn\Core\Console\Command;
 use Exception;
 use Magento\Framework\Console\Cli;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -53,10 +54,12 @@ class SyncStaticAssets extends Command
 
         try {
             $staticDir = $this->filesystem->getDirectoryRead(DirectoryList::STATIC_VIEW);
+            $filesToUpload = [];
 
+            // First, gather all files to get a total count
             foreach ($themes as $theme) {
                 $theme = trim($theme, " \t\n\r\0\x0B,");
-                $output->writeln("<info>Synchronizing theme: '{$theme}'</info>");
+                $output->writeln("<info>Scanning theme: '{$theme}'</info>");
 
                 $frontendPath = 'frontend/' . $theme;
                 $adminhtmlPath = 'adminhtml/' . $theme;
@@ -69,33 +72,39 @@ class SyncStaticAssets extends Command
                 }
 
                 if ($themePath === null) {
-                    $output->writeln("<warning>Theme '{$theme}' not found in pub/static/frontend or pub/static/adminhtml. Skipping.</warning>");
+                    $output->writeln("<warning>Theme '{$theme}' not found. Skipping.</warning>");
                     continue;
                 }
 
-                $output->writeln("<info>Found theme at 'pub/static/{$themePath}'. Starting sync...</info>");
                 $files = $staticDir->readRecursively($themePath);
-
-                if (empty($files)) {
-                    $output->writeln("<warning>No files found in 'pub/static/{$themePath}'.</warning>");
-                    continue;
-                }
-
                 foreach ($files as $file) {
-                    // $file is the full relative path from pub/static, e.g., "frontend/Magento/luma/css/styles.css"
-                    $sourcePath = $staticDir->getAbsolutePath($file);
-
-                    // The destination key should be relative to the 'static' directory on S3
-                    $destinationKey = $file;
-
                     if ($staticDir->isFile($file)) {
-                        $this->s3Adapter->uploadStaticFile($sourcePath, $destinationKey);
-                        $output->writeln("Uploaded: static/{$destinationKey}");
+                        $filesToUpload[] = $file;
                     }
                 }
             }
 
-            $output->writeln("<info>Synchronization complete.</info>");
+            if (empty($filesToUpload)) {
+                $output->writeln("<warning>No files found to upload.</warning>");
+                return Cli::RETURN_SUCCESS;
+            }
+
+            // Setup and run the progress bar
+            $output->writeln("<info>Uploading files...</info>");
+            $progressBar = new ProgressBar($output, count($filesToUpload));
+            $progressBar->start();
+
+            foreach ($filesToUpload as $file) {
+                $sourcePath = $staticDir->getAbsolutePath($file);
+                $destinationKey = $file; // Relative path is the destination key
+
+                $this->s3Adapter->uploadStaticFile($sourcePath, $destinationKey);
+                $progressBar->advance();
+            }
+
+            $progressBar->finish();
+            $output->writeln("\n<info>Synchronization complete.</info>");
+
             return Cli::RETURN_SUCCESS;
         } catch (Exception $e) {
             $this->logger->error('S3 Static Sync Error: ' . $e->getMessage());
