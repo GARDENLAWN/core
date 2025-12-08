@@ -130,4 +130,7 @@
         <plugin name="gardenlawn_core_s3_asset_publisher"
                 type="GardenLawn\Core\Plugin\Framework\App\View\Asset\PublisherPlugin" sortOrder="10"/>
     </type>
+    <type name="Magento\Deploy\Model\Filesystem">
+        <plugin name="gardenlawn_core_prevent_static_clean" type="GardenLawn\Core\Plugin\Deploy\Model\FilesystemPlugin" sortOrder="10" />
+    </type>
 </config>
