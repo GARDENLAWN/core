@@ -73,15 +73,19 @@ class SyncStaticAssets extends Command
                 }
 
                 $output->writeln("<info>Found theme at 'pub/static/{$themePath}'. Starting sync...</info>");
-                $files = $staticDir->read($themePath);
+                $files = $staticDir->readRecursively($themePath);
+
+                if (empty($files)) {
+                    $output->writeln("<warning>No files found in 'pub/static/{$themePath}'.</warning>");
+                    continue;
+                }
 
                 foreach ($files as $file) {
-                    // $file is relative to $themePath, so we need to prepend it
-                    $fullRelativePath = $themePath . '/' . $file;
-                    $sourcePath = $staticDir->getAbsolutePath($fullRelativePath);
-                    $destinationKey = 'static/' . $fullRelativePath;
+                    // $file is the full relative path from pub/static, e.g., "frontend/Magento/luma/css/styles.css"
+                    $sourcePath = $staticDir->getAbsolutePath($file);
+                    $destinationKey = 'static/' . $file;
 
-                    if ($staticDir->isFile($fullRelativePath)) {
+                    if ($staticDir->isFile($file)) {
                         $this->s3Adapter->uploadFile($sourcePath, $destinationKey);
                         $output->writeln("Uploaded: {$destinationKey}");
                     }
