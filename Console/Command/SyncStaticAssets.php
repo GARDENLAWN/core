@@ -103,6 +103,7 @@ class SyncStaticAssets extends Command
             // Setup and run the progress bar
             $output->writeln("<info>Uploading files...</info>");
             $progressBar = new ProgressBar($output, count($filesToUpload));
+            $progressBar->setFormat('%current%/%max% [%bar%] %percent:3s%% %elapsed:6s%/%estimated:-6s% %memory:6s%');
             $progressBar->start();
 
             $this->s3Adapter->uploadStaticFiles($filesToUpload, function () use ($progressBar) {
