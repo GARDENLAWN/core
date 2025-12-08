@@ -126,11 +126,11 @@
                 type="GardenLawn\Core\Plugin\MediaStorage\Model\File\Validator\NotProtectedExtensionPlugin"
                 sortOrder="10"/>
     </type>
-    <type name="Magento\Framework\App\View\Asset\Publisher">
-        <plugin name="gardenlawn_core_s3_asset_publisher"
-                type="GardenLawn\Core\Plugin\Framework\App\View\Asset\PublisherPlugin" sortOrder="10"/>
-    </type>
-    <type name="Magento\Deploy\Model\Filesystem">
-        <plugin name="gardenlawn_core_prevent_static_clean" type="GardenLawn\Core\Plugin\Deploy\Model\FilesystemPlugin" sortOrder="10" />
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="gardenlawn_s3_sync_static" xsi:type="object">GardenLawn\Core\Console\Command\SyncStaticAssets</item>
+            </argument>
+        </arguments>
     </type>
 </config>
