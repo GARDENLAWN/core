@@ -42,6 +42,7 @@
         "ext-curl": "*",
         "ext-fileinfo": "*",
         "ext-gd": "*",
+        "hugerte/hugerte": "*",
         "gardenlawn/amrobotstheme": "dev-master",
         "gardenlawn/finntheme": "dev-master",
         "gardenlawn/hyvatheme": "dev-master",
