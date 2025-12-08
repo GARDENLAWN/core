@@ -36,32 +36,43 @@ class SyncStaticAssets extends Command
     protected function configure(): void
     {
         $this->setName('gardenlawn:s3:sync-static')
-            ->setDescription('Synchronizes static assets for a specific theme to S3.')
+            ->setDescription('Synchronizes static assets for specific themes to S3.')
             ->addArgument(
                 self::THEME_ARGUMENT,
-                InputArgument::REQUIRED,
-                'The theme to synchronize (e.g., Magento/luma).'
+                InputArgument::IS_ARRAY | InputArgument::REQUIRED,
+                'The theme(s) to synchronize (e.g., Magento/luma).'
             );
         parent::configure();
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $theme = $input->getArgument(self::THEME_ARGUMENT);
-        $output->writeln("<info>Starting synchronization of static assets for theme '{$theme}' to S3...</info>");
+        $themes = $input->getArgument(self::THEME_ARGUMENT);
+        $output->writeln("<info>Starting synchronization of static assets for themes to S3...</info>");
 
         try {
             $staticDir = $this->filesystem->getDirectoryRead(DirectoryList::STATIC_VIEW);
-            $themePath = 'frontend/' . $theme;
-            $files = $staticDir->read($themePath);
 
-            foreach ($files as $file) {
-                $sourcePath = $staticDir->getAbsolutePath($file);
-                $destinationKey = 'static/' . $file;
+            foreach ($themes as $theme) {
+                $output->writeln("<info>Synchronizing theme: '{$theme}'</info>");
+                $themePath = 'frontend/' . $theme;
 
-                if ($staticDir->isFile($file)) {
-                    $this->s3Adapter->uploadFile($sourcePath, $destinationKey);
-                    $output->writeln("Uploaded: {$destinationKey}");
+                if (!$staticDir->isExist($themePath)) {
+                    $output->writeln("<warning>Theme path '{$themePath}' does not exist. Skipping.</warning>");
+                    continue;
+                }
+
+                $files = $staticDir->read($themePath);
+
+                foreach ($files as $file) {
+                    $fullPath = $themePath . '/' . $file; // Correctly build the full path for isFile check
+                    $sourcePath = $staticDir->getAbsolutePath($fullPath);
+                    $destinationKey = 'static/' . $fullPath;
+
+                    if ($staticDir->isFile($fullPath)) {
+                        $this->s3Adapter->uploadFile($sourcePath, $destinationKey);
+                        $output->writeln("Uploaded: {$destinationKey}");
+                    }
                 }
             }
 
