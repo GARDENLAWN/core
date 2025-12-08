@@ -98,9 +98,9 @@ class WebsiteSwitcher implements ArgumentInterface
     public function getWebsiteLogo(WebsiteInterface $website): string
     {
         $logoMap = [
-            'gardenlawn' => 'https://pub.gardenlawn.pl/media/images/logo.webp',
-            'amrobots' => 'https://pub.am-robots.pl/media/producers/am-robots.webp',
-            'finnpolska' => 'https://pub.finnpolska.pl/media/producers/finn.webp'
+            'gardenlawn' => 'https://pub.gardenlawn.pl/media/images/switcher/gardenlawn.webp',
+            'amrobots' => 'https://pub.am-robots.pl/media/images/switcher/am-robots.webp',
+            'finnpolska' => 'https://pub.finnpolska.pl/media/images/switcher/finn.webp'
         ];
 
         $websiteCode = $website->getCode();
