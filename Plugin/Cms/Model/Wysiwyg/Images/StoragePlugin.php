@@ -5,7 +5,7 @@ namespace GardenLawn\Core\Plugin\Cms\Model\Wysiwyg\Images;
 
 use Magento\Cms\Model\Wysiwyg\Images\Storage;
 use GardenLawn\MediaGallery\Model\AssetLinker;
-use GardenLawn\MediaGallery\Model\S3AssetSynchronizer;
+use GardenLawn\Core\Model\S3AssetSynchronizer;
 use Psr\Log\LoggerInterface;
 use Magento\Framework\App\ResourceConnection;
 

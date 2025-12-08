@@ -3,7 +3,7 @@ namespace GardenLawn\Core\Plugin\Framework\App\View\Asset;
 
 use Closure;
 use Exception;
-use GardenLawn\MediaGallery\Model\S3Adapter;
+use GardenLawn\Core\Model\S3Adapter;
 use Magento\Framework\App\View\Asset\Publisher as Subject;
 use Magento\Framework\View\Asset\File;
 use Magento\Framework\View\Asset;
