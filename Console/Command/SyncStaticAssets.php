@@ -89,7 +89,7 @@ class SyncStaticAssets extends Command
                     if ($staticDir->isFile($file)) {
                         $filesToUpload[] = [
                             'sourcePath' => $staticDir->getAbsolutePath($file),
-                            'destinationPath' => 'static/version' . $version . '/' . $file,
+                            'destinationPath' => 'version' . $version . '/' . $file,
                         ];
                     }
                 }
