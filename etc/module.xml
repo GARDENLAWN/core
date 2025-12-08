@@ -22,6 +22,7 @@
             <module name="Magento_MediaGalleryUi"/>
             <module name="Magento_AwsS3"/>
             <module name="Magento_RemoteStorage"/>
+            <module name="Magento_Ui"/>
         </sequence>
     </module>
 </config>
