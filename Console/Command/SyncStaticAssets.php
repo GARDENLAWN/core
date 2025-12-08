@@ -83,11 +83,13 @@ class SyncStaticAssets extends Command
                 foreach ($files as $file) {
                     // $file is the full relative path from pub/static, e.g., "frontend/Magento/luma/css/styles.css"
                     $sourcePath = $staticDir->getAbsolutePath($file);
-                    $destinationKey = 'static/' . $file;
+
+                    // The destination key should be relative to the 'static' directory on S3
+                    $destinationKey = $file;
 
                     if ($staticDir->isFile($file)) {
-                        $this->s3Adapter->uploadFile($sourcePath, $destinationKey);
-                        $output->writeln("Uploaded: {$destinationKey}");
+                        $this->s3Adapter->uploadStaticFile($sourcePath, $destinationKey);
+                        $output->writeln("Uploaded: static/{$destinationKey}");
                     }
                 }
             }

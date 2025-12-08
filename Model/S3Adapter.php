@@ -123,6 +123,30 @@ class S3Adapter
             'Bucket' => $this->bucket,
             'Key' => $fullPath,
             'SourceFile' => $filePath,
+            'ContentType' => $this->getContentTypeByPath($destinationPath),
+            'Metadata' => [
+                'CacheControl' => 'public, max-age=31536000'
+            ]
+        ]);
+    }
+
+    /**
+     * Uploads a static asset file.
+     *
+     * @param string $filePath The local path to the file.
+     * @param string $destinationPath The destination path relative to the 'static' directory on S3.
+     * @throws Exception
+     */
+    public function uploadStaticFile(string $filePath, string $destinationPath): void
+    {
+        $s3Client = $this->getS3Client();
+        $fullKey = $this->getPrefixedPath('static', $destinationPath);
+
+        $s3Client->putObject([
+            'Bucket' => $this->bucket,
+            'Key' => $fullKey,
+            'SourceFile' => $filePath,
+            'ContentType' => $this->getContentTypeByPath($destinationPath),
             'Metadata' => [
                 'CacheControl' => 'public, max-age=31536000'
             ]
