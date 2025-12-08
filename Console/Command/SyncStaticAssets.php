@@ -54,22 +54,34 @@ class SyncStaticAssets extends Command
             $staticDir = $this->filesystem->getDirectoryRead(DirectoryList::STATIC_VIEW);
 
             foreach ($themes as $theme) {
+                $theme = trim($theme, " \t\n\r\0\x0B,");
                 $output->writeln("<info>Synchronizing theme: '{$theme}'</info>");
-                $themePath = 'frontend/' . $theme;
 
-                if (!$staticDir->isExist($themePath)) {
-                    $output->writeln("<warning>Theme path '{$themePath}' does not exist. Skipping.</warning>");
+                $frontendPath = 'frontend/' . $theme;
+                $adminhtmlPath = 'adminhtml/' . $theme;
+                $themePath = null;
+
+                if ($staticDir->isExist($frontendPath)) {
+                    $themePath = $frontendPath;
+                } elseif ($staticDir->isExist($adminhtmlPath)) {
+                    $themePath = $adminhtmlPath;
+                }
+
+                if ($themePath === null) {
+                    $output->writeln("<warning>Theme '{$theme}' not found in pub/static/frontend or pub/static/adminhtml. Skipping.</warning>");
                     continue;
                 }
 
+                $output->writeln("<info>Found theme at 'pub/static/{$themePath}'. Starting sync...</info>");
                 $files = $staticDir->read($themePath);
 
                 foreach ($files as $file) {
-                    $fullPath = $themePath . '/' . $file; // Correctly build the full path for isFile check
-                    $sourcePath = $staticDir->getAbsolutePath($fullPath);
-                    $destinationKey = 'static/' . $fullPath;
+                    // $file is relative to $themePath, so we need to prepend it
+                    $fullRelativePath = $themePath . '/' . $file;
+                    $sourcePath = $staticDir->getAbsolutePath($fullRelativePath);
+                    $destinationKey = 'static/' . $fullRelativePath;
 
-                    if ($staticDir->isFile($fullPath)) {
+                    if ($staticDir->isFile($fullRelativePath)) {
                         $this->s3Adapter->uploadFile($sourcePath, $destinationKey);
                         $output->writeln("Uploaded: {$destinationKey}");
                     }
