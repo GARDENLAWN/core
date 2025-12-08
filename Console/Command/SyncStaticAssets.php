@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace GardenLawn\Core\Console\Command;
 
+use Exception;
 use Magento\Framework\Console\Cli;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -96,7 +97,7 @@ class SyncStaticAssets extends Command
 
             $output->writeln("<info>Synchronization complete.</info>");
             return Cli::RETURN_SUCCESS;
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $this->logger->error('S3 Static Sync Error: ' . $e->getMessage());
             $output->writeln("<error>An error occurred: {$e->getMessage()}</error>");
             return Cli::RETURN_FAILURE;
