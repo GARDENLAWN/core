@@ -28,7 +28,17 @@ $itemsVideo1 = [
         //->setData('title', __('Wideo'))
         ->toHtml()
     ?></div></div>
-<div x-data="viewFrontendTemplatesGardenlighting_rightMovedScript0">
+<div x-data="gardenLawnCoreGardenlightingRight">
 <?php /** Moved variables previously here to "./view/frontend/templates/gardenlighting_right-csp-js.phtml" */ ?>
 <?php /** References (`$itemsVideo1`, `$video`) */ ?>
 </div><?php $hyvaCsp->registerInlineScript() ?>
+<script>
+<?php /** Generated with hyva-csp-helper.php */ ?>
+function gardenLawnCoreGardenlightingRight() {
+    return Object.assign(
+        viewFrontendTemplatesGardenlighting_rightMovedScript0.call(this)
+    )
+}
+window.addEventListener('alpine:init', () => Alpine.data('gardenLawnCoreGardenlightingRight', gardenLawnCoreGardenlightingRight), {once: true});
+</script>
+<?php $hyvaCsp->registerInlineScript() ?>

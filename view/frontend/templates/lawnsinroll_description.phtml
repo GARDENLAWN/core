@@ -183,7 +183,17 @@ $product = $block->getProduct();
         </div>
     </div>
 </div>
-<div x-data="viewFrontendTemplatesLawnsinroll_descriptionMovedScript0">
+<div x-data="gardenLawnCoreLawnsinrollDescription">
 <?php /** Moved variables previously here to "./view/frontend/templates/lawnsinroll_description-csp-js.phtml" */ ?>
 <?php /** References (`$itemsVideo`, `$video`) */ ?>
 </div><?php $hyvaCsp->registerInlineScript() ?>
+<script>
+<?php /** Generated with hyva-csp-helper.php */ ?>
+function gardenLawnCoreLawnsinrollDescription() {
+    return Object.assign(
+        viewFrontendTemplatesLawnsinroll_descriptionMovedScript0.call(this)
+    )
+}
+window.addEventListener('alpine:init', () => Alpine.data('gardenLawnCoreLawnsinrollDescription', gardenLawnCoreLawnsinrollDescription), {once: true});
+</script>
+<?php $hyvaCsp->registerInlineScript() ?>
