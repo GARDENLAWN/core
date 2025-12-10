@@ -42,19 +42,3 @@ $itemsVideo = [
         ?>
     </div>
 </div>
-<script>
-    function gardenLawnCorePoolrobotsRight() {
-        return {
-            initPhotoSwipe() {
-                if (Alpine.store('HYVA_PHOTO_SWIPE').is_loaded) {
-                    new PhotoSwipeLightbox({
-                        gallery: '#my-gallery',
-                        children: 'a',
-                        pswpModule: PhotoSwipe
-                    }).init();
-                }
-            }
-        }
-    }
-    window.addEventListener('alpine:init', () => Alpine.data('gardenLawnCorePoolrobotsRight', gardenLawnCorePoolrobotsRight), {once: true});
-</script>

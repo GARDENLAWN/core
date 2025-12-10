@@ -17,41 +17,6 @@ $sliderViewModel = $block->getData('sliderViewModel');
 $itemsVideoTemplate = 'GardenLawn_Core::slider-youtube-item.phtml';
 
 ?>
-<div x-data='{
-    videos: <?= $videoSliderViewModel->getJsonVideoData() ?>,
-    players: [],
-    initPlayers() {
-        if (typeof YT === "undefined" || typeof YT.Player === "undefined") {
-            window.onYouTubeIframeAPIReady = () => this.loadPlayers();
-            const tag = document.createElement("script");
-            tag.src = "https://www.youtube.com/iframe_api";
-            const firstScriptTag = document.getElementsByTagName("script")[0];
-            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-        } else {
-            this.loadPlayers();
-        }
-    },
-    loadPlayers() {
-        this.videos.forEach(video => {
-            this.players.push(
-                new YT.Player(video.divId, {
-                    videoId: video.videoId,
-                    events: {
-                        "onStateChange": (event) => this.onPlayerStateChange(event)
-                    }
-                })
-            );
-        });
-    },
-    onPlayerStateChange(event) {
-        if (event.data === YT.PlayerState.PLAYING) {
-            this.players.forEach(player => {
-                if (player.getPlayerState() === YT.PlayerState.PLAYING && player.getIframe().id !== event.target.getIframe().id) {
-                    player.stopVideo();
-                }
-            });
-        }
-    }
-}' x-init="initPlayers()">
+<div x-data="gardenLawnCoreVideoSlider" data-hyvacsp1='<?= $videoSliderViewModel->getJsonVideoData() ?>' x-init="gardenLawnCoreVideoSliderInit17">
     <?= $sliderViewModel->getSliderForItems($itemsVideoTemplate, $videoSliderViewModel->getVideoData())->toHtml() ?>
 </div>
