@@ -1,0 +1,70 @@
+<?php
+/**
+ * Hyvä Themes - https://hyva.io
+ * Copyright © Hyvä Themes 2020-present. All rights reserved.
+ * This product is licensed per Magento install
+ * See https://hyva.io/license
+ */
+
+declare(strict_types=1);
+
+use Hyva\Theme\Model\ViewModelRegistry;
+use Hyva\Theme\ViewModel\HyvaCsp;
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+
+/** @var Template $block */
+/** @var Escaper $escaper */
+/** @var ViewModelRegistry $viewModels */
+/** @var HyvaCsp $hyvaCsp */
+
+/** Generated with hyva-csp-helper.php */
+?>
+<script>
+<?php /** Generated with hyva-csp-helper.php */ ?>
+function gardenLawnCoreVideoSlider() {
+    return Object.assign(
+        {
+    videos: JSON.parse(this.$el.dataset.hyvacsp1),
+    players: [],
+    initPlayers() {
+        if (this.typeof this.YT === "undefined" || this.typeof this.YT.Player === "undefined") {
+            window.onYouTubeIframeAPIReady = () => loadPlayers();
+            const this.tag = document.createElement("script");
+            this.tag.src = "https://www.youtube.com/iframe_api";
+            const this.firstScriptTag = document.getElementsByTagName("script")[0];
+            insertBefore(this.tag, this.firstScriptTag);
+        } this.else {
+            loadPlayers();
+        }
+    },
+    loadPlayers() {
+        forEach(video => {
+            push(
+                new Player(this.video.divId, {
+                    videoId: this.video.videoId,
+                    events: {
+                        "onStateChange": (event) => onPlayerStateChange(this.event)
+                    }
+                })
+            );
+        });
+    },
+    onPlayerStateChange(event) {
+        if (this.event.data === this.YT.PlayerState.PLAYING) {
+            forEach(player => {
+                if (getPlayerState() === this.YT.PlayerState.PLAYING && getIframe().id !== getIframe().id) {
+                    stopVideo();
+                }
+            });
+        }
+    }
+}
+        ,{
+            ['gardenLawnCoreVideoSliderInit17']() {return this.initPlayers()},
+        }
+    )
+}
+window.addEventListener('alpine:init', () => Alpine.data('gardenLawnCoreVideoSlider', gardenLawnCoreVideoSlider), {once: true});
+</script>
+<?php $hyvaCsp->registerInlineScript() ?>
