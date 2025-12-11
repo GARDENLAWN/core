@@ -34,4 +34,20 @@
                 sortOrder="10"
                 disabled="false"/>
     </type>
+
+    <!-- Plugin do nadpisywania logiki pobierania numeru sklepu Santander -->
+    <type name="Aurora\Santander\ViewModel\Rates">
+        <plugin name="GardenLawn_Core::override_santander_shop_id"
+                type="GardenLawn\Core\Plugin\ViewModel\Santander\RatesPlugin"
+                sortOrder="10"
+                disabled="false"/>
+    </type>
+
+    <!-- Plugin do kontroli dostępności metody płatności Santander -->
+    <type name="Aurora\Santander\Model\Santander">
+        <plugin name="GardenLawn_Core::santander_payment_availability"
+                type="GardenLawn\Core\Plugin\Model\Santander\AvailabilityPlugin"
+                sortOrder="10"
+                disabled="false"/>
+    </type>
 </config>
