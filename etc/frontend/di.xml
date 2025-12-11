@@ -50,4 +50,12 @@
                 sortOrder="10"
                 disabled="false"/>
     </type>
+
+    <!-- Plugin do poprawy obliczania ceny brutto w symulatorze Santander -->
+    <type name="Aurora\Santander\ViewModel\Installment">
+        <plugin name="GardenLawn_Core::santander_gross_price_fix"
+                type="GardenLawn\Core\Plugin\ViewModel\Santander\InstallmentViewModelPlugin"
+                sortOrder="10"
+                disabled="false"/>
+    </type>
 </config>
