@@ -116,15 +116,18 @@ class SyncDealerPrices extends Command
                 $productToSave = $this->productRepository->get($product->getSku(), true, null, true);
                 $existingTierPrices = $productToSave->getTierPrices() ?? [];
 
-                // Filter out old dealer prices
+                // Filter out ALL existing dealer prices (qty = 1)
+                // This ensures that if a group was removed from config, its price is also removed.
                 $newTierPrices = [];
                 foreach ($existingTierPrices as $price) {
-                    if (!in_array((int)$price->getCustomerGroupId(), $dealerGroups)) {
+                    // Keep price ONLY if qty != 1.
+                    // We assume qty=1 is reserved for our dealer price logic.
+                    if ((float)$price->getQty() != 1) {
                         $newTierPrices[] = $price;
                     }
                 }
 
-                // Add new dealer prices
+                // Add new dealer prices for currently configured groups
                 foreach ($dealerGroups as $groupId) {
                     $tierPrice = $this->tierPriceFactory->create();
                     $tierPrice->setCustomerGroupId($groupId);
