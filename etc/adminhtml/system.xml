@@ -42,6 +42,14 @@
                     <comment>Select customer groups that are considered B2B.</comment>
                 </field>
             </group>
+            <group id="dealer_price" translate="label" type="text" sortOrder="25" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Dealer Price Settings</label>
+                <field id="customer_groups" translate="label comment" type="multiselect" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Dealer Customer Groups</label>
+                    <source_model>GardenLawn\Core\Model\Config\Source\CustomerGroup</source_model>
+                    <comment>Select customer groups that should get the dealer price.</comment>
+                </field>
+            </group>
             <group id="cleanup" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
                 <label>Database Cleanup</label>
                 <field id="enabled" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">

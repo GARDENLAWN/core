@@ -19,7 +19,7 @@ use Magento\Framework\Exception\LocalizedException;
 
 class SyncDealerPrices extends Command
 {
-    private const XML_PATH_DEALER_GROUPS = 'gardenlawn_core/b2b/customer_groups';
+    private const XML_PATH_DEALER_GROUPS = 'gardenlawn_core/dealer_price/customer_groups';
 
     /** @var AppState */
     private $appState;
@@ -78,7 +78,7 @@ class SyncDealerPrices extends Command
 
         $dealerGroups = $this->getDealerGroups();
         if (empty($dealerGroups)) {
-            $output->writeln('<error>No B2B customer groups configured. Aborting.</error>');
+            $output->writeln('<error>No Dealer customer groups configured. Aborting.</error>');
             return 1;
         }
         $output->writeln('Target customer groups: ' . implode(', ', $dealerGroups));
