@@ -4,11 +4,25 @@ declare(strict_types=1);
 namespace GardenLawn\Core\Plugin\Framework\Image\Adapter;
 
 use Magento\Framework\Image\Adapter\Gd2;
+use Psr\Log\LoggerInterface;
 use ReflectionProperty;
 use ReflectionException;
 
 class Gd2Plugin
 {
+    /**
+     * @var LoggerInterface
+     */
+    private $logger;
+
+    /**
+     * @param LoggerInterface $logger
+     */
+    public function __construct(LoggerInterface $logger)
+    {
+        $this->logger = $logger;
+    }
+
     /**
      * Teach the GD2 adapter how to handle WebP before opening a file.
      *
@@ -44,7 +58,7 @@ class Gd2Plugin
                 $fileTypeProperty->setAccessible(true);
                 $fileTypeProperty->setValue($subject, IMAGETYPE_WEBP);
             } catch (ReflectionException $e) {
-                // Silently ignore to not break core functionality.
+                $this->logger->error('Gd2Plugin ReflectionException in beforeSave: ' . $e->getMessage());
             }
         }
 
@@ -52,8 +66,42 @@ class Gd2Plugin
     }
 
     /**
+     * After saving a JPG/PNG, also save a WebP version.
+     *
+     * @param Gd2 $subject
+     * @param mixed $result
+     * @param string|null $destination
+     * @return mixed
+     */
+    public function afterSave(Gd2 $subject, $result, string $destination = null)
+    {
+        // Only trigger for JPG and PNG files
+        if ($destination && preg_match('/\.(jpg|jpeg|png)$/i', $destination)) {
+            $webpDestination = preg_replace('/\.(jpg|jpeg|png)$/i', '.webp', $destination);
+
+            try {
+                // Get the internal image resource using reflection
+                $imageHandlerProperty = new ReflectionProperty(Gd2::class, '_imageHandler');
+                $imageHandlerProperty->setAccessible(true);
+                $imageResource = $imageHandlerProperty->getValue($subject);
+
+                if ($imageResource) {
+                    // Save the image as WebP
+                    imagewebp($imageResource, $webpDestination);
+                    $this->logger->info('Gd2Plugin successfully created WebP image.', ['destination' => $webpDestination]);
+                }
+            } catch (ReflectionException $e) {
+                $this->logger->error('Gd2Plugin ReflectionException in afterSave: ' . $e->getMessage());
+            } catch (\Exception $e) {
+                $this->logger->error('Gd2Plugin error creating WebP in afterSave: ' . $e->getMessage());
+            }
+        }
+
+        return $result;
+    }
+
+    /**
      * Use reflection to add WebP support to the GD2 adapter's internal callbacks.
-     * Also handles palette-to-true-color and transparency issues.
      *
      * @param Gd2 $subject
      */
