@@ -29,11 +29,11 @@
       "title": "AD Sp. z o.o.",
       "href": "/pl/wyszukiwarka-dilerow/dealer/?id=HPL7526",
       "cord": {
-        "longitude": 19.69509,
-        "latitude": 52.5582929
+        "longitude": 19.7063162,
+        "latitude": 52.5590112
       },
-      "address": "Rembielińskiego 10,\r\n09-400,\r\nPłock",
-      "phone": "24 262 83 75",
+      "address": "Bielska 54,\r\n09-400,\r\nPłock",
+      "phone": "799 029 911",
       "email": "plock@dilerhusqvarna.pl",
       "web": null,
       "openHours": [
@@ -512,7 +512,7 @@
       "address": "Gracjanów 5B,\r\n08-400,\r\nGarwolin",
       "phone": "601 599 342",
       "email": "arbo-ogrod@dilerhusqvarna.pl",
-      "web": null,
+      "web": "https://arbo.dilerhusqvarna.pl/",
       "openHours": [
         {
           "title": "",
@@ -647,7 +647,7 @@
       "address": "Dobrska 35,\r\n62-700,\r\nTurek",
       "phone": "632795630",
       "email": "turek@dilerhusqvarna.pl",
-      "web": null,
+      "web": "https://azymut.dilerhusqvarna.pl/",
       "openHours": [
         {
           "title": "",
@@ -1780,7 +1780,7 @@
         "longitude": 22.841766,
         "latitude": 52.74833
       },
-      "address": "Armii Krajowej 8B,\r\n17-120,\r\nBrańsk",
+      "address": "Armii Krajowej 8B,\r\n17-120,\r\nBrańsk",
       "phone": "519 486 798",
       "email": "elektro@dilerhusqvarna.pl",
       "web": null,
@@ -2076,11 +2076,11 @@
       "address": "Al. Marszałka J. Piłsudskiego 79,\r\n05-070,\r\nSulejówek",
       "phone": "575 666 521",
       "email": "fast-serwis@dilerhusqvarna.pl",
-      "web": null,
+      "web": "https://fast-serwis.dilerhusqvarna.pl/",
       "openHours": [
         {
           "title": "",
-          "value": "Poniedziałek - Piątek 9 - 18\nSobota  10 - 14"
+          "value": "Poniedziałek - Piątek 9 - 18Sobota  10 - 14"
         }
       ],
       "services": [
@@ -2121,7 +2121,7 @@
       "address": "Podtrzcianna 3,\r\n96-115,\r\nNowy Kawęczyn",
       "phone": "696 073 907",
       "email": "staniak@dilerhusqvarna.pl",
-      "web": null,
+      "web": "https://kosiarki-staniak.dilerhusqvarna.pl/https://kosiarki-staniak.dilerhusqvarna.pl/",
       "openHours": [
         {
           "title": "",
@@ -2511,7 +2511,7 @@
       "address": "Krakowska 200 a,\r\n32-546,\r\nMłoszowa",
       "phone": "32 612 23 57",
       "email": "gotfryd@dilerhusqvarna.pl",
-      "web": null,
+      "web": "https://gotfryd.dilerhusqvarna.pl/",
       "openHours": [
         {
           "title": "",
@@ -2814,7 +2814,7 @@
       "address": "Kilińskiego 12,\r\n34-400,\r\nNowy Targ",
       "phone": "18 266 69 46",
       "email": "hugon@dilerhusqvarna.pl",
-      "web": null,
+      "web": "https://hugon.dilerhusqvarna.pl/",
       "openHours": [
         {
           "title": "",
@@ -5171,7 +5171,7 @@
       "address": "Szkolna 22a,\r\n99-140,\r\nŚwinice Warckie",
       "phone": "609 223 040",
       "email": "baras@dilerhusqvarna.pl",
-      "web": null,
+      "web": "https://baras.pl/",
       "openHours": [
         {
           "title": "",
@@ -5221,6 +5221,7 @@
         }
       ],
       "services": [
+        "Has_RoboticMower_Service",
         "Is_ClassA_Retailer"
       ]
     },
@@ -5372,7 +5373,7 @@
       "address": "Kolejowa 27,\r\n28-500,\r\nKazimierza Wielka",
       "phone": "41 352 26 52",
       "email": "pilarkos@dilerhusqvarna.pl",
-      "web": null,
+      "web": "https://pilar-kos.dilerhusqvarna.pl/",
       "openHours": [
         {
           "title": "",
@@ -5560,7 +5561,7 @@
       "address": "Uniejowska 3,\r\n98-200,\r\nSieradz",
       "phone": "43 827 10 02",
       "email": "pilmet@dilerhusqvarna.pl",
-      "web": null,
+      "web": "https://pilmet.dilerhusqvarna.pl/",
       "openHours": [
         {
           "title": "",
@@ -5797,7 +5798,7 @@
       "address": "B.Krzywoustego 66,\r\n51-166,\r\nWrocław",
       "phone": "71 325 22 34",
       "email": "polmal@dilerhusqvarna.pl",
-      "web": null,
+      "web": "https://polmal.dilerhusqvarna.pl/",
       "openHours": [
         {
           "title": "",
@@ -5912,11 +5913,11 @@
       "address": "Tupadły 47A,\r\n88-101,\r\nTupadły / Inowrocław",
       "phone": "52 353 78 68",
       "email": "wulkan@dilerhusqvarna.pl",
-      "web": "http://www.diler-serwis.pl/husqvarna/",
+      "web": "https://wulkan.dilerhusqvarna.pl/",
       "openHours": [
         {
           "title": "",
-          "value": "Pd - Pt  od 8:00 do 17:00\nSb  od 8:00 do 13:00"
+          "value": "Pd - Pt  od 8:00 do 17:00Sb  od 8:00 do 13:00"
         }
       ],
       "services": [
@@ -7288,7 +7289,7 @@
         "latitude": 50.3299049
       },
       "address": "Prężyńska 17,\r\n48-200,\r\nPrudnik",
-      "phone": "77 436 76 88",
+      "phone": "885 775 400",
       "email": "info@niezawodniwzieleni.pl",
       "web": null,
       "openHours": [
