@@ -3,44 +3,50 @@ declare(strict_types=1);
 
 namespace GardenLawn\Core\Console\Command;
 
-use Exception;
-use Magento\Framework\Exception\CouldNotSaveException;
-use Magento\Framework\Exception\LocalizedException;
-use Magento\Framework\Exception\NoSuchEntityException;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Magento\Framework\App\State as AppState;
 use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Store\Model\StoreManagerInterface;
-use Magento\Directory\Model\Currency;
-use Magento\Catalog\Api\ScopedProductTierPriceManagementInterface;
+use Magento\Directory\Model\CurrencyFactory;
+use Magento\Catalog\Api\ProductTierPriceManagementInterface;
 use Magento\Catalog\Api\Data\ProductTierPriceInterfaceFactory;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Store\Model\ScopeInterface;
+use Magento\Framework\Exception\LocalizedException;
 
 class SyncDealerPrices extends Command
 {
-    private const string XML_PATH_DEALER_GROUPS = 'gardenlawn_core/b2b/customer_groups';
+    private const XML_PATH_DEALER_GROUPS = 'gardenlawn_core/b2b/customer_groups';
 
-    private AppState $appState;
-    private ProductRepositoryInterface $productRepository;
-    private SearchCriteriaBuilder $searchCriteriaBuilder;
-    private StoreManagerInterface $storeManager;
-    private ScopedProductTierPriceManagementInterface $tierPriceManagement;
-    private ProductTierPriceInterfaceFactory $tierPriceFactory;
-    private ScopeConfigInterface $scopeConfig;
+    /** @var AppState */
+    private $appState;
+    /** @var ProductRepositoryInterface */
+    private $productRepository;
+    /** @var SearchCriteriaBuilder */
+    private $searchCriteriaBuilder;
+    /** @var StoreManagerInterface */
+    private $storeManager;
+    /** @var ProductTierPriceManagementInterface */
+    private $tierPriceManagement;
+    /** @var ProductTierPriceInterfaceFactory */
+    private $tierPriceFactory;
+    /** @var ScopeConfigInterface */
+    private $scopeConfig;
+    /** @var CurrencyFactory */
+    private $currencyFactory;
 
     public function __construct(
         AppState $appState,
         ProductRepositoryInterface $productRepository,
         SearchCriteriaBuilder $searchCriteriaBuilder,
         StoreManagerInterface $storeManager,
-        ScopedProductTierPriceManagementInterface $tierPriceManagement,
+        ProductTierPriceManagementInterface $tierPriceManagement,
         ProductTierPriceInterfaceFactory $tierPriceFactory,
-        ScopeConfigInterface $scopeConfig
+        ScopeConfigInterface $scopeConfig,
+        CurrencyFactory $currencyFactory
     ) {
         $this->appState = $appState;
         $this->productRepository = $productRepository;
@@ -49,24 +55,25 @@ class SyncDealerPrices extends Command
         $this->tierPriceManagement = $tierPriceManagement;
         $this->tierPriceFactory = $tierPriceFactory;
         $this->scopeConfig = $scopeConfig;
+        $this->currencyFactory = $currencyFactory;
         parent::__construct();
     }
 
-    protected function configure(): void
+    protected function configure()
     {
         $this->setName('gardenlawn:dealer:sync-prices')
             ->setDescription('Syncs dealer_price attribute to tier prices for B2B customer groups.');
         parent::configure();
     }
 
-    /**
-     * @throws NoSuchEntityException
-     * @throws CouldNotSaveException
-     * @throws LocalizedException
-     */
-    protected function execute(InputInterface $input, OutputInterface $output): int
+    protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->appState->setAreaCode('adminhtml');
+        try {
+            $this->appState->setAreaCode('adminhtml');
+        } catch (LocalizedException $e) {
+            // Area code already set
+        }
+
         $output->writeln('<info>Starting dealer price synchronization...</info>');
 
         $dealerGroups = $this->getDealerGroups();
@@ -76,12 +83,12 @@ class SyncDealerPrices extends Command
         }
         $output->writeln('Target customer groups: ' . implode(', ', $dealerGroups));
 
-        $conversionRate = $this->getCurrencyRate('EUR', 'PLN');
+        $conversionRate = $this->getEurToPlnRate();
         if (!$conversionRate) {
-            $output->writeln('<error>Could not retrieve EUR to PLN conversion rate. Aborting.</error>');
+            $output->writeln('<error>Could not determine EUR to PLN conversion rate. Please check Currency Rates.</error>');
             return 1;
         }
-        $output->writeln('Current EUR -> PLN rate: ' . $conversionRate);
+        $output->writeln('Calculated EUR -> PLN rate: ' . $conversionRate);
 
         $searchCriteria = $this->searchCriteriaBuilder
             ->addFilter('dealer_price', 0, 'gt')
@@ -93,38 +100,52 @@ class SyncDealerPrices extends Command
             return 0;
         }
 
-        $progressBar = new ProgressBar($output, count($products));
+        $progressBar = new \Symfony\Component\Console\Helper\ProgressBar($output, count($products));
         $progressBar->start();
 
         foreach ($products as $product) {
-            $dealerPriceEur = (float)$product->getData('dealer_price');
-            $dealerPricePln = round($dealerPriceEur * $conversionRate, 2);
+            try {
+                $dealerPriceEur = (float)$product->getData('dealer_price');
+                $dealerPricePln = round($dealerPriceEur * $conversionRate, 2);
 
-            // Get existing tier prices to avoid duplicates
-            $existingTierPrices = $product->getTierPrices();
+                if ($dealerPricePln <= 0) {
+                    continue;
+                }
 
-            foreach ($dealerGroups as $groupId) {
-                // Remove old tier price for this group if it exists
-                foreach ($existingTierPrices as $key => $price) {
-                    if ((int)$price->getCustomerGroupId() === $groupId) {
-                        $this->tierPriceManagement->remove($product->getSku(), $price->getTierPriceId());
+                // Use ProductRepository to save which is more reliable for tier prices
+                $productToSave = $this->productRepository->get($product->getSku(), true, null, true);
+                $existingTierPrices = $productToSave->getTierPrices() ?? [];
+
+                // Filter out old dealer prices
+                $newTierPrices = [];
+                foreach ($existingTierPrices as $price) {
+                    if (!in_array((int)$price->getCustomerGroupId(), $dealerGroups)) {
+                        $newTierPrices[] = $price;
                     }
                 }
 
-                // Add new tier price
-                $tierPrice = $this->tierPriceFactory->create();
-                $tierPrice->setCustomerGroupId($groupId);
-                $tierPrice->setQty(1);
-                $tierPrice->setValue($dealerPricePln);
+                // Add new dealer prices
+                foreach ($dealerGroups as $groupId) {
+                    $tierPrice = $this->tierPriceFactory->create();
+                    $tierPrice->setCustomerGroupId($groupId);
+                    $tierPrice->setQty(1);
+                    $tierPrice->setValue($dealerPricePln);
+                    $newTierPrices[] = $tierPrice;
+                }
 
-                $this->tierPriceManagement->add($product->getSku(), $tierPrice);
+                $productToSave->setTierPrices($newTierPrices);
+                $this->productRepository->save($productToSave);
+
+            } catch (\Exception $e) {
+                $output->writeln('');
+                $output->writeln('<error>Error processing product SKU ' . $product->getSku() . ': ' . $e->getMessage() . '</error>');
             }
             $progressBar->advance();
         }
 
         $progressBar->finish();
         $output->writeln('');
-        $output->writeln('<info>Dealer price synchronization completed successfully.</info>');
+        $output->writeln('<info>Dealer price synchronization completed.</info>');
         $output->writeln('<comment>Please run "bin/magento indexer:reindex catalog_product_price" to apply changes.</comment>');
 
         return 0;
@@ -136,12 +157,29 @@ class SyncDealerPrices extends Command
         return $groups ? array_map('intval', explode(',', $groups)) : [];
     }
 
-    private function getCurrencyRate(string $from, string $to): ?float
+    private function getEurToPlnRate(): ?float
     {
         try {
-            $rate = $this->storeManager->getStore()->getBaseCurrency()->getRate($to);
+            $baseCurrency = $this->storeManager->getStore()->getBaseCurrency();
+            $baseCode = $baseCurrency->getCode();
+
+            if ($baseCode === 'PLN') {
+                $plnToEur = $baseCurrency->getRate('EUR');
+                if ($plnToEur > 0) {
+                    return 1 / $plnToEur;
+                }
+            }
+
+            if ($baseCode === 'EUR') {
+                return (float)$baseCurrency->getRate('PLN');
+            }
+
+            $eurCurrency = $this->currencyFactory->create()->load('EUR');
+            $rate = $eurCurrency->getRate('PLN');
+
             return $rate ? (float)$rate : null;
-        } catch (Exception $e) {
+
+        } catch (\Exception $e) {
             return null;
         }
     }
