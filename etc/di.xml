@@ -109,10 +109,12 @@
         <plugin name="gardenlawn_core_catalog_asset_image_transformation_webp"
                 type="GardenLawn\Core\Plugin\Catalog\Model\View\Asset\ImageTransformationPlugin"/>
     </type>
+    <!--
     <type name="Magento\Catalog\Model\View\Asset\ImageFactory">
         <plugin name="gardenlawn_core_catalog_asset_image_factory_webp"
                 type="GardenLawn\Core\Plugin\Catalog\Model\View\Asset\ImageFactoryPlugin"/>
     </type>
+    -->
     <!-- Add allowed extensions to WYSIWYG uploader & trigger post-upload sync -->
     <type name="Magento\Cms\Model\Wysiwyg\Images\Storage">
         <plugin name="gardenlawn_core_wysiwyg_storage_plugin"
