@@ -79,4 +79,14 @@ bin/magento gardenlawn:gallery:convert-to-webp [options]
 ```
 **Options:**
 - `-f`, `--force`: Force regeneration of existing WebP files and thumbnails, and refreshes metadata for original WebP files.
+
+#### Deduplicate Assets
+Finds and removes duplicate assets (files with the same path) from the `media_gallery_asset` table.
+
+**Usage:**
+```bash
+bin/magento gardenlawn:mediagallery:deduplicate-assets [options]
+```
+**Options:**
+- `--dry-run`: Do not modify the database, only show what would be done.
 ```
