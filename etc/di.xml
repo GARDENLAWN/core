@@ -132,6 +132,7 @@
         <arguments>
             <argument name="commands" xsi:type="array">
                 <item name="gardenlawn_s3_sync_static" xsi:type="object">GardenLawn\Core\Console\Command\SyncStaticAssets</item>
+                <item name="gardenlawn_dealer_sync_prices" xsi:type="object">GardenLawn\Core\Console\Command\SyncDealerPrices</item>
             </argument>
         </arguments>
     </type>
