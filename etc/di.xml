@@ -135,7 +135,4 @@
             </argument>
         </arguments>
     </type>
-    <type name="Magento\Catalog\Model\Product">
-        <plugin name="gardenlawn_core_dealer_price" type="GardenLawn\Core\Plugin\Model\Product\DealerPricePlugin" sortOrder="1"/>
-    </type>
 </config>
