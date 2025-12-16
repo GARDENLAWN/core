@@ -77,11 +77,17 @@ class S3Adapter
     /**
      * @throws Exception
      */
-    public function deleteFolder(string $path): void
+    public function deleteFolder(string $path, bool $forceDeleteAll = false): void
     {
         $s3Client = $this->getS3Client();
         $fullPathPrefix = $this->getFullS3Path($path) . '/';
-        $s3Client->deleteMatchingObjects($this->bucket, $fullPathPrefix);
+
+        if ($forceDeleteAll) {
+            $s3Client->deleteMatchingObjects($this->bucket, $fullPathPrefix);
+        } else {
+            // Delete everything EXCEPT .svg files
+            $s3Client->deleteMatchingObjects($this->bucket, $fullPathPrefix, '/^.*(?<!\.svg)$/i');
+        }
     }
 
     /**
@@ -109,7 +115,7 @@ class S3Adapter
             ]);
         }
 
-        $this->deleteFolder($oldPath);
+        $this->deleteFolder($oldPath, true);
     }
 
     /**
@@ -277,6 +283,11 @@ class S3Adapter
      */
     public function deleteObject(string $path): void
     {
+        // Prevent deleting SVG files
+        if (str_ends_with(strtolower($path), '.svg')) {
+            return;
+        }
+
         $s3Client = $this->getS3Client();
         $fullPath = $this->getFullS3Path($path);
 
