@@ -58,4 +58,12 @@
                 sortOrder="10"
                 disabled="false"/>
     </type>
+
+    <!-- Plugin to remove inline styles from Amasty HTML Sitemap -->
+    <type name="Amasty\SeoHtmlSitemap\Block\Sitemap">
+        <plugin name="GardenLawn_Core_Plugin_Amasty_SeoHtmlSitemap_Block_Sitemap"
+                type="GardenLawn\Core\Plugin\Amasty\SeoHtmlSitemap\Block\SitemapPlugin"
+                sortOrder="10"
+                disabled="false"/>
+    </type>
 </config>
