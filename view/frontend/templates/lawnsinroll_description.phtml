@@ -3,19 +3,16 @@
 /** @var Template $block */
 /** @var Escaper $escaper */
 /** @var ViewModelRegistry $viewModels */
-/** @var HyvaCsp $hyvaCsp */
 
 /** @var Slider $sliderViewModel */
 
 use Hyva\Theme\Model\ViewModelRegistry;
-use Hyva\Theme\ViewModel\HyvaCsp;
 use Hyva\Theme\ViewModel\Slider;
 use Magento\Catalog\Block\Product\View;
 use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
 
 /** @var View $block */
-/* TO ZOSTAWIAMY ALE ZAKOMENTOWANE
 $product = $block->getProduct();
 $sliderViewModel = $viewModels->require(Slider::class);
 $itemsVideoTemplate = 'GardenLawn_Core::slider-youtube-item.phtml';
@@ -26,9 +23,68 @@ $itemsVideo = [
     ['divId' => 'video4', 'videoId' => 'ryt9oYCqWIs']
 ];
 
-$product = $block->getProduct();*/
+$product = $block->getProduct();
 ?>
+<style type="text/css">
+    iframe {
+        overflow: hidden !important;
+        -ms-overflow-style: none !important; /* IE and Edge */
+        scrollbar-width: none !important; /* Firefox */
+    }
 
+    iframe::-webkit-scrollbar {
+        display: none !important;
+        background-color: transparent !important;
+    }
+
+    iframe::-webkit-scrollbar {
+        width: 0px !important;
+        height: 0px !important;
+        background-color: transparent !important;
+    }
+
+    iframe::-webkit-scrollbar-button {
+        width: 0px !important;
+        height: 0px !important;
+        background-color: transparent !important;
+    }
+
+    iframe::-webkit-scrollbar-thumb {
+        background-color: transparent !important;
+        border: 0px none !important;
+        border-radius: 0px !important;
+    }
+
+    iframe::-webkit-scrollbar-thumb:hover {
+        background-color: transparent !important;
+    }
+
+    iframe::-webkit-scrollbar-thumb:active {
+        background-color: transparent !important;
+    }
+
+    iframe::-webkit-scrollbar-track {
+        background-color: transparent !important;
+        border: 0px none !important;
+        border-radius: 0px !important;
+    }
+
+    iframe::-webkit-scrollbar-track:hover {
+        background-color: transparent !important;
+    }
+
+    iframe::-webkit-scrollbar-track:active {
+        background-color: transparent !important;
+    }
+
+    iframe::-webkit-scrollbar-corner {
+        background-color: transparent !important;
+    }
+
+    .topnav a {
+        text-align: center;
+    }
+</style>
 <section class="text-gray-700 body-font">
     <div class="flex pb-6 md:py-6 lg:flex-row flex-col items-center">
         <div
@@ -38,6 +94,7 @@ $product = $block->getProduct();*/
             <div>
                 <?= $block->getChildHtml('product.info') ?>
                 <div id="product-attribute"></div>
+
             </div>
         </div>
     </div>
@@ -52,1715 +109,138 @@ $product = $block->getProduct();*/
 
 <div id="tabs-description">
     <div class="tabs-container" data-content-type="tabs" data-appearance="default" data-active-tab=""
-         data-element="main">
-        <ul role="tablist" class="tabs-navigation" data-element="navigation">
-            <li role="tab" class="tab-header active" data-element="headers"><a href="#tab_1" class="tab-title"><span>Trawa z rolki</span></a></li>
-            <li role="tab" class="tab-header" data-element="headers"><a href="#tab_2" class="tab-title"><span>O producencie</span></a></li>
-            <li role="tab" class="tab-header" data-element="headers"><a href="#tab_3" class="tab-title"><span>Grupa Trawnik</span></a></li>
-            <li role="tab" class="tab-header" data-element="headers"><a href="#tab_4" class="tab-title"><span>Trawa ogrodowa</span></a></li>
-            <li role="tab" class="tab-header" data-element="headers"><a href="#tab_5" class="tab-title"><span>Logistyka</span></a></li>
+         data-element="main"
+         style="padding: 0; margin-left: -23px;">
+        <ul role="tablist" style=" text-align: center;" class="tabs-navigation" data-element="navigation">
+            <li role="tab" class="tab-header active" data-element="headers"><a href="#tab_1" class="tab-title"><span
+                        class="tab-title">Trawa z rolki</span></a></li>
+            <li role="tab" class="tab-header" data-element="headers"><a href="#tab_2" class="tab-title"
+                                                                        onclick="loadIframe(this)"><span
+                        class="tab-title">O producencie</span></a></li>
+            <li role="tab" class="tab-header" data-element="headers"><a href="#tab_3" class="tab-title"
+                                                                        onclick="loadIframe(this)"><span
+                        class="tab-title">Grupa Trawnik</span></a></li>
+            <li role="tab" class="tab-header" data-element="headers"><a href="#tab_4" class="tab-title"
+                                                                        onclick="loadIframe(this)"><span
+                        class="tab-title">Trawa ogrodowa</span></a></li>
+            <li role="tab" class="tab-header" data-element="headers"><a href="#tab_5" class="tab-title"
+                                                                        onclick="loadIframe(this)"><span
+                        class="tab-title">Logistyka</span></a></li>
+            <li role="tab" class="tab-header" data-element="headers"><a href="#tab_6" class="tab-title"
+                                                                        onclick="loadIframe(this)"><span
+                        class="tab-title">Poradnik</span></a></li>
+            <li role="tab" class="tab-header" data-element="headers"><a href="#tab_7" class="tab-title"
+                                                                        onclick="loadIframe(this)"><span
+                        class="tab-title">FAQ</span></a></li>
         </ul>
-        <div id="tab-content" class="tabs-content" data-element="content">
+        <div id="tab-content" class="tabs-content" data-element="content" style="width: 100%;">
             <div data-content-type="tab-item" data-appearance="default" data-tab-name="test 1"
-                 data-element="main" id="tab_1" class="active">
-                <section class="u-clearfix u-white u-section-3" id="sec-2b5d">
-                    <div class="u-clearfix u-sheet u-sheet-1">
-                        <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
-                            <div class="u-gutter-0 u-layout">
-                                <div class="u-layout-row">
-                                    <div class="u-container-style u-layout-cell u-size-30 u-layout-cell-1">
-                                        <div class="u-container-layout u-container-layout-1">
-                                            <h2 class="u-text u-text-1" data-animation-name="slideIn"
-                                                data-animation-duration="1000" data-animation-delay="0"
-                                                data-animation-direction="Down">O NAS<br>
-                                            </h2>
-                                            <p class="u-text u-text-2"><b>Trawnik Producent </b>to firma z ponad 26
-                                                letnią tradycją,
-                                                specjalizująca się w produkcji darni rolowanej na potrzeby zarówno
-                                                klientów indywidualnych jak i branży budownictwa sportowego.&nbsp;Jesteśmy
-                                                największą w tej części Europy plantacją darni. <br>
-                                                <br>Na blisko 350 hektarowej
-                                                powierzchni przy wykorzystaniu najnowocześniejszych technologii, maszyn
-                                                oraz zaangażowaniu wielu ludzi, produkujemy najwyższej jakości trawę
-                                                rolowaną. Jesteśmy liderem w branży budowy profesjonalnych obiektów
-                                                sportowych, których domeną są naturalne i hybrydowe nawierzchnie
-                                                trawiaste.
-                                            </p>
-                                            <a href="https://trawnikproducent.pl/grupa-trawnik/"
-                                               class="u-btn u-btn-round u-button-style u-custom-color-2 u-hover-custom-color-7 u-radius-50 u-btn-1"
-                                               data-animation-name="fadeIn" data-animation-duration="1000"
-                                               data-animation-delay="0" data-animation-direction="Down">Poznaj grupę
-                                                trawnik<br>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="u-container-style u-layout-cell u-size-30 u-layout-cell-2">
-                                        <div class="u-container-layout u-valign-bottom u-container-layout-2">
-                                            <img
-                                                src="https://trawnikproducent.pl/wp-content/uploads/Naszprodukttobardzotrwayisolidnytrawnikzrolki.jpg"
-                                                alt=""
-                                                class="u-expanded-width u-image u-image-round u-radius-25 u-image-1"
-                                                data-image-width="882" data-image-height="1347"
-                                                data-pagespeed-url-hash="1165948797"
-                                                onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <section class="u-clearfix u-grey-80 u-section-4" id="carousel_2ebb">
-                    <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
-                        <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
-                            <div class="u-layout">
-                                <div class="u-layout-row">
-                                    <div class="u-container-style u-layout-cell u-left-cell u-size-30 u-layout-cell-1">
-                                        <div class="u-container-layout u-container-layout-1">
-                                            <h2 class="u-text u-text-1" data-animation-name="zoomIn"
-                                                data-animation-duration="1000" data-animation-delay="0"
-                                                data-animation-direction="">PRACUJEMY DLA NAJWIĘKSZYCH</h2>
-                                            <p class="u-align-left u-text u-text-2">Wysoka jakość, odpowiednia cena i
-                                                szybka dostawa oraz szybko rosnąca baza klientów jest dobrym dowodem<br>na
-                                                to, że jesteśmy liderem w Europie w produkcji trawy z rolki.<br>
-                                                <br>Posiadamy solidną wiedzę fachową i dokładamy wszelkich starań, aby
-                                                Klient był zadowolony. Nawet po dostarczeniu,<br>jesteśmy dostępni, aby
-                                                odpowiedzieć na wszelkie pytania dotyczące trawnika.
-                                            </p>
-                                            <p class="u-text u-text-3">Nasz produkt to bardzo trwały i solidny trawnik,
-                                                który ma wiele zastosowań.</p>
-                                        </div>
-                                    </div>
-                                    <div
-                                        class="u-align-center-lg u-align-center-md u-align-center-sm u-align-center-xl u-align-left-xs u-container-style u-layout-cell u-right-cell u-size-30 u-layout-cell-2">
-                                        <div
-                                            class="u-container-layout u-valign-top-lg u-valign-top-xl u-valign-top-xs u-container-layout-2">
-                                            <img
-                                                src="https://trawnikproducent.pl/wp-content/uploads/xo-nas-z31.jpg.pagespeed.ic.Q-wV9fuGZz.webp"
-                                                alt=""
-                                                class="u-expanded-width u-image u-image-round u-radius-25 u-image-1"
-                                                data-image-width="982" data-image-height="504"
-                                                data-pagespeed-url-hash="44104147"
-                                                onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
-                                            <img
-                                                src="https://trawnikproducent.pl/wp-content/uploads/petar-tonchev-c-5-QE5kBYk-unsplash-scaled.jpeg"
-                                                alt=""
-                                                class="u-expanded-width u-image u-image-round u-radius-25 u-image-2"
-                                                data-image-width="2560" data-image-height="1440"
-                                                data-pagespeed-url-hash="2666071490"
-                                                onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <section class="u-clearfix u-section-5" id="sec-6940">
-                    <div class="u-clearfix u-sheet u-sheet-1">
-                        <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
-                            <div class="u-layout">
-                                <div class="u-layout-row">
-                                    <div class="u-container-style u-layout-cell u-left-cell u-size-30 u-layout-cell-1">
-                                        <div
-                                            class="u-container-layout u-valign-top-lg u-valign-top-md u-valign-top-sm u-valign-top-xs u-container-layout-1">
-                                            <img
-                                                src="https://trawnikproducent.pl/wp-content/uploads/xTrawnikproducentmaszynydowycinaniatrawyzrolki.jpg.pagespeed.ic.9oKDY_GZfk.webp"
-                                                alt=""
-                                                class="u-expanded-width u-image u-image-round u-radius-25 u-image-1"
-                                                data-image-width="1033" data-image-height="541"
-                                                data-pagespeed-url-hash="1087170253"
-                                                onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
-                                            <h2 class="u-text u-text-1" data-animation-name="zoomIn"
-                                                data-animation-duration="1000" data-animation-delay="0"
-                                                data-animation-direction="">
-                    <span class="u-text-custom-color-2">PRZ​EWAGA<br>DZIĘKI INNOWACYJNOŚCI
-                    </span>
-                                            </h2>
-                                            <p class="u-text u-text-2">
-                    <span style="font-weight: 700;"
-                          class="u-text-black">Trawnik Producent wprowadza pierwsze w Polsce<br>innowacyjne maszyny do wycinania trawy z rolki oraz konserwacji przed transportem do Klienta. Ponadto inwestuje w innowacyjne systemy nawadniające plantacje.
-                    </span>
-                                                <span style="font-weight: 700;" class="u-text-black"></span>
-                                                <br>
-                                                <br>Pierwszy w Polsce kombajn Trebro AutoStack II umożliwia zbieranie
-                                                darni z jeszcze większą wydajnością i precyzją. Klienci odnoszą
-                                                bezpośrednie korzyści z lepszej jakości murawy. Rolki darni są teraz
-                                                mocniejsze i bardziej spójne dzięki specjalistycznemu systemowi zwijania
-                                                i automatycznemu układaniu na paletach.<span class="u-text-black">
-                      <br>
-                    </span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div
-                                        class="u-align-left-xs u-container-style u-layout-cell u-right-cell u-size-30 u-white u-layout-cell-2">
-                                        <div class="u-container-layout u-valign-bottom-sm u-container-layout-2">
-                                            <img
-                                                src="https://trawnikproducent.pl/wp-content/uploads/xTrawnikProducentkomoraprniowa.jpg.pagespeed.ic.moda4GG-Hk.webp"
-                                                alt=""
-                                                class="u-expanded-width u-image u-image-round u-radius-25 u-image-2"
-                                                data-image-width="600" data-image-height="287"
-                                                data-pagespeed-url-hash="1918105499"
-                                                onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
-                                            <h2 class="u-text u-text-custom-color-2 u-text-3"
-                                                data-animation-name="zoomIn" data-animation-duration="1000"
-                                                data-animation-delay="0" data-animation-direction="">KOMORA PRÓŻNIOWA
-                                                VACUUM </h2>
-                                            <p class="u-text u-text-4">Zaprojektowana i zbudowana dla nas. Rolki z
-                                                naturalną trawą/murawą poddawane są procesowi wstępnego schładzania
-                                                próżniowego do 4°C przed dostawą, dzięki czemu można ją dłużej
-                                                transportować i przechowywać. Uzyskujemy tym samym świeżość i doskonałą
-                                                jakość na dłużej, oraz piękny zielony trawnik bezpośrednio po
-                                                rozłożeniu.<span class="u-text-black">
-                      <br>
-                    </span>
-                                            </p>
-                                            <img
-                                                src="https://trawnikproducent.pl/wp-content/uploads/xTrawnikProducentkomoraprniowaVacuum.jpg.pagespeed.ic.It5QEhGTMr.webp"
-                                                alt=""
-                                                class="u-expanded-width u-image u-image-round u-radius-25 u-image-3"
-                                                data-image-width="600" data-image-height="234"
-                                                data-pagespeed-url-hash="1652051672"
-                                                onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <section class="u-border-1 u-border-palette-5-light-3 u-clearfix u-palette-5-light-3 u-section-6"
-                         id="carousel_0443">
-                    <div class="u-clearfix u-sheet u-valign-middle-md u-valign-middle-sm u-sheet-1">
-                        <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
-                            <div class="u-layout">
-                                <div class="u-layout-row">
-                                    <div class="u-container-style u-layout-cell u-left-cell u-size-60 u-layout-cell-1">
-                                        <div
-                                            class="u-container-layout u-valign-top-lg u-valign-top-md u-valign-top-sm u-container-layout-1">
-                                            <h2 class="u-text u-text-1" data-animation-name="zoomIn"
-                                                data-animation-duration="1000" data-animation-delay="0"
-                                                data-animation-direction="">NAGRODY I WYRÓŻNIENIA</h2>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <section class="u-clearfix u-palette-5-light-3 u-section-7" id="carousel_af53">
-                    <div
-                        class="u-clearfix u-sheet u-valign-middle-lg u-valign-middle-md u-valign-middle-sm u-valign-middle-xl u-sheet-1">
-                        <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
-                            <div class="u-gutter-0 u-layout">
-                                <div class="u-layout-row">
-                                    <div
-                                        class="u-align-center-lg u-align-center-md u-align-center-sm u-align-center-xs u-container-style u-layout-cell u-palette-5-light-3 u-size-30 u-layout-cell-1">
-                                        <div class="u-container-layout u-container-layout-1">
-                                            <img
-                                                src="https://trawnikproducent.pl/wp-content/uploads/KLJ2024-zotoPNGSMALL-1024x1024.png"
-                                                alt="" class="u-image u-image-contain u-image-default u-image-1"
-                                                data-image-width="1024" data-image-height="1024"
-                                                data-pagespeed-url-hash="3808125429"
-                                                onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
-                                            <img
-                                                src="https://trawnikproducent.pl/wp-content/uploads/xnagroda-4-1.png.pagespeed.ic.Tqrjy_94Bq.webp"
-                                                alt="" class="u-image u-image-contain u-image-default u-image-2"
-                                                data-image-width="81" data-image-height="101"
-                                                data-pagespeed-url-hash="2685321251"
-                                                onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
-                                            <img
-                                                src="https://trawnikproducent.pl/wp-content/uploads/xnagroda-5-1.png.pagespeed.ic.aH95k_psF4.webp"
-                                                alt="" class="u-image u-image-contain u-image-default u-image-3"
-                                                data-image-width="57" data-image-height="95"
-                                                data-pagespeed-url-hash="1421958140"
-                                                onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
-                                            <img
-                                                src="https://trawnikproducent.pl/wp-content/uploads/xnagroda-3-1.png.pagespeed.ic.2bHyn8NH1Q.webp"
-                                                alt=""
-                                                class="u-align-center-lg u-align-center-md u-align-center-sm u-align-center-xs u-image u-image-contain u-image-default u-image-4"
-                                                data-image-width="78" data-image-height="102"
-                                                data-pagespeed-url-hash="3948684362"
-                                                onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
-                                        </div>
-                                    </div>
-                                    <div class="u-container-style u-layout-cell u-size-30 u-layout-cell-2">
-                                        <div class="u-container-layout u-container-layout-2">
-                                            <img
-                                                src="https://trawnikproducent.pl/wp-content/uploads/xnagroda-1-1.png.pagespeed.ic.0MFryccDs2.webp"
-                                                alt=""
-                                                class="u-align-center-lg u-align-center-md u-align-center-sm u-align-center-xs u-image u-image-contain u-image-default u-image-5"
-                                                data-image-width="107" data-image-height="41"
-                                                data-pagespeed-url-hash="2180443288"
-                                                onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
-                                            <img
-                                                src="https://trawnikproducent.pl/wp-content/uploads/xnagroda-6-1.png.pagespeed.ic.nY6KipsbQx.webp"
-                                                alt="" class="u-image u-image-contain u-image-default u-image-6"
-                                                data-image-width="63" data-image-height="77"
-                                                data-pagespeed-url-hash="158595029"
-                                                onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
-                                            <img
-                                                src="https://trawnikproducent.pl/wp-content/uploads/xnagroda-7-1.png.pagespeed.ic.KC2vYp6xeG.webp"
-                                                alt="" class="u-image u-image-contain u-image-default u-image-7"
-                                                data-image-width="70" data-image-height="56"
-                                                data-pagespeed-url-hash="3190199214"
-                                                onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+                 data-background-images="{}"
+                 data-element="main" id="tab_1" style="padding: 0">
+                <iframe id="iframe_1" style="width: 100%; overflow:hidden;" frameborder="0" scrolling="no"
+                        onload="resizeIframe(this)"
+                        src="/hyvaroot/pages/grassinfo1"></iframe>
             </div>
             <div data-content-type="tab-item" data-appearance="default" data-tab-name="test 2"
-                 data-element="main" id="tab_2">
-                <section class="u-clearfix u-custom-color-17 u-section-5" id="carousel_3ddd">
-                    <div class="u-clearfix u-sheet u-valign-middle-sm u-sheet-1">
-                        <div
-                            class="u-container-style u-expanded-width-lg u-expanded-width-md u-expanded-width-sm u-expanded-width-xs u-group u-group-1">
-                            <div class="u-container-layout u-container-layout-1">
-                                <h3 class="u-align-center u-text u-text-custom-color-2 u-text-1"
-                                    data-animation-name="slideIn" data-animation-duration="1000"
-                                    data-animation-delay="0" data-animation-direction="Down"><b style="">KOMORA
-                                        PRÓŻNIOWA VACUUM </b></h3>
-                                <p class="u-align-center u-text u-text-2">Rolki z naturalną trawą/murawą poddawane są
-                                    procesowi wstępnego schładzania próżniowego do 4°C przed dostawą, dzięki czemu można
-                                    ją dłużej transportować i przechowywać. Uzyskujemy tym samym świeżość i doskonałą
-                                    jakość na dłużej, oraz piękny zielony trawnik bezpośrednio po rozłożeniu.</p>
-                            </div>
-                        </div>
-                        <div
-                            class="data-layout-selected u-clearfix u-expanded-width u-gutter-20 u-layout-wrap u-layout-wrap-1">
-                            <div class="u-layout">
-                                <div class="u-layout-row">
-                                    <div
-                                        class="u-container-align-left u-container-style u-image u-layout-cell u-size-23 u-image-1"
-                                        data-image-width="718" data-image-height="315">
-                                        <div class="u-container-layout u-valign-bottom-xs u-container-layout-2"></div>
-                                    </div>
-                                    <div class="u-container-style u-image u-layout-cell u-size-37 u-image-2"
-                                         data-image-width="718" data-image-height="387">
-                                        <div class="u-container-layout u-container-layout-3"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <section class="u-clearfix u-grey-80 u-section-6" id="carousel_5f8e">
-                    <div class="u-clearfix u-sheet u-sheet-1">
-                        <h2 class="u-align-center u-text u-text-1">ZASTOSOWANIE TRAWY Z ROLKI</h2>
-                        <div class="u-clearfix u-expanded-width u-gutter-26 u-layout-wrap u-layout-wrap-1">
-                            <div class="u-layout">
-                                <div class="u-layout-row">
-                                    <div
-                                        class="u-align-center u-container-style u-layout-cell u-radius-50 u-shape-round u-size-12 u-white u-layout-cell-1">
-                                        <div
-                                            class="u-border-2 u-border-custom-color-2 u-container-layout u-valign-middle u-container-layout-1">
-                                            <span class="u-icon u-icon-circle u-text-black u-icon-1"></span>
-                                            <p class="u-text u-text-2">TRAWNIKI PRZYDOMOWE </p>
-                                        </div>
-                                    </div>
-                                    <div
-                                        class="u-align-center u-container-style u-layout-cell u-radius-50 u-shape-round u-size-12 u-white u-layout-cell-2">
-                                        <div
-                                            class="u-border-2 u-border-custom-color-2 u-container-layout u-valign-middle u-container-layout-2">
-                                            <span class="u-icon u-icon-circle u-text-black u-icon-2"></span>
-                                            <p class="u-text u-text-black u-text-3">zieleń miejska </p>
-                                        </div>
-                                    </div>
-                                    <div
-                                        class="u-align-center u-container-style u-layout-cell u-radius-50 u-shape-round u-size-12 u-white u-layout-cell-3">
-                                        <div
-                                            class="u-border-2 u-border-custom-color-2 u-container-layout u-container-layout-3">
-                                            <span class="u-icon u-icon-circle u-text-black u-icon-3"></span>
-                                            <p class="u-text u-text-4">PLAC ZABAW</p>
-                                        </div>
-                                    </div>
-                                    <div
-                                        class="u-align-center u-container-style u-layout-cell u-radius-50 u-shape-round u-size-12 u-white u-layout-cell-4">
-                                        <div
-                                            class="u-border-2 u-border-custom-color-2 u-container-layout u-valign-middle u-container-layout-4">
-                                            <span class="u-icon u-icon-circle u-text-black u-icon-4"></span>
-                                            <p class="u-text u-text-5">Zieleń terenów inwestycyjnych </p>
-                                        </div>
-                                    </div>
-                                    <div
-                                        class="u-align-center u-container-style u-layout-cell u-radius-50 u-shape-round u-size-12 u-white u-layout-cell-5">
-                                        <div
-                                            class="u-border-2 u-border-custom-color-2 u-container-layout u-valign-middle u-container-layout-5">
-                                            <span class="u-icon u-icon-circle u-text-black u-icon-5"></span>
-                                            <p class="u-text u-text-6">pasy zieleni przy drogach </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <p class="u-align-center u-text u-text-7"><b>Specjalizujemy się w produkcji darni rolowanej oraz
-                                montażu trawnika z rolki na wielu płaszczyznach.</b>
-                            <br>
-                            <br>Trawa rolowana idealnie sprawdzi się jako <b>trawnik przydomowy</b>, który doskonale
-                            urozmaici efekt wizualny podwórka. Poza <b>zielenią miejską</b> oraz <b>trawą na placach
-                                zabaw</b> trawa w rolkach wykorzystywana jest w branży budownictwa sportowego jako <b>trawa
-                                na</b> <b>korty tenisowe, murawy piłkarskie czy pola golfowe</b>. Zastosowanie trawy z
-                            rolki możliwe jest także na nietypowych powierzchniach takich jak dachy. Poza tym świetnie
-                            sprawdza się przy drogach, gdzie <b>pozwala zazielenić skarpy i nasypy</b>, na których trawa
-                            wysiewana mogłaby nie przynieść odpowiednich rezultatów.
-                        </p>
-                    </div>
-                </section>
-
-                <section class="u-clearfix u-section-7" id="sec-32e1">
-                    <div class="u-clearfix u-sheet u-sheet-1">
-                        <div
-                            class="u-container-style u-expanded-width-lg u-expanded-width-md u-expanded-width-sm u-expanded-width-xs u-group u-group-1">
-                            <div class="u-container-layout u-container-layout-1">
-                                <h2 class="u-align-center u-text u-text-1" data-animation-name="slideIn"
-                                    data-animation-duration="1000" data-animation-delay="0"
-                                    data-animation-direction="Down"><b style="">TRAWA Z ROLKI OD PRODUCENTA</b></h2>
-                                <p class="u-align-center u-text u-text-black u-text-2" data-animation-name="slideIn"
-                                   data-animation-duration="1000" data-animation-delay="0"
-                                   data-animation-direction="Down">Jako najlepszy na rynku producent oferujemy Państwu
-                                    trawnik z rolki, który może zachwycić już po kilku godzinach od jego założenia. <br>
-                                    <br>
-                                    <span class="u-text-custom-color-2">Intensywny, głęboki zielony kolor zachęca do odpoczynku, a także do zabawy.</span>
-                                </p>
-                            </div>
-                        </div>
-                        <div
-                            class="u-clearfix u-expanded-width-lg u-expanded-width-md u-expanded-width-sm u-expanded-width-xs u-gutter-34 u-layout-wrap u-layout-wrap-1">
-                            <div class="u-layout">
-                                <div class="u-layout-row">
-                                    <div
-                                        class="u-container-style u-custom-color-17 u-layout-cell u-radius-50 u-shape-round u-size-30 u-layout-cell-1">
-                                        <div
-                                            class="u-border-2 u-border-custom-color-2 u-container-layout u-valign-top u-container-layout-2">
-                                            <span
-                                                class="u-align-center u-file-icon u-icon u-icon-circle u-text-palette-1-base u-icon-1"><img
-                                                    src="https://trawnikproducent.pl/wp-content/uploads/5574607_football_grass_soccer_sport_sports_icon.svg"
-                                                    alt=""></span>
-                                            <h3 class="u-align-center-lg u-align-center-sm u-align-center-xl u-align-center-xs u-align-left-md u-text u-text-custom-color-2 u-text-3">
-                                                ZALETY <span class="u-text-black">TRAWY</span>
-                                                <br>
-                                            </h3>
-                                            <ul class="u-custom-list u-text u-text-4">
-                                                <li>
-                                                    <div class="u-list-icon u-text-custom-color-2">✔</div>
-                                                    jakość i starannie wyselekcjonowane gatunki traw,
-                                                </li>
-                                                <li>
-                                                    <div class="u-list-icon u-text-custom-color-2">✔</div>
-                                                    odporna na intensywną eksploatację i wydeptywanie,
-                                                </li>
-                                                <li>
-                                                    <div class="u-list-icon u-text-custom-color-2">✔</div>
-                                                    oszczędność czasu przy wykładaniu – szybki montaż,
-                                                </li>
-                                                <li>
-                                                    <div class="u-list-icon u-text-custom-color-2">✔</div>
-                                                    po wyłożeniu, natychmiast gotowa do użytku,
-                                                </li>
-                                                <li>
-                                                    <div class="u-list-icon u-text-custom-color-2">✔</div>
-                                                    wysoka aklimatyzacja w naszych warunkach klimatycznych.
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div
-                                        class="u-container-style u-custom-color-17 u-layout-cell u-radius-50 u-shape-round u-size-30 u-layout-cell-2">
-                                        <div
-                                            class="u-border-2 u-border-custom-color-2 u-container-layout u-valign-top-sm u-valign-top-xs u-container-layout-3">
-                                            <span
-                                                class="u-align-center u-file-icon u-icon u-icon-circle u-text-palette-1-base u-icon-2"><img
-                                                    src="https://trawnikproducent.pl/wp-content/uploads/2867914_information_icon.svg"
-                                                    alt=""></span>
-                                            <h3 class="u-align-center-lg u-align-center-sm u-align-center-xl u-align-center-xs u-align-left-md u-text u-text-custom-color-2 u-text-5">
-                                                DLACZEGO <span class="u-text-black">WARTO</span>?</h3>
-                                            <ul class="u-custom-list u-text u-text-6">
-                                                <li>
-                                                    <div class="u-list-icon u-text-custom-color-2">✔</div>
-                                                    trawa wycinana z gruntu hodowana na plantacji od 12-18 miesięcy,
-                                                </li>
-                                                <li>
-                                                    <div class="u-list-icon u-text-custom-color-2">✔</div>
-                                                    posiada zwarty i mocny system korzeniowy,
-                                                </li>
-                                                <li>
-                                                    <div class="u-list-icon u-text-custom-color-2">✔</div>
-                                                    siatka biodegradowalna zapewnia stabilność rolki i łatwe wykonanie
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <section class="u-clearfix u-section-8" id="sec-84f6">
-                    <div class="u-clearfix u-sheet u-sheet-1">
-                        <p class="u-align-center u-text u-text-1" data-animation-name="slideIn"
-                           data-animation-duration="1000" data-animation-delay="0" data-animation-direction="Down">
-                            SZCZEGÓŁOWE <span class="u-text-custom-color-2">INFORMACJE</span></p>
-                        <a href="#sec-f621"
-                           class="u-btn u-button-style u-custom-color-2 u-dialog-link u-hover-custom-color-1 u-btn-1"><span
-                                class="u-icon u-icon-1"></span> <br>O FIRMIE </a>
-                        <a href="#sec-7a76"
-                           class="u-btn u-button-style u-custom-color-2 u-dialog-link u-hover-custom-color-1 u-btn-2"><span
-                                class="u-icon u-icon-2"></span> <br>OFERTA </a>
-                        <a href="#sec-5fd8"
-                           class="u-btn u-button-style u-custom-color-2 u-dialog-link u-hover-custom-color-1 u-btn-3"><span
-                                class="u-icon u-icon-3"></span> <br>PORADY </a>
-                        <a href="#sec-6e0f"
-                           class="u-btn u-button-style u-custom-color-2 u-dialog-link u-hover-custom-color-1 u-btn-4"><span
-                                class="u-icon u-icon-4"></span> <br>TRANSPORT </a>
-                        <a href="https://trawnikproducent.pl/formularz-zamowienia/"
-                           class="u-btn u-button-style u-custom-color-1 u-hover-custom-color-2 u-btn-5"
-                           data-animation-name="zoomIn" data-animation-duration="1000" data-animation-delay="0"
-                           data-animation-direction="">ZŁÓŻ ZAMÓWIENIE</a>
-                        <a href="https://trawnikproducent.pl/zapytanie-ofertowe/"
-                           class="u-btn u-button-style u-custom-color-1 u-hover-custom-color-2 u-btn-6"
-                           data-animation-name="zoomIn" data-animation-duration="1000" data-animation-delay="0"
-                           data-animation-direction="">ZŁÓŻ ZAPYTANIE</a>
-                    </div>
-                </section>
-
-                <section class="skrollable u-align-left u-clearfix u-image u-shading u-section-9" src="" id="sec-029e"
-                         data-image-width="2304" data-image-height="1536">
-                    <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
-                        <h2 class="u-align-center u-text u-text-1">Trawa w rolce</h2>
-                        <p class="u-align-center u-custom-font u-heading-font u-text u-text-2">Czynności pielęgnacyjne
-                            po rozłożeniu</p>
-                        <p class="u-align-center u-text u-text-3">Aby trawniki z rolki mogły długo zachwycać swoim
-                            wyglądem oraz zachować dobry stan należy <span style="font-weight: 700;">odpowiednio o nie dbać</span>.<br>
-                            Jak zatem powinna być prawidłowo pielęgnowana <a
-                                href="https://trawnikproducent.pl/trawa-ogrodowa-strong/"
-                                class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-custom-color-1 u-btn-1">trawa
-                                ogrodowa</a>?</p>
-                        <p class="u-align-center u-text u-text-4">Trawnik w rolkach może być używany już kilka godzin po
-                            jego rozłożeniu, jednak warto dać odpocząć trawie kilka dni, aby odpowiednio się
-                            przystosowała do nowego miejsca. Przejście po świeżo rozwiniętej trawie nie zaszkodzi jej,
-                            jednak rozegranie na niej energicznego meczu przez dzieci i dorosłych może spowodować
-                            nieodwracalne szkody. Przez pierwszy okres po rozłożeniu – od siedmiu do dziesięciu dni -
-                            trawa powinna być także intensywnie podlewana. Do pierwszego koszenia trawnika z rolki można
-                            przystąpić po upływie jednego tygodnia, kiedy trawa odpowiednio się ukorzeni i zostanie
-                            wcześniej zwałowana. Trawnik z rolki może być w pełni użytkowany po upływie 4-6 tygodni – od
-                            tej pory należy o niego dbać tak samo, jak o zwykły trawnik z wysiewu.</p>
-                    </div>
-                </section>
-
-                <section class="u-clearfix u-section-10" id="sec-f464">
-                    <div class="u-clearfix u-sheet u-valign-middle-lg u-sheet-1">
-                        <h2 class="u-align-center u-text u-text-1">Trawnik z rolki - pielęgnacja</h2>
-                        <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
-                            <div class="u-gutter-0 u-layout">
-                                <div class="u-layout-row">
-                                    <div class="u-container-style u-layout-cell u-size-30 u-white u-layout-cell-1">
-                                        <div class="u-container-layout u-valign-top-xl u-container-layout-1">
-                                            <p class="u-align-center u-text u-text-2">Koszenie</p>
-                                            <p class="u-align-center u-text u-text-3">Trawnik w rolce nie różni się w
-                                                pielęgnacji od tego z tradycyjnego z wysiewu. Począwszy od marca, aż do
-                                                listopada należy go regularnie kosić. Pierwsze koszenie naszego trawnika
-                                                po okresie zimowym powinno być wykonane w marcu, natomiast ostatnie pod
-                                                koniec sezonu – końcem października lub początkiem listopada, dopóki nie
-                                                występują przymrozki.</p>
-                                        </div>
-                                    </div>
-                                    <div
-                                        class="u-container-style u-custom-color-2 u-layout-cell u-radius-25 u-shape-round u-size-30 u-layout-cell-2">
-                                        <div class="u-container-layout u-container-layout-2">
-                                            <p class="u-align-center u-text u-text-4">Nawożenie</p>
-                                            <p class="u-align-center u-text u-text-5"> Trawa z rolki powinna być
-                                                nawożona około 3-6 razy w ciągu roku. Dla każdej pory roku powinna być
-                                                stosowana inna mieszanka <a href="https://trawnikproducent.pl/nawozy/"
-                                                                            class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-body-alt-color u-btn-1">nawozu</a>
-                                                – najlepiej nawóz wieloskładnikowy wolno działający. Ostatnie nawożenie
-                                                powinno zawierać azot w ilości nie większej niż 8% </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-2">
-                            <div class="u-gutter-0 u-layout">
-                                <div class="u-layout-row">
-                                    <div
-                                        class="u-container-style u-custom-color-2 u-layout-cell u-radius-25 u-shape-round u-size-30 u-layout-cell-3">
-                                        <div class="u-container-layout u-valign-top u-container-layout-3">
-                                            <p class="u-align-center u-text u-text-6">Zabiegi</p>
-                                            <p class="u-align-center u-text u-text-7">Trawniki z rolki powinno się
-                                                wertykulować dwa razy do roku – na rozpoczęcie sezonu oraz na jego
-                                                koniec, czyli wiosną i jesienią. Dzięki temu można uniknąć pojawienia
-                                                tak zwanego filcu. Trawnik w rolkach warto również przynajmniej raz w
-                                                roku poddać zabiegowi napowietrzania – stosując w tym celu np. aerację.
-
-                                                [Image of lawn aeration process]
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="u-container-style u-layout-cell u-size-30 u-white u-layout-cell-4">
-                                        <div class="u-container-layout u-valign-top u-container-layout-4">
-                                            <p class="u-align-center u-text u-text-8">Nawadnianie</p>
-                                            <p class="u-align-center u-text u-text-9">Trawa rolowana powinna być także
-                                                odpowiednio nawadniana – nie rzadziej niż 1-2 razy w tygodniu. Należy
-                                                pamiętać, aby trawnik w rolce podlewać rano – wieczorne podlewanie może
-                                                prowadzić do chorób grzybowych trawnika, natomiast podlewanie w ciągu
-                                                dnia może być niemożliwe z uwagi na mocne słońce. W przypadku, kiedy
-                                                temperatura jest bardzo wysoka – zwłaszcza latem, a trawa nie wstaje po
-                                                przejściu się po niej, koniecznie należy uruchomić podlewanie –
-                                                optymalna ilość wody to 10-20 litrów na 1 m2.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <h3 class="u-align-center u-text u-text-10">Ile kosztuje trawa z rolki? </h3>
-                        <p class="u-align-center u-text u-text-11">
-                            <a href="https://trawnikproducent.pl/trawnik-z-rolki-cena/"
-                               class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-custom-color-2 u-btn-2">Cena
-                                trawy z rolki</a> rolowanej zależny jest od jej rodzaju oraz od długości rolki. Koszt
-                            trawy plasuje się nieco wyżej niż w przypadku tradycyjnego posiewu. Należy jednak brać pod
-                            uwagę również praktyczność takiego rozwiązania oraz walory wizualne. W zależności od rodzaju
-                            i metrażu, ceny są zróżnicowane, jednak efekt końcowy jest zauważalny natychmiast. <br>
-                            <br>
-                            <span style="font-weight: 700;">Naszą ofertę sprzedaży trawy z rolki kierujemy do klientów, indywidualnych oraz z branży budownictwa sportowego, z całej Polski. </span>
-                            <br>Zachęcamy do zapoznania się z naszymi realizacjami, pracowaliśmy m.in. przy
-                            przygotowaniu <a href="https://trawnikproducent.pl/trawa-w-rolkach-warszawa/"
-                                             class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-custom-color-2 u-btn-3">trawy
-                                z rolki w Warszawie</a> (PGE Narodowy), wykonaniu nawierzchni z <a
-                                href="https://trawnikproducent.pl/trawa-w-rolkach-wroclaw/"
-                                class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-custom-color-2 u-btn-4">trawy
-                                naturalnej z rolki we Wrocławiu</a> (Stadion Miejski), czy przy rozbudowie stadionu
-                            miejskiego w <a href="https://trawnikproducent.pl/trawa-w-rolkach-szczecin/"
-                                            class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-custom-color-2 u-btn-5">Szczecinie</a>.
-                            To zaledwie kilka z przykładów, wykonywaliśmy realizację montażu <a
-                                href="https://trawnikproducent.pl/trawa-w-rolkach-krakow/"
-                                class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-custom-color-2 u-btn-6">trawy
-                                z rolki w Krakowie</a>, czy w <a
-                                href="https://trawnikproducent.pl/trawa-w-rolkach-poznan/"
-                                class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-custom-color-2 u-btn-7">Poznaniu</a>
-                            i <a href="https://trawnikproducent.pl/trawa-z-rolki-bydgoszcz/"
-                                 class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-custom-color-2 u-btn-8">Bydgoszczy</a>,
-                            a także w wielu innych miastach. Zapraszamy także do zapoznania się z ofertą <a
-                                href="https://trawnikproducent.pl/murawa-sportowa/"
-                                class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-custom-color-2 u-btn-9">murawy
-                                piłkarskiej</a>.
-                        </p>
-                    </div>
-                </section>
-
-                <section class="skrollable u-align-left u-clearfix u-grey-80 u-section-11" src="" id="carousel_cd9b">
-                    <div class="u-clearfix u-sheet u-valign-bottom u-sheet-1">
-                        <h2 class="u-align-center u-text u-text-1">Trawa rolowana i jej pierwsze koszenie</h2>
-                        <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
-                            <div class="u-layout">
-                                <div class="u-layout-row">
-                                    <div class="u-container-style u-layout-cell u-size-30 u-layout-cell-1">
-                                        <div class="u-container-layout u-valign-top u-container-layout-1">
-                                            <p class="u-text u-text-2">
-                                                <span style="font-weight: 700;">W momencie, kiedy trawa zrośnie się z podłożem, na którym została rozwinięta, przychodzi moment pierwszego koszenia.</span>
-                                                W bardzo łatwy sposób możliwe jest sprawdzenie, czy trawnik z rolki
-                                                nadaje się już do koszenia poprzez delikatne pociągnięcie za kępę trawy.
-                                                Nie należy jednak tego robić codziennie, wówczas trawa mogłaby zostać
-                                                uszkodzona. <br>
-                                                <br>Zanim przystąpi się do koszenia, należy sprawdzić, czy ostrza noży
-                                                są odpowiednio przygotowane – jeżeli będą tępe, zamiast kosić, można
-                                                trawę wyrywać. Kosiarkę należy ustawić na wysokość 4- centymetrów, a
-                                                jednorazowo nie należy ścinać więcej niż 1/3 jej wysokości.<br>
-                                                <br>Trawnik z rolki należy kosić nie rzadziej niż raz w tygodniu, dzięki
-                                                czemu zachowa się jego optymalną długość oraz uniknie się niszczenia
-                                                trawy. Zachowywanie tych zasad jest ważne zwłaszcza w początkowym
-                                                okresie jej przystosowania do terenu.
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="u-container-style u-layout-cell u-size-30 u-layout-cell-2">
-                                        <div class="u-container-layout u-container-layout-2">
-                                            <img src="https://trawnikproducent.pl/wp-content/uploads/kosiarka.png"
-                                                 alt=""
-                                                 class="u-expanded-width u-image u-image-round u-radius-25 u-image-1"
-                                                 data-image-width="1280" data-image-height="800">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <section class="skrollable u-align-left u-clearfix u-grey-80 u-section-12" src="" id="carousel_b523">
-                    <div class="u-clearfix u-sheet u-sheet-1">
-                        <h2 class="u-align-center u-text u-text-1">Trawa w rolce - często zadawane pytania</h2>
-                        <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
-                            <div class="u-layout">
-                                <div class="u-layout-row">
-                                    <div class="u-container-style u-layout-cell u-size-60 u-layout-cell-1">
-                                        <div class="u-container-layout u-container-layout-1">
-                                            <h3 class="u-align-center u-text u-text-2">Ile kosztuje trawa z rolki? </h3>
-                                            <p class="u-text u-text-3">Ostateczna cena zależy od ilości zamówionych
-                                                metrów - standardowo koszt jednego metra kwadratowego mieści się w
-                                                przedziale 15-20zł. </p>
-                                            <h3 class="u-align-center u-text u-text-4"><b>Czy transportujemy trawy w
-                                                    rolkach?</b></h3>
-                                            <p class="u-text u-text-5">Tak - oferujemy kilka wariantów transportu. Trawa
-                                                w rolkach może zostać przewieziona w formie paletowanej, za
-                                                pośrednictwem naszej floty spedycyjnej, pojazdów naszych Klientów lub
-                                                też kurierem. </p>
-                                            <h3 class="u-align-center u-text u-text-6"><b>Ile trwa realizacja zamówienia
-                                                    na trawnik z rolki?</b><br></h3>
-                                            <p class="u-text u-text-7">Trawa z rolki jest natychmiast dostępna i
-                                                przygotowana do wysyłki. Zamówienia realizujemy natychmiast po
-                                                otrzymaniu zlecenia, najczęściej w ciągu 24 godzin. </p>
-                                            <h3 class="u-align-center u-text u-text-8"><b style="">Ile czasu potrwa
-                                                    zakładanie trawnika?</b><br></h3>
-                                            <p class="u-text u-text-9">Trawy z rolki przyjmują się na niemal każdym
-                                                terenie. Warunki gruntowe i atmosferyczne mają kluczowy wpływ na tempo
-                                                ukorzenienia. Zazwyczaj proces adaptacji trwa mniej niż 7 dni. <br></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <h3 class="u-align-center u-text u-text-10"><b>Kiedy warto zakładać trawnik?</b><br></h3>
-                        <p class="u-text u-text-11">Różne okresy w ciągu roku sprzyjają zakładaniu trawnika - zwłaszcza
-                            wczesna wiosna i wczesna jesień, gdy warunki atmosferyczne i glebowe sprzyjają prawidłowemu
-                            ukorzenianiu. <br></p>
-                        <h3 class="u-align-center u-text u-text-12"><b>Trawa z rolki czy zasiewanie trawnika?</b><br>
-                        </h3>
-                        <p class="u-text u-text-13">Wybór konkretnego rozwiązania zależy od oczekiwań nabywcy. Trawa z
-                            rolki jest prostsza w zakładaniu trawnika i gwarantuje natychmiastowy efekt „zielonego
-                            dywanu”. Zasiewanie trawnika wymaga więcej cierpliwości i systematycznej pracy. <br></p>
-                        <h3 class="u-align-center u-text u-text-14"><b>Trawa z rolki - producent czy pośrednik?</b><br>
-                        </h3>
-                        <p class="u-text u-text-15">Warto sięgać wyłącznie po ofertę bezpośrednich producentów, takich
-                            jak my. Gwarantujemy najważniejsze zalety gęstego trawnika - intensywną zieleń, mocny system
-                            korzeniowy. Nasze trawy w rolce pochodzą z własnej plantacji, posiadamy pełną kontrolę nad
-                            całym procesem wzrostu.<br></p>
-                        <h3 class="u-align-center u-text u-text-16"><b>Jak przygotować grunt pod trawę w rolce?</b><br>
-                        </h3>
-                        <p class="u-text u-text-17">Przede wszystkim - uprzątnąć podłoże z niepotrzebnych elementów,
-                            odchwaszczyć i rozkopać (szpadlem lub glebogryzarką). <br></p>
-                    </div>
-                </section>
+                 data-background-images="{}"
+                 data-element="main" id="tab_2" style="padding: 0">
+                <iframe id="iframe_2" style="width: 100%; overflow:hidden;" frameborder="0" scrolling="no"
+                        src=""></iframe>
             </div>
             <div data-content-type="tab-item" data-appearance="default" data-tab-name="test 3"
-                 data-element="main" id="tab_3">
-                <section class="u-clearfix u-white u-section-3" id="sec-2b5d">
-                    <div class="u-clearfix u-sheet u-sheet-1">
-                        <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
-                            <div class="u-gutter-0 u-layout">
-                                <div class="u-layout-row">
-                                    <div class="u-container-style u-layout-cell u-size-30 u-layout-cell-1">
-                                        <div class="u-container-layout u-valign-top u-container-layout-1">
-                                            <h2 class="u-text u-text-1" data-animation-name="zoomIn"
-                                                data-animation-duration="1000" data-animation-delay="0"
-                                                data-animation-direction="">GRUPA TRAWNIK</h2>
-                                            <h4 class="u-text u-text-custom-color-2 u-text-2">Posiadamy 25-letnie<br>doświadczenie
-                                                w branży </h4>
-                                            <p class="u-text u-text-3">Od 1998 r. do dziś staliśmy się specjalistami w
-                                                dziedzinie powszechnie stosowanej trawy naturalnej oraz nowoczesnej
-                                                naturalnej hybrydowej.<br>
-                                                <br>Działamy kompleksowo, zarządzając projektem od początku do końca, a
-                                                nawet jeszcze dalej, bo zapewniamy obsługę serwisową i szkoleniową w
-                                                zakresie konserwacji i pielęgnacji murawy. Możesz liczyć na nasz zespół,
-                                                który pomoże Ci dokonać wyboru najbardziej odpowiedniego systemu dla
-                                                Twojego obiektu sportowego: od podbudowy, drenażu, instalacji grzewczej,
-                                                rozłożenia murawy aż po serwis. <br>
-                                            </p>
-                                            <blockquote
-                                                class="u-border-2 u-border-custom-color-2 u-indent-31 u-text u-text-4">
-                                                Wszystkie etapy realizacji wykonywane są przez naszą wyszkoloną załogę,
-                                                wspieraną przez doświadczonych kierowników budowy. Często pracujemy w
-                                                bardzo napiętych terminach, dostarczając kompleksowe rozwiązania, z
-                                                jakimi inne firmy sobie nie radzą, gwarantując wysoką jakość naszego
-                                                produktu.
-                                            </blockquote>
-                                        </div>
-                                    </div>
-                                    <div class="u-container-style u-layout-cell u-size-30 u-layout-cell-2">
-                                        <div class="u-container-layout u-valign-bottom-xs u-container-layout-2">
-                                            <img
-                                                src="https://trawnikproducent.pl/wp-content/uploads/xgrupa-tranwik-projektuje-instaluje.jpg.pagespeed.ic.oR2ZG4GfJq.webp"
-                                                alt=""
-                                                class="u-expanded-width u-image u-image-contain u-image-round u-radius-25 u-image-1"
-                                                data-image-width="1200" data-image-height="812"
-                                                data-pagespeed-url-hash="549321106"
-                                                onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
-                                            <img
-                                                src="https://trawnikproducent.pl/wp-content/uploads/xmurawa-sportowa-arena-gdask-realizacja-hybrid-sport-1.jpg.pagespeed.ic.ktleT32D2O.webp"
-                                                alt=""
-                                                class="u-expanded-width u-hidden-sm u-hidden-xs u-image u-image-round u-radius-25 u-image-2"
-                                                data-image-width="1200" data-image-height="820"
-                                                data-pagespeed-url-hash="1450892135"
-                                                onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <section class="u-clearfix u-grey-80 u-section-4" id="carousel_2ebb">
-                    <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
-                        <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
-                            <div class="u-layout">
-                                <div class="u-layout-row">
-                                    <div class="u-container-style u-layout-cell u-left-cell u-size-30 u-layout-cell-1">
-                                        <div
-                                            class="u-container-layout u-valign-bottom-lg u-valign-bottom-md u-valign-bottom-sm u-valign-bottom-xs u-container-layout-1">
-                                            <h2 class="u-text u-text-1" data-animation-name="zoomIn"
-                                                data-animation-duration="1000" data-animation-delay="0"
-                                                data-animation-direction="">POZNAJ NASZE MOŻLIWOŚCI<br>
-                                            </h2>
-                                            <p class="u-align-left u-text u-text-2">System naturalnych hybrydowych muraw
-                                                sportowych ROYAL Hybrid to wysoka jakość, wysokie osiągi sportowe i
-                                                trwałość na długie lata. <br>
-                                                <br>
-                                                <span style="font-weight: 700;">Nasze innowacyjne boiska piłkarskie zostały zaprojektowane w taki sposób, aby zminimalizować ryzyko kontuzji graczy, przy jednoczesnym zachowaniu komfortu gry.</span>
-                                                <br>
-                                                <br> Nawierzchnia hybrydowa traktowana jest przez piłkarzy jak
-                                                naturalna, gdyż 70% to właśnie naturalna trawa osadzona na macie z
-                                                włókien monofilowych (30%), co znacząco wydłuża czas gry zarówno w ciągu
-                                                doby, jak i w całym sezonie. Mocna tkana struktura wzmocnienia pozwala
-                                                na swobodny przerost korzeni, cyrkulację powietrza i wody oraz
-                                                wykonywanie standardowych czynności serwisowych. </p>
-                                            <p class="u-text u-text-3">Dzięki szerokiemu gronu Klientów z sektora
-                                                samorządowego, sportu, rekreacji i edukacji rozumiemy wyzwania związane
-                                                z wysoką jakością. </p>
-                                        </div>
-                                    </div>
-                                    <div
-                                        class="u-align-center-lg u-align-center-md u-align-center-sm u-align-center-xl u-align-left-xs u-container-style u-layout-cell u-right-cell u-size-30 u-layout-cell-2">
-                                        <div class="u-container-layout u-valign-middle u-container-layout-2">
-                                            <img
-                                                src="https://trawnikproducent.pl/wp-content/uploads/xStadionPGE.png.pagespeed.ic.UcYbLFuh6u.webp"
-                                                alt=""
-                                                class="u-expanded-width u-image u-image-round u-radius-25 u-image-1"
-                                                data-image-width="1216" data-image-height="811"
-                                                data-pagespeed-url-hash="1846045438"
-                                                onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
-                                            <img
-                                                src="https://trawnikproducent.pl/wp-content/uploads/petar-tonchev-c-5-QE5kBYk-unsplash-scaled.jpeg"
-                                                alt=""
-                                                class="u-expanded-width u-image u-image-round u-radius-25 u-image-2"
-                                                data-image-width="2560" data-image-height="1440"
-                                                data-pagespeed-url-hash="2666071490"
-                                                onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <section class="u-clearfix u-section-5" id="carousel_0443">
-                    <div class="u-clearfix u-sheet u-sheet-1">
-                        <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
-                            <div class="u-layout">
-                                <div class="u-layout-row">
-                                    <div
-                                        class="u-align-center u-container-style u-layout-cell u-left-cell u-size-60 u-layout-cell-1">
-                                        <div
-                                            class="u-container-layout u-valign-bottom-lg u-valign-bottom-md u-valign-bottom-sm u-valign-bottom-xl u-container-layout-1">
-                                            <img
-                                                src="https://trawnikproducent.pl/wp-content/uploads/xgrupa-trawnik.png.pagespeed.ic.TzVnw6brJr.webp"
-                                                alt="" class="u-image u-image-contain u-image-default u-image-1"
-                                                data-image-width="449" data-image-height="452"
-                                                data-pagespeed-url-hash="4052475140"
-                                                onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
-                                            <h4 class="u-text u-text-custom-color-2 u-text-1">W GRUPIE TRAWNIK WIEMY Z
-                                                DOŚWIADCZENIA, ŻE KAŻDY SPORT I KAŻDY PROJEKT JEST WYJĄTKOWY</h4>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <section class="u-clearfix u-section-6" id="sec-6940">
-                    <div class="u-clearfix u-sheet u-valign-middle-sm u-sheet-1">
-                        <div class="u-clearfix u-expanded-width u-gutter-0 u-layout-wrap u-layout-wrap-1">
-                            <div class="u-gutter-0 u-layout">
-                                <div class="u-layout-row">
-                                    <div
-                                        class="u-align-center u-container-style u-layout-cell u-size-12 u-size-60-md u-layout-cell-1">
-                                        <div class="u-container-layout u-container-layout-1">
-                                            <img
-                                                src="https://trawnikproducent.pl/wp-content/uploads/xcropped-trawnikproducent.png.pagespeed.ic.JQgG3JgPEU.webp"
-                                                alt=""
-                                                class="u-expanded-width u-image u-image-contain u-image-default u-image-1"
-                                                data-image-width="240" data-image-height="138"
-                                                data-pagespeed-url-hash="4243168240"
-                                                onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
-                                            <h3 class="u-text u-text-custom-color-2 u-text-1">Trawnik Producent<br>
-                                            </h3>
-                                            <p class="u-text u-text-2">Produkcja traw ogrodowych</p>
-                                        </div>
-                                    </div>
-                                    <div class="u-container-style u-layout-cell u-size-12 u-size-60-md u-layout-cell-2">
-                                        <div class="u-container-layout u-container-layout-2">
-                                            <img
-                                                src="https://trawnikproducent.pl/wp-content/uploads/xtrawnik-finance.png.pagespeed.ic._vsiQe4lA_.webp"
-                                                alt=""
-                                                class="u-expanded-width u-image u-image-contain u-image-default u-image-2"
-                                                data-image-width="304" data-image-height="175"
-                                                data-pagespeed-url-hash="1935510999"
-                                                onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
-                                            <h3 class="u-align-center u-text u-text-custom-color-14 u-text-3">Trawnik
-                                                Finance</h3>
-                                            <p class="u-align-center u-text u-text-4"><i></i> Opcje finansowania
-                                                projektów </p>
-                                        </div>
-                                    </div>
-                                    <div
-                                        class="u-align-center u-container-style u-layout-cell u-size-12 u-size-60-md u-layout-cell-3">
-                                        <div
-                                            class="u-container-layout u-valign-top-lg u-valign-top-md u-valign-top-xl u-container-layout-3">
-                                            <img
-                                                src="https://trawnikproducent.pl/wp-content/uploads/xhybrid-sport-logo.png.pagespeed.ic.mYwU0Dy7s2.webp"
-                                                alt=""
-                                                class="u-expanded-width-lg u-expanded-width-md u-expanded-width-xl u-image u-image-contain u-image-default u-image-3"
-                                                data-image-width="296" data-image-height="147"
-                                                data-pagespeed-url-hash="1371071123"
-                                                onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
-                                            <h3 class="u-text u-text-custom-color-11 u-text-5">Hybrid <br>Spor<span
-                                                    style="font-weight: 700;"></span>t </h3>
-                                            <p class="u-text u-text-6">Przygotowanie projektu inwestycji</p>
-                                        </div>
-                                    </div>
-                                    <div
-                                        class="u-align-center u-container-style u-layout-cell u-size-12 u-size-60-md u-layout-cell-4">
-                                        <div
-                                            class="u-container-layout u-valign-top-lg u-valign-top-md u-valign-top-xl u-container-layout-4">
-                                            <img
-                                                src="https://trawnikproducent.pl/wp-content/uploads/xhybrid-service-logo.png.pagespeed.ic.8d4X5kwbrk.webp"
-                                                alt=""
-                                                class="u-expanded-width-lg u-expanded-width-md u-expanded-width-xl u-expanded-width-xs u-image u-image-contain u-image-default u-image-4"
-                                                data-image-width="296" data-image-height="147"
-                                                data-pagespeed-url-hash="3421373854"
-                                                onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
-                                            <h3 class="u-text u-text-custom-color-13 u-text-7">Hybrid Service</h3>
-                                            <p class="u-text u-text-8">Kompleksowa pielęgnacja murawy</p>
-                                        </div>
-                                    </div>
-                                    <div
-                                        class="u-align-center u-container-style u-layout-cell u-size-12 u-size-60-md u-layout-cell-5">
-                                        <div
-                                            class="u-container-layout u-valign-top-lg u-valign-top-md u-valign-top-xl u-container-layout-5">
-                                            <img
-                                                src="https://trawnikproducent.pl/wp-content/uploads/xlogo_browar_szczecinek.png.pagespeed.ic.KnBf4-h1oB.webp"
-                                                alt=""
-                                                class="u-expanded-width-lg u-expanded-width-md u-expanded-width-xl u-expanded-width-xs u-image u-image-contain u-image-default u-image-5"
-                                                data-image-width="309" data-image-height="183"
-                                                data-pagespeed-url-hash="1589545301"
-                                                onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
-                                            <h3 class="u-text u-text-palette-2-base u-text-9">Browar Szczecinek</h3>
-                                            <p class="u-text u-text-10">Catering <br>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+                 data-background-images="{}"
+                 data-element="main" id="tab_3" style="padding: 0">
+                <iframe id="iframe_3" style="width: 100%; overflow:hidden;" frameborder="0" scrolling="no"
+                        src=""></iframe>
             </div>
             <div data-content-type="tab-item" data-appearance="default" data-tab-name="test 4"
-                 data-element="main" id="tab_4">
-                <section class="u-clearfix u-white u-section-3" id="sec-2b5d">
-                    <div class="u-clearfix u-sheet u-sheet-1">
-                        <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
-                            <div class="u-gutter-0 u-layout">
-                                <div class="u-layout-row">
-                                    <div class="u-container-style u-layout-cell u-size-30 u-layout-cell-1">
-                                        <div class="u-container-layout u-valign-top u-container-layout-1">
-                                            <h2 class="u-text u-text-1" data-animation-name="zoomIn"
-                                                data-animation-duration="1000" data-animation-delay="0"
-                                                data-animation-direction="">TRAWA OGRODOWA<br>
-                                            </h2>
-                                            <p class="u-text u-text-2">
-                    <span style="font-weight: 700;">Oprócz wielkości plantacji, naszą cechą wyróżniającą jest wysoka jakość produkowanej trawy. Wynika to z najwyższej jakości zastosowanych materiałów produkcyjnych oraz właściwości technologicznych plantacji – jest to jedyna w Polsce plantacja całkowicie nawadniana. <br>
-                    </span>
-                                                <br>Posiada ponad 20 km rurociągów, własne studnie głębinowe oraz
-                                                zbiorniki retencyjne. Zapewnia to najwyższą klasę produktów niezależnie
-                                                od panujących warunków pogodowych.<br>
-                                                <br>Trawa w rolkach posiada wbudowaną w korzeń siatkę biodegradowalną,
-                                                która jest niewidoczna. System korzeniowy w połączeniu z siatką tworzy
-                                                mocną i zwartą konstrukcję, sprawdzającą się doskonale na nawierzchniach
-                                                intensywnie użytkowanych i eksploatowanych. <br>
-                                                <br>
-                                                <span style="font-weight: 700;">To doskonały produkt do zagospodarowania nierównych i płaskich terenów, takich jak place zabaw, skwery, przydomowe ogrody czy elementy zielonej architektury. </span>
-                                            </p>
-                                            <a href="#form-kontakt"
-                                               class="u-border-0 u-btn u-btn-round u-button-style u-custom-color-1 u-hover-custom-color-2 u-radius-29 u-btn-1">Zapytaj</a>
-                                        </div>
-                                    </div>
-                                    <div class="u-container-style u-layout-cell u-size-30 u-layout-cell-2">
-                                        <div class="u-container-layout u-container-layout-2">
-                                            <img
-                                                src="https://trawnikproducent.pl/wp-content/uploads/xtrawnik-producent-trawa-w-rolce-do-ogrodu.jpg.pagespeed.ic.pine6sRwM-.webp"
-                                                alt=""
-                                                class="u-expanded-width u-image u-image-round u-radius-25 u-image-1"
-                                                data-image-width="723" data-image-height="1175"
-                                                data-pagespeed-url-hash="3152477848"
-                                                onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <section class="u-clearfix u-white u-section-4" id="carousel_c4de">
-                    <div class="u-clearfix u-sheet u-sheet-1">
-                        <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
-                            <div class="u-gutter-0 u-layout">
-                                <div class="u-layout-row">
-                                    <div class="u-container-style u-layout-cell u-size-60 u-layout-cell-1">
-                                        <div class="u-container-layout u-container-layout-1">
-                                            <h2 class="u-text u-text-custom-color-2 u-text-1"
-                                                data-animation-name="zoomIn" data-animation-duration="1000"
-                                                data-animation-delay="0" data-animation-direction="">Zalety trawy
-                                                ogrodowej<br>
-                                            </h2>
-                                            <div
-                                                class="u-border-2 u-border-custom-color-2 u-line u-line-horizontal u-line-1"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <section class="u-clearfix u-section-5" id="sec-6940">
-                    <div class="u-clearfix u-sheet u-valign-middle-md u-sheet-1">
-                        <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
-                            <div class="u-layout">
-                                <div class="u-layout-row">
-                                    <div class="u-container-style u-layout-cell u-left-cell u-size-20 u-layout-cell-1">
-                                        <div class="u-container-layout u-valign-top u-container-layout-1">
-                                            <img
-                                                src="https://trawnikproducent.pl/wp-content/uploads/xtrawa-w-rolce-producent-trawy-ogrodowej.png.pagespeed.ic.sIeMlCUUlO.webp"
-                                                alt=""
-                                                class="u-expanded-width-lg u-expanded-width-md u-expanded-width-xs u-image u-image-contain u-image-default u-image-1"
-                                                data-image-width="884" data-image-height="933"
-                                                data-pagespeed-url-hash="2160694025"
-                                                onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
-                                        </div>
-                                    </div>
-                                    <div
-                                        class="u-align-left-xs u-container-style u-layout-cell u-right-cell u-size-40 u-white u-layout-cell-2">
-                                        <div
-                                            class="u-container-layout u-valign-top-md u-valign-top-sm u-valign-top-xl u-container-layout-2">
-                                            <p class="u-text u-text-1">Trawa rolowana pochodzi ze starannie
-                                                wyselekcjonowanych gatunków traw, idealnie spełnia oczekiwania
-                                                przydomowych ogrodów.</p>
-                                            <ul class="u-custom-list u-spacing-4 u-text u-text-2">
-                                                <li style="margin-left: 1.7em;">
-                                                    <div class="u-list-icon u-text-custom-color-2 u-list-icon-1">
-                                                        <div xmlns="http://www.w3.org/2000/svg"
-                                                             xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
-                                                             xml:space="preserve" class="u-svg-content"
-                                                             style="font-size: 0.9em; margin: -0.9em;">✔</div>
-                                                    </div>
-                                                    doskonała jakość trawy ogrodowej,
-                                                </li>
-                                                <li style="margin-left: 1.7em;">
-                                                    <div class="u-list-icon u-text-custom-color-2 u-list-icon-2">
-                                                        <div xmlns="http://www.w3.org/2000/svg"
-                                                             xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
-                                                             xml:space="preserve" class="u-svg-content"
-                                                             style="font-size: 0.9em; margin: -0.9em;">✔</div>
-                                                    </div>
-                                                    starannie wyselekcjonowane gatunki traw,
-                                                </li>
-                                                <li style="margin-left: 1.7em;">
-                                                    <div class="u-list-icon u-text-custom-color-2 u-list-icon-3">
-                                                        <div xmlns="http://www.w3.org/2000/svg"
-                                                             xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
-                                                             xml:space="preserve" class="u-svg-content"
-                                                             style="font-size: 0.9em; margin: -0.9em;">✔</div>
-                                                    </div>
-                                                    odporne na intensywną eksploatację i wydeptywanie,
-                                                </li>
-                                                <li style="margin-left: 1.7em;">
-                                                    <div class="u-list-icon u-text-custom-color-2 u-list-icon-4">
-                                                        <div xmlns="http://www.w3.org/2000/svg"
-                                                             xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
-                                                             xml:space="preserve" class="u-svg-content"
-                                                             style="font-size: 0.9em; margin: -0.9em;">✔</div>
-                                                    </div>
-                                                    oszczędność czasu przy wykładaniu - szybki montaż,
-                                                </li>
-                                                <li style="margin-left: 1.7em;">
-                                                    <div class="u-list-icon u-text-custom-color-2 u-list-icon-5">
-                                                        <div xmlns="http://www.w3.org/2000/svg"
-                                                             xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
-                                                             xml:space="preserve" class="u-svg-content"
-                                                             style="font-size: 0.9em; margin: -0.9em;">✔</div>
-                                                    </div>
-                                                    po wyłożeniu, natychmiast gotowa do użytku,
-                                                </li>
-                                                <li style="margin-left: 1.7em;">
-                                                    <div class="u-list-icon u-text-custom-color-2 u-list-icon-6">
-                                                        <div xmlns="http://www.w3.org/2000/svg"
-                                                             xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
-                                                             xml:space="preserve" class="u-svg-content"
-                                                             style="font-size: 0.9em; margin: -0.9em;">✔</div>
-                                                    </div>
-                                                    wysoka aklimatyzacja w naszych warunkach klimatycznych.
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+                 data-background-images="{}"
+                 data-element="main" id="tab_4" style="padding: 0">
+                <iframe id="iframe_4" style="width: 100%; overflow:hidden;" frameborder="0" scrolling="no"
+                        src=""></iframe>
             </div>
             <div data-content-type="tab-item" data-appearance="default" data-tab-name="test 5"
-                 data-element="main" id="tab_5">
-                <section class="u-clearfix u-white u-section-3" id="logistyka">
-                    <div
-                        class="u-clearfix u-sheet u-valign-middle-lg u-valign-middle-md u-valign-middle-sm u-valign-middle-xs u-sheet-1">
-                        <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
-                            <div class="u-gutter-0 u-layout">
-                                <div class="u-layout-row">
-                                    <div class="u-container-style u-layout-cell u-size-30 u-layout-cell-1">
-                                        <div class="u-container-layout u-valign-middle u-container-layout-1">
-                                            <h2 class="u-align-center-xs u-text u-text-1" data-animation-name="zoomIn"
-                                                data-animation-duration="1000" data-animation-delay="0"
-                                                data-animation-direction="">TRAWNIK PRODUCENT<br>
-                                            </h2>
-                                            <h4 class="u-align-center-xs u-text u-text-custom-color-2 u-text-2">
-                                                Posiadamy 25-letnie<br>doświadczenie w branży </h4>
-                                            <p class="u-text u-text-3">Prosto z plantacji na palety transportowe trafia
-                                                trawa zawinięta w rolkę i niemal natychmiast ładowana jest do samochodu
-                                                dostawcy. Dzięki temu nie zwiększamy czasu, w którym trawa pozbawiona
-                                                jest gruntu. <br>
-                                                <br>
-                                                <span style="font-weight: 700;">Wysyłamy naszą trawę na wskazany adres na terenie całej Polski oraz poza jej granicami. W</span>
-                                                <span style="font-weight: 700;">cenie transportu gotowy produkt pakujemy na palety transportowe i profesjonalnie zabezpieczamy. </span>
-                                                <br>
-                                                <br>Dodatkowo nasi Klienci mogą odebrać zamówienie prosto z naszej
-                                                plantacji.<br>
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="u-container-style u-layout-cell u-size-30 u-layout-cell-2">
-                                        <div
-                                            class="u-container-layout u-valign-middle-lg u-valign-middle-md u-valign-middle-xl u-container-layout-2">
-                                            <img
-                                                src="https://trawnikproducent.pl/wp-content/uploads/15c1af1f7ce71626695f0b8d49ce1620a3647e81d25d89aa129338b7c5381fcdff256627eddb645d2a99303a29633d16c1184cefa8388173383518_1280.jpg"
-                                                alt=""
-                                                class="u-expanded-width u-image u-image-round u-radius-25 u-image-1"
-                                                data-image-width="1280" data-image-height="853"
-                                                data-pagespeed-url-hash="324804118"
-                                                onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <section class="u-align-center u-clearfix u-container-align-center u-image u-shading u-section-4"
-                         id="carousel_c586" data-image-width="1920" data-image-height="1037">
-                    <style
-                        class="u-block-23ca-68 u-state-style">.u-block-23ca-68:not([data-block-selected]):not([data-cell-selected]), .u-block-23ca-68:not([data-block-selected]):not([data-cell-selected]):before, .u-block-23ca-68:not([data-block-selected]):not([data-cell-selected]) > .u-container-layout:before {
-                            transition-property: fill, color, background-color, stroke-width, border-style, border-width, border-top-width, border-left-width, border-right-width, border-bottom-width, custom-border, borders, box-shadow, text-shadow, opacity, border-radius, stroke, border-color, font-size, font-style, font-weight, text-decoration, letter-spacing, transform, background-image, background-size, background-position
-                        }
-
-                        .u-block-23ca-68:not([data-block-selected]):not([data-cell-selected]).u-block-23ca-68:not([data-block-selected]):not([data-cell-selected]).u-block-23ca-68:not([data-block-selected]):not([data-cell-selected]):hover:before {
-                            background-color: #333129 !important
-                        } </style>
-                    <style
-                        class="u-block-23ca-59 u-state-style">.u-block-23ca-59:not([data-block-selected]):not([data-cell-selected]), .u-block-23ca-59:not([data-block-selected]):not([data-cell-selected]):before, .u-block-23ca-59:not([data-block-selected]):not([data-cell-selected]) > .u-container-layout:before {
-                            transition-property: fill, color, background-color, stroke-width, border-style, border-width, border-top-width, border-left-width, border-right-width, border-bottom-width, custom-border, borders, box-shadow, text-shadow, opacity, border-radius, stroke, border-color, font-size, font-style, font-weight, text-decoration, letter-spacing, transform, background-image, background-size, background-position
-                        }
-
-                        .u-container-layout:hover .u-block-23ca-59:not([data-block-selected]):not([data-cell-selected]) {
-                            color: #fff !important
-                        }
-
-                        .u-container-layout.hover .u-block-23ca-59:not([data-block-selected]):not([data-cell-selected]) {
-                            color: #fff !important
-                        }</style>
-                    <style
-                        class="u-block-23ca-65 u-state-style">.u-block-23ca-65:not([data-block-selected]):not([data-cell-selected]), .u-block-23ca-65:not([data-block-selected]):not([data-cell-selected]):before, .u-block-23ca-65:not([data-block-selected]):not([data-cell-selected]) > .u-container-layout:before {
-                            transition-property: fill, color, background-color, stroke-width, border-style, border-width, border-top-width, border-left-width, border-right-width, border-bottom-width, custom-border, borders, box-shadow, text-shadow, opacity, border-radius, stroke, border-color, font-size, font-style, font-weight, text-decoration, letter-spacing, transform, background-image, background-size, background-position
-                        }
-
-                        .u-container-layout:hover .u-block-23ca-65:not([data-block-selected]):not([data-cell-selected]) {
-                            color: #fff !important
-                        }
-
-                        .u-container-layout.hover .u-block-23ca-65:not([data-block-selected]):not([data-cell-selected]) {
-                            color: #fff !important
-                        }</style>
-                    <style
-                        class="u-block-23ca-60 u-state-style">.u-block-23ca-60:not([data-block-selected]):not([data-cell-selected]), .u-block-23ca-60:not([data-block-selected]):not([data-cell-selected]):before, .u-block-23ca-60:not([data-block-selected]):not([data-cell-selected]) > .u-container-layout:before {
-                            transition-property: fill, color, background-color, stroke-width, border-style, border-width, border-top-width, border-left-width, border-right-width, border-bottom-width, custom-border, borders, box-shadow, text-shadow, opacity, border-radius, stroke, border-color, font-size, font-style, font-weight, text-decoration, letter-spacing, transform, background-image, background-size, background-position
-                        }
-
-                        .u-container-layout:hover .u-block-23ca-60:not([data-block-selected]):not([data-cell-selected]) {
-                            color: #fff !important
-                        }
-
-                        .u-container-layout.hover .u-block-23ca-60:not([data-block-selected]):not([data-cell-selected]) {
-                            color: #fff !important
-                        }</style>
-                    <style
-                        class="u-block-23ca-72 u-state-style">.u-block-23ca-72:not([data-block-selected]):not([data-cell-selected]), .u-block-23ca-72:not([data-block-selected]):not([data-cell-selected]):before, .u-block-23ca-72:not([data-block-selected]):not([data-cell-selected]) > .u-container-layout:before {
-                            transition-property: fill, color, background-color, stroke-width, border-style, border-width, border-top-width, border-left-width, border-right-width, border-bottom-width, custom-border, borders, box-shadow, text-shadow, opacity, border-radius, stroke, border-color, font-size, font-style, font-weight, text-decoration, letter-spacing, transform, background-image, background-size, background-position
-                        }
-
-                        .u-container-layout:hover .u-block-23ca-72:not([data-block-selected]):not([data-cell-selected]) {
-                            color: #fff !important
-                        }
-
-                        .u-container-layout.hover .u-block-23ca-72:not([data-block-selected]):not([data-cell-selected]) {
-                            color: #fff !important
-                        }</style>
-                    <style
-                        class="u-block-23ca-61 u-state-style">.u-block-23ca-61:not([data-block-selected]):not([data-cell-selected]), .u-block-23ca-61:not([data-block-selected]):not([data-cell-selected]):before, .u-block-23ca-61:not([data-block-selected]):not([data-cell-selected]) > .u-container-layout:before {
-                            transition-property: fill, color, background-color, stroke-width, border-style, border-width, border-top-width, border-left-width, border-right-width, border-bottom-width, custom-border, borders, box-shadow, text-shadow, opacity, border-radius, stroke, border-color, font-size, font-style, font-weight, text-decoration, letter-spacing, transform, background-image, background-size, background-position
-                        }
-
-                        .u-container-layout:hover .u-block-23ca-61:not([data-block-selected]):not([data-cell-selected]) {
-                            transform: translateX(0) translateY(-5px) scale(1) !important
-                        }
-
-                        .u-container-layout.hover .u-block-23ca-61:not([data-block-selected]):not([data-cell-selected]) {
-                            transform: translateX(0) translateY(-5px) scale(1) !important
-                        }</style>
-                    <style
-                        class="u-block-23ca-67 u-state-style">.u-block-23ca-67:not([data-block-selected]):not([data-cell-selected]), .u-block-23ca-67:not([data-block-selected]):not([data-cell-selected]):before, .u-block-23ca-67:not([data-block-selected]):not([data-cell-selected]) > .u-container-layout:before {
-                            transition-property: fill, color, background-color, stroke-width, border-style, border-width, border-top-width, border-left-width, border-right-width, border-bottom-width, custom-border, borders, box-shadow, text-shadow, opacity, border-radius, stroke, border-color, font-size, font-style, font-weight, text-decoration, letter-spacing, transform, background-image, background-size, background-position
-                        }
-
-                        .u-container-layout:hover .u-block-23ca-67:not([data-block-selected]):not([data-cell-selected]) {
-                            transform: translateX(0) translateY(-5px) scale(1) !important
-                        }
-
-                        .u-container-layout.hover .u-block-23ca-67:not([data-block-selected]):not([data-cell-selected]) {
-                            transform: translateX(0) translateY(-5px) scale(1) !important
-                        }</style>
-                    <style
-                        class="u-block-23ca-79 u-state-style">.u-block-23ca-79:not([data-block-selected]):not([data-cell-selected]), .u-block-23ca-79:not([data-block-selected]):not([data-cell-selected]):before, .u-block-23ca-79:not([data-block-selected]):not([data-cell-selected]) > .u-container-layout:before {
-                            transition-property: fill, color, background-color, stroke-width, border-style, border-width, border-top-width, border-left-width, border-right-width, border-bottom-width, custom-border, borders, box-shadow, text-shadow, opacity, border-radius, stroke, border-color, font-size, font-style, font-weight, text-decoration, letter-spacing, transform, background-image, background-size, background-position
-                        }
-
-                        .u-container-layout:hover .u-block-23ca-79:not([data-block-selected]):not([data-cell-selected]) {
-                            transform: translateX(0) translateY(-5px) scale(1) !important
-                        }
-
-                        .u-container-layout.hover .u-block-23ca-79:not([data-block-selected]):not([data-cell-selected]) {
-                            transform: translateX(0) translateY(-5px) scale(1) !important
-                        }</style>
-                    <div class="u-clearfix u-sheet u-sheet-1">
-                        <h2 class="u-align-center u-text u-text-black u-text-1" data-animation-name="customAnimationIn"
-                            data-animation-duration="1500" data-animation-delay="0">NASZE OFERTY TRANSPORTU</h2>
-                        <div class="u-expanded-width u-list u-list-1">
-                            <div class="u-repeater u-repeater-1">
-                                <div
-                                    class="u-align-center u-border-2 u-border-custom-color-2 u-container-style u-list-item u-radius-20 u-repeater-item u-shape-round u-video-cover u-white u-list-item-1"
-                                    data-animation-direction="Up" data-animation-name="customAnimationIn"
-                                    data-animation-duration="1500" data-animation-delay="500"
-                                    data-href="#transport-wlasny" title="Sekcja 7 (TRANSPORT WE WŁASNYM ZAKRESIE)">
-                                    <div
-                                        class="u-container-layout u-similar-container u-valign-top u-container-layout-1">
-                                        <span
-                                            class="u-align-center u-file-icon u-hover-feature u-icon u-icon-circle u-text-palette-1-base u-icon-1"><img
-                                                src="https://trawnikproducent.pl/wp-content/uploads/svg-gobbler.svg"
-                                                alt="" data-pagespeed-url-hash="3474019181"
-                                                onload="pagespeed.CriticalImages.checkImageForCriticality(this);"></span>
-                                        <h4 class="u-align-center u-text u-text-custom-color-2 u-text-2">Transport
-                                            własny </h4>
-                                        <p class="u-align-center u-text u-text-3">Indywidualny odbiór towaru prosto z
-                                            naszych plantacji.</p>
-                                    </div>
-                                </div>
-                                <div
-                                    class="u-align-center u-border-2 u-border-custom-color-2 u-container-style u-list-item u-radius-20 u-repeater-item u-shape-round u-video-cover u-white u-list-item-2"
-                                    data-animation-direction="Up" data-animation-name="customAnimationIn"
-                                    data-animation-duration="1500" data-animation-delay="500"
-                                    data-href="#transport-kurier">
-                                    <div class="u-container-layout u-similar-container u-container-layout-2"><span
-                                            class="u-align-center u-file-icon u-hover-feature u-icon u-icon-circle u-text-palette-1-base u-icon-2"><img
-                                                src="https://trawnikproducent.pl/wp-content/uploads/svg-gobbler.svg"
-                                                alt="" data-pagespeed-url-hash="3474019181"
-                                                onload="pagespeed.CriticalImages.checkImageForCriticality(this);"></span>
-                                        <h4 class="u-align-center u-text u-text-custom-color-2 u-text-4">Transport
-                                            Kurier<br>
-                                        </h4>
-                                        <p class="u-align-center u-text u-text-5">Palety z trawą wysyłamyprzesyłką
-                                            kurierską.</p>
-                                    </div>
-                                </div>
-                                <div
-                                    class="u-align-center u-border-2 u-border-custom-color-2 u-container-style u-list-item u-radius-20 u-repeater-item u-shape-round u-video-cover u-white u-list-item-3"
-                                    data-animation-direction="Up" data-animation-name="customAnimationIn"
-                                    data-animation-duration="1500" data-animation-delay="500"
-                                    data-href="#transport-trawnik-1">
-                                    <div class="u-container-layout u-similar-container u-container-layout-3"><span
-                                            class="u-align-center u-file-icon u-hover-feature u-icon u-icon-circle u-text-palette-1-base u-icon-3"><img
-                                                src="https://trawnikproducent.pl/wp-content/uploads/svg-gobbler.svg"
-                                                alt="" data-pagespeed-url-hash="3474019181"
-                                                onload="pagespeed.CriticalImages.checkImageForCriticality(this);"></span>
-                                        <h4 class="u-align-center u-text u-text-custom-color-2 u-text-6">Transport
-                                            Trawnik<br>
-                                        </h4>
-                                        <p class="u-align-center u-text u-text-7">Większe zamówienia wysyłamy spedycją,
-                                            Transport Trawnik Producent.<br>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <style
-                        class="u-icon-3 u-state-style">.u-section-4 .u-icon-3:not([data-block-selected]):not([data-cell-selected]), .u-section-4 .u-icon-3:not([data-block-selected]):not([data-cell-selected]):before, .u-section-4 .u-icon-3:not([data-block-selected]):not([data-cell-selected]) > .u-container-layout:before {
-                            transition-property: fill, color, background-color, stroke-width, border-style, border-width, border-top-width, border-left-width, border-right-width, border-bottom-width, custom-border, borders, box-shadow, text-shadow, opacity, border-radius, stroke, border-color, font-size, font-style, font-weight, text-decoration, letter-spacing, transform, background-image, image-zoom, background-size, background-position
-                        }
-
-                        .u-container-layout:hover .u-section-4 .u-icon-3:not([data-block-selected]):not([data-cell-selected]) {
-                            transform: translateX(0) translateY(0) scale(1.1) !important;
-                            box-shadow: 0 0 0 rgba(0, 0, 0, 0) !important;
-                            stroke-width: 0 !important;
-                            text-shadow: 0 0 0 rgba(0, 0, 0, 0) !important
-                        }
-
-                        .u-section-4 .u-icon-3:not([data-block-selected]):not([data-cell-selected]) {
-                            stroke-width: 0 !important;
-                            stroke: var(--transparent) !important;
-                            border-color: var(--transparent) !important
-                        }
-
-                        .u-container-layout.hover .u-section-4 .u-icon-3:not([data-block-selected]):not([data-cell-selected]) {
-                            transform: translateX(0) translateY(0) scale(1.1) !important;
-                            box-shadow: 0 0 0 rgba(0, 0, 0, 0) !important;
-                            stroke-width: 0 !important;
-                            text-shadow: 0 0 0 rgba(0, 0, 0, 0) !important
-                        }
-
-                        .u-section-4 .u-icon-3:not([data-block-selected]):not([data-cell-selected]) {
-                            stroke-width: 0 !important;
-                            stroke: var(--transparent) !important;
-                            border-color: var(--transparent) !important
-                        }</style>
-                    <style
-                        class="u-icon-1 u-state-style">.u-section-4 .u-icon-1:not([data-block-selected]):not([data-cell-selected]), .u-section-4 .u-icon-1:not([data-block-selected]):not([data-cell-selected]):before, .u-section-4 .u-icon-1:not([data-block-selected]):not([data-cell-selected]) > .u-container-layout:before {
-                            transition-property: fill, color, background-color, stroke-width, border-style, border-width, border-top-width, border-left-width, border-right-width, border-bottom-width, custom-border, borders, box-shadow, text-shadow, opacity, border-radius, stroke, border-color, font-size, font-style, font-weight, text-decoration, letter-spacing, transform, background-image, image-zoom, background-size, background-position
-                        }
-
-                        .u-container-layout:hover .u-section-4 .u-icon-1:not([data-block-selected]):not([data-cell-selected]) {
-                            transform: translateX(0) translateY(0) scale(1.1) !important;
-                            box-shadow: 0 0 0 rgba(0, 0, 0, 0) !important;
-                            stroke-width: 0 !important;
-                            text-shadow: 0 0 0 rgba(0, 0, 0, 0) !important
-                        }
-
-                        .u-section-4 .u-icon-1:not([data-block-selected]):not([data-cell-selected]) {
-                            stroke-width: 0 !important;
-                            stroke: var(--transparent) !important;
-                            border-color: var(--transparent) !important
-                        }
-
-                        .u-container-layout.hover .u-section-4 .u-icon-1:not([data-block-selected]):not([data-cell-selected]) {
-                            transform: translateX(0) translateY(0) scale(1.1) !important;
-                            box-shadow: 0 0 0 rgba(0, 0, 0, 0) !important;
-                            stroke-width: 0 !important;
-                            text-shadow: 0 0 0 rgba(0, 0, 0, 0) !important
-                        }
-
-                        .u-section-4 .u-icon-1:not([data-block-selected]):not([data-cell-selected]) {
-                            stroke-width: 0 !important;
-                            stroke: var(--transparent) !important;
-                            border-color: var(--transparent) !important
-                        }</style>
-                    <style
-                        class="u-icon-2 u-state-style">.u-section-4 .u-icon-2:not([data-block-selected]):not([data-cell-selected]), .u-section-4 .u-icon-2:not([data-block-selected]):not([data-cell-selected]):before, .u-section-4 .u-icon-2:not([data-block-selected]):not([data-cell-selected]) > .u-container-layout:before {
-                            transition-property: fill, color, background-color, stroke-width, border-style, border-width, border-top-width, border-left-width, border-right-width, border-bottom-width, custom-border, borders, box-shadow, text-shadow, opacity, border-radius, stroke, border-color, font-size, font-style, font-weight, text-decoration, letter-spacing, transform, background-image, image-zoom, background-size, background-position
-                        }
-
-                        .u-container-layout:hover .u-section-4 .u-icon-2:not([data-block-selected]):not([data-cell-selected]) {
-                            transform: translateX(0) translateY(0) scale(1.1) !important;
-                            box-shadow: 0 0 0 rgba(0, 0, 0, 0) !important;
-                            stroke-width: 0 !important;
-                            text-shadow: 0 0 0 rgba(0, 0, 0, 0) !important
-                        }
-
-                        .u-section-4 .u-icon-2:not([data-block-selected]):not([data-cell-selected]) {
-                            stroke-width: 0 !important;
-                            stroke: var(--transparent) !important;
-                            border-color: var(--transparent) !important
-                        }
-
-                        .u-container-layout.hover .u-section-4 .u-icon-2:not([data-block-selected]):not([data-cell-selected]) {
-                            transform: translateX(0) translateY(0) scale(1.1) !important;
-                            box-shadow: 0 0 0 rgba(0, 0, 0, 0) !important;
-                            stroke-width: 0 !important;
-                            text-shadow: 0 0 0 rgba(0, 0, 0, 0) !important
-                        }
-
-                        .u-section-4 .u-icon-2:not([data-block-selected]):not([data-cell-selected]) {
-                            stroke-width: 0 !important;
-                            stroke: var(--transparent) !important;
-                            border-color: var(--transparent) !important
-                        }</style>
-                </section>
-
-                <section class="u-clearfix u-section-5" id="sec-92f8">
-                    <div class="u-clearfix u-sheet u-sheet-1">
-                        <div class="u-clearfix u-expanded-width u-gutter-8 u-layout-wrap u-layout-wrap-1">
-                            <div class="u-layout">
-                                <div class="u-layout-row">
-                                    <div class="u-container-style u-layout-cell u-left-cell u-size-24 u-layout-cell-1">
-                                        <div class="u-container-layout u-valign-top u-container-layout-1">
-                                            <h2 class="u-custom-font u-text u-text-1">NASZA PLANTACJA<br>
-                                            </h2>
-                                            <h5 class="u-text u-text-2">Przygotowanie trawy do wysyłki</h5>
-                                        </div>
-                                    </div>
-                                    <div class="u-container-style u-layout-cell u-right-cell u-size-36 u-layout-cell-2">
-                                        <div
-                                            class="u-container-layout u-valign-top-lg u-valign-top-md u-valign-top-sm u-valign-top-xl u-container-layout-2">
-                                            <p class="u-text u-text-3">Trawa przed wysyłką nie jest w żaden sposób
-                                                magazynowana. Oznacza to, że specjalnie dla Ciebie nasi specjaliści przy
-                                                użyciu najwyższej jakości sprzętu zbiorą trawę wprost z plantacji.
-                                                Dzięki temu możesz mieć pewność, że produkt, który otrzymasz będzie
-                                                świeży i nie wysuszy się w transporcie.<br>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div
-                            class="u-expanded-width u-gallery u-layout-grid u-lightbox u-show-text-on-hover u-gallery-1">
-                            <div class="u-gallery-inner u-gallery-inner-1">
-                                <div class="u-effect-fade u-effect-hover-zoom u-gallery-item u-radius-25 u-shape-round">
-                                    <div class="u-back-slide" data-image-width="1024" data-image-height="615">
-                                        <img class="u-back-image u-expanded"
-                                             src="https://trawnikproducent.pl/wp-content/uploads/xtrawnik-producent-plantacja-trawy.jpg.pagespeed.ic.ZnuXXGEAzk.webp"
-                                             data-pagespeed-url-hash="1273373714"
-                                             onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
-                                    </div>
-                                    <div class="u-over-slide u-shading u-over-slide-1">
-                                        <h3 class="u-gallery-heading"></h3>
-                                        <p class="u-gallery-text"></p>
-                                    </div>
-                                </div>
-                                <div class="u-effect-fade u-effect-hover-zoom u-gallery-item u-radius-25 u-shape-round">
-                                    <div class="u-back-slide" data-image-width="768" data-image-height="862">
-                                        <img class="u-back-image u-expanded"
-                                             src="https://trawnikproducent.pl/wp-content/uploads/xodzywka-do-tranwikw-na-wiosn-1.jpg.pagespeed.ic.7QXhCzxyWq.webp"
-                                             data-pagespeed-url-hash="3234628420"
-                                             onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
-                                    </div>
-                                    <div class="u-over-slide u-shading u-over-slide-2">
-                                        <h3 class="u-gallery-heading"></h3>
-                                        <p class="u-gallery-text"></p>
-                                    </div>
-                                </div>
-                                <div class="u-effect-fade u-effect-hover-zoom u-gallery-item u-radius-25 u-shape-round">
-                                    <div class="u-back-slide" data-image-width="1024" data-image-height="615">
-                                        <img class="u-back-image u-expanded"
-                                             src="https://trawnikproducent.pl/wp-content/uploads/xtrawnik-producent-farma.jpg.pagespeed.ic.Tjh54jEZgy.webp"
-                                             data-pagespeed-url-hash="1689137437"
-                                             onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
-                                    </div>
-                                    <div class="u-over-slide u-shading u-over-slide-3">
-                                        <h3 class="u-gallery-heading"></h3>
-                                        <p class="u-gallery-text"></p>
-                                    </div>
-                                </div>
-                                <div class="u-effect-fade u-effect-hover-zoom u-gallery-item u-radius-25 u-shape-round">
-                                    <div class="u-back-slide" data-image-width="1200" data-image-height="800">
-                                        <img class="u-back-image u-expanded"
-                                             src="https://trawnikproducent.pl/wp-content/uploads/xtransport-trawy.jpg.pagespeed.ic.JklS-Mxd3h.webp"
-                                             data-pagespeed-url-hash="2942708679"
-                                             onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
-                                    </div>
-                                    <div class="u-over-slide u-shading u-over-slide-4">
-                                        <h3 class="u-gallery-heading"></h3>
-                                        <p class="u-gallery-text"></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <section class="u-clearfix u-palette-5-light-3 u-section-6" id="transport-kurier">
-                    <div class="u-clearfix u-sheet u-sheet-1">
-                        <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
-                            <div class="u-layout">
-                                <div class="u-layout-row">
-                                    <div class="u-container-style u-layout-cell u-left-cell u-size-30 u-layout-cell-1">
-                                        <div
-                                            class="u-container-layout u-valign-middle-lg u-valign-middle-md u-valign-middle-xl u-container-layout-1">
-                                            <h2 class="u-text u-text-1" data-animation-name="zoomIn"
-                                                data-animation-duration="1000" data-animation-delay="0"
-                                                data-animation-direction="">TRANSPORT KURIER</h2>
-                                            <p class="u-align-left u-text u-text-2">Wychodząc naprzeciw naszym Klientom
-                                                trawę wysyłamyprzesyłką kurierską. Koszt dostawy uzależniony jest od
-                                                ilości zamawianychpalet.<br>
-                                                <br>
-                                                <br>
-                                                <span style="font-weight: 700;">INFORMACJE DOTYCZĄCE PRZESYŁEK KURIERSKICH:</span>
-                                            </p>
-                                            <div
-                                                class="u-expanded-width-sm u-expanded-width-xs u-table u-table-responsive u-table-1">
-                                                <table class="u-table-entity">
-                                                    <colgroup>
-                                                        <col width="47.3%">
-                                                        <col width="52.7%">
-                                                    </colgroup>
-                                                    <tbody class="u-table-body">
-                                                    <tr style="height: 79px;">
-                                                        <td class="u-border-1 u-border-custom-color-19 u-custom-color-2 u-first-column u-table-cell">
-                                                            <b>1 paleta</b>
-                                                        </td>
-                                                        <td class="u-border-1 u-border-custom-color-19 u-table-cell">
-                                                            35m2trawy z rolki (35 rolek x 1m2
-                                                        </td>
-                                                    </tr>
-                                                    <tr style="height: 79px;">
-                                                        <td class="u-border-1 u-border-custom-color-19 u-custom-color-2 u-first-column u-table-cell">
-                                                            <b>Wymiary palety</b>
-                                                            <br>
-                                                        </td>
-                                                        <td class="u-border-1 u-border-custom-color-19 u-table-cell">
-                                                            120x80cm x wys.150cm
-                                                        </td>
-                                                    </tr>
-                                                    <tr style="height: 52px;">
-                                                        <td class="u-border-1 u-border-custom-color-19 u-custom-color-2 u-first-column u-table-cell">
-                                                            <b>Waga 1 rolki</b>
-                                                            <br>
-                                                        </td>
-                                                        <td class="u-border-1 u-border-custom-color-19 u-table-cell">
-                                                            ok.25 kg
-                                                        </td>
-                                                    </tr>
-                                                    <tr style="height: 52px;">
-                                                        <td class="u-border-1 u-border-custom-color-19 u-custom-color-2 u-first-column u-table-cell">
-                                                            <b>Waga 1 palety</b>
-                                                        </td>
-                                                        <td class="u-border-1 u-border-custom-color-19 u-table-cell">do
-                                                            1000 kg
-                                                        </td>
-                                                    </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div
-                                        class="u-align-left-xs u-container-style u-layout-cell u-right-cell u-size-30 u-layout-cell-2">
-                                        <div
-                                            class="u-container-layout u-valign-middle-lg u-valign-middle-xl u-valign-top-md u-valign-top-sm u-valign-top-xs u-container-layout-2">
-                                            <img
-                                                src="https://trawnikproducent.pl/wp-content/uploads/xpaleta.png.pagespeed.ic.ArUtuLWBQo.webp"
-                                                alt=""
-                                                class="u-expanded-width-lg u-expanded-width-md u-expanded-width-xl u-expanded-width-xs u-image u-image-contain u-image-default u-image-1"
-                                                data-image-width="479" data-image-height="439"
-                                                data-pagespeed-url-hash="2565917219"
-                                                onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
-                                            <blockquote class="u-text u-text-3">Wysyłki zleconym przez nastransportem
-                                                kurierskim realizowane są <span style="font-weight: 700;">od wtorku do czwartku</span>.
-                                            </blockquote>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <section class="u-clearfix u-white u-section-7" id="transport-wlasny">
-                    <div class="u-clearfix u-sheet u-sheet-1">
-                        <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
-                            <div class="u-layout">
-                                <div class="u-layout-row">
-                                    <div class="u-container-style u-layout-cell u-left-cell u-size-30 u-layout-cell-1">
-                                        <div class="u-container-layout u-container-layout-1">
-                                            <h2 class="u-text u-text-1" data-animation-name="zoomIn"
-                                                data-animation-duration="1000" data-animation-delay="0"
-                                                data-animation-direction="">TRANSPORT WE WŁASNYM ZAKRESIE<br>
-                                            </h2>
-                                            <p class="u-align-left u-text u-text-2">Trawnik Producent, umożliwia naszym
-                                                klientom, indywidualny odbiór towaru prosto z naszych plantacji. <br>Gwarantujemy
-                                                dobrze zabezpieczony towar na palecie, który dodatkowo jest owinięty
-                                                specjalną siatką, uniemożliwiając w ten sposób, przemieszczanie się
-                                                rolek trawy. Posiadając specjalistyczny sprzęt, jesteśmy przygotowani na
-                                                sprawne i bezpieczne załadunki. <br>
-                                                <br>
-                                                <span
-                                                    style="font-weight: 700;">INFORMACJE DOTYCZĄCE PALET I WYMIARÓW:<br>
-                    </span>
-                                            </p>
-                                            <div
-                                                class="u-align-left u-expanded-width-sm u-expanded-width-xs u-table u-table-responsive u-table-1">
-                                                <table class="u-table-entity">
-                                                    <colgroup>
-                                                        <col width="47.3%">
-                                                        <col width="52.7%">
-                                                    </colgroup>
-                                                    <tbody class="u-custom-color-17 u-table-body u-table-body-1">
-                                                    <tr style="height: 79px;">
-                                                        <td class="u-border-1 u-border-custom-color-16 u-custom-color-2 u-first-column u-table-cell">
-                                                            <b>1 paleta</b>
-                                                        </td>
-                                                        <td class="u-border-1 u-border-custom-color-2 u-table-cell"> 40
-                                                            m2trawy z rolki (40 rolek x 1m2
-                                                        </td>
-                                                    </tr>
-                                                    <tr style="height: 79px;">
-                                                        <td class="u-border-1 u-border-custom-color-16 u-custom-color-2 u-first-column u-table-cell">
-                                                            <b>Wymiary palety</b>
-                                                            <br>
-                                                        </td>
-                                                        <td class="u-border-1 u-border-custom-color-2 u-table-cell">
-                                                            120x80cm x wys.150cm
-                                                        </td>
-                                                    </tr>
-                                                    <tr style="height: 52px;">
-                                                        <td class="u-border-1 u-border-custom-color-16 u-custom-color-2 u-first-column u-table-cell">
-                                                            <b>Waga 1 rolki</b>
-                                                            <br>
-                                                        </td>
-                                                        <td class="u-border-1 u-border-custom-color-2 u-table-cell">
-                                                            ok.25 kg
-                                                        </td>
-                                                    </tr>
-                                                    <tr style="height: 52px;">
-                                                        <td class="u-border-1 u-border-custom-color-16 u-custom-color-2 u-first-column u-table-cell">
-                                                            <b>Waga 1 palety</b>
-                                                        </td>
-                                                        <td class="u-border-1 u-border-custom-color-2 u-table-cell">do
-                                                            1000 kg
-                                                        </td>
-                                                    </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div
-                                        class="u-align-left-xs u-container-style u-layout-cell u-right-cell u-size-30 u-layout-cell-2">
-                                        <div
-                                            class="u-container-layout u-valign-top-md u-valign-top-sm u-valign-top-xs u-container-layout-2">
-                                            <img
-                                                src="https://trawnikproducent.pl/wp-content/uploads/xpaleta.png.pagespeed.ic.ArUtuLWBQo.webp"
-                                                alt=""
-                                                class="u-expanded-width u-image u-image-contain u-image-default u-image-1"
-                                                data-image-width="479" data-image-height="439"
-                                                data-pagespeed-url-hash="2565917219"
-                                                onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
-                                            <blockquote class="u-text u-text-3">Odbiór towaru od poniedziałku do piątku
-                                                (preferowany wcześniejszy kontakt telefoniczny)
-                                            </blockquote>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+                 data-background-images="{}"
+                 data-element="main" id="tab_5" style="padding: 0">
+                <iframe id="iframe_5" style="width: 100%; overflow:hidden;" frameborder="0" scrolling="no"
+                        src=""></iframe>
+            </div>
+            <div data-content-type="tab-item" data-appearance="default" data-tab-name="test 6"
+                 data-background-images="{}"
+                 data-element="main" id="tab_6" style="padding: 0">
+                <iframe id="iframe_6" style="width: 100%; overflow:hidden;" frameborder="0" scrolling="no"
+                        src=""></iframe>
+            </div>
+            <div data-content-type="tab-item" data-appearance="default" data-tab-name="test 7"
+                 data-background-images="{}"
+                 data-element="main" id="tab_7" style="padding: 0">
+                <iframe id="iframe_7" style="width: 100%; overflow:hidden;" frameborder="0" scrolling="no"
+                        src=""></iframe>
             </div>
         </div>
     </div>
 </div>
-
-<style>
-    #tabs-description {
-        font-family: Arial, sans-serif;
-        margin: 20px;
-    }
-
-    .tabs-navigation {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        display: flex;
-        border-bottom: 2px solid #ccc;
-        justify-content: center;
-    }
-
-    .tab-header {
-        margin-right: 5px;
-    }
-
-    .tab-title {
-        display: block;
-        padding: 10px 20px;
-        background-color: #f1f1f1;
-        border: 1px solid #ccc;
-        border-bottom: none;
-        text-decoration: none;
-        color: #333;
-        border-radius: 5px 5px 0 0;
-    }
-
-    .tab-header.active .tab-title {
-        background-color: #fff;
-        border-bottom: 2px solid #fff;
-        margin-bottom: -2px;
-    }
-
-    .tabs-content {
-        border: 1px solid #ccc;
-        padding: 20px;
-        border-top: none;
-    }
-
-    .tabs-content [data-content-type="tab-item"] {
-        display: none;
-    }
-
-    .tabs-content [data-content-type="tab-item"].active {
-        display: block;
-    }
-</style>
-
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const tabs = document.querySelectorAll('#tabs-description .tab-header');
-        const tabContents = document.querySelectorAll('#tabs-description .tabs-content [data-content-type="tab-item"]');
+    if (window.innerWidth >= 768) {
+        document.getElementById('yt-video').style.zIndex = 9999;
+    } else {
+        document.getElementById('gallery').appendChild(document.getElementById('yt-video'));
+        document.getElementById('gallery').children[0].style.zIndex = 9999;
+        document.getElementById('tab-content').style.width = window.innerWidth + 'px';
+    }
 
-        // Show the first tab by default
-        if (tabs.length > 0) {
-            tabs[0].classList.add('active');
-            tabContents[0].classList.add('active');
+    if (document.getElementById('product-attributes'))
+        document.getElementById('product-attribute').appendChild(document.getElementById('product.attributes'));
+
+    //document.getElementById('custom-description').appendChild(document.getElementById('tabs-description'));
+
+    //document.getElementById('custom-description').innerHTML = '';
+    //document.getElementById('custom-short-description').innerHTML = '';
+
+    const tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/iframe_api';
+    const firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    let players = [];
+
+    function onYouTubeIframeAPIReady() {
+        <?php foreach ($itemsVideo as $video): ?>
+        players.push(
+            new YT.Player('<?php echo $video['divId']; ?>', {
+                videoId: '<?php echo $video['videoId']; ?>',
+                events: {
+                    'onStateChange': onPlayerStateChange,
+                },
+            }));
+        <?php endforeach; ?>
+    }
+
+    function onPlayerStateChange(event) {
+        for (let i in players) {
+            if (event.target.getPlayerState() === YT.PlayerState.PLAYING &&
+                players[i].g.id !== event.target.g.id &&
+                players[i].getPlayerState() === YT.PlayerState.PLAYING
+            ) {
+                players[i].stopVideo();
+            }
         }
+    }
 
-        tabs.forEach((tab, index) => {
-            tab.addEventListener('click', (e) => {
-                e.preventDefault();
+    function loadIframe(tab) {
+        let id = tab.href.substr(tab.href.length - 1);
+        let iframe = document.getElementById('iframe_' + id);
+        if (iframe.isinit === undefined) {
+            iframe.isinit = false;
+            iframe.src = '/hyvaroot/pages/grassinfo' + id;
+            iframe.onload = function() {
+                resizeIframe(iframe);
+                try {
+                    iframe.contentWindow.document.getElementById('am-cookie-bar').remove();
+                } catch (ex) {
 
-                tabs.forEach(t => t.classList.remove('active'));
-                tab.classList.add('active');
-
-                tabContents.forEach(content => {
-                    content.classList.remove('active');
-                });
-                tabContents[index].classList.add('active');
-            });
-        });
-    });
+                }
+            };
+        }
+    }
 </script>
