@@ -181,7 +181,38 @@ $product = $block->getProduct();
     </div>
 </div>
 <script>
-    if (window.innerWidth >= 768) {
+
+    function resizeIframe(obj) {
+        let height = obj.contentWindow.document.body.scrollHeight;
+        obj.style.height = height + 'px';
+        obj.style.width = '100%';
+        obj.style.overflow = 'hidden';
+        obj.style.overflowY = 'hidden';
+        document.getElementById(obj.id)
+            .contentWindow.document.getElementsByTagName('body')[0]
+            .style.textAlign = "<?= GardenLawn\Core\Utils\Utils::isFirefox() ? '-moz-center' : '-webkit-center' ?>";
+    }
+
+    function youTubeResize() {
+        Array.from(document.getElementsByClassName('yt-iframe')).forEach(
+            function (element, index, array) {
+                element.setAttribute('width', '100%');
+                element.setAttribute('height', (element.offsetWidth * 9.0 / 16.0).toFixed(0));
+            },
+        );
+    }
+
+    function galleryResize() {
+        Array.from(document.getElementsByTagName('img')).forEach(
+            function (element, index, array) {
+                element.setAttribute('width', '100%');
+                element.setAttribute('height', (element.offsetWidth * 9.0 / 16.0).toFixed(0));
+            },
+        );
+    }
+
+
+    /*if (window.innerWidth >= 768) {
         document.getElementById('yt-video').style.zIndex = 9999;
     } else {
         document.getElementById('gallery').appendChild(document.getElementById('yt-video'));
@@ -191,7 +222,7 @@ $product = $block->getProduct();
 
     if (document.getElementById('product-attributes'))
         document.getElementById('product-attribute').appendChild(document.getElementById('product.attributes'));
-
+*/
     //document.getElementById('custom-description').appendChild(document.getElementById('tabs-description'));
 
     //document.getElementById('custom-description').innerHTML = '';
