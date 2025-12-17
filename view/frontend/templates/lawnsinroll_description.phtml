@@ -52,24 +52,17 @@ $product = $block->getProduct();*/
 
 <div id="tabs-description">
     <div class="tabs-container" data-content-type="tabs" data-appearance="default" data-active-tab=""
-         data-element="main"
-         style="padding: 0; margin-left: -23px;">
-        <ul role="tablist" style=" text-align: center;" class="tabs-navigation" data-element="navigation">
-            <li role="tab" class="tab-header active" data-element="headers"><a href="#tab_1" class="tab-title"><span
-                        class="tab-title">Trawa z rolki</span></a></li>
-            <li role="tab" class="tab-header" data-element="headers"><a href="#tab_2" class="tab-title"><span
-                        class="tab-title">O producencie</span></a></li>
-            <li role="tab" class="tab-header" data-element="headers"><a href="#tab_3" class="tab-title"><span
-                        class="tab-title">Grupa Trawnik</span></a></li>
-            <li role="tab" class="tab-header" data-element="headers"><a href="#tab_4" class="tab-title"><span
-                        class="tab-title">Trawa ogrodowa</span></a></li>
-            <li role="tab" class="tab-header" data-element="headers"><a href="#tab_5" class="tab-title"><span
-                        class="tab-title">Logistyka</span></a></li>
-            <li role="tab" class="tab-header" data-element="headers"><a href="#tab_6" class="tab-title"><span
+         data-element="main">
+        <ul role="tablist" class="tabs-navigation" data-element="navigation">
+            <li role="tab" class="tab-header active" data-element="headers"><a href="#tab_1" class="tab-title"><span>Trawa z rolki</span></a></li>
+            <li role="tab" class="tab-header" data-element="headers"><a href="#tab_2" class="tab-title"><span>O producencie</span></a></li>
+            <li role="tab" class="tab-header" data-element="headers"><a href="#tab_3" class="tab-title"><span>Grupa Trawnik</span></a></li>
+            <li role="tab" class="tab-header" data-element="headers"><a href="#tab_4" class="tab-title"><span>Trawa ogrodowa</span></a></li>
+            <li role="tab" class="tab-header" data-element="headers"><a href="#tab_5" class="tab-title"><span>Logistyka</span></a></li>
         </ul>
-        <div id="tab-content" class="tabs-content" data-element="content" style="width: 100%;">
+        <div id="tab-content" class="tabs-content" data-element="content">
             <div data-content-type="tab-item" data-appearance="default" data-tab-name="test 1"
-                 data-element="main" id="tab_1" style="padding: 0">
+                 data-element="main" id="tab_1" class="active">
                 <section class="u-clearfix u-white u-section-3" id="sec-2b5d">
                     <div class="u-clearfix u-sheet u-sheet-1">
                         <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
@@ -322,7 +315,7 @@ $product = $block->getProduct();*/
                 </section>
             </div>
             <div data-content-type="tab-item" data-appearance="default" data-tab-name="test 2"
-                 data-element="main" id="tab_2" style="padding: 0">
+                 data-element="main" id="tab_2">
                 <section class="u-clearfix u-custom-color-17 u-section-5" id="carousel_3ddd">
                     <div class="u-clearfix u-sheet u-valign-middle-sm u-sheet-1">
                         <div
@@ -756,7 +749,7 @@ $product = $block->getProduct();*/
                 </section>
             </div>
             <div data-content-type="tab-item" data-appearance="default" data-tab-name="test 3"
-                 data-element="main" id="tab_3" style="padding: 0">
+                 data-element="main" id="tab_3">
                 <section class="u-clearfix u-white u-section-3" id="sec-2b5d">
                     <div class="u-clearfix u-sheet u-sheet-1">
                         <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
@@ -981,7 +974,7 @@ $product = $block->getProduct();*/
                 </section>
             </div>
             <div data-content-type="tab-item" data-appearance="default" data-tab-name="test 4"
-                 data-element="main" id="tab_4" style="padding: 0">
+                 data-element="main" id="tab_4">
                 <section class="u-clearfix u-white u-section-3" id="sec-2b5d">
                     <div class="u-clearfix u-sheet u-sheet-1">
                         <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
@@ -1137,7 +1130,7 @@ $product = $block->getProduct();*/
                 </section>
             </div>
             <div data-content-type="tab-item" data-appearance="default" data-tab-name="test 5"
-                 data-element="main" id="tab_5" style="padding: 0">
+                 data-element="main" id="tab_5">
                 <section class="u-clearfix u-white u-section-3" id="logistyka">
                     <div
                         class="u-clearfix u-sheet u-valign-middle-lg u-valign-middle-md u-valign-middle-sm u-valign-middle-xs u-sheet-1">
@@ -1693,3 +1686,81 @@ $product = $block->getProduct();*/
         </div>
     </div>
 </div>
+
+<style>
+    #tabs-description {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+    }
+
+    .tabs-navigation {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        border-bottom: 2px solid #ccc;
+        justify-content: center;
+    }
+
+    .tab-header {
+        margin-right: 5px;
+    }
+
+    .tab-title {
+        display: block;
+        padding: 10px 20px;
+        background-color: #f1f1f1;
+        border: 1px solid #ccc;
+        border-bottom: none;
+        text-decoration: none;
+        color: #333;
+        border-radius: 5px 5px 0 0;
+    }
+
+    .tab-header.active .tab-title {
+        background-color: #fff;
+        border-bottom: 2px solid #fff;
+        margin-bottom: -2px;
+    }
+
+    .tabs-content {
+        border: 1px solid #ccc;
+        padding: 20px;
+        border-top: none;
+    }
+
+    .tabs-content [data-content-type="tab-item"] {
+        display: none;
+    }
+
+    .tabs-content [data-content-type="tab-item"].active {
+        display: block;
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const tabs = document.querySelectorAll('#tabs-description .tab-header');
+        const tabContents = document.querySelectorAll('#tabs-description .tabs-content [data-content-type="tab-item"]');
+
+        // Show the first tab by default
+        if (tabs.length > 0) {
+            tabs[0].classList.add('active');
+            tabContents[0].classList.add('active');
+        }
+
+        tabs.forEach((tab, index) => {
+            tab.addEventListener('click', (e) => {
+                e.preventDefault();
+
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+
+                tabContents.forEach(content => {
+                    content.classList.remove('active');
+                });
+                tabContents[index].classList.add('active');
+            });
+        });
+    });
+</script>
