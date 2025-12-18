@@ -110,12 +110,6 @@ $product = $block->getProduct();
             <li role="tab" class="tab-header" data-element="headers"><a href="#tab_5" class="tab-title"
                                                                         onclick="loadIframe(this)"><span
                         class="tab-title">Logistyka</span></a></li>
-            <li role="tab" class="tab-header" data-element="headers"><a href="#tab_6" class="tab-title"
-                                                                        onclick="loadIframe(this)"><span
-                        class="tab-title">Poradnik</span></a></li>
-            <li role="tab" class="tab-header" data-element="headers"><a href="#tab_7" class="tab-title"
-                                                                        onclick="loadIframe(this)"><span
-                        class="tab-title">FAQ</span></a></li>
         </ul>
         <div id="tab-content" class="tabs-content" data-element="content" style="width: 100%;">
             <div data-content-type="tab-item" data-appearance="default" data-tab-name="test 1"
@@ -147,18 +141,6 @@ $product = $block->getProduct();
                  data-background-images="{}"
                  data-element="main" id="tab_5" style="padding: 0">
                 <iframe id="iframe_5" style="width: 100%; overflow:hidden;" frameborder="0" scrolling="no"
-                        src=""></iframe>
-            </div>
-            <div data-content-type="tab-item" data-appearance="default" data-tab-name="test 6"
-                 data-background-images="{}"
-                 data-element="main" id="tab_6" style="padding: 0">
-                <iframe id="iframe_6" style="width: 100%; overflow:hidden;" frameborder="0" scrolling="no"
-                        src=""></iframe>
-            </div>
-            <div data-content-type="tab-item" data-appearance="default" data-tab-name="test 7"
-                 data-background-images="{}"
-                 data-element="main" id="tab_7" style="padding: 0">
-                <iframe id="iframe_7" style="width: 100%; overflow:hidden;" frameborder="0" scrolling="no"
                         src=""></iframe>
             </div>
         </div>
@@ -194,23 +176,6 @@ $product = $block->getProduct();
             },
         );
     }
-
-
-    /*if (window.innerWidth >= 768) {
-        document.getElementById('yt-video').style.zIndex = 9999;
-    } else {
-        document.getElementById('gallery').appendChild(document.getElementById('yt-video'));
-        document.getElementById('gallery').children[0].style.zIndex = 9999;
-        document.getElementById('tab-content').style.width = window.innerWidth + 'px';
-    }
-
-    if (document.getElementById('product-attributes'))
-        document.getElementById('product-attribute').appendChild(document.getElementById('product.attributes'));
-*/
-    //document.getElementById('custom-description').appendChild(document.getElementById('tabs-description'));
-
-    //document.getElementById('custom-description').innerHTML = '';
-    //document.getElementById('custom-short-description').innerHTML = '';
 
     const tag = document.createElement('script');
     tag.src = 'https://www.youtube.com/iframe_api';
@@ -248,7 +213,7 @@ $product = $block->getProduct();
         if (iframe.isinit === undefined) {
             iframe.isinit = false;
             iframe.src = '/hyvaroot/pages/grassinfo' + id;
-            iframe.onload = function() {
+            iframe.onload = function () {
                 resizeIframe(iframe);
                 try {
                     iframe.contentWindow.document.getElementById('am-cookie-bar').remove();
