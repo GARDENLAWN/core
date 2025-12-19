@@ -95,7 +95,11 @@ class AwsS3Plugin extends CoreAwsS3
             $adapter->write($path, $content, new Config($config));
 
             // 2. Jeśli to obrazek JPG/PNG, stwórz i wyślij wersję WebP
-            if ($isImageContent && preg_match('/\.(jpg|jpeg|png)$/i', $path)) {
+            // Zmiana: Nie generuj WebP dla obrazów katalogu (media/catalog/...), chyba że to cache.
+            $isCatalog = str_contains($path, 'catalog/');
+            $isCache = str_contains($path, '/cache/');
+
+            if ($isImageContent && preg_match('/\.(jpg|jpeg|png)$/i', $path) && (!$isCatalog || $isCache)) {
                 $imageResource = @imagecreatefromstring($content);
                 if ($imageResource) {
                     if ($imageSize[2] === IMAGETYPE_PNG) {
