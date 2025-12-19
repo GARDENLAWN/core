@@ -136,4 +136,7 @@
             </argument>
         </arguments>
     </type>
+    <type name="Magento\Contact\Controller\Index\Post">
+        <plugin name="gardenlawn_core_contact_post_plugin" type="GardenLawn\Core\Plugin\ContactPostPlugin" sortOrder="10"/>
+    </type>
 </config>
