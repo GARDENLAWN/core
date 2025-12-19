@@ -50,6 +50,7 @@
         "gardenlawn/module-hyva-checkout-inpost": "*",
         "gardenlawn/module-hyva-checkout-paynow": "*",
         "gardenlawn/module-hyva-checkout-santander": "*",
+        "gardenlawn/seo": "*",
         "hyva-themes/hyva-ui": "^2.6",
         "hyva-themes/magento2-compat-module-fallback": "*",
         "hyva-themes/magento2-default-theme-csp": "^1.4",
