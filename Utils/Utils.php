@@ -329,7 +329,7 @@ class Utils
                     media_gallery_asset mga ON mga.id = l.asset_id
                 WHERE
                     mg.path LIKE 'gallery/%' AND
-                    --mga.path LIKE '%.webp' AND
+                    mga.path LIKE '%.webp' AND
                     mg.enabled = 1 AND
                     l.enabled = 1
                 ORDER BY
