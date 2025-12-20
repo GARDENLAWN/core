@@ -142,4 +142,7 @@
     <type name="Magento\Wishlist\CustomerData\Wishlist">
         <plugin name="gardenlawn_core_wishlist_customer_data_plugin" type="GardenLawn\Core\Plugin\Wishlist\CustomerData\WishlistPlugin" sortOrder="10"/>
     </type>
+    <type name="Magento\Sales\CustomerData\LastOrderedItems">
+        <plugin name="gardenlawn_core_last_ordered_items_plugin" type="GardenLawn\Core\Plugin\LastOrderedItemsPlugin" sortOrder="10"/>
+    </type>
 </config>
