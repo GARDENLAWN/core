@@ -1,9 +1,0 @@
-<?php declare(strict_types=1);
-
-/** @var Template $block */
-
-use Magento\Framework\View\Element\Template;
-
-$item = $block->getData('item');
-?>
-<div id="<?php echo $item['divId']; ?>" class="div-fill yt-iframe" onload="youTubeResize()"></div>
