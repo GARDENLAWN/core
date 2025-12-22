@@ -4,19 +4,35 @@ declare(strict_types=1);
 namespace GardenLawn\Core\Model\Sitemap\ItemProvider;
 
 use GardenLawn\Core\ViewModel\Gallery as GalleryViewModel;
-use Magento\Framework\DataObject;
 use Magento\Sitemap\Model\ItemProvider\ItemProviderInterface;
 use Magento\Sitemap\Model\SitemapItemInterfaceFactory;
+use Magento\Framework\UrlInterface;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\Framework\Data\Collection;
 use Magento\Framework\Data\Collection\EntityFactoryInterface;
+use Magento\Framework\DataObject;
 
 class Gallery implements ItemProviderInterface
 {
-    private GalleryViewModel $galleryViewModel;
-    private SitemapItemInterfaceFactory $sitemapItemFactory;
-    private StoreManagerInterface $storeManager;
-    private EntityFactoryInterface $entityFactory;
+    /**
+     * @var GalleryViewModel
+     */
+    private $galleryViewModel;
+
+    /**
+     * @var SitemapItemInterfaceFactory
+     */
+    private $sitemapItemFactory;
+
+    /**
+     * @var StoreManagerInterface
+     */
+    private $storeManager;
+
+    /**
+     * @var EntityFactoryInterface
+     */
+    private $entityFactory;
 
     /**
      * @param GalleryViewModel $galleryViewModel
@@ -39,7 +55,7 @@ class Gallery implements ItemProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function getItems($storeId): array
+    public function getItems($storeId)
     {
         try {
             $store = $this->storeManager->getStore($storeId);
@@ -84,10 +100,16 @@ class Gallery implements ItemProviderInterface
                 $collection->addItem($image);
             }
 
+            // Wrapper object that mimics what Sitemap expects (getCollection, getTitle, getThumbnail)
+            $imagesWrapper = new DataObject();
+            $imagesWrapper->setCollection($collection);
+            $imagesWrapper->setTitle('Galeria Realizacji');
+            $imagesWrapper->setThumbnail($images[0]->getThumbnail());
+
              $items[] = $this->sitemapItemFactory->create([
                 'url' => $galleryPageUrl,
                 'updatedAt' => date('Y-m-d H:i:s'), // Or get the last modified date of the images
-                'images' => $collection,
+                'images' => $imagesWrapper,
                 'priority' => '0.5', // Default priority
                 'changeFrequency' => 'weekly', // Default frequency
             ]);
