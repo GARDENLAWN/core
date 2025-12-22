@@ -145,4 +145,11 @@
     <type name="Magento\Sales\CustomerData\LastOrderedItems">
         <plugin name="gardenlawn_core_last_ordered_items_plugin" type="GardenLawn\Core\Plugin\LastOrderedItemsPlugin" sortOrder="10"/>
     </type>
+    <type name="Magento\Sitemap\Model\ItemProvider\Composite">
+        <arguments>
+            <argument name="itemProviders" xsi:type="array">
+                <item name="gardenlawn_gallery_provider" xsi:type="object">GardenLawn\Core\Model\Sitemap\ItemProvider\Gallery</item>
+            </argument>
+        </arguments>
+    </type>
 </config>
