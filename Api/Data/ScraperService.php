@@ -551,7 +551,7 @@ class ScraperService
 
                         $sd = new stdClass();
                         $sd->sku = $tmp->skuExternal;
-                        $sd->description = $tmp->catalog_product_attribute[0]->short_description;
+                        $sd->description = $tmp->catalog_product_attribute[0]->description;
                         $tableDescriptions[] = $sd;
 
                         foreach ($tmp->catalog_product_entity_media_gallery as $img) {
