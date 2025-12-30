@@ -620,6 +620,11 @@ class ScraperService
             return 'Dimension C';
         }
 
+        // D: 50 x 50 x 80 -> sorted: 50, 50, 80
+        if ($dims[0] <= 50 && $dims[1] <= 50 && $dims[2] <= 80) {
+            return 'Dimension D';
+        }
+
         return null;
     }
 }
