@@ -60,11 +60,13 @@
         "hyva-themes/magento2-optimized-csp-allowlist": "^1.0",
         "hyva-themes/magento2-payment-icons": "^2.0",
         "hyva-themes/magento2-theme-module": "*",
+        "imangazaliev/didom": "^2.0",
         "magento/composer-dependency-version-audit-plugin": "~0.1",
         "magento/composer-root-update-plugin": "^2.0.4",
         "magento/product-community-edition": "2.4.8-p3",
         "pay-now/paynow-magento2": "^2.0",
         "php": ">=8.3.0",
+        "phpoffice/phpspreadsheet": "^1.29",
         "plumrocket/module-csp-reports": "^1.0",
         "smartmage/inpost": "*"
     },

@@ -153,7 +153,7 @@ class ScraperService
     {
         $reader = new Xls();
         $reader->setReadDataOnly(true);
-        $spreadsheet = $reader->load("/var/www/html/magento/app/code/GardenLawn/Core/Configs/automow.xls");
+        $spreadsheet = $reader->load(BP . "/Configs/automow.xls");
         $worksheet = $spreadsheet->getActiveSheet();
 
         $i = 0;
@@ -234,7 +234,7 @@ class ScraperService
         }
 
         $json = json_encode($items);
-        file_put_contents("/var/www/html/magento/app/code/GardenLawn/Core/Configs/automow_data.json", $json);
+        file_put_contents(BP . "/Configs/automow_data.json", $json);
     }
 
     public static function find($skuExternal, $array)
@@ -251,7 +251,7 @@ class ScraperService
     {
         $categories = ScraperService::getAmRobotsCategory();
 
-        $string = file_get_contents("/var/www/html/magento/app/code/GardenLawn/Core/Configs/automow_data.json");
+        $string = file_get_contents(BP . "/Configs/automow_data.json");
         $table = json_decode($string);
         $all = [];
 
@@ -294,6 +294,7 @@ class ScraperService
                         $tmp->catalog_product_attribute[0]->length = $tmp->contains;
                         $tmp->catalog_product_attribute[0]->has_options = 0;
                         $tmp->catalog_product_attribute[0]->required_options = 0;
+                        $tmp->catalog_product_attribute[0]->external_sku = $tmp->skuExternal;
                         $tmp->catalog_product_attribute[0]->meta_title = $tmp->catalog_product_attribute[0]->name;
                         $tmp->catalog_product_attribute[0]->meta_keyword = implode(',', $tmp->catalog_product_attribute[0]->Tags);
 
@@ -434,6 +435,7 @@ class ScraperService
                         $tmp->sku = $maskSku;
                         $tmp->rowId = $rowId;
                         $tmp->catalog_product_attribute[0]->sku = $tmp->sku;
+                        $tmp->catalog_product_attribute[0]->external_sku = $tmp->skuExternal;
                         $tmp->catalog_product_attribute[0]->meta_title = $tmp->catalog_product_attribute[0]->name;
                         $tmp->catalog_product_attribute[0]->meta_keyword = implode(',', $tmp->catalog_product_attribute[0]->Tags);
 
@@ -493,23 +495,23 @@ class ScraperService
         }
 
         $json = json_encode($all);
-        file_put_contents("/var/www/html/magento/app/code/GardenLawn/Core/Configs/automow_prepared_data.json", $json);
+        file_put_contents(BP . "/app/code/GardenLawn/Core/Configs/automow_prepared_data.json", $json);
 
         $json = json_encode($tableConfigurable);
-        file_put_contents("/var/www/html/magento/app/code/GardenLawn/Core/Configs/automow_prepared_configurable_data.json", $json);
+        file_put_contents(BP . "/app/code/GardenLawn/Core/Configs/automow_prepared_configurable_data.json", $json);
 
         $json = json_encode($tableSimple);
-        file_put_contents("/var/www/html/magento/app/code/GardenLawn/Core/Configs/automow_prepared_single_data.json", $json);
+        file_put_contents(BP . "/app/code/GardenLawn/Core/Configs/automow_prepared_single_data.json", $json);
 
         $json = json_encode($tableDescriptions);
-        file_put_contents("/var/www/html/magento/app/code/GardenLawn/Core/Configs/automow_prepared_description_data.json", $json);
+        file_put_contents(BP . "/app/code/GardenLawn/Core/Configs/automow_prepared_description_data.json", $json);
     }
 
     public static function getAmRobotsCategory(): array
     {
         $reader = new Xls();
         $reader->setReadDataOnly(true);
-        $spreadsheet = $reader->load("/var/www/html/magento/app/code/GardenLawn/Core/Configs/amrobots_category.xls");
+        $spreadsheet = $reader->load(BP . "/Configs/amrobots_category.xls");
         $worksheet = $spreadsheet->getActiveSheet();
 
         $i = 0;

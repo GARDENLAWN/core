@@ -35,25 +35,25 @@ class Custom
 
         try {
 
-            $string = file_get_contents("/var/www/html/magento/app/code/GardenLawn/Core/Configs/export-images.json");
+            $string = file_get_contents(BP . "/app/code/GardenLawn/Core/Configs/export-images.json");
             $string = json_decode($string);
             $string = json_encode($string);
-            file_put_contents("/var/www/html/magento/app/code/GardenLawn/Core/Configs/export-images.json", $string);
+            file_put_contents(BP . "/app/code/GardenLawn/Core/Configs/export-images.json", $string);
 
-            $string = file_get_contents("/var/www/html/magento/app/code/GardenLawn/Core/Configs/automow_prepared_data.json");
+            $string = file_get_contents(BP . "/app/code/GardenLawn/Core/Configs/automow_prepared_data.json");
             $string = json_decode($string);
             $string = json_encode($string);
-            file_put_contents("/var/www/html/magento/app/code/GardenLawn/Core/Configs/automow_prepared_data.json", $string);
+            file_put_contents(BP . "/app/code/GardenLawn/Core/Configs/automow_prepared_data.json", $string);
 
-            $string = file_get_contents("/var/www/html/magento/app/code/GardenLawn/Core/Configs/automow_prepared_configurable_data.json");
+            $string = file_get_contents(BP . "/app/code/GardenLawn/Core/Configs/automow_prepared_configurable_data.json");
             $string = json_decode($string);
             $string = json_encode($string);
-            file_put_contents("/var/www/html/magento/app/code/GardenLawn/Core/Configs/automow_prepared_configurable_data.json", $string);
+            file_put_contents(BP . "/app/code/GardenLawn/Core/Configs/automow_prepared_configurable_data.json", $string);
 
-            $string = file_get_contents("/var/www/html/magento/app/code/GardenLawn/Core/Configs/automow_prepared_single_data.json");
+            $string = file_get_contents(BP . "/app/code/GardenLawn/Core/Configs/automow_prepared_single_data.json");
             $string = json_decode($string);
             $string = json_encode($string);
-            file_put_contents("/var/www/html/magento/app/code/GardenLawn/Core/Configs/automow_prepared_single_data.json", $string);
+            file_put_contents(BP . "/app/code/GardenLawn/Core/Configs/automow_prepared_single_data.json", $string);
 
         } catch (Exception) {
         }
