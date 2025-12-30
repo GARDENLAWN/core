@@ -203,6 +203,12 @@ class ScraperService
                         case 'H':
                             $item->distributor_price = (string)$cell->getCalculatedValue();
                             break;
+                        case 'I':
+                            $item->dimension = (string)$cell->getCalculatedValue();
+                            break;
+                        case 'J':
+                            $item->weight = (string)$cell->getCalculatedValue();
+                            break;
                         case 'O':
                             $item->commodity_code = (string)$cell->getCalculatedValue();
                             break;
@@ -223,6 +229,8 @@ class ScraperService
                     $item->catalog_product_attribute[0]->import_currency = $item->import_currency;
                     $item->catalog_product_attribute[0]->dealer_price = $item->dealer_price;
                     $item->catalog_product_attribute[0]->distributor_price = $item->distributor_price;
+                    $item->catalog_product_attribute[0]->dimension = $item->dimension;
+                    $item->catalog_product_attribute[0]->weight = $item->weight;
                     $item->catalog_product_attribute[0]->external_sku = $item->skuExternal;
                     $item->catalog_product_attribute[0]->commodity_code = $item->commodity_code;
                     $item->catalog_product_attribute[0]->GTIN13 = $item->GTIN13;
