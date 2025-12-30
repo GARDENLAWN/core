@@ -304,7 +304,10 @@ class ScraperService
                         $tmp->catalog_product_attribute[0]->required_options = 0;
                         $tmp->catalog_product_attribute[0]->external_sku = $tmp->skuExternal;
 
-                        $tmp->catalog_product_attribute[0]->inpost_dimension = $tmp->catalog_product_attribute[0]->dimension;
+                        $inpostDimension = self::calculateInpostDimension($tmp->catalog_product_attribute[0]->dimension, $tmp->catalog_product_attribute[0]->weight);
+                        if ($inpostDimension) {
+                            $tmp->catalog_product_attribute[0]->inpost_dimension = $inpostDimension;
+                        }
 
                         $tmp->catalog_product_attribute[0]->meta_title = $tmp->catalog_product_attribute[0]->name;
                         $tmp->catalog_product_attribute[0]->meta_keyword = implode(',', $tmp->catalog_product_attribute[0]->Tags);
@@ -448,7 +451,10 @@ class ScraperService
                         $tmp->catalog_product_attribute[0]->sku = $tmp->sku;
                         $tmp->catalog_product_attribute[0]->external_sku = $tmp->skuExternal;
 
-                        $tmp->catalog_product_attribute[0]->inpost_dimension = $tmp->catalog_product_attribute[0]->dimension;
+                        $inpostDimension = self::calculateInpostDimension($tmp->catalog_product_attribute[0]->dimension, $tmp->catalog_product_attribute[0]->weight);
+                        if ($inpostDimension) {
+                            $tmp->catalog_product_attribute[0]->inpost_dimension = $inpostDimension;
+                        }
 
                         $tmp->catalog_product_attribute[0]->meta_title = $tmp->catalog_product_attribute[0]->name;
                         $tmp->catalog_product_attribute[0]->meta_keyword = implode(',', $tmp->catalog_product_attribute[0]->Tags);
@@ -578,5 +584,42 @@ class ScraperService
         } catch (Exception $ex) {
             return false;
         }
+    }
+
+    public static function calculateInpostDimension($dimension, $weight)
+    {
+        if (empty($dimension) || empty($weight)) {
+            return null;
+        }
+
+        $weight = (float)str_replace(',', '.', $weight);
+        if ($weight > 25) {
+            return null;
+        }
+
+        $dims = explode('*', str_replace(',', '.', $dimension));
+        if (count($dims) !== 3) {
+            return null;
+        }
+
+        $dims = array_map('floatval', $dims);
+        sort($dims);
+
+        // A: 8 x 38 x 64 -> sorted: 8, 38, 64
+        if ($dims[0] <= 8 && $dims[1] <= 38 && $dims[2] <= 64) {
+            return 'Dimension A';
+        }
+
+        // B: 19 x 38 x 64 -> sorted: 19, 38, 64
+        if ($dims[0] <= 19 && $dims[1] <= 38 && $dims[2] <= 64) {
+            return 'Dimension B';
+        }
+
+        // C: 41 x 38 x 64 -> sorted: 38, 41, 64
+        if ($dims[0] <= 38 && $dims[1] <= 41 && $dims[2] <= 64) {
+            return 'Dimension C';
+        }
+
+        return null;
     }
 }
