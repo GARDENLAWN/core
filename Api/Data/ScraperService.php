@@ -221,6 +221,9 @@ class ScraperService
                         case 'V':
                             $item->qnty = $cell->getCalculatedValue();
                             break;
+                        case 'X':
+                            $item->GTIN14 = (string)$cell->getCalculatedValue();
+                            break;
                     }
                 }
 
