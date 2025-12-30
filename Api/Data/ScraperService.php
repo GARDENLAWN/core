@@ -255,9 +255,41 @@ class ScraperService
         return null;
     }
 
+    public static function getSkuMap(): array
+    {
+        $path = BP . "/app/code/GardenLawn/Core/Configs/amrobots-maps.json";
+        if (!file_exists($path)) {
+            return ['gtin' => [], 'name' => [], 'skus' => []];
+        }
+        $string = file_get_contents($path);
+        $data = json_decode($string);
+        $gtinMap = [];
+        $nameMap = [];
+        $skus = [];
+        if ($data) {
+            foreach ($data as $item) {
+                if (isset($item->catalog_product_attribute[0])) {
+                    $attr = $item->catalog_product_attribute[0];
+                    if (!empty($attr->sku)) {
+                        $skus[$attr->sku] = true;
+                    }
+                    if (!empty($attr->GTIN13)) {
+                        $gtinMap[$attr->GTIN13] = $attr->sku;
+                    }
+                    if (!empty($attr->name)) {
+                        $nameMap[$attr->name] = $attr->sku;
+                    }
+                }
+            }
+        }
+        return ['gtin' => $gtinMap, 'name' => $nameMap, 'skus' => $skus];
+    }
+
     public static function prepareAutomowJsonData(): void
     {
         $categories = ScraperService::getAmRobotsCategory();
+        $maps = ScraperService::getSkuMap();
+        $mappedSkus = $maps['skus'];
 
         $string = file_get_contents(BP . "/Configs/automow_data.json");
         $table = json_decode($string);
@@ -285,13 +317,50 @@ class ScraperService
                 $options = null;
                 $options = [];
                 $current = new stdClass();
-                $maskSku = "AMROBOTSC" . substr("000" . $configurableNumber, -3);
+
+                $parentName = '';
+                foreach ($table as $i) {
+                     if (property_exists($i, 'sku') && $i->sku == $sku) {
+                         $parentName = $i->catalog_product_attribute[0]->name;
+                         break;
+                     }
+                }
+
+                $parentSku = '';
+                if (isset($maps['name'][$parentName])) {
+                    $parentSku = $maps['name'][$parentName];
+                } else {
+                     $maskSku = '';
+                     do {
+                         $maskSku = "AMROBOTSC" . substr("000" . $configurableNumber, -3);
+                         $exists = isset($mappedSkus[$maskSku]);
+                         if ($exists) {
+                             $configurableNumber++;
+                         }
+                     } while ($exists);
+                     $parentSku = $maskSku;
+                     $configurableNumber++;
+                }
+
                 foreach ($table as $i) {
                     if (property_exists($i, 'sku') && $i->sku == $sku) {
                         $current = clone $i;
                         $tmp = $i;
                         $tmp->rowId = $rowId;
-                        $tmp->sku = $maskSku . "-" . str_replace(' ', '', $tmp->contains);
+
+                        $variationName = $tmp->catalog_product_attribute[0]->name . "-" . $tmp->contains;
+                        $variationSku = '';
+                        $gtin = $tmp->GTIN13 ?? ($tmp->catalog_product_attribute[0]->GTIN13 ?? '');
+
+                        if (!empty($gtin) && isset($maps['gtin'][$gtin])) {
+                            $variationSku = $maps['gtin'][$gtin];
+                        } elseif (isset($maps['name'][$variationName])) {
+                            $variationSku = $maps['name'][$variationName];
+                        } else {
+                            $variationSku = $parentSku . "-" . str_replace(' ', '', $tmp->contains);
+                        }
+
+                        $tmp->sku = $variationSku;
                         $options[] = $tmp->sku;
                         $tmp->has_options = 0;
                         $tmp->required_options = 0;
@@ -368,7 +437,7 @@ class ScraperService
                 $configurable = new stdClass();
 
                 $configurable->rowId = $rowId;
-                $configurable->sku = $maskSku;
+                $configurable->sku = $parentSku;
                 $configurable->attribute_set_id = 11;
                 $configurable->type_id = 'configurable';
                 $configurable->has_options = 1;
@@ -440,13 +509,31 @@ class ScraperService
                 $table[] = $configurable;
                 $tableConfigurable[] = $configurable;
                 $all[] = $configurable;
-                $configurableNumber++;
                 $rowId++;
             } else {
                 foreach ($table as $tmp) {
                     if (property_exists($tmp, 'sku') && $tmp->sku == $sku) {
-                        $maskSku = "AMROBOTSS" . substr("000" . $configurableNumber, -3);
-                        $tmp->sku = $maskSku;
+
+                        $simpleSku = '';
+                        $gtin = $tmp->GTIN13 ?? ($tmp->catalog_product_attribute[0]->GTIN13 ?? '');
+                        if (!empty($gtin) && isset($maps['gtin'][$gtin])) {
+                            $simpleSku = $maps['gtin'][$gtin];
+                        } elseif (isset($maps['name'][$tmp->catalog_product_attribute[0]->name])) {
+                             $simpleSku = $maps['name'][$tmp->catalog_product_attribute[0]->name];
+                        } else {
+                             $maskSku = '';
+                             do {
+                                 $maskSku = "AMROBOTSS" . substr("000" . $configurableNumber, -3);
+                                 $exists = isset($mappedSkus[$maskSku]);
+                                 if ($exists) {
+                                     $configurableNumber++;
+                                 }
+                             } while ($exists);
+                             $simpleSku = $maskSku;
+                             $configurableNumber++;
+                        }
+
+                        $tmp->sku = $simpleSku;
                         $tmp->rowId = $rowId;
                         $tmp->catalog_product_attribute[0]->sku = $tmp->sku;
                         $tmp->catalog_product_attribute[0]->external_sku = $tmp->skuExternal;
@@ -507,7 +594,6 @@ class ScraperService
 
                         $tableSimple[] = $tmp;
                         $all[] = $tmp;
-                        $configurableNumber++;
                         $rowId++;
                     }
                 }
