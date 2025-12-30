@@ -303,6 +303,9 @@ class ScraperService
                         $tmp->catalog_product_attribute[0]->has_options = 0;
                         $tmp->catalog_product_attribute[0]->required_options = 0;
                         $tmp->catalog_product_attribute[0]->external_sku = $tmp->skuExternal;
+
+                        $tmp->catalog_product_attribute[0]->inpost_dimension = $tmp->catalog_product_attribute[0]->dimension;
+
                         $tmp->catalog_product_attribute[0]->meta_title = $tmp->catalog_product_attribute[0]->name;
                         $tmp->catalog_product_attribute[0]->meta_keyword = implode(',', $tmp->catalog_product_attribute[0]->Tags);
 
@@ -444,6 +447,9 @@ class ScraperService
                         $tmp->rowId = $rowId;
                         $tmp->catalog_product_attribute[0]->sku = $tmp->sku;
                         $tmp->catalog_product_attribute[0]->external_sku = $tmp->skuExternal;
+
+                        $tmp->catalog_product_attribute[0]->inpost_dimension = $tmp->catalog_product_attribute[0]->dimension;
+
                         $tmp->catalog_product_attribute[0]->meta_title = $tmp->catalog_product_attribute[0]->name;
                         $tmp->catalog_product_attribute[0]->meta_keyword = implode(',', $tmp->catalog_product_attribute[0]->Tags);
 
