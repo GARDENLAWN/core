@@ -223,6 +223,7 @@ class ScraperService
                     $item->catalog_product_attribute[0]->import_currency = $item->import_currency;
                     $item->catalog_product_attribute[0]->dealer_price = $item->dealer_price;
                     $item->catalog_product_attribute[0]->distributor_price = $item->distributor_price;
+                    $item->catalog_product_attribute[0]->external_sku = $item->skuExternal;
                     $item->catalog_product_attribute[0]->commodity_code = $item->commodity_code;
                     $item->catalog_product_attribute[0]->GTIN13 = $item->GTIN13;
                 }
