@@ -1,4 +1,4 @@
-﻿Column1;Column2;Column3;Column4;Column5;Column6;Column7;Column8;Column9;Column10;Column11;Column12;Column13;Column14;Column15;Column16;Column17;Column18
+﻿url;external_sku;name;length;dimension;weight;Meters;Dealer;Distributor;;"Commodity codes";GTIN-13;Kategoria;GTIN-14;"Ilość w domu";Puste;short_description;description
 BRAK;200299;;;31*31*31;0,27;;;;;8507600090;3564092002993;Inne;3564093002992;;;;
 BRAK;10293547;3,4mm Standard Cable;50m;34*34*16;0,5;50;11,05;9;;8544492000;5744003721580;Przewody;;1;;;
 BRAK;29330156;3,8mm Black Premium Safety Cable ;500m;28*28*20.5;11,6;500;231,2;185;;8544492000;;Przewody;;0;;;
@@ -1680,10 +1680,10 @@ https://am-robots.com/pl/shop/cable/safety-cable/38mm-premium-safety-cable-orang
 <p>Patent w toku</p>
 <p class="""" data-placeholder_class_index=""1"" data-placeholder-image=""https://am-robots.com/wp-content/uploads/complianz/placeholders/youtubeZ1tBuQuB3aw-maxresdefault.webp""><iframe data-placeholder-image=""https://am-robots.com/wp-content/uploads/complianz/placeholders/youtubeZ1tBuQuB3aw-maxresdefault.webp"" data-category=""marketing"" data-service=""youtube"" class=""cmplz-placeholder-element cmplz-video cmplz-processed cmplz-activated"" data-cmplz-target=""src"" data-src-cmplz=""https://www.youtube.com/embed/Z1tBuQuB3aw?feature=oembed"" title=""AM ROBOTS Safety cable"" width=""1080"" height=""608"" src=""https://www.youtube.com/embed/Z1tBuQuB3aw?feature=oembed"" allow=""accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"" referrerpolicy=""strict-origin-when-cross-origin"" allowfullscreen=""""></iframe></p>
 <p>&nbsp;</p>";"<div class=""et_pb_module et_pb_wc_tabs et_pb_wc_tabs_0 et_pb_tabs"">
-				
-				
-				
-				
+
+
+
+
 				<ul class=""et_pb_tabs_controls clearfix"">
 					<li class=""description_tab et_pb_tab_active"" style=""height: 31.8px;""><a href=""#tab-description"">Opis</a></li><li class=""additional_information_tab"" style=""height: 31.8px;""><a href=""#tab-additional_information"">Informacje dodatkowe</a></li><li class=""catalogue_tab_tab"" style=""height: 31.8px;""><a href=""#tab-catalogue_tab"">Katalog</a></li><li class=""downloads_tab_tab"" style=""height: 31.8px;""><a href=""#tab-downloads_tab"">Instrukcje</a></li>
 				</ul>
@@ -1707,7 +1707,7 @@ https://am-robots.com/pl/shop/cable/safety-cable/38mm-premium-safety-cable-orang
 					</div>
 				</div><div class=""et_pb_tab clearfix"">
 					<div class=""et_pb_tab_content"">
-						
+
 	<h2>Informacje dodatkowe</h2>
 
 <table class=""woocommerce-product-attributes shop_attributes"">
@@ -1753,10 +1753,10 @@ https://am-robots.com/pl/shop/cable/safety-cable/38mm-premium-safety-cable-orang
 <p>Patent w toku</p>
 <p class="""" data-placeholder_class_index=""1"" data-placeholder-image=""https://am-robots.com/wp-content/uploads/complianz/placeholders/youtubeZ1tBuQuB3aw-maxresdefault.webp""><iframe data-placeholder-image=""https://am-robots.com/wp-content/uploads/complianz/placeholders/youtubeZ1tBuQuB3aw-maxresdefault.webp"" data-category=""marketing"" data-service=""youtube"" class=""cmplz-placeholder-element cmplz-video cmplz-processed cmplz-activated"" data-cmplz-target=""src"" data-src-cmplz=""https://www.youtube.com/embed/Z1tBuQuB3aw?feature=oembed"" title=""AM ROBOTS Safety cable"" width=""1080"" height=""608"" src=""https://www.youtube.com/embed/Z1tBuQuB3aw?feature=oembed"" allow=""accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"" referrerpolicy=""strict-origin-when-cross-origin"" allowfullscreen=""""></iframe></p>
 <p>&nbsp;</p>";"<div class=""et_pb_module et_pb_wc_tabs et_pb_wc_tabs_0 et_pb_tabs"">
-				
-				
-				
-				
+
+
+
+
 				<ul class=""et_pb_tabs_controls clearfix"">
 					<li class=""description_tab et_pb_tab_active"" style=""height: 31.8px;""><a href=""#tab-description"">Opis</a></li><li class=""additional_information_tab"" style=""height: 31.8px;""><a href=""#tab-additional_information"">Informacje dodatkowe</a></li><li class=""catalogue_tab_tab"" style=""height: 31.8px;""><a href=""#tab-catalogue_tab"">Katalog</a></li><li class=""downloads_tab_tab"" style=""height: 31.8px;""><a href=""#tab-downloads_tab"">Instrukcje</a></li>
 				</ul>
@@ -1780,7 +1780,7 @@ https://am-robots.com/pl/shop/cable/safety-cable/38mm-premium-safety-cable-orang
 					</div>
 				</div><div class=""et_pb_tab clearfix"">
 					<div class=""et_pb_tab_content"">
-						
+
 	<h2>Informacje dodatkowe</h2>
 
 <table class=""woocommerce-product-attributes shop_attributes"">
