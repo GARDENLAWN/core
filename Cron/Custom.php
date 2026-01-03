@@ -31,7 +31,7 @@ class Custom
     {
         //return;
         //ScraperService::saveAutomowJsonData();
-        ScraperService::prepareAutomowJsonData();
+        //ScraperService::prepareAutomowJsonData();
 
         try {
 
@@ -55,6 +55,10 @@ class Custom
             $string = json_encode($string);
             file_put_contents(BP . "/app/code/GardenLawn/Core/Configs/automow_prepared_single_data.json", $string);
 
+            $string = file_get_contents(BP . "/app/code/GardenLawn/Core/Configs/automow_prepared_description_data_processed.json");
+            $string = json_decode($string);
+            $string = json_encode($string);
+            file_put_contents(BP . "/app/code/GardenLawn/Core/Configs/automow_prepared_description_data_processed.json", $string);
         } catch (Exception) {
         }
     }
