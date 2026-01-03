@@ -75,7 +75,7 @@ while (($data = fgetcsv($inputHandle, 0, $delimiter)) !== false) {
 
     // Losowe opóźnienie (anty-ban)
     if (!empty($url) && stripos($url, 'http') === 0) {
-        $sleepTime = rand(1, 3);
+        $sleepTime = rand(3, 4);
         sleep($sleepTime);
     }
 
