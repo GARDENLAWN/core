@@ -1,0 +1,15 @@
+# Lista plików do pobrania. Linki relatywne wymagają dodania domeny (np. https://am-robots.com)
+https://am-robots.com/wp-content/uploads/2025/05/Installation-flyer_Czech.pdf
+https://am-robots.com/wp-content/uploads/2025/05/Installation-flyer_Eng.pdf
+https://am-robots.com/wp-content/uploads/2025/05/Installation-flyer_French.pdf
+https://am-robots.com/wp-content/uploads/2025/05/Installation-flyer_German.pdf
+https://am-robots.com/wp-content/uploads/2025/05/Installation-flyer_Italian.pdf
+https://am-robots.com/wp-content/uploads/2025/05/Installation-flyer_Polish.pdf
+https://am-robots.com/wp-content/uploads/2025/05/Installation-flyer_Slovakian.pdf
+https://am-robots.com/wp-content/uploads/2025/05/Installation-flyer_Spanish.pdf
+https://am-robots.com/wp-content/uploads/2025/05/Installation-flyer_dansk.pdf
+https://am-robots.com/wp-content/uploads/2020/11/PW_600MH_2020_FLYER_DE_EUR_R00_compressed.pdf
+https://am-robots.com/wp-content/uploads/2020/11/PW_600MH_2020_FLYER_EN_EUR_R00-compressed.pdf
+https://am-robots.com/wp-content/uploads/2020/11/PW_600MH_2020_FLYER_FR_EUR_R00-compressed.pdf
+https://am-robots.com/wp-content/uploads/2025/05/STORM-specification-list-all-models.pdf
+https://am-robots.com/wp-content/uploads/2025/10/AM-Garages-robot-compatibility-2025.xlsx
