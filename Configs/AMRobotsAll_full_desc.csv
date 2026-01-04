@@ -1,13 +1,13 @@
 ﻿url;external_sku;name;length;dimension;weight;Meters;Dealer;Distributor;Inne;Commodity codes;GTIN-13;Kategoria;GTIN-14;Ilość w domu;Puste;short_description;description
 BRAK;200299;;;31*31*31;0,27;;;;;8507600090;3564092002993;Inne;3564093002992;;;;
-BRAK;10293547;3,4mm Standard Cable;50m;34*34*16;0,5;50;11,05;9;;8544492000;5744003721580;Przewody;;1;;;
+https://am-robots.com/pl/shop/cable/standard-cable/standard-cable-34-mm/;10293547;3,4 mm Zielony standardowy przewód graniczny;50m;34*34*16;0,5;50;11,05;9;;8544492000;5744003721580;Przewody;;1;;;
 BRAK;29330156;3,8mm Black Premium Safety Cable ;500m;28*28*20.5;11,6;500;231,2;185;;8544492000;;Przewody;;0;;;
 BRAK;29330162;3,8mm Black Premium Safety Cable ;800m;31*31*24.5;18,5;800;369,75;296;;8544492000;;Przewody;;0;;;
 BRAK;39734588;Luba Mammotion Reversible blades;300 szt.;;;300;153;121,5;;;;Noże;;0;;;
 BRAK;53541698;Heat Shrink connector (5 pcs);; ;0,025;Tin sealed with shrinkable plastic;2,125;1,8;;8547200090;5744003721559;Łączniki;;0;;;
 BRAK;53972374;Guide cable Connector Kit (10 pcs );;;;Double layer repair kits for 3,4mm². For professionals;7,225;6,03;;;;;;1;;;
 BRAK;53972375;Guide cable Connector Kit (50 pcs );;;;Double layer repair kits for 3,4mm². For professionals;18,7;15,75;;;;;;1;;;
-BRAK;54691276;3M - 314 Scotchlock (100pcs);;22*22*22;0,4;Connect 3 wires (Waterproff);46;44;;8547200090;5744003720262;Szpilki;15744003720184;1;;;
+BRAK;54691276;3M - 314 Scotchlock (100pcs);;22*22*22;0,4;Connect 3 wires (Waterproff);46;44;;8547200090;5744003720262;Szpilki;15744003720184;0;;;
 BRAK;57504142;Hybrid Grass 1 x 20m;; ; ;Artificial grass for better robot grip with the lawn;346,8;279;;5703310000;5744003721481;Inne;;0;;;
 https://am-robots.com/pl/shop/batteries/al-ko-robolinho/al-ko-robolinho-oem-440454-3000-4000-82-8-116-al-al02/;200300;AL-KO Robolinho OEM: 440454 (3000 / 4000 / 82.8 /116) - AL-AL02;;34,5*29*24,5;0,69;;;;;8507600090;3564092003006;Inne;3564093003005;;;"<p><strong>Akumulatory AXCELL Robot to kompatybilne typy akumulatorów zbudowane zgodnie ze specyfikacjami OE.</strong></p>
 <p>Dostępne w różnych technologiach (NiMH, Li-Ion lub LiFePo4), akumulatory te są przeznaczone do intensywnego ładowania i rozładowywania oraz opracowane z najwyższej klasy funkcjami bezpieczeństwa. Idealne do zapewnienia robotowi dużej autonomii podczas pracy!</p>
@@ -2541,7 +2541,7 @@ Złącze 314 jest najczęściej stosowanym złączem w instalacjach podziemnych.
 
 <p>100 sztuk w jednym worku - Oryginalny numer części: 501 98 02-03</p>
 <p>Dla kabla 3,8 mm: W przypadku instalacji powyżej 800 metrów należy postępować zgodnie z tymi wskazówkami dotyczącymi instalacji <a href=""https://youtu.be/e1Zb1do2QBA""><strong>wideo</strong></a></p>"
-https://am-robots.com/pl/shop/connectors/scotchlock/;54691298;314 Złącze;100 szt.;46*30*24;0,4;Connect 3 wires (Waterproff);30,6;24,3;;8547200090;5744003720224;Łączniki;15744003720177;1;;"<p><strong><br>
+https://am-robots.com/pl/shop/connectors/scotchlock/;54691298;314 Złącze;100 szt.;46*30*24;0,4;Connect 3 wires (Waterproff);30,6;24,3;;8547200090;5744003720224;Łączniki;15744003720177;0;;"<p><strong><br>
 Złącze 314 jest najczęściej stosowanym złączem w instalacjach podziemnych. </strong></p>
 <p>To złącze jest używane do wielu celów, ale jest najczęściej używany do podziemnego połączenia z przewodem granicznym. Możliwości zastosowania tego niebieskiego złącza są nieograniczone.</p>
 <p> </p>
