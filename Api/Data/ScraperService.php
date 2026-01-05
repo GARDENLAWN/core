@@ -256,6 +256,7 @@ class ScraperService
                     $att->inpost_dimension = $row['att.inpost_dimension'] ?? null;
                     $att->CategoryWords = []; // Inicjalizacja pustej tablicy
                     $att->Tags = []; // Inicjalizacja pustej tablicy
+                    $att->length = $row['att.length']; // Dodanie length do atrybutów
 
                     $vis = $row['att.visibility'] ?? 'Catalog, Search';
                     if (str_contains($vis, 'Not Visible')) $att->visibility = 1;
@@ -420,7 +421,11 @@ class ScraperService
             $s1 = new stdClass();
             $s1->source_code = "am_robots";
             $s1->sku = $simple->sku;
-            $s1->quantity = 10;
+            if (isset($attr->price) && floatval($attr->price) > 0) {
+                $s1->quantity = 10;
+            } else {
+                $s1->quantity = 0;
+            }
             $s1->status = 1;
 
             $s2 = new stdClass();
