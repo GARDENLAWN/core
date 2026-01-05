@@ -1,4 +1,4 @@
-sku;url;external_sku;name;length;dimension;weight;Meters;dealer_price;distributor_price;Inne;commodity_code;GTIN13;Kategoria;GTIN14;"Ilość w domu";Puste;product_type;visibility;inpost_dimension
+sku;url;external_sku;name;length;dimension;weight;Meters;dealer_price;distributor_price;Inne;commodity_code;GTIN13;Kategoria;GTIN14;"Ilość w domu";Puste;type_id;visibility;inpost_dimension
 AMROBOTSS001;BRAK;200299;BRAK;BRAK;31*31*31;0.27;0;0;0;BRAK;8507600090;3564092002993;Inne;3564093002992;0;BRAK;simple;"Catalog, Search";"Dimension C"
 AMROBOTSC001;https://am-robots.com/pl/shop/cable/standard-cable/standard-cable-34-mm/;10293547;"3,4 mm Zielony standardowy przewód graniczny";BRAK;34*34*16;0.5;50;11.05;9;BRAK;8544492000;5744003721580;Przewody;BRAK;1;BRAK;configurable;"Catalog, Search";"Dimension B"
 AMROBOTSC001-50m;https://am-robots.com/pl/shop/cable/standard-cable/standard-cable-34-mm/;10293547;"3,4 mm Zielony standardowy przewód graniczny-50m";50m;34*34*16;0.5;50;11.05;9;BRAK;8544492000;5744003721580;Przewody;BRAK;1;BRAK;simple;"Not Visible Individually";"Dimension B"
