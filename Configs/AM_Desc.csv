@@ -1,13 +1,14 @@
 external_sku;short_description;description
-200299;<p>TODO</p>;<p>TODO</p>
-29330156;<p>TODO</p>;<p>TODO</p>
-29330162;<p>TODO</p>;<p>TODO</p>
-39734588;<p>TODO</p>;<p>TODO</p>
-53541698;<p>TODO</p>;<p>TODO</p>
-53972374;<p>TODO</p>;<p>TODO</p>
-53972375;<p>TODO</p>;<p>TODO</p>
-54691276;<p>TODO</p>;<p>TODO</p>
-57504142;<p>TODO</p>;<p>TODO</p>
+200299;;
+10293547;;
+29330156;;
+29330162;;
+39734588;;
+53541698;;
+53972374;;
+53972375;;
+54691276;;
+57504142;;
 200300;"<p><strong>Akumulatory AXCELL Robot to kompatybilne typy akumulatorów zbudowane zgodnie ze specyfikacjami OE.</strong></p>
 <p>Dostępne w różnych technologiach (NiMH, Li-Ion lub LiFePo4), akumulatory te są przeznaczone do intensywnego ładowania i rozładowywania oraz opracowane z najwyższej klasy funkcjami bezpieczeństwa. Idealne do zapewnienia robotowi dużej autonomii podczas pracy!</p>
 <p>Korzyści:</p>
@@ -2106,26 +2107,6 @@ Zestawy naprawcze 5 i 25 metrów - Napraw uszkodzony przewód przy pomocy zestaw
 <li>Dla wszystkich robotów Honda Miimo</li>
 </ul>"
 10293538;"<p><strong><br>
-Zielony przewód graniczny kosiarki samojezdnej 3,4 mm to najwyższej jakości przewód, który nadaje się do WSZYSTKICH instalacji kosiarki samojezdnej.</strong></p>
-<p>Kabel jest izolowany twardym tworzywem sztucznym w celu ochrony przewodu. Jest nadal bardzo elastyczny i można go układać za pomocą wszystkich maszyn kablowych.</p>
-<p>Większy przewód graniczny kosiarki robota jest dostarczany w wysokiej jakości drewnianych szpulach, aby zapobiec pęknięciu przy uderzeniu. Wszystkie przewody są oznaczone licznikami.</p>
-<p><span lang=""EN-US"">Pasuje do wszystkich automatycznych kosiarek do trawy.</span></p>
-<p>Dostępne na bębnach 5 / 25 / 50 / 100 / 150 / 250 / 500 / 800 metrów o średnicy 3,4 mm.</p>
-<p><iframe data-placeholder-image=""https://am-robots.com/wp-content/uploads/complianz/placeholders/youtubeQR82_Nfd-0c-maxresdefault.webp"" data-category=""marketing"" data-service=""youtube"" class=""cmplz-placeholder-element cmplz-iframe cmplz-iframe-styles cmplz-video"" data-cmplz-target=""src"" data-src-cmplz=""https://www.youtube.com/embed/QR82_Nfd-0c?feature=oembed"" title=""AM ROBOTS Robot Mower Cable - Meter mark"" width=""1080"" height=""608"" src=""about:blank"" allow=""accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"" referrerpolicy=""strict-origin-when-cross-origin"" allowfullscreen></iframe></p>";"<h2>Opis</h2>
-
-<ul class=""a-unordered-list a-vertical a-spacing-none"">
-<li><span class=""a-list-item"">Grubość przewodu granicznego kosiarki Robot 3,4 mm zapewniająca stabilniejszą izolację niż oryginalny plastik.</span></li>
-<li>Rozmiar rolki kabla: 5/25/100/150/250/500/800 metrów - 800 metrów pasuje do wszystkich profesjonalnych maszyn kablowych.</li>
-<li><span class=""a-list-item"">Używany do instalacji kosiarek robotów, pętli granicznej, kabla granicznego, kabla wyszukiwania, pętli look-up, drutu prowadzącego i wielu innych.</span></li>
-<li><span class=""a-list-item""><span class=""cc-container-cnlibahlccceecnjljbjhbpmkggfekkn"">Do wszystkich typów kosiarek automatycznych Husqvarna Automower, takich jak: 105 305 308 310 315 315X 320 330X 420 430X 440 450X 520 550 G2 G3 210C 220AC 230ACX 260ACX 265ACX SH Solar Hybrid</span></span></li>
-<li><span class=""a-list-item"">Do wszystkich typów Gardena, takich jak: R38Li R40Li R45Li R50Li R70Li R75Li R80Li R100Li R130Li R160Li R165 R180 Sileno Sileno+ Sileno City smart Sileno City smart Sileno smart Sileno+</span></li>
-<li><span class=""a-list-item""><span class=""cc-container-cnlibahlccceecnjljbjhbpmkggfekkn"">Dla wszystkich McCulloch, takich jak: ROB R600 i R1000 Bosch Indego 800 1000 1100 1200 podłącz WorX Landroid</span></span></li>
-<li><span class=""a-list-item"">Do wszystkich modeli Robomow-autonomicznych takich jak: MC300, MC500, MC1000, MC1200, MS-Seria, RL-seria, RM-seria.</span></li>
-<li><span class=""a-list-item"">Dla wszystkich typów Ambrogio, takich jak: L200-250 -Modele robotów</span></li>
-<li>Do wszystkich robotów Stihl/Viking iMow</li>
-<li>Dla wszystkich robotów Hinda Miimo</li>
-</ul>"
-10293547;"<p><strong><br>
 Zielony przewód graniczny kosiarki samojezdnej 3,4 mm to najwyższej jakości przewód, który nadaje się do WSZYSTKICH instalacji kosiarki samojezdnej.</strong></p>
 <p>Kabel jest izolowany twardym tworzywem sztucznym w celu ochrony przewodu. Jest nadal bardzo elastyczny i można go układać za pomocą wszystkich maszyn kablowych.</p>
 <p>Większy przewód graniczny kosiarki robota jest dostarczany w wysokiej jakości drewnianych szpulach, aby zapobiec pęknięciu przy uderzeniu. Wszystkie przewody są oznaczone licznikami.</p>
