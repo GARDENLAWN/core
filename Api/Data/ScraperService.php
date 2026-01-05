@@ -675,7 +675,7 @@ class ScraperService
         }
     }
 
-    public static function calculateInpostDimension($dimension, $weight)
+    public static function calculateInpostDimension($dimension, $weight): ?string
     {
         if (empty($dimension) || empty($weight)) {
             return null;
