@@ -146,102 +146,158 @@ class ScraperService
         return $item;
     }
 
+    public static function scrapeImages($url, $sku): array
+    {
+        $result = ['gallery' => [], 'firstImg' => ''];
+        try {
+            $curl = curl_init($url);
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl, CURLOPT_USERAGENT, 'Mozilla/5.0');
+            $content = curl_exec($curl);
+            curl_close($curl);
+
+            if (!empty($content)) {
+                $document = new Document($content);
+                $images = explode(';', str_replace(".webp", "", self::getItem($document, 'Images', ['.woocommerce-product-gallery'], 'img', 'src', false, [0])));
+
+                $imagesAllowed = [];
+                foreach ($images as $image) {
+                    if (self::checkRemoteFile($image)) {
+                        $imagesAllowed[] = $image;
+                    }
+                }
+
+                $firstImg = '';
+                $position = 1;
+                $gallery = [];
+
+                foreach ($imagesAllowed as $img) {
+                    if (!str_contains($img, 'product-image-placeholder') && $img != '' && strlen($img) > 0) {
+                        $i = new stdClass();
+                        $i->attribute_id = 90;
+                        $i->value = $img;
+                        if ($firstImg == '') {
+                            $firstImg = $img;
+                        }
+                        $i->media_type = "image";
+                        $i->product_id = $sku;
+                        $ent = new stdClass();
+                        $ent->entity_id = $sku;
+                        $ent->position = $position;
+                        $i->catalog_product_entity_media_gallery_value = [$ent];
+                        $gallery[] = $i;
+                        $position++;
+                    }
+                }
+                $result['gallery'] = $gallery;
+                $result['firstImg'] = $firstImg;
+            }
+        } catch (Exception $e) {
+            // ignore
+        }
+        return $result;
+    }
+
     /**
      * @throws InvalidSelectorException
      */
     public static function saveAutomowJsonData(): void
     {
-        $reader = new Xls();
-        $reader->setReadDataOnly(true);
-        $spreadsheet = $reader->load(BP . "/Configs/automow.xls");
-        $worksheet = $spreadsheet->getActiveSheet();
-
-        $i = 0;
-
-        $items = [];
-
-        foreach ($worksheet->getRowIterator() as $row) {
-            if ($i != 0 && $i < 2000) {
-                $cellIterator = $row->getCellIterator();
-                $cellIterator->setIterateOnlyExistingCells(false);
-                $item = new stdClass();
-                $item->url = '';
-                foreach ($cellIterator as $cell) {
-                    switch ($cell->getColumn()) {
-                        case 'A':
-                            $item->url = $cell->getCalculatedValue();
-                            if (!empty($item->url)) {
-                                $item = self::scraper($item);
-                            }
-                            break;
-                        case 'B':
-                            $item->skuExternal = $cell->getCalculatedValue();
-                            break;
-                        case 'D':
-                            $item->contains = (string)$cell->getCalculatedValue();
-                            try {
-                                if (empty($item->url)) {
-                                    $item = self::scraper($item);
-                                }
-                                if ($item->catalog_product_attribute && $item->catalog_product_attribute[0] != null) {
-                                    $item->catalog_product_attribute[0]->sku = $item->sku;
-                                }
-                            } catch (Exception $e) {
-                                echo '<p><strong>' . $e->getMessage() . '</strong></p>';
-                            }
-                            break;
-                        case 'F':
-                            if ($item != null && property_exists($item, 'catalog_product_attribute') && $item->catalog_product_attribute[0] != null) {
-                                $item->catalog_product_attribute[0]->price = (string)$cell->getCalculatedValue();
-                            }
-                            $item->import_price = (string)$cell->getCalculatedValue();
-                            $item->import_currency = 'EUR';
-                            break;
-                        case 'G':
-                            $item->dealer_price = (string)$cell->getCalculatedValue();
-                            break;
-                        case 'H':
-                            $item->distributor_price = (string)$cell->getCalculatedValue();
-                            break;
-                        case 'I':
-                            $item->dimension = (string)$cell->getCalculatedValue();
-                            break;
-                        case 'J':
-                            $item->weight = (string)$cell->getCalculatedValue();
-                            break;
-                        case 'O':
-                            $item->commodity_code = (string)$cell->getCalculatedValue();
-                            break;
-                        case 'T':
-                            $item->GTIN13 = (string)$cell->getCalculatedValue();
-                            break;
-                        case 'U':
-                            $item->CategoryCustom = (string)$cell->getCalculatedValue();
-                            break;
-                        case 'V':
-                            $item->qnty = $cell->getCalculatedValue();
-                            break;
-                        case 'X':
-                            $item->GTIN14 = (string)$cell->getCalculatedValue();
-                            break;
-                    }
+        $descriptions = [];
+        $descFile = BP . "/app/code/GardenLawn/Core/Configs/AM_Desc_updated.csv";
+        if (file_exists($descFile)) {
+            $handle = fopen($descFile, "r");
+            $header = fgetcsv($handle, 0, ";");
+            while (($data = fgetcsv($handle, 0, ";")) !== FALSE) {
+                if (count($data) == count($header)) {
+                    $row = array_combine($header, $data);
+                    $descriptions[$row['external_sku']] = [
+                        'short_description' => $row['short_description'],
+                        'description' => $row['description']
+                    ];
                 }
-
-                if (property_exists($item, 'catalog_product_attribute')) {
-                    $item->catalog_product_attribute[0]->import_price = $item->import_price;
-                    $item->catalog_product_attribute[0]->import_currency = $item->import_currency;
-                    $item->catalog_product_attribute[0]->dealer_price = $item->dealer_price;
-                    $item->catalog_product_attribute[0]->distributor_price = $item->distributor_price;
-                    $item->catalog_product_attribute[0]->dimension = $item->dimension;
-                    $item->catalog_product_attribute[0]->weight = $item->weight;
-                    $item->catalog_product_attribute[0]->external_sku = $item->skuExternal;
-                    $item->catalog_product_attribute[0]->commodity_code = $item->commodity_code;
-                    $item->catalog_product_attribute[0]->GTIN13 = $item->GTIN13;
-                }
-
-                $items[] = $item;
             }
-            $i++;
+            fclose($handle);
+        }
+
+        $csvFile = BP . "/app/code/GardenLawn/Core/Configs/AM_Processed.csv";
+        $items = [];
+        if (file_exists($csvFile)) {
+            $handle = fopen($csvFile, "r");
+            $header = fgetcsv($handle, 0, ";");
+
+            $i = 0;
+            while (($data = fgetcsv($handle, 0, ";")) !== FALSE) {
+                if ($i < 2000) {
+                    if (count($data) !== count($header)) {
+                        continue;
+                    }
+                    $row = array_combine($header, $data);
+
+                    $item = new stdClass();
+                    $item->sku = $row['sku'];
+                    $item->url = ($row['url'] === 'BRAK') ? '' : $row['url'];
+                    $item->skuExternal = ($row['att.external_sku'] === 'BRAK') ? '' : $row['att.external_sku'];
+                    $item->type_id = $row['type_id'];
+                    $item->attribute_set_id = $row['att.attribute_set_id'];
+                    $item->contains = $row['att.length']; // Mapowanie length na contains dla logiki wariacji
+
+                    $att = new stdClass();
+                    $att->sku = $row['att.sku'];
+                    $att->name = $row['att.name'];
+                    $att->price = $row['att.dealer_price'];
+                    $att->dealer_price = $row['att.dealer_price'];
+                    $att->distributor_price = $row['att.distributor_price'];
+                    $att->dimension = $row['att.dimension'];
+                    $att->weight = $row['att.weight'];
+                    $att->external_sku = $item->skuExternal;
+                    $att->commodity_code = $row['att.commodity_code'];
+                    $att->GTIN13 = $row['att.GTIN13'];
+                    $att->inpost_dimension = $row['att.inpost_dimension'] ?? null;
+                    $att->CategoryWords = []; // Inicjalizacja pustej tablicy
+                    $att->Tags = []; // Inicjalizacja pustej tablicy
+
+                    $vis = $row['att.visibility'] ?? 'Catalog, Search';
+                    if (str_contains($vis, 'Not Visible')) $att->visibility = 1;
+                    elseif (str_contains($vis, 'Catalog, Search')) $att->visibility = 4;
+                    elseif (str_contains($vis, 'Catalog')) $att->visibility = 2;
+                    elseif (str_contains($vis, 'Search')) $att->visibility = 3;
+                    else $att->visibility = 4;
+
+                    if (isset($descriptions[$item->skuExternal])) {
+                        $att->short_description = $descriptions[$item->skuExternal]['short_description'];
+                        $att->description = $descriptions[$item->skuExternal]['description'];
+                    } else {
+                        $att->short_description = '';
+                        $att->description = '';
+                    }
+
+                    $gallery = [];
+                    if (!empty($item->url)) {
+                        $galleryData = self::scrapeImages($item->url, $item->sku);
+                        if (!empty($galleryData)) {
+                            $gallery = $galleryData['gallery'];
+                            if (isset($galleryData['firstImg']) && !empty($galleryData['firstImg'])) {
+                                $att->image = $galleryData['firstImg'];
+                                $att->small_image = $galleryData['firstImg'];
+                                $att->thumbnail = $galleryData['firstImg'];
+                                $att->swatch_image = $galleryData['firstImg'];
+                            }
+                        }
+                    }
+
+                    $item->catalog_product_attribute = [$att];
+                    $item->catalog_product_entity_media_gallery = $gallery;
+
+                    $item->import_price = $row['att.dealer_price'];
+                    $item->import_currency = 'EUR';
+                    $item->qnty = $row['att.Iloscwdomu'] ?? 0;
+
+                    $items[] = $item;
+                }
+                $i++;
+            }
+            fclose($handle);
         }
 
         $json = json_encode($items);
@@ -303,304 +359,199 @@ class ScraperService
         $tableConfigurable = [];
         $tableDescriptions = [];
 
+        // W nowej logice SKU jest już w pliku JSON (z AM_Processed.csv), więc nie musimy go generować.
+        // Ale musimy zidentyfikować produkty konfigurowalne i proste.
+        // W AM_Processed.csv mamy kolumnę type_id.
+
+        // Grupowanie produktów prostych, które należą do konfigurowalnego
+        $configurableProducts = [];
+        $simpleProducts = [];
+
         foreach ($table as $item) {
-            if (property_exists($item, 'sku') && $item->skuExternal != null) {
-                $item->importType = 'single';
-                $skus[] = $item->sku;
+            if ($item->type_id === 'configurable') {
+                $configurableProducts[$item->sku] = $item;
+            } else {
+                $simpleProducts[] = $item;
             }
         }
 
-        $configurable = array_count_values($skus);
-
-        $configurableNumber = 1;
         $rowId = 1;
-        foreach ($configurable as $sku => $count) {
-            if ($count > 1) {
-                $name = '';
-                $options = null;
-                $options = [];
-                $current = new stdClass();
 
-                $parentName = '';
-                foreach ($table as $i) {
-                     if (property_exists($i, 'sku') && $i->sku == $sku) {
-                         $parentName = $i->catalog_product_attribute[0]->name;
-                         break;
-                     }
+        // Przetwarzanie produktów prostych
+        foreach ($simpleProducts as $simple) {
+            $simple->rowId = $rowId;
+            $simple->importType = 'simple';
+
+            // Upewnij się, że atrybuty są ustawione
+            if (!isset($simple->catalog_product_attribute[0])) {
+                $simple->catalog_product_attribute[0] = new stdClass();
+            }
+            $attr = $simple->catalog_product_attribute[0];
+
+            // Inpost Dimension (już jest w JSON z saveAutomowJsonData, ale dla pewności)
+            if (empty($attr->inpost_dimension)) {
+                $inpostDimension = self::calculateInpostDimension($attr->dimension ?? '', $attr->weight ?? '');
+                if ($inpostDimension) {
+                    $attr->inpost_dimension = $inpostDimension;
                 }
+            }
 
-                $parentSku = '';
-                if (isset($maps['name'][$parentName])) {
-                    $parentSku = $maps['name'][$parentName];
-                } else {
-                     $maskSku = '';
-                     do {
-                         $maskSku = "AMROBOTSC" . substr("000" . $configurableNumber, -3);
-                         $exists = isset($mappedSkus[$maskSku]);
-                         if ($exists) {
-                             $configurableNumber++;
-                         }
-                     } while ($exists);
-                     $parentSku = $maskSku;
-                     $configurableNumber++;
-                }
+            // Meta dane
+            $attr->meta_title = $attr->name;
+            $attr->meta_keyword = implode(',', $attr->Tags ?? []);
 
-                foreach ($table as $i) {
-                    if (property_exists($i, 'sku') && $i->sku == $sku) {
-                        $current = clone $i;
-                        $tmp = $i;
-                        $tmp->rowId = $rowId;
+            // Opisy do oddzielnego pliku
+            $sd = new stdClass();
+            $sd->sku = $simple->sku; // Używamy SKU produktu, a nie external_sku, bo to jest klucz w Magento
+            $sd->description = $attr->description ?? '';
+            $tableDescriptions[] = $sd;
 
-                        $variationName = $tmp->catalog_product_attribute[0]->name . "-" . $tmp->contains;
-                        $variationSku = '';
-                        $gtin = $tmp->GTIN13 ?? ($tmp->catalog_product_attribute[0]->GTIN13 ?? '');
-
-                        if (!empty($gtin) && isset($maps['gtin'][$gtin])) {
-                            $variationSku = $maps['gtin'][$gtin];
-                        } elseif (isset($maps['name'][$variationName])) {
-                            $variationSku = $maps['name'][$variationName];
-                        } else {
-                            $variationSku = $parentSku . "-" . str_replace(' ', '', $tmp->contains);
-                        }
-
-                        $tmp->sku = $variationSku;
-                        $options[] = $tmp->sku;
-                        $tmp->has_options = 0;
-                        $tmp->required_options = 0;
-                        $name = $tmp->catalog_product_attribute[0]->name;
-                        $tmp->catalog_product_attribute[0]->name = $tmp->catalog_product_attribute[0]->name . "-" . $tmp->contains;
-                        $tmp->catalog_product_attribute[0]->sku = $tmp->sku;
-                        $tmp->catalog_product_attribute[0]->visibility = 1;
-                        $tmp->catalog_product_attribute[0]->length = $tmp->contains;
-                        $tmp->catalog_product_attribute[0]->has_options = 0;
-                        $tmp->catalog_product_attribute[0]->required_options = 0;
-                        $tmp->catalog_product_attribute[0]->external_sku = $tmp->skuExternal;
-
-                        $inpostDimension = self::calculateInpostDimension($tmp->catalog_product_attribute[0]->dimension, $tmp->catalog_product_attribute[0]->weight);
-                        if ($inpostDimension) {
-                            $tmp->catalog_product_attribute[0]->inpost_dimension = $inpostDimension;
-                        }
-
-                        $tmp->catalog_product_attribute[0]->meta_title = $tmp->catalog_product_attribute[0]->name;
-                        $tmp->catalog_product_attribute[0]->meta_keyword = implode(',', $tmp->catalog_product_attribute[0]->Tags);
-
-                        $sd = new stdClass();
-                        $sd->sku = $tmp->skuExternal;
-                        $sd->description = $tmp->catalog_product_attribute[0]->short_description;
-                        $tableDescriptions[] = $sd;
-
-                        $tmp->importType = 'simple';
-                        foreach ($tmp->catalog_product_entity_media_gallery as $img) {
-                            $img->product_id = $tmp->sku;
-                            $img->catalog_product_entity_media_gallery_value[0]->entity_id = $tmp->sku;
-                        }
-
-                        $s1 = new stdClass();
-                        $s1->source_code = "am_robots";
-                        $s1->sku = $tmp->sku;
-                        $s1->quantity = 10;
-                        $s1->status = 1;
-
-                        $s2 = new stdClass();
-                        $s2->source_code = "gardenlawn_source";
-                        $s2->sku = $tmp->sku;
-                        $s2->quantity = $tmp->qnty ?? 0;
-                        $s2->status = 1;
-
-                        $source = [$s1, $s2];
-                        $tmp->inventory_source_item = $source;
-
-                        $s3 = new stdClass();
-                        $s3->stock_id = 1;
-                        $s3->qty = 0;
-                        $s3->product_sku = $tmp->sku;
-                        $tmp->inventory_stock_item = [$s3];
-
-                        $s4 = new stdClass();
-                        $s4->stock_status = 1;
-                        $s4->stock_id = 2;
-                        $s4->product_sku = $tmp->sku;
-                        $tmp->inventory_stock_status = [$s4];
-
-                        $cat = ScraperService::find($tmp->skuExternal, $categories);
-                        if ($cat != null) {
-                            $tmp->catalog_product_attribute[0]->compatibility = $cat->company;
-                            $c = new stdClass();
-                            $c->categories = $cat->category;
-                            $c->product_sku = $tmp->sku;
-                            $tmp->product_category_relation = [$c];
-                        }
-
-                        $tableSimple[] = $tmp;
-                        $all[] = $tmp;
-                        $rowId++;
-                    }
-                }
-
-                $configurable = new stdClass();
-
-                $configurable->rowId = $rowId;
-                $configurable->sku = $parentSku;
-                $configurable->attribute_set_id = 11;
-                $configurable->type_id = 'configurable';
-                $configurable->has_options = 1;
-                $configurable->required_options = 1;
-
-                $a = new stdClass();
-                $a->sku = $configurable->sku;
-                $a->name = $name;
-                $a->CategoryWords = $current->catalog_product_attribute[0]->CategoryWords;
-                $a->Tags = $current->catalog_product_attribute[0]->Tags;
-                $a->short_description = $current->catalog_product_attribute[0]->short_description;
-                $a->description = $current->catalog_product_attribute[0]->description;
-                $a->image = $current->catalog_product_attribute[0]->image;
-                $a->small_image = $current->catalog_product_attribute[0]->small_image;
-                $a->thumbnail = $current->catalog_product_attribute[0]->thumbnail;
-                $a->swatch_image = $current->catalog_product_attribute[0]->swatch_image;
-                $a->visibility = 4;
-                $a->has_options = 1;
-                $a->required_options = 1;
-
-                $configurable->catalog_product_attribute = [$a];
-
-                $configurable->catalog_product_attribute[0]->meta_title = $configurable->catalog_product_attribute[0]->name;
-                $configurable->catalog_product_attribute[0]->meta_keyword = implode(',', $configurable->catalog_product_attribute[0]->Tags);
-
-                $g = [];
-                foreach ($current->catalog_product_entity_media_gallery as $img) {
-                    $i = new stdClass();
-                    $i->value = $img->value;
-                    $i->media_type = $img->media_type;
-                    $i->product_id = $configurable->sku;
-
-                    $v = new stdClass();
-                    $v->entity_id = $configurable->sku;
-                    $v->position = $img->catalog_product_entity_media_gallery_value[0]->position;
-                    $i->catalog_product_entity_media_gallery_value = [$v];
-
-                    $g[] = $i;
-                }
-
-                $configurable->catalog_product_entity_media_gallery = $g;
-
-                $s = new stdClass();
-                $s->product_id = $configurable->sku;
-
-                $op = [];
-
-                foreach ($options as $i) {
-                    $o = new stdClass();
-                    $o->parent_id = $configurable->sku;
-                    $o->sku = $i;
-                    $op[] = $o;
-                }
-
-                $s->catalog_product_super_attribute_link = $op;
-                $configurable->catalog_product_super_attribute = [$s];
-
-                $cat = ScraperService::find($current->skuExternal, $categories);
-                if ($cat != null) {
-                    $configurable->catalog_product_attribute[0]->compatibility = $cat->company;
-                    $c = new stdClass();
-                    $c->categories = $cat->category;
-                    $c->product_sku = $configurable->sku;
-                    $configurable->product_category_relation = [$c];
-                }
-
-                $configurable->importType = 'configurable';
-
-                $table[] = $configurable;
-                $tableConfigurable[] = $configurable;
-                $all[] = $configurable;
-                $rowId++;
-            } else {
-                foreach ($table as $tmp) {
-                    if (property_exists($tmp, 'sku') && $tmp->sku == $sku) {
-
-                        $simpleSku = '';
-                        $gtin = $tmp->GTIN13 ?? ($tmp->catalog_product_attribute[0]->GTIN13 ?? '');
-                        if (!empty($gtin) && isset($maps['gtin'][$gtin])) {
-                            $simpleSku = $maps['gtin'][$gtin];
-                        } elseif (isset($maps['name'][$tmp->catalog_product_attribute[0]->name])) {
-                             $simpleSku = $maps['name'][$tmp->catalog_product_attribute[0]->name];
-                        } else {
-                             $maskSku = '';
-                             do {
-                                 $maskSku = "AMROBOTSS" . substr("000" . $configurableNumber, -3);
-                                 $exists = isset($mappedSkus[$maskSku]);
-                                 if ($exists) {
-                                     $configurableNumber++;
-                                 }
-                             } while ($exists);
-                             $simpleSku = $maskSku;
-                             $configurableNumber++;
-                        }
-
-                        $tmp->sku = $simpleSku;
-                        $tmp->rowId = $rowId;
-                        $tmp->catalog_product_attribute[0]->sku = $tmp->sku;
-                        $tmp->catalog_product_attribute[0]->external_sku = $tmp->skuExternal;
-
-                        $inpostDimension = self::calculateInpostDimension($tmp->catalog_product_attribute[0]->dimension, $tmp->catalog_product_attribute[0]->weight);
-                        if ($inpostDimension) {
-                            $tmp->catalog_product_attribute[0]->inpost_dimension = $inpostDimension;
-                        }
-
-                        $tmp->catalog_product_attribute[0]->meta_title = $tmp->catalog_product_attribute[0]->name;
-                        $tmp->catalog_product_attribute[0]->meta_keyword = implode(',', $tmp->catalog_product_attribute[0]->Tags);
-
-                        $sd = new stdClass();
-                        $sd->sku = $tmp->skuExternal;
-                        $sd->description = $tmp->catalog_product_attribute[0]->description;
-                        $tableDescriptions[] = $sd;
-
-                        foreach ($tmp->catalog_product_entity_media_gallery as $img) {
-                            $img->product_id = $tmp->sku;
-                            $img->catalog_product_entity_media_gallery_value[0]->entity_id = $tmp->sku;
-                        }
-
-                        $s1 = new stdClass();
-                        $s1->source_code = "am_robots";
-                        $s1->sku = $tmp->sku;
-                        $s1->quantity = 10;
-                        $s1->status = 1;
-
-                        $s2 = new stdClass();
-                        $s2->source_code = "gardenlawn_source";
-                        $s2->sku = $tmp->sku;
-                        $s2->quantity = $tmp->qnty ?? 0;
-                        $s2->status = 1;
-
-                        $source = [$s1, $s2];
-                        $tmp->inventory_source_item = $source;
-
-                        $s3 = new stdClass();
-                        $s3->stock_id = 1;
-                        $s3->qty = 0;
-                        $s3->product_sku = $tmp->sku;
-                        $tmp->inventory_stock_item = [$s3];
-
-                        $s4 = new stdClass();
-                        $s4->stock_status = 1;
-                        $s4->stock_id = 2;
-                        $s4->product_sku = $tmp->sku;
-                        $tmp->inventory_stock_status = [$s4];
-
-                        $cat = ScraperService::find($tmp->skuExternal, $categories);
-                        if ($cat != null) {
-                            $tmp->catalog_product_attribute[0]->compatibility = $cat->company;
-                            $c = new stdClass();
-                            $c->categories = $cat->category;
-                            $c->product_sku = $tmp->sku;
-                            $tmp->product_category_relation = [$c];
-                        }
-
-                        $tableSimple[] = $tmp;
-                        $all[] = $tmp;
-                        $rowId++;
+            // Media
+            if (isset($simple->catalog_product_entity_media_gallery)) {
+                foreach ($simple->catalog_product_entity_media_gallery as $img) {
+                    $img->product_id = $simple->sku;
+                    if (isset($img->catalog_product_entity_media_gallery_value[0])) {
+                        $img->catalog_product_entity_media_gallery_value[0]->entity_id = $simple->sku;
                     }
                 }
             }
+
+            // Inventory
+            $s1 = new stdClass();
+            $s1->source_code = "am_robots";
+            $s1->sku = $simple->sku;
+            $s1->quantity = 10;
+            $s1->status = 1;
+
+            $s2 = new stdClass();
+            $s2->source_code = "gardenlawn_source";
+            $s2->sku = $simple->sku;
+            $s2->quantity = intval($simple->qnty ?? 0);
+            $s2->status = 1;
+
+            $simple->inventory_source_item = [$s1, $s2];
+
+            $s3 = new stdClass();
+            $s3->stock_id = 1;
+            $s3->qty = 0;
+            $s3->product_sku = $simple->sku;
+            $simple->inventory_stock_item = [$s3];
+
+            $s4 = new stdClass();
+            $s4->stock_status = 1;
+            $s4->stock_id = 2;
+            $s4->product_sku = $simple->sku;
+            $simple->inventory_stock_status = [$s4];
+
+            // Kategorie
+            $cat = ScraperService::find($simple->skuExternal, $categories);
+            if ($cat != null) {
+                $attr->compatibility = $cat->company;
+                $c = new stdClass();
+                $c->categories = $cat->category;
+                $c->product_sku = $simple->sku;
+                $simple->product_category_relation = [$c];
+            }
+
+            $tableSimple[] = $simple;
+            $all[] = $simple;
+            $rowId++;
+        }
+
+        // Przetwarzanie produktów konfigurowalnych
+        // Musimy znaleźć dzieci dla każdego konfigurowalnego produktu.
+        // W AM_Processed.csv mamy att.parent_sku dla produktów prostych, ale tutaj w JSON tego nie mamy bezpośrednio w głównym obiekcie,
+        // chyba że dodaliśmy to w saveAutomowJsonData.
+        // Ale w saveAutomowJsonData nie mapowaliśmy att.parent_sku.
+        // Musimy to poprawić w saveAutomowJsonData lub tutaj polegać na logice nazewnictwa SKU (np. AMROBOTSC001-50m ma rodzica AMROBOTSC001).
+        // Lepszym podejściem jest ponowne wczytanie CSV, aby znać relacje, LUB (prościej) założenie, że SKU proste zaczyna się od SKU rodzica + myślnik.
+        // Jednak w AM_Processed.csv mamy kolumnę att.parent_sku. Dodajmy ją do saveAutomowJsonData.
+
+        // Wróćmy do saveAutomowJsonData i dodajmy parent_sku.
+        // Ale użytkownik prosił o przerobienie prepareAutomowJsonData.
+        // Załóżmy, że w JSON mamy już poprawne SKU.
+        // W AM_Processed.csv:
+        // AMROBOTSC001-50m;simple;AMROBOTSC001;...
+        // AMROBOTSC001;configurable;;...
+
+        // Musimy wiedzieć, które simple należą do którego configurable.
+        // Możemy to zrobić iterując po simple i sprawdzając czy ich SKU zaczyna się od SKU jakiegoś configurable.
+        // Albo lepiej: wczytajmy mapę relacji z CSV jeszcze raz tutaj, bo w JSON tego nie ma.
+
+        $relations = [];
+        $csvFile = BP . "/app/code/GardenLawn/Core/Configs/AM_Processed.csv";
+        if (file_exists($csvFile)) {
+            $handle = fopen($csvFile, "r");
+            $header = fgetcsv($handle, 0, ";");
+            while (($data = fgetcsv($handle, 0, ";")) !== FALSE) {
+                if (count($data) == count($header)) {
+                    $row = array_combine($header, $data);
+                    if (!empty($row['att.parent_sku'])) {
+                        $relations[$row['att.parent_sku']][] = $row['sku'];
+                    }
+                }
+            }
+            fclose($handle);
+        }
+
+        foreach ($configurableProducts as $confSku => $conf) {
+            $conf->rowId = $rowId;
+            $conf->importType = 'configurable';
+            $conf->has_options = 1;
+            $conf->required_options = 1;
+
+            if (!isset($conf->catalog_product_attribute[0])) {
+                $conf->catalog_product_attribute[0] = new stdClass();
+            }
+            $attr = $conf->catalog_product_attribute[0];
+
+            $attr->visibility = 4;
+            $attr->has_options = 1;
+            $attr->required_options = 1;
+            $attr->meta_title = $attr->name;
+            $attr->meta_keyword = implode(',', $attr->Tags ?? []);
+
+            // Media dla configurable (bierzemy z pierwszego dziecka lub z samego siebie jeśli ma URL)
+            // W saveAutomowJsonData pobieramy zdjęcia jeśli jest URL. Configurable w CSV ma URL.
+            if (isset($conf->catalog_product_entity_media_gallery)) {
+                 foreach ($conf->catalog_product_entity_media_gallery as $img) {
+                    $img->product_id = $conf->sku;
+                    if (isset($img->catalog_product_entity_media_gallery_value[0])) {
+                        $img->catalog_product_entity_media_gallery_value[0]->entity_id = $conf->sku;
+                    }
+                }
+            }
+
+            // Relacje (dzieci)
+            if (isset($relations[$confSku])) {
+                $childrenSkus = $relations[$confSku];
+
+                $s = new stdClass();
+                $s->product_id = $conf->sku;
+                $op = [];
+                foreach ($childrenSkus as $childSku) {
+                    $o = new stdClass();
+                    $o->parent_id = $conf->sku;
+                    $o->sku = $childSku;
+                    $op[] = $o;
+                }
+                $s->catalog_product_super_attribute_link = $op;
+                $conf->catalog_product_super_attribute = [$s];
+            }
+
+            // Kategorie
+            $cat = ScraperService::find($conf->skuExternal, $categories);
+            if ($cat != null) {
+                $attr->compatibility = $cat->company;
+                $c = new stdClass();
+                $c->categories = $cat->category;
+                $c->product_sku = $conf->sku;
+                $conf->product_category_relation = [$c];
+            }
+
+            $tableConfigurable[] = $conf;
+            $all[] = $conf;
+            $rowId++;
         }
 
         $json = json_encode($all);

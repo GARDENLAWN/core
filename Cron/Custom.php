@@ -31,7 +31,7 @@ class Custom
     {
         //return;
         //ScraperService::saveAutomowJsonData();
-        //ScraperService::prepareAutomowJsonData();
+        ScraperService::prepareAutomowJsonData();
 
         try {
 
