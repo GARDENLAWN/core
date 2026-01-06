@@ -16,6 +16,17 @@ class FileUploaderPlugin
     }
 
     /**
+     * Ensure WebP and other modern formats are allowed after initialization
+     *
+     * @param FileUploader $subject
+     * @return void
+     */
+    public function afterInitialize(FileUploader $subject)
+    {
+        $subject->setAllowedExtensions(['webp', 'avif', 'svg']);
+    }
+
+    /**
      * @throws LocalizedException
      */
     public function aroundMove(
@@ -136,19 +147,6 @@ class FileUploaderPlugin
         if (!$statusOk) {
             return false;
         }
-
-        // Optional: Check Content-Type to avoid soft 404s (HTML pages)
-        // But be careful, some CDNs might return weird content types.
-        // Generally images should be image/...
-        /*
-        foreach ($headers as $header) {
-            if (stripos($header, 'Content-Type:') === 0) {
-                if (stripos($header, 'text/html') !== false) {
-                    return false; // It's an HTML page, not an image
-                }
-            }
-        }
-        */
 
         return true;
     }
