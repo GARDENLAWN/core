@@ -27,16 +27,16 @@ class Gd2Plugin
      * Teach the GD2 adapter how to handle WebP before opening a file.
      *
      * @param Gd2 $subject
-     * @param string|null $fileName
+     * @param string|null $filename
      * @return array
      */
-    public function beforeOpen(Gd2 $subject, string $fileName = null): array
+    public function beforeOpen(Gd2 $subject, string $filename = null): array
     {
-        if ($fileName && str_ends_with(strtolower($fileName), '.webp')) {
+        if ($filename && str_ends_with(strtolower($filename), '.webp')) {
             $this->addWebpSupport($subject);
         }
 
-        return [$fileName];
+        return [$filename];
     }
 
     /**
@@ -112,6 +112,12 @@ class Gd2Plugin
             $callbacksProperty = new ReflectionProperty(Gd2::class, '_callbacks');
             $callbacksProperty->setAccessible(true);
             $callbacks = $callbacksProperty->getValue($subject);
+
+            // Ensure IMAGETYPE_WEBP constant exists (PHP < 7.1 fallback, though Magento 2.4 requires newer PHP)
+            if (!defined('IMAGETYPE_WEBP')) {
+                define('IMAGETYPE_WEBP', 18);
+            }
+
             if (!isset($callbacks[IMAGETYPE_WEBP])) {
                 $callbacks[IMAGETYPE_WEBP] = ['output' => 'imagewebp', 'create' => 'imagecreatefromwebp'];
                 $callbacksProperty->setValue($subject, $callbacks);
@@ -122,7 +128,7 @@ class Gd2Plugin
             $imageHandlerProperty->setAccessible(true);
             $imageResource = $imageHandlerProperty->getValue($subject);
 
-            if ($imageResource) {
+            if ($imageResource && is_resource($imageResource) || $imageResource instanceof \GdImage) {
                 // FIX for palette-based images
                 if (function_exists('imageistruecolor') && !imageistruecolor($imageResource)) {
                     imagepalettetotruecolor($imageResource);
