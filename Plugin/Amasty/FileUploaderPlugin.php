@@ -23,7 +23,51 @@ class FileUploaderPlugin
      */
     public function afterInitialize(FileUploader $subject)
     {
+        // 1. Add extensions to allowed list
         $subject->setAllowedExtensions(['webp', 'avif', 'svg']);
+
+        // 2. Inject MIME types into protected property via Reflection
+        // This ensures that 'type' field is correctly populated in the result
+        try {
+            $reflection = new \ReflectionClass($subject);
+            // _allowedMimeTypes is defined in Magento\CatalogImportExport\Model\Import\Uploader
+            // We might need to traverse up to find the property if it's private in parent (it is protected, so accessible here)
+
+            // Find the property in the class hierarchy
+            $prop = null;
+            $class = $reflection;
+            do {
+                if ($class->hasProperty('_allowedMimeTypes')) {
+                    $prop = $class->getProperty('_allowedMimeTypes');
+                    break;
+                }
+            } while ($class = $class->getParentClass());
+
+            if ($prop) {
+                $prop->setAccessible(true);
+                $mimeTypes = $prop->getValue($subject);
+
+                $newMimeTypes = [
+                    'webp' => 'image/webp',
+                    'avif' => 'image/avif',
+                    'svg'  => 'image/svg+xml'
+                ];
+
+                // Only add if not exists to preserve existing logic
+                foreach ($newMimeTypes as $ext => $mime) {
+                    if (!isset($mimeTypes[$ext])) {
+                        $mimeTypes[$ext] = $mime;
+                    }
+                }
+
+                $prop->setValue($subject, $mimeTypes);
+            }
+        } catch (\Exception $e) {
+            // Log warning but don't break the import
+            if ($this->logger) {
+                $this->logger->warning('FileUploaderPlugin: Could not inject MIME types: ' . $e->getMessage());
+            }
+        }
     }
 
     /**
