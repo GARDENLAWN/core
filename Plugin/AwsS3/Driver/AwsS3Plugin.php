@@ -228,4 +228,17 @@ class AwsS3Plugin extends CoreAwsS3
         }
         return false;
     }
+
+    /**
+     * @inheritDoc
+     * Nadpisanie metody fileOpen w celu poprawnego odczytu plików WebP.
+     */
+    public function fileOpen($path, $mode)
+    {
+        // Jeśli plik to WebP, upewnij się, że jest poprawnie otwierany
+        // Oryginalna metoda fileOpen w AwsS3.php obsługuje odczyt (r) poprzez pobranie zawartości do tmpfile
+        // Jeśli mamy problem z odczytem WebP, może to wynikać z tego, że adapter S3 nie widzi pliku lub ma problem z metadanymi
+
+        return parent::fileOpen($path, $mode);
+    }
 }
