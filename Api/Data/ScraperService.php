@@ -189,11 +189,8 @@ class ScraperService
                 $result['gallery'] = $gallery;
                 $result['firstImg'] = $firstImg;
 
-                $result['short_description'] = self::getItem($document, 'ShortDescription', ['.woocommerce-product-details__short-description', '.et_pb_wc_description_0'], null, null, false, null);
-                $result['description'] = self::getItem($document, 'Description', ['#tab-description', '.et_pb_tab_content'], null, null, false, [null, 1]);
-                $result['description'] .= '<br/><br/>' . self::getItem($document, 'AdditionalInformation', ['#tab-additional_information', '.et_pb_tab_content'], null, null, false, [null, 2]);
-                $result['description'] .= '<br/><br/>' . self::getItem($document, 'Catalogue', ['#tab-catalogue_tab', '.et_pb_tab_content'], null, null, false, [null, 3]);
-                $result['description'] .= '<br/><br/>' . self::getItem($document, 'Downloads', ['#tab-downloads_tab', '.et_pb_tab_content'], null, null, false, [null, 4]);
+                $result['short_description'] = self::getItem($document, 'ShortDescription', ['.woocommerce-product-details__short-description']);
+                $result['description'] = self::getItem($document, 'Description', ['.woocommerce-tabs wc-tabs-wrapper']);
             }
         } catch (Exception $e) {
             // ignore
@@ -360,12 +357,12 @@ class ScraperService
             $attr->meta_keyword = implode(',', $attr->Tags ?? []);
             $attr->url_key = self::generateUrlKey($attr->name);
 
-            // Podmiana linków w opisach
+            // Podmiana linków i czyszczenie opisów
             if (!empty($attr->short_description)) {
-                $attr->short_description = self::replaceLinksInDescription($attr->short_description, $linkReplacements);
+                $attr->short_description = self::processDescription($attr->short_description, $linkReplacements);
             }
             if (!empty($attr->description)) {
-                $attr->description = self::replaceLinksInDescription($attr->description, $linkReplacements);
+                $attr->description = self::processDescription($attr->description, $linkReplacements);
             }
 
             // Opisy do oddzielnego pliku
@@ -550,12 +547,12 @@ class ScraperService
 
             $attr->meta_keyword = implode(',', array_unique($collectedTags));
 
-            // Podmiana linków w opisach dla configurable
+            // Podmiana linków i czyszczenie opisów dla configurable
             if (!empty($attr->short_description)) {
-                $attr->short_description = self::replaceLinksInDescription($attr->short_description, $linkReplacements);
+                $attr->short_description = self::processDescription($attr->short_description, $linkReplacements);
             }
             if (!empty($attr->description)) {
-                $attr->description = self::replaceLinksInDescription($attr->description, $linkReplacements);
+                $attr->description = self::processDescription($attr->description, $linkReplacements);
             }
 
             // Kategorie
@@ -721,33 +718,63 @@ class ScraperService
         return $replacements;
     }
 
-    public static function replaceLinksInDescription($description, $replacements): string
+    public static function processDescription($description, $replacements): string
     {
         if (empty($description)) {
             return '';
         }
 
-        $document = new Document($description);
-        $links = $document->find('a');
+        try {
+            $document = new Document($description);
 
-        $changed = false;
-        foreach ($links as $link) {
-            $href = $link->attr('href');
-            if ($href) {
-                foreach ($replacements as $replacement) {
-                    if (str_contains($href, $replacement['link'])) {
-                        $link->setAttribute('href', $replacement['new_link']);
-                        $changed = true;
-                        break; // Znaleziono pasujący link, przerywamy pętlę replacements dla tego linku
+            // 1. Remove images
+            foreach ($document->find('img') as $element) {
+                $element->remove();
+            }
+
+            // 2. Remove forms
+            foreach ($document->find('form') as $element) {
+                $element->remove();
+            }
+
+            // 4, 5, 6. Remove specific classes
+            $selectorsToRemove = ['.et_pb_wc_meta', '.et_pb_wc_upsells', '.et_pb_wc_related_products'];
+            foreach ($selectorsToRemove as $selector) {
+                foreach ($document->find($selector) as $element) {
+                    $element->remove();
+                }
+            }
+
+            // Process links
+            foreach ($document->find('a') as $link) {
+                // 3. Remove "Zaloguj się..." links
+                if (str_contains(mb_strtolower($link->text()), 'zaloguj się') || str_contains(mb_strtolower($link->text()), 'Przeczytaj ten artykuł')) {
+                    $link->remove();
+                    continue;
+                }
+
+                $href = $link->attr('href');
+                if ($href) {
+                    // 7. Fix wp-content links
+                    if (str_contains($href, 'wp-content/')) {
+                        $filename = basename(parse_url($href, PHP_URL_PATH));
+                        $newHref = 'https://pub.am-robots.pl/media/am-robots/' . $filename;
+                        $link->setAttribute('href', $newHref);
+                    } else {
+                        // Existing CSV replacement logic
+                        foreach ($replacements as $replacement) {
+                            if (str_contains($href, $replacement['link'])) {
+                                $link->setAttribute('href', $replacement['new_link']);
+                                break;
+                            }
+                        }
                     }
                 }
             }
-        }
 
-        if ($changed) {
             return $document->html();
+        } catch (Exception $e) {
+            return $description;
         }
-
-        return $description;
     }
 }
