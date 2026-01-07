@@ -521,8 +521,8 @@ class ScraperService
                                 $childDesc = $childAttr->description ?? '';
 
                                 if (!empty($childShortDesc) || !empty($childDesc)) {
-                                    $attr->short_description = $childShortDesc;
-                                    $attr->description = $childDesc;
+                                    $attr->short_description = self::processDescription($childShortDesc, $linkReplacements);
+                                    $attr->description = self::processDescription($childDesc, $linkReplacements);
                                     $descriptionSet = true;
                                 }
                             }
@@ -735,12 +735,64 @@ class ScraperService
                 $element->remove();
             }
 
+            // Remove tabs navigation
+            foreach ($document->find('.tabs') as $element) {
+                $element->remove();
+            }
+
+            // Remove "Additional Information" panel
+            foreach ($document->find('.woocommerce-Tabs-panel--additional_information') as $element) {
+                $element->remove();
+            }
+
+            // Remove "Reviews" panel if exists
+            foreach ($document->find('.woocommerce-Tabs-panel--reviews') as $element) {
+                $element->remove();
+            }
+
             // 4, 5, 6. Remove specific classes
             $selectorsToRemove = ['.et_pb_wc_meta', '.et_pb_wc_upsells', '.et_pb_wc_related_products'];
             foreach ($selectorsToRemove as $selector) {
                 foreach ($document->find($selector) as $element) {
                     $element->remove();
                 }
+            }
+
+            // Clean up remaining panels (Description, Catalogue, etc.)
+            foreach ($document->find('.woocommerce-Tabs-panel') as $element) {
+                $element->removeAttribute('style'); // Remove display:none
+                $element->removeAttribute('class');
+                $element->removeAttribute('id');
+                $element->removeAttribute('role');
+                $element->removeAttribute('aria-labelledby');
+                $element->setAttribute('class', 'product-description-section mb-4');
+
+                // Remove "Opis" header inside the panel if exists
+                foreach ($element->find('h2') as $h2) {
+                    if (trim($h2->text()) === 'Opis') {
+                        $h2->remove();
+                    }
+                }
+            }
+
+            // Clean up main container if it exists
+            foreach ($document->find('.woocommerce-tabs') as $element) {
+                 $element->removeAttribute('class');
+            }
+
+            // Clean up lists
+            foreach ($document->find('ul') as $element) {
+                $element->removeAttribute('class');
+            }
+            foreach ($document->find('li') as $element) {
+                $element->removeAttribute('class');
+            }
+
+            // Clean up spans
+            foreach ($document->find('span') as $element) {
+                $element->removeAttribute('class');
+                $element->removeAttribute('style');
+                $element->removeAttribute('lang');
             }
 
             // Process links
