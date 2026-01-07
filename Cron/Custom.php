@@ -30,7 +30,7 @@ class Custom
     public function execute(): void
     {
         //return;
-        ScraperService::saveAutomowJsonData();
+        //ScraperService::saveAutomowJsonData();
         ScraperService::prepareAutomowJsonData();
 
         try {
