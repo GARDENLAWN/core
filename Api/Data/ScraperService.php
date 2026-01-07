@@ -315,41 +315,9 @@ class ScraperService
         return null;
     }
 
-    public static function getSkuMap(): array
-    {
-        $path = BP . "/app/code/GardenLawn/Core/Configs/amrobots-maps.json";
-        if (!file_exists($path)) {
-            return ['gtin' => [], 'name' => [], 'skus' => []];
-        }
-        $string = file_get_contents($path);
-        $data = json_decode($string);
-        $gtinMap = [];
-        $nameMap = [];
-        $skus = [];
-        if ($data) {
-            foreach ($data as $item) {
-                if (isset($item->catalog_product_attribute[0])) {
-                    $attr = $item->catalog_product_attribute[0];
-                    if (!empty($attr->sku)) {
-                        $skus[$attr->sku] = true;
-                    }
-                    if (!empty($attr->GTIN13)) {
-                        $gtinMap[$attr->GTIN13] = $attr->sku;
-                    }
-                    if (!empty($attr->name)) {
-                        $nameMap[$attr->name] = $attr->sku;
-                    }
-                }
-            }
-        }
-        return ['gtin' => $gtinMap, 'name' => $nameMap, 'skus' => $skus];
-    }
-
     public static function prepareAutomowJsonData(): void
     {
         $categories = ScraperService::getAmRobotsCategory();
-        $maps = ScraperService::getSkuMap();
-        $mappedSkus = $maps['skus'];
 
         $string = file_get_contents(BP . "/Configs/automow_data.json");
         $table = json_decode($string);
