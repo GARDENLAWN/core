@@ -91,11 +91,9 @@ class ScraperService
             $magentoSku = $newUrl;
             $item->sku = $magentoSku;
             $att->sku = $magentoSku;
-            $att->short_description = self::getItem($document, 'ShortDescription', ['.woocommerce-product-details__short-description', '.et_pb_wc_description_0'], null, null, false, null);
-            //$att->Videos = self::getItem($document, 'Videos', ['.woocommerce-product-details__short-description'], 'iframe', 'data-src-cmplz', false, null);
-            //$att->Images = explode(';', self::getItem($document, 'Images', ['.woocommerce-product-gallery'], 'img', 'src', false, [0]));
-            $att->description = self::getItem($document, 'Description', ['#tab-description', '.et_pb_tab_content'], null, null, false, [null, 1]);
-            $att->description .= '<br/><br/>' . self::getItem($document, 'AdditionalInformation', ['#tab-additional_information', '.et_pb_tab_content'], null, null, false, [null, 2]);
+
+            $att->short_description = self::getItem($document, 'ShortDescription', ['.woocommerce-product-details__short-description']);
+            $att->description = self::getItem($document, 'Description', ['.woocommerce-tabs wc-tabs-wrapper']);
 
             $gallery = [];
             $images = explode(';', str_replace(".webp", "", self::getItem($document, 'Images', ['.woocommerce-product-gallery'], 'img', 'src', false, [0])));
