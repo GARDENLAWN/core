@@ -77,6 +77,12 @@ class Gd2Plugin
     {
         // Only trigger for JPG and PNG files
         if ($destination && preg_match('/\.(jpg|jpeg|png)$/i', $destination)) {
+            // Skip if destination is a remote URL
+            if (preg_match('/^https?:\/\//', $destination)) {
+                $this->logger->warning('Gd2Plugin: Skipping WebP generation for remote URL: ' . $destination);
+                return $result;
+            }
+
             $webpDestination = preg_replace('/\.(jpg|jpeg|png)$/i', '.webp', $destination);
 
             try {
@@ -128,7 +134,7 @@ class Gd2Plugin
             $imageHandlerProperty->setAccessible(true);
             $imageResource = $imageHandlerProperty->getValue($subject);
 
-            if ($imageResource && is_resource($imageResource) || $imageResource instanceof \GdImage) {
+            if (($imageResource && is_resource($imageResource)) || ($imageResource instanceof \GdImage)) {
                 // FIX for palette-based images
                 if (function_exists('imageistruecolor') && !imageistruecolor($imageResource)) {
                     imagepalettetotruecolor($imageResource);
