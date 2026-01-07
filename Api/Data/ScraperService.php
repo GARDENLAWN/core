@@ -93,7 +93,7 @@ class ScraperService
             $att->sku = $magentoSku;
 
             $att->short_description = self::getItem($document, 'ShortDescription', ['.woocommerce-product-details__short-description']);
-            $att->description = self::getItem($document, 'Description', ['.woocommerce-tabs wc-tabs-wrapper']);
+            $att->description = self::getItem($document, 'Description', ['.woocommerce-tabs']);
 
             $gallery = [];
             $images = explode(';', str_replace(".webp", "", self::getItem($document, 'Images', ['.woocommerce-product-gallery'], 'img', 'src', false, [0])));
@@ -188,7 +188,7 @@ class ScraperService
                 $result['firstImg'] = $firstImg;
 
                 $result['short_description'] = self::getItem($document, 'ShortDescription', ['.woocommerce-product-details__short-description']);
-                $result['description'] = self::getItem($document, 'Description', ['.woocommerce-tabs wc-tabs-wrapper']);
+                $result['description'] = self::getItem($document, 'Description', ['.woocommerce-tabs']);
             }
         } catch (Exception $e) {
             // ignore
