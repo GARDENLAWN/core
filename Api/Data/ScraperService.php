@@ -533,15 +533,20 @@ class ScraperService
             if (isset($relations[$confSku])) {
                 $childrenSkus = $relations[$confSku];
 
-                // Pobieranie opisu z pierwszego dziecka
-                if (!empty($childrenSkus)) {
-                    $firstChildSku = $childrenSkus[0];
-                    if (isset($simpleProductsMap[$firstChildSku])) {
-                        $child = $simpleProductsMap[$firstChildSku];
+                // Pobieranie opisu z pierwszego dziecka, które ma niepuste opisy
+                foreach ($childrenSkus as $childSku) {
+                    if (isset($simpleProductsMap[$childSku])) {
+                        $child = $simpleProductsMap[$childSku];
                         if (isset($child->catalog_product_attribute[0])) {
                             $childAttr = $child->catalog_product_attribute[0];
-                            $attr->short_description = $childAttr->short_description ?? '';
-                            $attr->description = $childAttr->description ?? '';
+                            $childShortDesc = $childAttr->short_description ?? '';
+                            $childDesc = $childAttr->description ?? '';
+
+                            if (!empty($childShortDesc) || !empty($childDesc)) {
+                                $attr->short_description = $childShortDesc;
+                                $attr->description = $childDesc;
+                                break;
+                            }
                         }
                     }
                 }
