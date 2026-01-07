@@ -377,9 +377,11 @@ class ScraperService
         }
 
         $rowId = 1;
+        $simpleProductsMap = [];
 
         // Przetwarzanie produktów prostych
         foreach ($simpleProducts as $simple) {
+            $simpleProductsMap[$simple->sku] = $simple;
             $simple->rowId = $rowId;
             $simple->importType = 'simple';
 
@@ -530,6 +532,19 @@ class ScraperService
             // Relacje (dzieci)
             if (isset($relations[$confSku])) {
                 $childrenSkus = $relations[$confSku];
+
+                // Pobieranie opisu z pierwszego dziecka
+                if (!empty($childrenSkus)) {
+                    $firstChildSku = $childrenSkus[0];
+                    if (isset($simpleProductsMap[$firstChildSku])) {
+                        $child = $simpleProductsMap[$firstChildSku];
+                        if (isset($child->catalog_product_attribute[0])) {
+                            $childAttr = $child->catalog_product_attribute[0];
+                            $attr->short_description = $childAttr->short_description ?? '';
+                            $attr->description = $childAttr->description ?? '';
+                        }
+                    }
+                }
 
                 $s = new stdClass();
                 $s->product_id = $conf->sku;
