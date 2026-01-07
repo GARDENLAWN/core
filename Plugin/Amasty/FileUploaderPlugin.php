@@ -80,6 +80,8 @@ class FileUploaderPlugin
                      $renameFileOff = false
     ) {
         $originalFileName = $fileName;
+        $tempPath = null;
+        $tempDirBase = null;
 
         try {
             // 1. Fix missing protocol
@@ -104,16 +106,71 @@ class FileUploaderPlugin
                         __('File %1 (originally %2) does not exist or is not accessible.', $fileName, $originalFileName)
                     );
                 }
+
+                // 4. Download file locally to avoid hash_file issues with remote URLs (e.g. 502 Bad Gateway)
+                // Use a unique directory to preserve the original filename
+                $tempDirBase = sys_get_temp_dir() . DIRECTORY_SEPARATOR . uniqid('am_import_dir_');
+                if (!mkdir($tempDirBase) && !is_dir($tempDirBase)) {
+                    // Fallback to temp dir if mkdir fails
+                    $tempDirBase = sys_get_temp_dir();
+                }
+
+                $urlPath = parse_url($fileName, PHP_URL_PATH);
+                $baseName = basename($urlPath ?: '');
+                if (empty($baseName)) {
+                    $baseName = 'import_file_' . uniqid() . '.img';
+                }
+                // Sanitize filename slightly but keep it recognizable
+                $baseName = preg_replace('/[^a-zA-Z0-9._-]/', '_', $baseName);
+
+                $tempPath = $tempDirBase . DIRECTORY_SEPARATOR . $baseName;
+
+                if ($this->downloadFile($fileName, $tempPath)) {
+                    $fileName = $tempPath;
+                } else {
+                    // Cleanup if download failed
+                    if ($tempDirBase !== sys_get_temp_dir() && is_dir($tempDirBase)) {
+                        @rmdir($tempDirBase);
+                    }
+                    throw new LocalizedException(
+                        __('Failed to download file %1', $fileName)
+                    );
+                }
             }
         } catch (LocalizedException $e) {
+            if ($tempPath && file_exists($tempPath)) {
+                @unlink($tempPath);
+            }
+            if ($tempDirBase && $tempDirBase !== sys_get_temp_dir() && is_dir($tempDirBase)) {
+                @rmdir($tempDirBase);
+            }
             throw $e;
         } catch (\Exception $e) {
+            if ($tempPath && file_exists($tempPath)) {
+                @unlink($tempPath);
+            }
+            if ($tempDirBase && $tempDirBase !== sys_get_temp_dir() && is_dir($tempDirBase)) {
+                @rmdir($tempDirBase);
+            }
             $this->logger->error("FileUploaderPlugin Error: " . $e->getMessage());
             // Fallback to original filename if something goes wrong in our logic
             return $proceed($originalFileName, $renameFileOff);
         }
 
-        return $proceed($fileName, $renameFileOff);
+        try {
+            $result = $proceed($fileName, $renameFileOff);
+        } finally {
+            // Cleanup temp file if it still exists (FileUploader might have moved it)
+            if ($tempPath && file_exists($tempPath)) {
+                @unlink($tempPath);
+            }
+            // Cleanup temp dir
+            if ($tempDirBase && $tempDirBase !== sys_get_temp_dir() && is_dir($tempDirBase)) {
+                @rmdir($tempDirBase);
+            }
+        }
+
+        return $result;
     }
 
     private function encodeUrl(string $url): string
@@ -190,6 +247,42 @@ class FileUploaderPlugin
 
         if (!$statusOk) {
             return false;
+        }
+
+        return true;
+    }
+
+    private function downloadFile(string $url, string $destination): bool
+    {
+        $context = stream_context_create([
+            'http' => [
+                'method' => 'GET',
+                'header' => "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36\r\n",
+                'timeout' => 30,
+                'ignore_errors' => true
+            ],
+            'ssl' => [
+                'verify_peer' => false,
+                'verify_peer_name' => false,
+            ]
+        ]);
+
+        $result = @copy($url, $destination, $context);
+
+        if (!$result) {
+            return false;
+        }
+
+        // Check for HTTP error codes in $http_response_header
+        if (isset($http_response_header)) {
+            foreach ($http_response_header as $header) {
+                if (preg_match('#^HTTP/\d\.\d\s+(\d+)#', $header, $matches)) {
+                    $code = (int)$matches[1];
+                    if ($code >= 400) {
+                        return false;
+                    }
+                }
+            }
         }
 
         return true;

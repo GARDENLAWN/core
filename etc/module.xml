@@ -24,6 +24,7 @@
             <module name="Magento_RemoteStorage"/>
             <module name="Magento_Ui"/>
             <module name="Aurora_Santander"/>
+            <module name="Amasty_ImportCore"/>
         </sequence>
     </module>
 </config>
