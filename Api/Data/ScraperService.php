@@ -308,6 +308,7 @@ class ScraperService
     public static function prepareAutomowJsonData(): void
     {
         $categories = ScraperService::getAmRobotsCategory();
+        $linkReplacements = ScraperService::getLinkReplacements();
 
         $string = file_get_contents(BP . "/Configs/automow_data.json");
         $table = json_decode($string);
@@ -361,6 +362,14 @@ class ScraperService
             $attr->meta_title = $attr->name;
             $attr->meta_keyword = implode(',', $attr->Tags ?? []);
             $attr->url_key = self::generateUrlKey($attr->name);
+
+            // Podmiana linków w opisach
+            if (!empty($attr->short_description)) {
+                $attr->short_description = self::replaceLinksInDescription($attr->short_description, $linkReplacements);
+            }
+            if (!empty($attr->description)) {
+                $attr->description = self::replaceLinksInDescription($attr->description, $linkReplacements);
+            }
 
             // Opisy do oddzielnego pliku
             $sd = new stdClass();
@@ -544,6 +553,14 @@ class ScraperService
 
             $attr->meta_keyword = implode(',', array_unique($collectedTags));
 
+            // Podmiana linków w opisach dla configurable
+            if (!empty($attr->short_description)) {
+                $attr->short_description = self::replaceLinksInDescription($attr->short_description, $linkReplacements);
+            }
+            if (!empty($attr->description)) {
+                $attr->description = self::replaceLinksInDescription($attr->description, $linkReplacements);
+            }
+
             // Kategorie
             $cat = ScraperService::find($conf->skuExternal, $categories);
             if ($cat != null) {
@@ -684,5 +701,56 @@ class ScraperService
         $name = preg_replace('/[^a-z0-9]+/', '-', $name);
         $name = trim($name, '-');
         return $name;
+    }
+
+    public static function getLinkReplacements(): array
+    {
+        $csvFile = BP . "/app/code/GardenLawn/Core/Configs/AM_Desc_remaining_links.csv";
+        $replacements = [];
+        if (file_exists($csvFile)) {
+            $handle = fopen($csvFile, "r");
+            $header = fgetcsv($handle, 0, ";"); // Zakładam, że separator to średnik, jak w innych plikach CSV w tym projekcie. Sprawdziłem plik i jest tam średnik.
+
+            while (($data = fgetcsv($handle, 0, ";")) !== FALSE) {
+                if (count($data) >= 2) {
+                    $replacements[] = [
+                        'link' => $data[0],
+                        'new_link' => $data[1]
+                    ];
+                }
+            }
+            fclose($handle);
+        }
+        return $replacements;
+    }
+
+    public static function replaceLinksInDescription($description, $replacements): string
+    {
+        if (empty($description)) {
+            return '';
+        }
+
+        $document = new Document($description);
+        $links = $document->find('a');
+
+        $changed = false;
+        foreach ($links as $link) {
+            $href = $link->attr('href');
+            if ($href) {
+                foreach ($replacements as $replacement) {
+                    if (str_contains($href, $replacement['link'])) {
+                        $link->setAttribute('href', $replacement['new_link']);
+                        $changed = true;
+                        break; // Znaleziono pasujący link, przerywamy pętlę replacements dla tego linku
+                    }
+                }
+            }
+        }
+
+        if ($changed) {
+            return $document->html();
+        }
+
+        return $description;
     }
 }
