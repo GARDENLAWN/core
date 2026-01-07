@@ -360,6 +360,7 @@ class ScraperService
             // Meta dane
             $attr->meta_title = $attr->name;
             $attr->meta_keyword = implode(',', $attr->Tags ?? []);
+            $attr->url_key = self::generateUrlKey($attr->name);
 
             // Opisy do oddzielnego pliku
             $sd = new stdClass();
@@ -474,7 +475,7 @@ class ScraperService
             $attr->has_options = 1;
             $attr->required_options = 1;
             $attr->meta_title = $attr->name;
-            $attr->meta_keyword = implode(',', $attr->Tags ?? []);
+            $attr->url_key = self::generateUrlKey($attr->name);
 
             // Media dla configurable (bierzemy z pierwszego dziecka lub z samego siebie jeśli ma URL)
             // W saveAutomowJsonData pobieramy zdjęcia jeśli jest URL. Configurable w CSV ma URL.
@@ -487,9 +488,15 @@ class ScraperService
                 }
             }
 
+            $collectedTags = [];
+            if (isset($attr->Tags) && is_array($attr->Tags)) {
+                $collectedTags = $attr->Tags;
+            }
+
             // Relacje (dzieci)
             if (isset($relations[$confSku])) {
                 $childrenSkus = $relations[$confSku];
+                $descriptionSet = false;
 
                 // Pobieranie opisu z pierwszego dziecka, które ma niepuste opisy
                 foreach ($childrenSkus as $childSku) {
@@ -497,13 +504,26 @@ class ScraperService
                         $child = $simpleProductsMap[$childSku];
                         if (isset($child->catalog_product_attribute[0])) {
                             $childAttr = $child->catalog_product_attribute[0];
-                            $childShortDesc = $childAttr->short_description ?? '';
-                            $childDesc = $childAttr->description ?? '';
 
-                            if (!empty($childShortDesc) || !empty($childDesc)) {
-                                $attr->short_description = $childShortDesc;
-                                $attr->description = $childDesc;
-                                break;
+                            // Zbieranie tagów z dzieci
+                            if (!empty($childAttr->Tags) && is_array($childAttr->Tags)) {
+                                foreach ($childAttr->Tags as $tag) {
+                                    $tag = trim($tag);
+                                    if ($tag !== '') {
+                                        $collectedTags[] = $tag;
+                                    }
+                                }
+                            }
+
+                            if (!$descriptionSet) {
+                                $childShortDesc = $childAttr->short_description ?? '';
+                                $childDesc = $childAttr->description ?? '';
+
+                                if (!empty($childShortDesc) || !empty($childDesc)) {
+                                    $attr->short_description = $childShortDesc;
+                                    $attr->description = $childDesc;
+                                    $descriptionSet = true;
+                                }
                             }
                         }
                     }
@@ -521,6 +541,8 @@ class ScraperService
                 $s->catalog_product_super_attribute_link = $op;
                 $conf->catalog_product_super_attribute = [$s];
             }
+
+            $attr->meta_keyword = implode(',', array_unique($collectedTags));
 
             // Kategorie
             $cat = ScraperService::find($conf->skuExternal, $categories);
@@ -649,5 +671,18 @@ class ScraperService
         }
 
         return null;
+    }
+
+    public static function generateUrlKey($name): string
+    {
+        $table = [
+            'ą' => 'a', 'ć' => 'c', 'ę' => 'e', 'ł' => 'l', 'ń' => 'n', 'ó' => 'o', 'ś' => 's', 'ź' => 'z', 'ż' => 'z',
+            'Ą' => 'A', 'Ć' => 'C', 'Ę' => 'E', 'Ł' => 'L', 'Ń' => 'N', 'Ó' => 'O', 'Ś' => 'S', 'Ź' => 'Z', 'Ż' => 'Z'
+        ];
+        $name = strtr($name, $table);
+        $name = strtolower($name);
+        $name = preg_replace('/[^a-z0-9]+/', '-', $name);
+        $name = trim($name, '-');
+        return $name;
     }
 }
