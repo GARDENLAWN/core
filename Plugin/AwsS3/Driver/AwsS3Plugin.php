@@ -102,6 +102,11 @@ class AwsS3Plugin extends CoreAwsS3
             if ($isImageContent && preg_match('/\.(jpg|jpeg|png)$/i', $path) && (!$isCatalog || $isCache)) {
                 $imageResource = @imagecreatefromstring($content);
                 if ($imageResource) {
+                    // Fix for "Palette image not supported by webp"
+                    if (!imageistruecolor($imageResource)) {
+                        imagepalettetotruecolor($imageResource);
+                    }
+
                     if ($imageSize[2] === IMAGETYPE_PNG) {
                         imagealphablending($imageResource, false);
                         imagesavealpha($imageResource, true);
