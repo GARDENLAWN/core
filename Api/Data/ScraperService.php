@@ -148,7 +148,7 @@ class ScraperService
 
     public static function scrapeImages($url, $sku): array
     {
-        $result = ['gallery' => [], 'firstImg' => ''];
+        $result = ['gallery' => [], 'firstImg' => '', 'short_description' => '', 'description' => ''];
         try {
             $curl = curl_init($url);
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
@@ -191,6 +191,12 @@ class ScraperService
                 }
                 $result['gallery'] = $gallery;
                 $result['firstImg'] = $firstImg;
+
+                $result['short_description'] = self::getItem($document, 'ShortDescription', ['.woocommerce-product-details__short-description', '.et_pb_wc_description_0'], null, null, false, null);
+                $result['description'] = self::getItem($document, 'Description', ['#tab-description', '.et_pb_tab_content'], null, null, false, [null, 1]);
+                $result['description'] .= '<br/><br/>' . self::getItem($document, 'AdditionalInformation', ['#tab-additional_information', '.et_pb_tab_content'], null, null, false, [null, 2]);
+                $result['description'] .= '<br/><br/>' . self::getItem($document, 'Catalogue', ['#tab-catalogue_tab', '.et_pb_tab_content'], null, null, false, [null, 3]);
+                $result['description'] .= '<br/><br/>' . self::getItem($document, 'Downloads', ['#tab-downloads_tab', '.et_pb_tab_content'], null, null, false, [null, 4]);
             }
         } catch (Exception $e) {
             // ignore
@@ -203,23 +209,6 @@ class ScraperService
      */
     public static function saveAutomowJsonData(): void
     {
-        $descriptions = [];
-        $descFile = BP . "/app/code/GardenLawn/Core/Configs/AM_Desc_updated.csv";
-        if (file_exists($descFile)) {
-            $handle = fopen($descFile, "r");
-            $header = fgetcsv($handle, 0, ";");
-            while (($data = fgetcsv($handle, 0, ";")) !== FALSE) {
-                if (count($data) == count($header)) {
-                    $row = array_combine($header, $data);
-                    $descriptions[$row['external_sku']] = [
-                        'short_description' => $row['short_description'],
-                        'description' => $row['description']
-                    ];
-                }
-            }
-            fclose($handle);
-        }
-
         $csvFile = BP . "/app/code/GardenLawn/Core/Configs/AM_Processed.csv";
         $items = [];
         if (file_exists($csvFile)) {
@@ -265,13 +254,8 @@ class ScraperService
                     elseif (str_contains($vis, 'Search')) $att->visibility = 3;
                     else $att->visibility = 4;
 
-                    if (isset($descriptions[$item->skuExternal])) {
-                        $att->short_description = $descriptions[$item->skuExternal]['short_description'];
-                        $att->description = $descriptions[$item->skuExternal]['description'];
-                    } else {
-                        $att->short_description = '';
-                        $att->description = '';
-                    }
+                    $att->short_description = '';
+                    $att->description = '';
 
                     $gallery = [];
                     if (!empty($item->url)) {
@@ -283,6 +267,12 @@ class ScraperService
                                 $att->small_image = $galleryData['firstImg'];
                                 $att->thumbnail = $galleryData['firstImg'];
                                 $att->swatch_image = $galleryData['firstImg'];
+                            }
+                            if (isset($galleryData['short_description'])) {
+                                $att->short_description = $galleryData['short_description'];
+                            }
+                            if (isset($galleryData['description'])) {
+                                $att->description = $galleryData['description'];
                             }
                         }
                     }
