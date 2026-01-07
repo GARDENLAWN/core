@@ -461,6 +461,8 @@ class ScraperService
             fclose($handle);
         }
 
+        $rowId = 1;
+
         foreach ($configurableProducts as $confSku => $conf) {
             $conf->rowId = $rowId;
             $conf->importType = 'configurable';
