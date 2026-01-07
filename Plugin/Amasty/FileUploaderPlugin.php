@@ -85,12 +85,13 @@ class FileUploaderPlugin
             // 1. Fix missing protocol
             if (!preg_match('#^https?://#i', $fileName)) {
                 // Heuristic: if it contains wp-content or looks like a domain
-                if (str_contains($fileName, 'wp-content/uploads') || preg_match('#^[a-z0-9.-]+\.[a-z]{2,}/#i', $fileName)) {
+                // Use stripos for case-insensitive check
+                if (stripos($fileName, 'wp-content/uploads') !== false || preg_match('#^[a-z0-9.-]+\.[a-z]{2,}/#i', $fileName)) {
                     $fileName = 'https://' . ltrim($fileName, '/');
                 }
             }
 
-            // 2. Encode URL
+            // 2. Encode URL (only spaces)
             if (preg_match('#^https?://#i', $fileName)) {
                 $fileName = $this->encodeUrl($fileName);
             }
@@ -119,43 +120,9 @@ class FileUploaderPlugin
     private function encodeUrl(string $url): string
     {
         $url = trim($url);
-        // Pre-encode spaces to avoid parse_url issues
-        $url = str_replace(' ', '%20', $url);
-
-        $parts = parse_url($url);
-        if ($parts === false) {
-            return $url;
-        }
-
-        $newUrl = '';
-        if (isset($parts['scheme'])) {
-            $newUrl .= $parts['scheme'] . '://';
-        }
-        if (isset($parts['host'])) {
-            $newUrl .= $parts['host'];
-        }
-        if (isset($parts['port'])) {
-            $newUrl .= ':' . $parts['port'];
-        }
-
-        if (isset($parts['path'])) {
-            // Split path and encode segments
-            $pathParts = explode('/', $parts['path']);
-            foreach ($pathParts as &$part) {
-                // Decode first to avoid double encoding if already encoded
-                $part = rawurlencode(rawurldecode($part));
-            }
-            $newUrl .= implode('/', $pathParts);
-        }
-
-        if (isset($parts['query'])) {
-            $newUrl .= '?' . $parts['query'];
-        }
-        if (isset($parts['fragment'])) {
-            $newUrl .= '#' . $parts['fragment'];
-        }
-
-        return $newUrl;
+        // Only encode spaces to avoid altering other characters that might be valid or specific to the source
+        // This preserves the original link as much as possible while fixing the most common issue
+        return str_replace(' ', '%20', $url);
     }
 
     private function remoteFileExists(string $url): bool
