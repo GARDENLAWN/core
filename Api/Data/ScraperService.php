@@ -96,9 +96,6 @@ class ScraperService
             //$att->Images = explode(';', self::getItem($document, 'Images', ['.woocommerce-product-gallery'], 'img', 'src', false, [0]));
             $att->description = self::getItem($document, 'Description', ['#tab-description', '.et_pb_tab_content'], null, null, false, [null, 1]);
             $att->description .= '<br/><br/>' . self::getItem($document, 'AdditionalInformation', ['#tab-additional_information', '.et_pb_tab_content'], null, null, false, [null, 2]);
-            $att->description .= '<br/><br/>' . self::getItem($document, 'Catalogue', ['#tab-catalogue_tab', '.et_pb_tab_content'], null, null, false, [null, 3]);
-            $att->description .= '<br/><br/>' . self::getItem($document, 'Downloads', ['#tab-downloads_tab', '.et_pb_tab_content'], null, null, false, [null, 4]);
-            $att->santander_installment = 1;
 
             $gallery = [];
             $images = explode(';', str_replace(".webp", "", self::getItem($document, 'Images', ['.woocommerce-product-gallery'], 'img', 'src', false, [0])));
