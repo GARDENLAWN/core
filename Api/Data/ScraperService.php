@@ -209,7 +209,7 @@ class ScraperService
      */
     public static function saveAutomowJsonData(): void
     {
-        $csvFile = BP . "/app/code/GardenLawn/Core/Configs/AM_Processed.csv";
+        $csvFile = dirname(__DIR__, 2) . "/Configs/AM_Processed.csv";
         $items = [];
         if (file_exists($csvFile)) {
             $handle = fopen($csvFile, "r");
@@ -454,7 +454,7 @@ class ScraperService
         // Albo lepiej: wczytajmy mapę relacji z CSV jeszcze raz tutaj, bo w JSON tego nie ma.
 
         $relations = [];
-        $csvFile = BP . "/app/code/GardenLawn/Core/Configs/AM_Processed.csv";
+        $csvFile = dirname(__DIR__, 2) . "/Configs/AM_Processed.csv";
         if (file_exists($csvFile)) {
             $handle = fopen($csvFile, "r");
             $header = fgetcsv($handle, 0, ";");
@@ -577,16 +577,16 @@ class ScraperService
         }
 
         $json = json_encode($all);
-        file_put_contents(BP . "/app/code/GardenLawn/Core/Configs/automow_prepared_data.json", $json);
+        file_put_contents(dirname(__DIR__, 2) . "/Configs/automow_prepared_data.json", $json);
 
         $json = json_encode($tableConfigurable);
-        file_put_contents(BP . "/app/code/GardenLawn/Core/Configs/automow_prepared_configurable_data.json", $json);
+        file_put_contents(dirname(__DIR__, 2) . "/Configs/automow_prepared_configurable_data.json", $json);
 
         $json = json_encode($tableSimple);
-        file_put_contents(BP . "/app/code/GardenLawn/Core/Configs/automow_prepared_single_data.json", $json);
+        file_put_contents(dirname(__DIR__, 2) . "/Configs/automow_prepared_single_data.json", $json);
 
         $json = json_encode($tableDescriptions);
-        file_put_contents(BP . "/app/code/GardenLawn/Core/Configs/automow_prepared_description_data.json", $json);
+        file_put_contents(dirname(__DIR__, 2) . "/Configs/automow_prepared_description_data.json", $json);
     }
 
     public static function getAmRobotsCategory(): array
@@ -705,7 +705,7 @@ class ScraperService
 
     public static function getLinkReplacements(): array
     {
-        $csvFile = BP . "/app/code/GardenLawn/Core/Configs/AM_Desc_remaining_links.csv";
+        $csvFile = dirname(__DIR__, 2) . "/Configs/AM_Desc_remaining_links.csv";
         $replacements = [];
         if (file_exists($csvFile)) {
             $handle = fopen($csvFile, "r");
