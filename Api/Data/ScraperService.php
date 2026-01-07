@@ -746,7 +746,7 @@ class ScraperService
             // Process links
             foreach ($document->find('a') as $link) {
                 // 3. Remove "Zaloguj się..." links
-                if (str_contains(mb_strtolower($link->text()), 'zaloguj się') || str_contains(mb_strtolower($link->text()), 'Przeczytaj ten artykuł')) {
+                if (str_contains(mb_strtolower($link->text()), 'zaloguj się') || str_contains(mb_strtolower($link->text()), 'przeczytaj ten artykuł')) {
                     $link->remove();
                     continue;
                 }
@@ -766,6 +766,28 @@ class ScraperService
                                 break;
                             }
                         }
+                    }
+                }
+            }
+
+            // Remove empty tags
+            foreach ($document->find('*') as $element) {
+                $tagName = strtolower($element->tag);
+                if (in_array($tagName, ['br', 'hr', 'img', 'input', 'meta', 'link', 'iframe'])) {
+                    continue;
+                }
+
+                if (trim($element->text()) === '') {
+                    $hasContent = false;
+                    foreach (['img', 'br', 'hr', 'iframe', 'input'] as $checkTag) {
+                        if ($element->has($checkTag)) {
+                            $hasContent = true;
+                            break;
+                        }
+                    }
+
+                    if (!$hasContent) {
+                        $element->remove();
                     }
                 }
             }
