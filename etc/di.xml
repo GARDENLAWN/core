@@ -31,7 +31,7 @@
         <arguments>
             <argument name="allowedExtensions" xsi:type="array">
                 <item name="jpg" xsi:type="string">jpg</item>
-                <item name="jpeg" xsi:type="string">jpg</item>
+                <item name="jpeg" xsi:type="string">jpeg</item>
                 <item name="gif" xsi:type="string">gif</item>
                 <item name="png" xsi:type="string">png</item>
                 <item name="svg" xsi:type="string">svg</item>
@@ -157,4 +157,7 @@
         <plugin name="gardenlawn_core_amasty_file_uploader_plugin"
                 type="GardenLawn\Core\Plugin\Amasty\FileUploaderPlugin" sortOrder="10"/>
     </type>
+    <!-- Override the SelectBuilder globally so both Sync and StockIndexer use it -->
+    <preference for="Magento\InventoryConfigurableProductIndexer\Indexer\SelectBuilder"
+                type="GardenLawn\Core\Model\InventoryConfigurableProductIndexer\Indexer\SelectBuilder"/>
 </config>

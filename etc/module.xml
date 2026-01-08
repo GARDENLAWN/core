@@ -25,6 +25,7 @@
             <module name="Magento_Ui"/>
             <module name="Aurora_Santander"/>
             <module name="Amasty_ImportCore"/>
+            <module name="Magento_InventoryConfigurableProductIndexer"/>
         </sequence>
     </module>
 </config>
