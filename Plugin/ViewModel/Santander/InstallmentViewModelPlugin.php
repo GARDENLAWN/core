@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace GardenLawn\Core\Plugin\ViewModel\Santander;
 
 use Aurora\Santander\ViewModel\Installment as Subject;
-use GardenLawn\Core\Utils\Logger;
 use Magento\Checkout\Model\Session as CheckoutSession;
 
 class InstallmentViewModelPlugin
@@ -32,7 +31,6 @@ class InstallmentViewModelPlugin
             // getGrandTotal() zwraca ostateczną kwotę brutto do zapłaty, uwzględniającą produkty, wysyłkę, podatki i zniżki.
             // Jest to jedyna prawidłowa wartość dla symulatora.
             $grandTotal = $quote->getGrandTotal();
-Logger::writeLog('suma: '.$grandTotal);
             return (float)$grandTotal;
 
         } catch (\Exception $e) {
