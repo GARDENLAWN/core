@@ -138,12 +138,19 @@ $block->setData('current_page', $page);
                                 x-transition:enter.opacity.duration.500ms
                                 x-transition:leave.opacity.duration.0ms
                             >
-                                <img
-                                    class="w-full h-full object-contain"
-                                    :class="imageFullscreenClasses()"
-                                    :src="getImage(image)"
-                                    alt=""
-                                >
+                                <template x-if="image.type === 'video'">
+                                    <div class="w-full h-full flex items-center justify-center bg-black">
+                                        <div :id="'video-player-' + index" class="w-full h-full"></div>
+                                    </div>
+                                </template>
+                                <template x-if="image.type !== 'video'">
+                                    <img
+                                        class="w-full h-full object-contain"
+                                        :class="imageFullscreenClasses()"
+                                        :src="getImage(image)"
+                                        alt=""
+                                    >
+                                </template>
                             </figure>
                         </template>
 
@@ -316,6 +323,7 @@ $block->setData('current_page', $page);
                 thumbsOverflow: false,
                 thumbsStart: true,
                 thumbsEnd: true,
+                players: {},
 
                 init() {
                     this.itemCount = this.images.length;
@@ -329,6 +337,7 @@ $block->setData('current_page', $page);
                             if (activeThumb) {
                                 this.scrollTo(activeThumb);
                             };
+                            this.handleVideoPlayback(item);
                         });
                     });
                     this.$watch('itemCount', () => {
@@ -397,6 +406,7 @@ $block->setData('current_page', $page);
                     this.activeItem = mainImg === -1 ? 0 : mainImg;
                     this.isStart = this.activeItem === 0;
                     this.isEnd = this.activeItem === (this.itemCount - 1);
+                    this.handleVideoPlayback(this.activeItem);
                 },
                 eventListeners: {
                     ['@keydown.window.escape']() {
@@ -520,6 +530,53 @@ $block->setData('current_page', $page);
                         : scrollWidth > offsetWidth;
 
                     this.thumbsOverflow = hasOverflow;
+                },
+                handleVideoPlayback(index) {
+                    const currentImage = this.images[index];
+                    if (currentImage && currentImage.type === 'video' && currentImage.videoUrl) {
+                        this.initYoutubePlayer(index, currentImage.videoUrl);
+                    }
+                },
+                initYoutubePlayer(index, videoId) {
+                    if (this.players[index]) return;
+
+                    const containerId = 'video-player-' + index;
+
+                    const createPlayer = () => {
+                        if (!document.getElementById(containerId)) return;
+
+                        this.players[index] = new YT.Player(containerId, {
+                            height: '100%',
+                            width: '100%',
+                            videoId: videoId,
+                            playerVars: {
+                                'playsinline': 1,
+                                'rel': 0
+                            }
+                        });
+                    };
+
+                    if (typeof YT !== 'undefined' && YT.Player) {
+                        createPlayer();
+                    } else {
+                        if (!document.querySelector('script[src*="youtube.com/iframe_api"]')) {
+                            var tag = document.createElement('script');
+                            tag.src = "https://www.youtube.com/iframe_api";
+                            var firstScriptTag = document.getElementsByTagName('script')[0];
+                            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+                            if (typeof window.onYouTubeIframeAPIReady === 'undefined') {
+                                window.onYouTubeIframeAPIReady = function() {};
+                            }
+                        }
+
+                        var checkYT = setInterval(() => {
+                            if (typeof YT !== 'undefined' && YT.Player) {
+                                clearInterval(checkYT);
+                                createPlayer();
+                            }
+                        }, 200);
+                    }
                 }
             }
         }

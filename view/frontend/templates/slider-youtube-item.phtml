@@ -7,55 +7,54 @@ use Hyva\Theme\Model\ViewModelRegistry;
 use Hyva\Theme\ViewModel\HyvaCsp;
 
 /** @var Template $block */
-/** @var array $item */
 /** @var ViewModelRegistry $viewModels */
 /** @var HyvaCsp $hyvaCsp */
 
 $hyvaCsp = $viewModels->require(HyvaCsp::class);
 
+$item = $block->getItem();
 $divId = $item['divId'] ?? uniqid('video_');
 $videoId = $item['videoId'] ?? '';
 
 ?>
-<div class="slider-item w-full px-2">
-    <?php if ($videoId): ?>
-        <div id="<?= $block->escapeHtmlAttr($divId) ?>" class="w-full aspect-video bg-gray-200"></div>
-
-        <div x-data="gardenLawnYoutubePlayer('<?= $block->escapeJs($divId) ?>', '<?= $block->escapeJs($videoId) ?>')"
-             x-intersect.once="loadPlayer">
-        </div>
-    <?php endif; ?>
-</div>
-
 <script>
     if (typeof gardenLawnYoutubePlayer === 'undefined') {
         window.gardenLawnYoutubePlayer = function (divId, videoId) {
             return {
                 divId: divId,
                 videoId: videoId,
+                playerCreated: false,
                 loadPlayer() {
+                    if (this.playerCreated) return;
+
                     if (typeof YT !== 'undefined' && YT.Player) {
                         this.createPlayer();
                     } else {
-                        if (!window.youtubeApiLoading) {
-                            window.youtubeApiLoading = true;
+                        if (!document.querySelector('script[src*="youtube.com/iframe_api"]')) {
                             var tag = document.createElement('script');
                             tag.src = "https://www.youtube.com/iframe_api";
                             var firstScriptTag = document.getElementsByTagName('script')[0];
                             firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-                            var existingCallback = window.onYouTubeIframeAPIReady;
-                            window.onYouTubeIframeAPIReady = function() {
-                                if (existingCallback) existingCallback();
-                                window.dispatchEvent(new CustomEvent('youtube-api-ready'));
-                            };
+                            if (typeof window.onYouTubeIframeAPIReady === 'undefined') {
+                                window.onYouTubeIframeAPIReady = function() {};
+                            }
                         }
-                        window.addEventListener('youtube-api-ready', () => {
-                            this.createPlayer();
-                        });
+
+                        var checkYT = setInterval(() => {
+                            if (typeof YT !== 'undefined' && YT.Player) {
+                                clearInterval(checkYT);
+                                this.createPlayer();
+                            }
+                        }, 200);
                     }
                 },
                 createPlayer() {
+                    if (this.playerCreated) return;
+                    var container = document.getElementById(this.divId);
+                    if (!container) return;
+
+                    this.playerCreated = true;
                     new YT.Player(this.divId, {
                         height: '100%',
                         width: '100%',
@@ -70,4 +69,10 @@ $videoId = $item['videoId'] ?? '';
         }
     }
 </script>
+
+<div class="slider-item w-full px-2" x-data="gardenLawnYoutubePlayer('<?= $block->escapeJs($divId) ?>', '<?= $block->escapeJs($videoId) ?>')">
+    <?php if ($videoId): ?>
+        <div id="<?= $block->escapeHtmlAttr($divId) ?>" class="w-full aspect-video bg-gray-200" x-intersect.once="loadPlayer"></div>
+    <?php endif; ?>
+</div>
 <?php $hyvaCsp->registerInlineScript() ?>
