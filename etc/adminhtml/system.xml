@@ -49,6 +49,11 @@
                     <source_model>GardenLawn\Core\Model\Config\Source\CustomerGroup</source_model>
                     <comment>Select customer groups that should get the dealer price.</comment>
                 </field>
+                <field id="attribute_sets" translate="label comment" type="multiselect" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Product Attribute Sets</label>
+                    <source_model>GardenLawn\Core\Model\Config\Source\AttributeSet</source_model>
+                    <comment>Select attribute sets to sync prices for. Leave empty to sync all.</comment>
+                </field>
             </group>
             <group id="price_calculation" translate="label" type="text" sortOrder="28" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Main Price Calculation</label>

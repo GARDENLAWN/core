@@ -21,6 +21,7 @@ use GardenLawn\Core\Model\PriceCalculator;
 class SyncDealerPrices extends Command
 {
     private const XML_PATH_DEALER_GROUPS = 'gardenlawn_core/dealer_price/customer_groups';
+    private const XML_PATH_ATTRIBUTE_SETS = 'gardenlawn_core/dealer_price/attribute_sets';
 
     /** @var AppState */
     private $appState;
@@ -95,13 +96,20 @@ class SyncDealerPrices extends Command
         }
         $output->writeln('Calculated EUR -> PLN rate: ' . $conversionRate);
 
+        // Filter by Attribute Sets
+        $attributeSetIds = $this->getAttributeSetIds();
+        if (!empty($attributeSetIds)) {
+            $this->searchCriteriaBuilder->addFilter('attribute_set_id', $attributeSetIds, 'in');
+            $output->writeln('Filtering by Attribute Sets: ' . implode(', ', $attributeSetIds));
+        }
+
         $searchCriteria = $this->searchCriteriaBuilder
             ->addFilter('dealer_price', 0, 'gt')
             ->create();
         $products = $this->productRepository->getList($searchCriteria)->getItems();
 
         if (empty($products)) {
-            $output->writeln('<comment>No products with dealer_price found.</comment>');
+            $output->writeln('<comment>No products with dealer_price found (matching criteria).</comment>');
             return 0;
         }
 
@@ -179,6 +187,16 @@ class SyncDealerPrices extends Command
         }
         $groupsArray = explode(',', $groups);
         return array_filter(array_map('intval', $groupsArray));
+    }
+
+    private function getAttributeSetIds(): array
+    {
+        $sets = $this->scopeConfig->getValue(self::XML_PATH_ATTRIBUTE_SETS, ScopeInterface::SCOPE_STORE);
+        if (!$sets) {
+            return [];
+        }
+        $setsArray = explode(',', $sets);
+        return array_filter(array_map('intval', $setsArray));
     }
 
     private function getEurToPlnRate(): ?float
