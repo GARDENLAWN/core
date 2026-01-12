@@ -5,12 +5,37 @@ namespace GardenLawn\Core\Block\Adminhtml\System\Config;
 
 use Magento\Config\Block\System\Config\Form\Field;
 use Magento\Framework\Data\Form\Element\AbstractElement;
+use Magento\Backend\Block\Template\Context;
+use Magento\Catalog\Api\ProductRepositoryInterface;
+use Magento\Framework\Api\SearchCriteriaBuilder;
 
 class SimulateButton extends Field
 {
+    /**
+     * @var ProductRepositoryInterface
+     */
+    private $productRepository;
+
+    /**
+     * @var SearchCriteriaBuilder
+     */
+    private $searchCriteriaBuilder;
+
+    public function __construct(
+        Context $context,
+        ProductRepositoryInterface $productRepository,
+        SearchCriteriaBuilder $searchCriteriaBuilder,
+        array $data = []
+    ) {
+        parent::__construct($context, $data);
+        $this->productRepository = $productRepository;
+        $this->searchCriteriaBuilder = $searchCriteriaBuilder;
+    }
+
     protected function _getElementHtml(AbstractElement $element)
     {
         $url = $this->getUrl('gardenlawn_core/price/calculate');
+        $optionsHtml = $this->getProductOptions();
 
         $html = '<button type="button" id="gardenlawn_simulate_btn" class="action-default scalable" onclick="openSimulationModal()">
             <span>' . __('Open Simulator') . '</span>
@@ -19,9 +44,12 @@ class SimulateButton extends Field
         $html .= "
         <div id='simulation-modal-content' style='display:none;'>
             <div class='admin__field'>
-                <label class='admin__field-label'><span>SKU</span></label>
+                <label class='admin__field-label'><span>Select Product</span></label>
                 <div class='admin__field-control'>
-                    <input type='text' class='admin__control-text' id='sim_sku' placeholder='Enter Product SKU' />
+                    <select class='admin__control-select' id='sim_sku' style='width: 100%;'>
+                        <option value=''>-- Select Product --</option>
+                        {$optionsHtml}
+                    </select>
                 </div>
             </div>
             <div class='admin__field' style='margin-top: 10px;'>
@@ -47,7 +75,7 @@ class SimulateButton extends Field
 
                 window.runSimulation = function() {
                     var sku = $('#sim_sku').val();
-                    if(!sku) { alert('Please enter SKU'); return; }
+                    if(!sku) { alert('Please select a product'); return; }
 
                     $('#sim_result').html('Loading...');
 
@@ -86,5 +114,26 @@ class SimulateButton extends Field
         ";
 
         return $html;
+    }
+
+    private function getProductOptions(): string
+    {
+        try {
+            $searchCriteria = $this->searchCriteriaBuilder
+                ->addFilter('dealer_price', 0, 'gt')
+                ->setPageSize(200) // Limit to 200 products for performance
+                ->create();
+
+            $products = $this->productRepository->getList($searchCriteria)->getItems();
+
+            $options = '';
+            foreach ($products as $product) {
+                $label = $product->getSku() . ' - ' . substr($product->getName(), 0, 50);
+                $options .= "<option value='{$product->getSku()}'>{$label}</option>";
+            }
+            return $options;
+        } catch (\Exception $e) {
+            return "<option value=''>Error loading products</option>";
+        }
     }
 }
