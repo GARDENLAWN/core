@@ -136,6 +136,12 @@ class SyncDealerPrices extends Command
                     $newTierPrices[] = $tierPrice;
                 }
 
+                // Optimization: Check if tier prices actually changed before saving
+                if ($this->areTierPricesEqual($existingTierPrices, $newTierPrices)) {
+                    $progressBar->advance();
+                    continue;
+                }
+
                 $productToSave->setTierPrices($newTierPrices);
                 $this->productRepository->save($productToSave);
 
@@ -157,7 +163,11 @@ class SyncDealerPrices extends Command
     private function getDealerGroups(): array
     {
         $groups = $this->scopeConfig->getValue(self::XML_PATH_DEALER_GROUPS, ScopeInterface::SCOPE_STORE);
-        return $groups ? array_map('intval', explode(',', $groups)) : [];
+        if (!$groups) {
+            return [];
+        }
+        $groupsArray = explode(',', $groups);
+        return array_filter(array_map('intval', $groupsArray));
     }
 
     private function getEurToPlnRate(): ?float
@@ -185,5 +195,37 @@ class SyncDealerPrices extends Command
         } catch (\Exception $e) {
             return null;
         }
+    }
+
+    /**
+     * Compare two arrays of Tier Prices to check if they are effectively the same.
+     *
+     * @param \Magento\Catalog\Api\Data\ProductTierPriceInterface[] $existing
+     * @param \Magento\Catalog\Api\Data\ProductTierPriceInterface[] $new
+     * @return bool
+     */
+    private function areTierPricesEqual(array $existing, array $new): bool
+    {
+        if (count($existing) !== count($new)) {
+            return false;
+        }
+
+        // Helper to generate a unique key for a tier price
+        $generateKey = function ($price) {
+            return sprintf(
+                '%s-%s-%s',
+                (int)$price->getCustomerGroupId(),
+                (float)$price->getQty(),
+                (float)$price->getValue()
+            );
+        };
+
+        $existingKeys = array_map($generateKey, $existing);
+        $newKeys = array_map($generateKey, $new);
+
+        sort($existingKeys);
+        sort($newKeys);
+
+        return $existingKeys === $newKeys;
     }
 }
