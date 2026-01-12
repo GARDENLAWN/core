@@ -75,21 +75,40 @@ class PriceCalculator
         foreach ($rules as $rule) {
             if ($price <= (float)$rule['price_limit']) {
                 $target = (float)$rule['rounding_target'];
-                $target = $target - floor($target);
-                if ($target < 0) $target = 0.99;
-
                 $method = $rule['rounding_method'] ?? 'nearest';
-                $floor = floor($price);
 
-                $lower = $floor - 1 + $target;
-                $middle = $floor + $target;
-                $upper = $floor + 1 + $target;
+                // Determine step based on target magnitude
+                if ($target < 1) {
+                    // Decimal rounding (e.g. 0.99)
+                    // Step is 1.0
+                    $step = 1.0;
+                    // Ensure target is just the decimal part if user entered 0.99
+                    // If user entered 0.50, we want X.50
+                    // Logic: base = floor(price)
+                    $base = floor($price);
+                } else {
+                    // Integer rounding (e.g. 9, 99, 50)
+                    // Calculate step: 9 -> 10, 99 -> 100, 50 -> 100
+                    $digits = strlen((string)floor($target));
+                    $step = pow(10, $digits);
+
+                    // Base is price rounded down to nearest step
+                    // e.g. price 150, step 100 -> base 100
+                    $base = floor($price / $step) * $step;
+                }
+
+                // Candidates
+                $lower = $base - $step + $target;
+                $middle = $base + $target;
+                $upper = $base + $step + $target;
 
                 if ($method === 'up') {
+                    // Find smallest candidate >= price
                     if ($lower >= $price) return $lower;
                     if ($middle >= $price) return $middle;
                     return $upper;
                 } elseif ($method === 'down') {
+                    // Find largest candidate <= price
                     if ($upper <= $price) return $upper;
                     if ($middle <= $price) return $middle;
                     return $lower;

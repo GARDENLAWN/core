@@ -73,6 +73,10 @@
                     <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
                     <comment>Define rounding rules based on GROSS price ranges.</comment>
                 </field>
+                <field id="simulator" translate="label" type="button" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Price Simulator</label>
+                    <frontend_model>GardenLawn\Core\Block\Adminhtml\System\Config\SimulateButton</frontend_model>
+                </field>
             </group>
             <group id="cleanup" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
                 <label>Database Cleanup</label>
