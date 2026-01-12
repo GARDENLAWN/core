@@ -1,683 +1,88 @@
-<!DOCTYPE html>
-<html lang="pl-PL" class="u-responsive-xl skrollr skrollr-desktop" style="display: table; margin: auto; width: 100%;">
-<head>
-    <style type="text/css">
-        .page-main { margin: 0 !important; }
-        body { overflow: hidden !important; -ms-overflow-style: none !important; scrollbar-width: none !important; }
-        ::-webkit-scrollbar { display: none !important; width: 0px !important; height: 0px !important; background-color: transparent !important; }
-        ::-webkit-scrollbar-button, ::-webkit-scrollbar-thumb, ::-webkit-scrollbar-track, ::-webkit-scrollbar-corner { background-color: transparent !important; }
-    </style>
+<?php
+/** @var \Magento\Framework\View\Element\Template $block */
+$greenColor = 'text-[#009640]';
+?>
+<div class="space-y-16 py-8 text-gray-700 font-sans">
 
-    <script type="text/javascript" async="" src="/static/frontend/GardenLawn/Hyvatheme/pl_PL/files/grass/js.js"></script>
-    <script>(function (html) { html.className = html.className.replace(/\bno-js\b/, 'js') })(document.documentElement);</script>
+    <!-- About Section -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">O producencie</h2>
+                <p class="text-lg leading-relaxed mb-6">
+                    <b>Trawnik Producent</b> to firma z ponad 26 letnią tradycją, specjalizująca się w produkcji darni rolowanej na potrzeby zarówno klientów indywidualnych jak i branży budownictwa sportowego. Jesteśmy największą w tej części Europy plantacją darni.
+                </p>
+                <p class="text-lg leading-relaxed">
+                    Na blisko 350 hektarowej powierzchni przy wykorzystaniu najnowocześniejszych technologii, maszyn oraz zaangażowaniu wielu ludzi, produkujemy najwyższej jakości trawę rolowaną.
+                </p>
+            </div>
+            <div>
+                <img src="https://pub.gardenlawn.pl/media/images/grass/Naszprodukttobardzotrwayisolidnytrawnikzrolki.webp" alt="Trawnik z rolki" class="rounded-xl shadow-lg w-full h-auto object-cover">
+            </div>
+        </div>
+    </section>
 
-    <script data-cfasync="false" data-pagespeed-no-defer="" type="text/javascript">
-        var gtm4wp_datalayer_name = "dataLayer";
-        var dataLayer = dataLayer || [];
-    </script>
-
-    <title>O FIRMIE - Trawnik Producent</title>
-    <link rel="canonical" href="https://trawnikproducent.pl/o-nas/">
-    <meta property="og:description" content="NAJWIĘKSZA PLANTACJA DARNIOWA W TEJ CZĘŚCI EUROPY. Trawnik Producent to firma z ponad 26 letnią tradycją.">
-
-    <script type="application/ld+json" class="yoast-schema-graph">{
-            "@context": "https://schema.org",
-            "@graph": [
-                {
-                    "@type": "WebSite",
-                    "@id": "https://trawnikproducent.pl/#website",
-                    "url": "https://trawnikproducent.pl/",
-                    "name": "Trawnik Producent",
-                    "inLanguage": "pl-PL"
-                },
-                {
-                    "@type": "WebPage",
-                    "@id": "https://trawnikproducent.pl/o-nas/#webpage",
-                    "url": "https://trawnikproducent.pl/o-nas/",
-                    "name": "O FIRMIE - Trawnik Producent",
-                    "isPartOf": { "@id": "https://trawnikproducent.pl/#website" },
-                    "inLanguage": "pl-PL"
-                },
-                {
-                    "@type": "BreadcrumbList",
-                    "@id": "https://trawnikproducent.pl/o-nas/#breadcrumb",
-                    "itemListElement": [
-                        { "@type": "ListItem", "position": 1, "name": "Strona główna", "item": "https://trawnikproducent.pl/" },
-                        { "@type": "ListItem", "position": 2, "name": "O FIRMIE" }
-                    ]
-                }
-            ]
-        }</script>
-
-    <link rel="dns-prefetch" href="https://www.google.com/">
-    <link rel="alternate" type="application/rss+xml" title="Trawnik Producent » Kanał z wpisami" href="https://trawnikproducent.pl/feed/">
-
-    <script type="application/ld+json">{
-            "@context": "http:\/\/schema.org",
-            "@type": "Organization",
-            "name": "Trawnik Producent",
-            "url": "https:\/\/trawnikproducent.pl\/",
-            "logo": "https://pub.gardenlawn.pl/media/images/grass/cropped-trawnikproducent.webp"
-        }</script>
-    <script type="application/ld+json">{
-            "@context": "http:\/\/schema.org",
-            "@type": "Article",
-            "headline": "O FIRMIE",
-            "author": { "@type": "Person", "name": "Admin Trawnik" },
-            "publisher": {
-                "@type": "Organization",
-                "name": "Trawnik Producent",
-                "logo": {
-                    "@type": "ImageObject",
-                    "url": "https://pub.gardenlawn.pl/media/images/grass/cropped-trawnikproducent.webp",
-                    "width": 240,
-                    "height": 138
-                }
-            }
-        }</script>
-
-    <link rel="stylesheet" id="wp-block-library-css" href="/static/frontend/GardenLawn/Hyvatheme/pl_PL/files/grass/style.min.css" type="text/css" media="all">
-    <link rel="stylesheet" id="contact-form-7-css" href="/static/frontend/GardenLawn/Hyvatheme/pl_PL/files/grass/styles.css" type="text/css" media="all">
-    <link rel="stylesheet" id="formcraft-common-css" href="/static/frontend/GardenLawn/Hyvatheme/pl_PL/files/grass/formcraft-common.css" type="text/css" media="all">
-    <link rel="stylesheet" id="formcraft-form-css" href="/static/frontend/GardenLawn/Hyvatheme/pl_PL/files/grass/form.css" type="text/css" media="all">
-    <link rel="stylesheet" id="rt-tpg-css" href="/static/frontend/GardenLawn/Hyvatheme/pl_PL/files/grass/thepostgrid.css" type="text/css" media="all">
-    <link rel="stylesheet" id="theme-style-css" href="/static/frontend/GardenLawn/Hyvatheme/pl_PL/files/grass/style.css" type="text/css" media="all">
-    <link rel="stylesheet" id="theme-media-css" href="/static/frontend/GardenLawn/Hyvatheme/pl_PL/files/grass/media.css" type="text/css" media="all">
-
-    <script type="text/javascript" src="/static/frontend/GardenLawn/Hyvatheme/pl_PL/files/grass/jquery.min.js" id="jquery-core-js"></script>
-    <script type="text/javascript" src="/static/frontend/GardenLawn/Hyvatheme/pl_PL/files/grass/jquery-migrate.min.js" id="jquery-migrate-js"></script>
-
-    <link id="u-theme-google-font" rel="stylesheet" href="/static/frontend/GardenLawn/Hyvatheme/pl_PL/files/grass/css.css">
-
-    <style>
-        /* SECTION 2 - Background Image Updated to WebP */
-        .u-section-2 {
-            background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("https://pub.gardenlawn.pl/media/images/grass/slide-o-nas-1-1.webp");
-            background-position: 50% 50%;
-        }
-        .u-section-2 .u-sheet-1 { min-height: 720px; }
-        .u-section-2 .u-text-1 { animation-duration: 1000ms; margin: 235px 0 0; }
-        .u-section-2 .u-text-2 { font-size: 1.875rem; margin: 23px 0 0; }
-        .u-section-2 .u-btn-1 { letter-spacing: 1px; border-style: solid; font-weight: 700; text-transform: uppercase; margin: 43px auto 60px; padding: 17px 86px 18px 85px; }
-
-        @media (max-width: 1199px) {
-            .u-section-2 { background-position: 50% 50%; }
-            .u-section-2 .u-sheet-1 { min-height: 500px; }
-            .u-section-2 .u-text-1 { margin-right: 119px; margin-left: 290px; font-size: 3rem; }
-            .u-section-2 .u-text-2, .u-section-2 .u-btn-1 { margin-left: 290px; }
-        }
-        @media (max-width: 991px) {
-            .u-section-2 .u-sheet-1 { min-height: 698px; }
-            .u-section-2 .u-text-1 { width: 407px; margin-top: 141px; margin-left: auto; margin-right: auto; }
-            .u-section-2 .u-text-2 { width: auto; margin-top: 33px; margin-right: 132px; margin-left: 90px; }
-            .u-section-2 .u-btn-1 { margin-top: 51px; margin-left: auto; }
-        }
-        @media (max-width: 767px) {
-            .u-section-2 .u-sheet-1 { min-height: 550px; }
-            .u-section-2 .u-text-1 { font-size: 2.5rem; width: auto; margin-top: 142px; margin-left: 0; margin-right: 0; }
-            .u-section-2 .u-text-2 { margin-left: 0; margin-right: 0; }
-        }
-        @media (max-width: 575px) {
-            .u-section-2 .u-sheet-1 { min-height: 556px; }
-            .u-section-2 .u-text-1 { margin-top: 131px; margin-left: 25px; margin-right: 25px; }
-            .u-section-2 .u-text-2 { font-size: 1.25rem; width: 235px; margin-top: 31px; margin-left: auto; margin-right: auto; }
-            .u-section-2 .u-btn-1 { margin-top: 38px; padding: 9px 61px 11px 60px; }
-        }
-
-        /* SECTION 3 */
-        .u-section-3 { background-image: none; }
-        .u-section-3 .u-sheet-1 { min-height: 574px; }
-        .u-section-3 .u-layout-wrap-1 { margin-top: 61px; margin-bottom: 40px; }
-        .u-section-3 .u-layout-cell-1, .u-section-3 .u-layout-cell-2 { min-height: 513px; }
-        .u-section-3 .u-container-layout-1 { padding: 30px 30px 34px; }
-        .u-section-3 .u-text-1 { animation-duration: 1000ms; margin: 0; }
-        .u-section-3 .u-text-2 { margin: 20px 29px 0 0; }
-        .u-section-3 .u-btn-1 { border-style: none; font-weight: 700; text-transform: uppercase; font-size: 0.875rem; letter-spacing: 1px; background-image: none; animation-duration: 1000ms; margin: 29px auto 0 0; }
-        .u-section-3 .u-container-layout-2 { padding: 30px; }
-        .u-section-3 .u-image-1 { height: 453px; margin-top: 0; margin-bottom: 0; }
-
-        @media (max-width: 1199px) {
-            .u-section-3 .u-sheet-1 { min-height: 430px; }
-            .u-section-3 .u-layout-wrap-1 { position: relative; }
-            .u-section-3 .u-layout-cell-1 { min-height: 423px; }
-            .u-section-3 .u-text-2 { margin-right: 0; }
-            .u-section-3 .u-layout-cell-2 { min-height: 606px; }
-            .u-section-3 .u-image-1 { height: 364px; }
-        }
-        @media (max-width: 991px) {
-            .u-section-3 .u-sheet-1 { min-height: 353px; }
-            .u-section-3 .u-layout-cell-1 { min-height: 100px; }
-            .u-section-3 .u-container-layout-1 { padding-bottom: 30px; }
-            .u-section-3 .u-image-1 { height: 266px; }
-        }
-        @media (max-width: 767px) {
-            .u-section-3 .u-sheet-1 { min-height: 480px; }
-            .u-section-3 .u-container-layout-1, .u-section-3 .u-container-layout-2 { padding-left: 10px; padding-right: 10px; }
-            .u-section-3 .u-layout-cell-2 { min-height: 451px; }
-            .u-section-3 .u-image-1 { height: 461px; }
-        }
-        @media (max-width: 575px) {
-            .u-section-3 .u-sheet-1 { min-height: 922px; }
-            .u-section-3 .u-text-1 { width: auto; }
-            .u-section-3 .u-layout-cell-2, .u-section-3 .u-image-1 { min-height: 284px; height: 284px; }
-        }
-
-        /* SECTION 4 */
-        .u-section-4 { background-image: none; }
-        .u-section-4 .u-sheet-1 { min-height: 618px; }
-        .u-section-4 .u-layout-wrap-1 { margin-top: 60px; margin-bottom: 60px; }
-        .u-section-4 .u-layout-cell-1, .u-section-4 .u-layout-cell-2 { min-height: 498px; }
-        .u-section-4 .u-container-layout-1 { padding: 30px 30px 23px; }
-        .u-section-4 .u-text-1 { animation-duration: 1000ms; margin: 0; }
-        .u-section-4 .u-text-2 { margin: 28px 47px 0 0; }
-        .u-section-4 .u-text-3 { font-weight: 700; margin: 35px 77px 0 0; }
-        .u-section-4 .u-container-layout-2 { padding: 30px; }
-        .u-section-4 .u-image-1 { height: 198px; margin-top: 0; margin-bottom: 0; margin-left: 0; }
-        .u-section-4 .u-image-2 { height: 193px; margin-top: 26px; margin-bottom: 0; margin-left: 0; }
-
-        @media (max-width: 1199px) {
-            .u-section-4 .u-sheet-1 { min-height: 430px; }
-            .u-section-4 .u-layout-wrap-1 { position: relative; }
-            .u-section-4 .u-layout-cell-1 { min-height: 411px; }
-            .u-section-4 .u-text-2 { margin-top: 20px; margin-right: 0; }
-            .u-section-4 .u-text-3 { width: 310px; margin-left: 50px; margin-right: 50px; }
-            .u-section-4 .u-layout-cell-2 { min-height: 671px; }
-            .u-section-4 .u-image-1 { height: 159px; margin-left: initial; }
-            .u-section-4 .u-image-2 { height: 155px; margin-top: 48px; margin-left: initial; }
-        }
-        @media (max-width: 991px) {
-            .u-section-4 .u-sheet-1 { min-height: 353px; }
-            .u-section-4 .u-layout-cell-1 { min-height: 100px; }
-            .u-section-4 .u-text-3 { width: auto; margin-top: 60px; margin-left: 0; margin-right: 0; }
-            .u-section-4 .u-layout-cell-2 { min-height: 315px; }
-            .u-section-4 .u-image-1 { height: 116px; margin-top: 10px; margin-left: initial; }
-            .u-section-4 .u-image-2 { height: 113px; margin-left: initial; }
-        }
-        @media (max-width: 767px) {
-            .u-section-4 .u-sheet-1 { min-height: 480px; }
-            .u-section-4 .u-container-layout-1, .u-section-4 .u-container-layout-2 { padding-left: 10px; padding-right: 10px; }
-            .u-section-4 .u-text-3 { margin-top: 35px; }
-            .u-section-4 .u-layout-cell-2 { min-height: 473px; }
-            .u-section-4 .u-image-1 { height: 201px; margin-top: -21px; margin-left: initial; }
-            .u-section-4 .u-image-2 { height: 196px; margin-top: 35px; margin-left: initial; }
-        }
-        @media (max-width: 575px) {
-            .u-section-4 .u-sheet-1 { min-height: 339px; }
-            .u-section-4 .u-text-3 { margin-top: 33px; }
-            .u-section-4 .u-layout-cell-2 { min-height: 298px; }
-            .u-section-4 .u-image-1 { height: 124px; margin-top: 0; margin-left: initial; }
-            .u-section-4 .u-image-2 { height: 121px; margin-top: 25px; margin-left: initial; }
-        }
-
-        /* SECTION 5 */
-        .u-section-5 .u-sheet-1 { min-height: 846px; }
-        .u-section-5 .u-layout-wrap-1 { margin-top: 60px; margin-bottom: 60px; }
-        .u-section-5 .u-layout-cell-1, .u-section-5 .u-layout-cell-2 { min-height: 744px; }
-        .u-section-5 .u-container-layout-1 { padding: 30px; }
-        .u-section-5 .u-image-1 { height: 202px; margin-top: -30px; margin-bottom: 0; }
-        .u-section-5 .u-text-1 { animation-duration: 1000ms; font-size: 2.25rem; margin: 32px 11px 0; }
-        .u-section-5 .u-text-2 { margin: 20px 50px 0 11px; }
-        .u-section-5 .u-layout-cell-2 { background-image: none; }
-        .u-section-5 .u-container-layout-2 { padding: 30px 30px 18px; }
-        .u-section-5 .u-image-2 { height: 202px; margin: -30px auto 0 0; }
-        .u-section-5 .u-text-3 { animation-duration: 1000ms; font-size: 2.25rem; margin: 32px 20px 0 0; }
-        .u-section-5 .u-text-4 { margin: 17px 20px 0 0; }
-        .u-section-5 .u-image-3 { height: 183px; margin-top: 42px; margin-bottom: 0; margin-left: 0; }
-
-        @media (max-width: 1199px) {
-            .u-section-5 .u-sheet-1 { min-height: 430px; }
-            .u-section-5 .u-layout-wrap-1 { position: relative; }
-            .u-section-5 .u-layout-cell-1, .u-section-5 .u-layout-cell-2 { min-height: 885px; }
-            .u-section-5 .u-image-1 { height: 208px; margin-top: 0; }
-            .u-section-5 .u-text-1, .u-section-5 .u-text-3 { font-size: 2rem; width: auto; margin-left: 0; margin-right: 0; }
-            .u-section-5 .u-text-1 { margin-top: 29px; }
-            .u-section-5 .u-text-2 { width: auto; margin-top: 29px; margin-left: 0; margin-right: 0; }
-            .u-section-5 .u-image-2 { height: 205px; margin-top: 564px; margin-right: initial; margin-left: initial; }
-            .u-section-5 .u-text-3 { margin-top: -526px; }
-            .u-section-5 .u-text-4 { width: auto; margin-top: 23px; margin-right: 0; }
-            .u-section-5 .u-image-3 { height: 211px; margin-top: -516px; margin-left: initial; }
-        }
-        @media (max-width: 991px) {
-            .u-section-5 .u-sheet-1 { min-height: 945px; }
-            .u-section-5 .u-layout-wrap-1 { margin-bottom: 0; }
-            .u-section-5 .u-image-1 { height: 152px; }
-            .u-section-5 .u-text-1, .u-section-5 .u-text-3 { font-size: 1.75rem; }
-            .u-section-5 .u-text-1 { margin-top: 36px; }
-            .u-section-5 .u-text-2 { margin-top: 20px; }
-            .u-section-5 .u-image-2 { height: 221px; margin-top: 580px; margin-right: initial; margin-left: initial; }
-            .u-section-5 .u-text-3 { margin-top: -613px; margin-right: 20px; }
-            .u-section-5 .u-text-4 { margin-top: 22px; }
-            .u-section-5 .u-image-3 { height: 154px; margin-top: -560px; margin-left: initial; }
-        }
-        @media (max-width: 767px) {
-            .u-section-5 .u-sheet-1 { min-height: 1554px; }
-            .u-section-5 .u-layout-cell-1 { min-height: 664px; }
-            .u-section-5 .u-container-layout-1 { padding-left: 10px; padding-right: 10px; padding-bottom: 15px; }
-            .u-section-5 .u-image-1 { height: 263px; margin-top: -30px; }
-            .u-section-5 .u-text-1 { margin-top: 30px; }
-            .u-section-5 .u-text-2 { margin-top: 27px; }
-            .u-section-5 .u-layout-cell-2 { min-height: 802px; }
-            .u-section-5 .u-container-layout-2 { padding: 13px 10px 32px; }
-            .u-section-5 .u-image-2 { height: 242px; margin-top: 0; margin-right: initial; margin-left: initial; }
-            .u-section-5 .u-text-3 { margin-top: 33px; }
-            .u-section-5 .u-image-3 { height: 243px; margin-top: 33px; margin-left: initial; }
-        }
-        @media (max-width: 575px) {
-            .u-section-5 .u-sheet-1 { min-height: 1720px; }
-            .u-section-5 .u-layout-cell-1 { min-height: 798px; }
-            .u-section-5 .u-image-1 { height: 162px; margin-top: 0; }
-            .u-section-5 .u-text-1, .u-section-5 .u-text-3 { font-size: 1.5rem; }
-            .u-section-5 .u-text-1, .u-section-5 .u-text-2, .u-section-5 .u-text-4 { margin-top: 29px; }
-            .u-section-5 .u-layout-cell-2 { min-height: 841px; }
-            .u-section-5 .u-container-layout-2 { padding-bottom: 30px; }
-            .u-section-5 .u-image-2 { height: 220px; margin-top: 1211px; margin-right: initial; margin-left: initial; }
-            .u-section-5 .u-text-3 { margin-top: -553px; margin-right: 0; }
-            .u-section-5 .u-image-3 { height: 176px; margin-top: -594px; margin-left: initial; }
-        }
-
-        /* SECTION 6 */
-        .u-section-6 { background-image: none; }
-        .u-section-6 .u-sheet-1 { min-height: 118px; }
-        .u-section-6 .u-layout-wrap-1 { margin-top: 28px; margin-bottom: 1px; }
-        .u-section-6 .u-layout-cell-1 { min-height: 90px; }
-        .u-section-6 .u-container-layout-1 { padding: 30px; }
-        .u-section-6 .u-text-1 { animation-duration: 1000ms; margin: -17px 0 0; }
-
-        @media (max-width: 1199px) { .u-section-6 .u-sheet-1 { min-height: 166px; } .u-section-6 .u-layout-cell-1 { min-height: 138px; } .u-section-6 .u-text-1 { margin-top: 21px; } }
-        @media (max-width: 991px) { .u-section-6 .u-sheet-1 { min-height: 102px; } .u-section-6 .u-layout-wrap-1 { margin-top: 2px; margin-bottom: 2px; } .u-section-6 .u-layout-cell-1 { min-height: 100px; } .u-section-6 .u-text-1 { width: auto; margin-top: 0; } }
-        @media (max-width: 767px) { .u-section-6 .u-sheet-1 { min-height: 115px; } .u-section-6 .u-layout-wrap-1 { margin-top: 1px; margin-bottom: 1px; } .u-section-6 .u-container-layout-1 { padding-left: 10px; padding-right: 10px; } .u-section-6 .u-text-1 { margin-top: 15px; } }
-        @media (max-width: 575px) { .u-section-6 .u-sheet-1 { min-height: 99px; } .u-section-6 .u-layout-wrap-1 { margin-bottom: 15px; } .u-section-6 .u-layout-cell-1 { min-height: 54px; } .u-section-6 .u-container-layout-1 { padding-bottom: 24px; } .u-section-6 .u-text-1 { margin-top: 0; margin-right: 10px; margin-left: -10px; } }
-
-        /* SECTION 7 */
-        .u-section-7 { background-image: none; }
-        .u-section-7 .u-sheet-1 { min-height: 297px; }
-        .u-section-7 .u-layout-wrap-1 { margin-top: 1px; margin-bottom: 1px; }
-        .u-section-7 .u-layout-cell-1, .u-section-7 .u-layout-cell-2 { min-height: 295px; }
-        .u-section-7 .u-container-layout-1, .u-section-7 .u-container-layout-2 { padding: 30px; }
-        .u-section-7 .u-image-1 { width: 117px; height: 101px; margin: 0 auto 0 0; }
-        .u-section-7 .u-image-2 { width: 103px; height: 87px; margin: -94px auto 0 179px; }
-        .u-section-7 .u-image-3 { width: 111px; height: 87px; margin: -89px 55px 0 auto; }
-        .u-section-7 .u-image-4 { width: 117px; height: 93px; margin: 46px auto 0 7px; }
-        .u-section-7 .u-image-5 { width: 165px; height: 94px; margin: 0 auto 0 0; }
-        .u-section-7 .u-image-6 { width: 117px; height: 84px; margin: -89px 168px 0 auto; }
-        .u-section-7 .u-image-7 { width: 147px; height: 74px; margin: -69px 0 0 auto; }
-
-        @media (max-width: 1199px) {
-            .u-section-7 .u-sheet-1 { min-height: 330px; }
-            .u-section-7 .u-layout-cell-1, .u-section-7 .u-layout-cell-2 { min-height: 328px; }
-            .u-section-7 .u-image-1 { height: 100px; margin-left: -10px; margin-right: -10px; }
-            .u-section-7 .u-image-2 { margin-top: -93px; margin-right: -16px; margin-left: 153px; }
-            .u-section-7 .u-image-3 { margin-top: -81px; margin-right: 0; }
-            .u-section-7 .u-image-4 { margin-top: 45px; margin-left: -10px; }
-            .u-section-7 .u-container-layout-2 { padding-bottom: 130px; }
-            .u-section-7 .u-image-5 { width: 131px; height: 85px; margin-top: 23px; }
-            .u-section-7 .u-image-6 { height: 74px; margin-top: -79px; margin-right: 0; }
-            .u-section-7 .u-image-7 { width: 109px; margin-top: -74px; margin-right: 130px; }
-        }
-        @media (max-width: 991px) {
-            .u-section-7 .u-sheet-1 { min-height: 279px; }
-            .u-section-7 .u-layout-cell-1, .u-section-7 .u-layout-cell-2 { min-height: 277px; }
-            .u-section-7 .u-container-layout-1 { padding-bottom: 23px; }
-            .u-section-7 .u-image-1 { margin-top: -7px; margin-right: auto; margin-left: -30px; }
-            .u-section-7 .u-image-2 { margin-right: auto; margin-left: 87px; }
-            .u-section-7 .u-image-3 { margin-top: -87px; }
-            .u-section-7 .u-image-4 { margin-top: 42px; margin-left: -7px; }
-            .u-section-7 .u-container-layout-2 { padding-bottom: 30px; }
-            .u-section-7 .u-image-5 { margin-top: 0; }
-            .u-section-7 .u-image-6 { margin-top: 36px; margin-right: auto; margin-left: 0; }
-            .u-section-7 .u-image-7 { margin-top: -189px; margin-right: 0; }
-        }
-        @media (max-width: 767px) {
-            .u-section-7 .u-sheet-1 { min-height: 298px; }
-            .u-section-7 .u-layout-cell-1, .u-section-7 .u-layout-cell-2 { min-height: 149px; }
-            .u-section-7 .u-container-layout-1 { padding-left: 10px; padding-right: 10px; padding-bottom: 13px; }
-            .u-section-7 .u-image-1 { margin-left: -10px; }
-            .u-section-7 .u-image-2 { margin-top: -92px; margin-left: 129px; }
-            .u-section-7 .u-image-3 { margin-right: 156px; }
-            .u-section-7 .u-image-4 { margin-top: -76px; margin-right: 0; margin-left: auto; }
-            .u-section-7 .u-container-layout-2 { padding: 14px 10px 0; }
-            .u-section-7 .u-image-5 { margin-top: 18px; margin-right: 100px; margin-left: auto; }
-            .u-section-7 .u-image-6 { margin-top: -85px; }
-            .u-section-7 .u-image-7 { margin-top: -68px; margin-right: auto; margin-left: 130px; }
-        }
-        @media (max-width: 575px) {
-            .u-section-7 .u-sheet-1 { min-height: 486px; }
-            .u-section-7 .u-layout-wrap-1 { margin-top: 0; margin-bottom: 13px; }
-            .u-section-7 .u-layout-cell-1 { min-height: 259px; }
-            .u-section-7 .u-container-layout-1 { padding-top: 11px; padding-bottom: 11px; }
-            .u-section-7 .u-image-1 { margin-top: 0; margin-right: 196px; margin-left: 7px; }
-            .u-section-7 .u-image-2 { margin-top: -93px; margin-right: 32px; margin-left: auto; }
-            .u-section-7 .u-image-3 { margin-top: 38px; margin-right: 28px; }
-            .u-section-7 .u-image-4 { margin-top: -90px; margin-right: auto; margin-left: 11px; }
-            .u-section-7 .u-layout-cell-2 { min-height: 214px; }
-            .u-section-7 .u-image-5 { margin-top: 0; margin-right: auto; margin-left: 22px; }
-            .u-section-7 .u-image-6 { margin-top: -79px; margin-right: 16px; margin-left: auto; }
-            .u-section-7 .u-image-7 { margin-top: 22px; margin-left: 16px; }
-        }
-
-        .u-section-8 .u-sheet-1 { min-height: 50px; }
-    </style>
-
-    <meta name="abstract" content="Trawnik Producent to firma z ponad 17 letnią tradycją, specjalizująca się w produkcji darni rolowanej.">
-    <script src="/static/frontend/GardenLawn/Hyvatheme/pl_PL/files/grass/pixel.js" async="" charset="utf-8"></script>
-    <link rel="icon" href="https://pub.gardenlawn.pl/media/images/grass/cropped-favicon.webp">
-
-    <style type="text/css" id="wp-custom-css">
-        .rt-detail { background: #e5e5e5 !important; }
-    </style>
-
-    <style>
-        .u-body, h1, h2, h3, h4, h5, h6, .u-custom-font.u-text-font, .u-custom-font.u-heading-font { font-family: 'Open Sans', sans-serif !important; }
-        .u-body { color: #111111; background-color: #ffffff; }
-        a { text-decoration: underline; font-weight: 600; color: #009640; }
-        a:hover { color: #00873a; }
-
-        /* Custom Color 2 (Green) */
-        .u-custom-color-2 { color: #ffffff; background-color: #009640; }
-        .u-text-custom-color-2 { color: #009640 !important; }
-        .u-border-custom-color-2 { border-color: #009640 !important; color: #009640 !important; background-color: transparent !important; }
-
-        /* Palette 5 Light 3 (Greyish) */
-        .u-palette-5-light-3 { color: #111111; background-color: #f5f7fa; }
-        .u-border-palette-5-light-3 { border-color: #f5f7fa !important; color: #f5f7fa !important; background-color: transparent !important; }
-
-        /* Helpers */
-        .u-white { background-color: #ffffff; color: #111111; }
-        .u-grey-80 { background-color: #333333; color: #ffffff; }
-        .u-text-black { color: #000000 !important; }
-        .u-image-round { border-radius: 25px; }
-
-        .u-btn {
-            font-weight: 700; text-transform: uppercase; border-radius: 50px;
-            background-color: #009640; color: #ffffff;
-            padding: 12px 45px; margin: 19px 0 20px;
-        }
-        .u-btn:hover { background-color: #98cb40; color: #ffffff; }
-
-        @media (max-width: 767px) { h1.u-title { font-size: 3.75rem; } }
-        @media (max-width: 575px) { h1.u-title { font-size: 3rem; } h2.u-subtitle { font-size: 1.5rem; } }
-        html { font-size: 16px; }
-    </style>
-
-    <style id="cky-style">
-        .cky-overlay{background:#000000;opacity:0.4;position:fixed;top:0;left:0;width:100%;height:100%;z-index:99999999}.cky-hide{display:none}.cky-btn-revisit-wrapper{display:flex;align-items:center;justify-content:center;background:#0056a7;width:45px;height:45px;border-radius:50%;position:fixed;z-index:999999;cursor:pointer}.cky-revisit-bottom-left{bottom:15px;left:15px}.cky-revisit-bottom-right{bottom:15px;right:15px}.cky-btn-revisit-wrapper .cky-btn-revisit{display:flex;align-items:center;justify-content:center;background:none;border:none;cursor:pointer;position:relative;margin:0;padding:0}.cky-btn-revisit-wrapper .cky-btn-revisit img{max-width:fit-content;margin:0;height:30px;width:30px}.cky-consent-container{position:fixed;width:440px;box-sizing:border-box;z-index:9999999;border-radius:6px}.cky-consent-container .cky-consent-bar{background:#ffffff;border:1px solid;padding:20px 26px;box-shadow:0 -1px 10px 0 #acabab4d;border-radius:6px}.cky-box-bottom-left{bottom:40px;left:40px}.cky-box-bottom-right{bottom:40px;right:40px}.cky-notice .cky-title{color:#212121;font-weight:700;font-size:18px;line-height:24px;margin:0 0 12px 0}.cky-notice-des{color:#212121;font-size:14px;line-height:24px;font-weight:400}.cky-btn{flex:auto;max-width:100%;font-size:14px;font-family:inherit;line-height:24px;padding:8px;font-weight:500;border-radius:2px;cursor:pointer;text-align:center;min-height:0}.cky-btn:hover{opacity:0.8}.cky-btn-accept{background:#1863dc;color:#ffffff;border:2px solid #1863dc}.cky-btn-reject{color:#1863dc;background:transparent;border:2px solid #1863dc}
-        @media (max-width: 576px) { .cky-box-bottom-left, .cky-box-bottom-right { bottom: 0; left: 0; width: 100%; } .cky-consent-container .cky-consent-bar { padding: 20px 0; } .cky-notice-btn-wrapper { flex-direction: column; } }
-    </style>
-</head>
-
-<body class="u-body u-sticky-scroll" style="display: table-cell; margin: auto;">
-<style>
-    /* Header Styles */
-    .u-header { background-image: none; }
-    .u-header .u-sheet-1 { min-height: 93px; }
-    .u-header .u-image-1 { animation-duration: 1000ms; margin: 6px auto 0 8px; }
-    .u-header .u-logo-image-1 { max-width: 136px; max-height: 136px; }
-    .u-header .u-menu-1 { margin: -44px auto 0; }
-    .u-header .u-nav-1 { font-size: 0.9375rem; letter-spacing: 0px; font-weight: 700; text-transform: uppercase; }
-    .u-header .u-menu-close-1 { height: 28px; margin: 35px 40px 0 188px; }
-    .u-header .u-nav-2 { font-size: 1rem; font-weight: 700; height: 324px; margin: 29px 0 0 auto; }
-    .u-header .u-image-2 { width: 125px; height: 60px; margin: 19px auto 0 20px; }
-    .u-header .u-social-icons-1 { white-space: nowrap; height: 31px; min-height: 16px; width: 113px; min-width: 68px; margin: -41px 1px 35px auto; }
-    .u-header .u-icon-1, .u-header .u-icon-2 { height: 32px; } .u-header .u-icon-3 { height: 31px; }
-
-    @media (max-width: 1199px) {
-        .u-header .u-sheet-1 { min-height: 70px; }
-        .u-header .u-image-1 { margin-left: 0; }
-        .u-header .u-logo-image-1 { max-width: 111px; max-height: 111px; }
-        .u-header .u-menu-1 { margin-top: -36px; }
-        .u-header .u-menu-close-1 { margin-top: 39px; margin-right: 36px; margin-left: 192px; }
-        .u-header .u-nav-2 { height: 340px; margin-top: 25px; margin-left: initial; margin-right: initial; }
-        .u-header .u-social-icons-1 { margin-bottom: 17px; }
-    }
-    @media (max-width: 991px) {
-        .u-header .u-sheet-1 { min-height: 82px; }
-        .u-header .u-image-1 { margin-top: 9px; width: auto; }
-        .u-header .u-menu-1 { width: auto; margin-top: -48px; margin-right: 0; }
-        .u-header .u-menu-close-1 { margin-top: 44px; margin-right: 42px; margin-left: 186px; }
-        .u-header .u-nav-2 { margin-top: 20px; margin-left: initial; margin-right: initial; }
-        .u-header .u-social-icons-1 { margin-top: -37px; margin-right: auto; margin-bottom: 35px; }
-    }
-    @media (max-width: 767px) {
-        .u-header .u-sheet-1 { min-height: 68px; }
-        .u-header .u-image-1 { margin-top: 7px; }
-        .u-header .u-menu-close-1 { width: 22px; }
-        .u-header .u-social-icons-1 { margin-bottom: 13px; margin-left: 206px; }
-    }
-    @media (max-width: 575px) {
-        .u-header .u-sheet-1 { min-height: 66px; }
-        .u-header .u-image-1 { margin-top: 10px; }
-        .u-header .u-logo-image-1 { max-width: 91px; max-height: 91px; }
-        .u-header .u-menu-1 { margin-top: -42px; }
-        .u-header .u-nav-2 { width: 232px; margin-right: 0; margin-left: auto; }
-        .u-header .u-social-icons-1 { margin: -41px 104px 17px auto; }
-    }
-</style>
-
-<section class="u-clearfix u-white u-section-3" id="sec-2b5d">
-    <div class="u-clearfix u-sheet u-sheet-1">
-        <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
-            <div class="u-gutter-0 u-layout">
-                <div class="u-layout-row">
-                    <div class="u-container-style u-layout-cell u-size-30 u-layout-cell-1">
-                        <div class="u-container-layout u-container-layout-1">
-                            <h2 class="u-text u-text-1 animated slideInDown-played" data-animation-name="slideIn"
-                                data-animation-duration="1000" data-animation-delay="0" data-animation-direction="Down"
-                                style="will-change: transform; animation-duration: 1000ms;">O producencie<br>
-                            </h2>
-                            <p class="u-text u-text-2"><b>Trawnik Producent </b>to firma z ponad 26 letnią tradycją,
-                                specjalizująca się w produkcji darni rolowanej na potrzeby zarówno
-                                klientów indywidualnych jak i branży budownictwa sportowego.&nbsp;Jesteśmy
-                                największą w tej części Europy plantacją darni. <br>
-                                <br>Na blisko 350 hektarowej
-                                powierzchni przy wykorzystaniu najnowocześniejszych technologii, maszyn
-                                oraz zaangażowaniu wielu ludzi, produkujemy najwyższej jakości trawę
-                                rolowaną. Jesteśmy liderem w branży budowy profesjonalnych obiektów
-                                sportowych, których domeną są naturalne i hybrydowe nawierzchnie
-                                trawiaste.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="u-container-style u-layout-cell u-size-30 u-layout-cell-2">
-                        <div class="u-container-layout u-valign-bottom u-container-layout-2">
-                            <img
-                                src="https://pub.gardenlawn.pl/media/images/grass/Naszprodukttobardzotrwayisolidnytrawnikzrolki.webp"
-                                alt="" class="u-expanded-width u-image u-image-round u-radius-25 u-image-1"
-                                data-image-width="882" data-image-height="1347">
-                        </div>
-                    </div>
+    <!-- Clients Section (Dark) -->
+    <section class="bg-gray-800 text-white py-16 rounded-xl">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-3xl font-bold mb-6">PRACUJEMY DLA NAJWIĘKSZYCH</h2>
+                    <p class="mb-6 text-lg">
+                        Wysoka jakość, odpowiednia cena i szybka dostawa oraz szybko rosnąca baza klientów jest dobrym dowodem na to, że jesteśmy liderem w Europie.
+                    </p>
+                    <p class="mb-6">
+                        Posiadamy solidną wiedzę fachową i dokładamy wszelkich starań, aby Klient był zadowolony. Nawet po dostarczeniu jesteśmy dostępni, aby odpowiedzieć na wszelkie pytania.
+                    </p>
+                    <p class="font-semibold text-green-400">Nasz produkt to bardzo trwały i solidny trawnik, który ma wiele zastosowań.</p>
+                </div>
+                <div class="space-y-4">
+                    <img src="https://pub.gardenlawn.pl/media/images/grass/o-nas-z31.webp" alt="Realizacja" class="rounded-lg shadow-md w-full">
+                    <img src="https://pub.gardenlawn.pl/media/images/grass/petar-tonchev-c-5-QE5kBYk-unsplash-scaled.webp" alt="Stadion" class="rounded-lg shadow-md w-full">
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<section class="u-clearfix u-grey-80 u-section-4" id="carousel_2ebb" style="width: fit-content">
-    <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
-        <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
-            <div class="u-layout">
-                <div class="u-layout-row">
-                    <div class="u-container-style u-layout-cell u-left-cell u-size-30 u-layout-cell-1">
-                        <div class="u-container-layout u-container-layout-1">
-                            <h2 class="u-text u-text-1 animated zoomIn-played" data-animation-name="zoomIn"
-                                data-animation-duration="1000" data-animation-delay="0" data-animation-direction=""
-                                style="will-change: transform, opacity; animation-duration: 1000ms;">PRACUJEMY DLA
-                                NAJWIĘKSZYCH</h2>
-                            <p class="u-align-left u-text u-text-2">Wysoka jakość, odpowiednia cena i szybka dostawa
-                                oraz szybko rosnąca baza klientów jest dobrym dowodem<br>na to, że jesteśmy liderem w
-                                Europie w produkcji trawy z rolki.<br>
-                                <br>Posiadamy solidną wiedzę fachową i dokładamy wszelkich starań, aby Klient był
-                                zadowolony. Nawet po dostarczeniu,<br>jesteśmy dostępni, aby odpowiedzieć na wszelkie
-                                pytania dotyczące trawnika.
-                            </p>
-                            <p class="u-text u-text-3">Nasz produkt to bardzo trwały i solidny trawnik, który ma wiele
-                                zastosowań.</p>
-                        </div>
-                    </div>
-                    <div
-                        class="u-align-center-lg u-align-center-md u-align-center-sm u-align-center-xl u-align-left-xs u-container-style u-layout-cell u-right-cell u-size-30 u-layout-cell-2">
-                        <div
-                            class="u-container-layout u-valign-top-lg u-valign-top-xl u-valign-top-xs u-container-layout-2">
-                            <img
-                                src="https://pub.gardenlawn.pl/media/images/grass/o-nas-z31.webp"
-                                alt=""
-                                class="u-expanded-width u-image u-image-round u-radius-25 u-image-1"
-                                data-image-width="982" data-image-height="504">
-                            <img
-                                src="https://pub.gardenlawn.pl/media/images/grass/petar-tonchev-c-5-QE5kBYk-unsplash-scaled.webp"
-                                alt="" class="u-expanded-width u-image u-image-round u-radius-25 u-image-2"
-                                data-image-width="2560" data-image-height="1440">
-                        </div>
-                    </div>
+    <!-- Innovation Section -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+            <!-- Left -->
+            <div>
+                <img src="https://pub.gardenlawn.pl/media/images/grass/Trawnikproducentmaszynydowycinaniatrawyzrolki.webp" alt="Maszyny" class="rounded-xl shadow-lg mb-8 w-full">
+                <h2 class="text-3xl font-bold mb-4">PRZEWAGA <br><span class="<?= $greenColor ?>">DZIĘKI INNOWACYJNOŚCI</span></h2>
+                <p class="mb-4 font-bold">Trawnik Producent wprowadza pierwsze w Polsce innowacyjne maszyny do wycinania trawy z rolki.</p>
+                <p>Pierwszy w Polsce kombajn Trebro AutoStack II umożliwia zbieranie darni z jeszcze większą wydajnością i precyzją. Rolki darni są teraz mocniejsze i bardziej spójne.</p>
+            </div>
+            <!-- Right -->
+            <div>
+                <div class="bg-gray-50 p-6 rounded-xl border border-gray-100 h-full">
+                    <img src="https://pub.gardenlawn.pl/media/images/grass/TrawnikProducentkomoraprniowa.webp" alt="Komora próżniowa" class="rounded-lg mb-6 w-full">
+                    <h3 class="text-2xl font-bold <?= $greenColor ?> mb-4">KOMORA PRÓŻNIOWA VACUUM</h3>
+                    <p class="mb-6">
+                        Zaprojektowana i zbudowana dla nas. Rolki z naturalną trawą poddawane są procesowi wstępnego schładzania próżniowego do 4°C przed dostawą.
+                        Uzyskujemy tym samym świeżość i doskonałą jakość na dłużej.
+                    </p>
+                    <img src="https://pub.gardenlawn.pl/media/images/grass/TrawnikProducentkomoraprniowaVacuum.webp" alt="Vacuum" class="rounded-lg w-full">
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<section class="u-clearfix u-section-5" id="sec-6940">
-    <div class="u-clearfix u-sheet u-sheet-1">
-        <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
-            <div class="u-layout">
-                <div class="u-layout-row">
-                    <div class="u-container-style u-layout-cell u-left-cell u-size-30 u-layout-cell-1">
-                        <div
-                            class="u-container-layout u-valign-top-lg u-valign-top-md u-valign-top-sm u-valign-top-xs u-container-layout-1">
-                            <img
-                                src="https://pub.gardenlawn.pl/media/images/grass/Trawnikproducentmaszynydowycinaniatrawyzrolki.webp"
-                                alt="" class="u-expanded-width u-image u-image-round u-radius-25 u-image-1"
-                                data-image-width="1033" data-image-height="541">
-                            <h2 class="u-text u-text-1 animated zoomOut" data-animation-name="zoomIn"
-                                data-animation-duration="1000" data-animation-delay="0" data-animation-direction=""
-                                style="will-change: transform, opacity; animation-duration: 1000ms;">
-                    <span class="u-text-custom-color-2">PRZ​EWAGA<br>DZIĘKI INNOWACYJNOŚCI
-                    </span>
-                            </h2>
-                            <p class="u-text u-text-2">
-                    <span style="font-weight: 700;"
-                          class="u-text-black">Trawnik Producent wprowadza pierwsze w Polsce<br>innowacyjne maszyny do wycinania trawy z rolki oraz konserwacji przed transportem do Klienta. Ponadto inwestuje w innowacyjne systemy nawadniające plantacje.
-                    </span>
-                                <span style="font-weight: 700;" class="u-text-black"></span>
-                                <br>
-                                <br>Pierwszy w Polsce kombajn Trebro AutoStack II umożliwia zbieranie darni z jeszcze
-                                większą wydajnością i precyzją. Klienci odnoszą bezpośrednie korzyści z lepszej jakości
-                                murawy. Rolki darni są teraz mocniejsze i bardziej spójne dzięki specjalistycznemu
-                                systemowi zwijania i automatycznemu układaniu na paletach.<span class="u-text-black">
-                      <br>
-                    </span>
-                            </p>
-                        </div>
-                    </div>
-                    <div
-                        class="u-align-left-xs u-container-style u-layout-cell u-right-cell u-size-30 u-white u-layout-cell-2">
-                        <div class="u-container-layout u-valign-bottom-sm u-container-layout-2">
-                            <img
-                                src="https://pub.gardenlawn.pl/media/images/grass/TrawnikProducentkomoraprniowa.webp"
-                                alt=""
-                                class="u-expanded-width u-image u-image-round u-radius-25 u-image-2"
-                                data-image-width="600" data-image-height="287">
-                            <h2 class="u-text u-text-custom-color-2 u-text-3 animated zoomOut"
-                                data-animation-name="zoomIn" data-animation-duration="1000" data-animation-delay="0"
-                                data-animation-direction=""
-                                style="will-change: transform, opacity; animation-duration: 1000ms;">KOMORA PRÓŻNIOWA
-                                VACUUM </h2>
-                            <p class="u-text u-text-4">Zaprojektowana i zbudowana dla nas. Rolki z naturalną
-                                trawą/murawą poddawane są procesowi wstępnego schładzania próżniowego do 4°C przed
-                                dostawą, dzięki czemu można ją dłużej transportować i przechowywać. Uzyskujemy tym samym
-                                świeżość i doskonałą jakość na dłużej, oraz piękny zielony trawnik bezpośrednio po
-                                rozłożeniu.<span class="u-text-black">
-                      <br>
-                    </span>
-                            </p>
-                            <img
-                                src="https://pub.gardenlawn.pl/media/images/grass/TrawnikProducentkomoraprniowaVacuum.webp"
-                                alt="" class="u-expanded-width u-image u-image-round u-radius-25 u-image-3"
-                                data-image-width="600" data-image-height="234">
-                        </div>
-                    </div>
-                </div>
+    <!-- Awards Section -->
+    <section class="bg-gray-50 py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl font-bold text-gray-900 mb-12">NAGRODY I WYRÓŻNIENIA</h2>
+            <div class="flex flex-wrap justify-center items-center gap-8 md:gap-12 grayscale hover:grayscale-0 transition-all duration-500">
+                <img src="https://pub.gardenlawn.pl/media/images/grass/KLJ2024-zotoPNGSMALL-1024x1024.webp" class="h-24 md:h-32 object-contain" alt="Nagroda 1">
+                <img src="https://pub.gardenlawn.pl/media/images/grass/nagroda-4-1.webp" class="h-20 md:h-24 object-contain" alt="Nagroda 2">
+                <img src="https://pub.gardenlawn.pl/media/images/grass/nagroda-5-1.webp" class="h-20 md:h-24 object-contain" alt="Nagroda 3">
+                <img src="https://pub.gardenlawn.pl/media/images/grass/nagroda-3-1.webp" class="h-20 md:h-24 object-contain" alt="Nagroda 4">
+                <img src="https://pub.gardenlawn.pl/media/images/grass/nagroda-1-1.webp" class="h-16 md:h-20 object-contain" alt="Nagroda 5">
+                <img src="https://pub.gardenlawn.pl/media/images/grass/nagroda-6-1.webp" class="h-20 md:h-24 object-contain" alt="Nagroda 6">
+                <img src="https://pub.gardenlawn.pl/media/images/grass/nagroda-7-1.webp" class="h-16 md:h-20 object-contain" alt="Nagroda 7">
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<section class="u-border-1 u-border-palette-5-light-3 u-clearfix u-palette-5-light-3 u-section-6" id="carousel_0443">
-    <div class="u-clearfix u-sheet u-valign-middle-md u-valign-middle-sm u-sheet-1">
-        <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
-            <div class="u-layout">
-                <div class="u-layout-row">
-                    <div class="u-container-style u-layout-cell u-left-cell u-size-60 u-layout-cell-1">
-                        <div
-                            class="u-container-layout u-valign-top-lg u-valign-top-md u-valign-top-sm u-container-layout-1">
-                            <h2 class="u-text u-text-1 animated zoomOut" data-animation-name="zoomIn"
-                                data-animation-duration="1000" data-animation-delay="0" data-animation-direction=""
-                                style="will-change: transform, opacity; animation-duration: 1000ms;">NAGRODY I
-                                WYRÓŻNIENIA</h2>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="u-clearfix u-palette-5-light-3 u-section-7" id="carousel_af53">
-    <div
-        class="u-clearfix u-sheet u-valign-middle-lg u-valign-middle-md u-valign-middle-sm u-valign-middle-xl u-sheet-1">
-        <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
-            <div class="u-gutter-0 u-layout">
-                <div class="u-layout-row">
-                    <div
-                        class="u-align-center-lg u-align-center-md u-align-center-sm u-align-center-xs u-container-style u-layout-cell u-palette-5-light-3 u-size-30 u-layout-cell-1">
-                        <div class="u-container-layout u-container-layout-1">
-                            <img
-                                src="https://pub.gardenlawn.pl/media/images/grass/KLJ2024-zotoPNGSMALL-1024x1024.webp"
-                                alt=""
-                                class="u-image u-image-contain u-image-default u-image-1" data-image-width="1024"
-                                data-image-height="1024">
-                            <img
-                                src="https://pub.gardenlawn.pl/media/images/grass/nagroda-4-1.webp"
-                                alt=""
-                                class="u-image u-image-contain u-image-default u-image-2" data-image-width="81"
-                                data-image-height="101">
-                            <img
-                                src="https://pub.gardenlawn.pl/media/images/grass/nagroda-5-1.webp"
-                                alt=""
-                                class="u-image u-image-contain u-image-default u-image-3" data-image-width="57"
-                                data-image-height="95">
-                            <img
-                                src="https://pub.gardenlawn.pl/media/images/grass/nagroda-3-1.webp"
-                                alt=""
-                                class="u-align-center-lg u-align-center-md u-align-center-sm u-align-center-xs u-image u-image-contain u-image-default u-image-4"
-                                data-image-width="78" data-image-height="102">
-                        </div>
-                    </div>
-                    <div class="u-container-style u-layout-cell u-size-30 u-layout-cell-2">
-                        <div class="u-container-layout u-container-layout-2">
-                            <img
-                                src="https://pub.gardenlawn.pl/media/images/grass/nagroda-1-1.webp"
-                                alt=""
-                                class="u-align-center-lg u-align-center-md u-align-center-sm u-align-center-xs u-image u-image-contain u-image-default u-image-5"
-                                data-image-width="107" data-image-height="41">
-                            <img
-                                src="https://pub.gardenlawn.pl/media/images/grass/nagroda-6-1.webp"
-                                alt=""
-                                class="u-image u-image-contain u-image-default u-image-6" data-image-width="63"
-                                data-image-height="77">
-                            <img
-                                src="https://pub.gardenlawn.pl/media/images/grass/nagroda-7-1.webp"
-                                alt=""
-                                class="u-image u-image-contain u-image-default u-image-7" data-image-width="70"
-                                data-image-height="56">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="u-clearfix u-palette-5-light-3 u-section-8" id="sec-b81a">
-    <div class="u-clearfix u-sheet u-sheet-1"></div>
-</section>
-</body>
-</html>
+</div>

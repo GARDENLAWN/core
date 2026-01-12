@@ -2,207 +2,715 @@
 
 /** @var Template $block */
 /** @var Escaper $escaper */
+
 /** @var ViewModelRegistry $viewModels */
 
-/** @var Slider $sliderViewModel */
-
 use Hyva\Theme\Model\ViewModelRegistry;
-use Hyva\Theme\ViewModel\Slider;
-use Magento\Catalog\Block\Product\View;
-use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
 
 /** @var View $block */
 $product = $block->getProduct();
-$sliderViewModel = $viewModels->require(Slider::class);
 
-// Helper to render and clean external templates using Shadow DOM for isolation
-$renderGrassInfo = function($templateName) use ($block) {
-    $fileName = $block->getTemplateFile('GardenLawn_Core::' . $templateName);
-    if (!file_exists($fileName)) {
-        return '';
-    }
-    ob_start();
-    include $fileName;
-    $content = ob_get_clean();
-
-    // Extract html classes
-    $htmlClasses = '';
-    if (preg_match('/<html[^>]*class=["\']([^"\']*)["\']/', $content, $matches)) {
-        $htmlClasses = $matches[1];
-    }
-
-    // Extract body classes
-    $bodyClasses = '';
-    if (preg_match('/<body[^>]*class=["\']([^"\']*)["\']/', $content, $matches)) {
-        $bodyClasses = $matches[1];
-    }
-
-    // Remove Doctype and html/head/body tags wrapper
-    $content = preg_replace('/<!DOCTYPE html>/i', '', $content);
-    $content = preg_replace('/<html[^>]*>/i', '', $content);
-    $content = preg_replace('/<\/html>/i', '', $content);
-    $content = preg_replace('/<head>/i', '', $content);
-    $content = preg_replace('/<\/head>/i', '', $content);
-    $content = preg_replace('/<body[^>]*>/i', '', $content);
-    $content = preg_replace('/<\/body>/i', '', $content);
-
-    // Remove title, meta, canonical, json-ld
-    $content = preg_replace('/<title>.*?<\/title>/is', '', $content);
-    $content = preg_replace('/<meta[^>]*>/i', '', $content);
-    $content = preg_replace('/<link rel="canonical"[^>]*>/i', '', $content);
-    $content = preg_replace('/<script type="application\/ld\+json".*?<\/script>/is', '', $content);
-
-    // Remove jQuery to avoid duplicates/errors
-    $content = preg_replace('/<script[^>]*jquery\.min\.js[^>]*><\/script>/i', '', $content);
-    $content = preg_replace('/<script[^>]*jquery-migrate\.min\.js[^>]*><\/script>/i', '', $content);
-
-    // Remove body overflow styles
-    $content = preg_replace('/body\s*{[^}]*overflow:[^}]*}/is', '', $content);
-
-    // Replace 'body' selector in CSS with .body-wrapper
-    $content = preg_replace('/(?<=})\s*body\s*{/', '.body-wrapper {', $content);
-    $content = preg_replace('/^\s*body\s*{/', '.body-wrapper {', $content);
-
-    // Inject responsive styles and reset for Shadow DOM
-    $responsiveStyles = '<style>
-        :host { display: block; all: initial; contain: content; }
-        .body-wrapper {
-            width: 100%;
-            overflow-x: hidden;
-            background-color: #fff;
-            font-family: "Open Sans", sans-serif;
-            color: #111;
-        }
-        .body-wrapper * {
-            max-width: 100% !important;
-            box-sizing: border-box !important;
-        }
-        .body-wrapper img {
-            height: auto !important;
-        }
-        /* Hide header/footer elements if they exist in the content */
-        header, footer, .u-header { display: none !important; }
-    </style>';
-
-    // Wrap in Declarative Shadow DOM
-    return '<div class="grass-info-host ' . $htmlClasses . '">' .
-           '<template shadowrootmode="open">' .
-           $responsiveStyles .
-           '<div class="body-wrapper ' . $bodyClasses . '">' . $content . '</div>' .
-           '</template>' .
-           '</div>';
-};
-
+// Common helpers
+$greenText = 'text-[#009640]';
+$iconCheck = '<svg class="w-5 h-5 text-[#009640] mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>';
 ?>
-<style type="text/css">
-    .topnav a {
-        text-align: center;
-    }
 
-    .tabs-container {
-        padding: 0;
-        margin-left: -23px;
-    }
-
+<style>
     .tabs-navigation {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
+        border-bottom: 1px solid #e5e7eb;
+        margin-bottom: 0;
+        list-style: none !important;
+        padding-left: 0 !important;
+    }
+
+    .tabs-navigation li {
+        margin-bottom: -1px;
+        list-style: none !important;
+    }
+
+    .tabs-navigation a {
+        display: block;
+        padding: 1rem 2rem;
+        font-weight: 600;
+        color: #6b7280;
+        border-bottom: 3px solid transparent;
+        transition: all 0.2s;
+        font-size: 1.125rem;
+        text-decoration: none;
+    }
+
+    .tabs-navigation a:hover {
+        color: #111827;
+        border-bottom-color: #d1d5db;
+    }
+
+    .tabs-navigation .tab-header.active a {
+        color: #009640;
+        border-bottom-color: #009640;
+        background-color: #f9fafb;
     }
 
     @media (max-width: 768px) {
-        .tabs-container {
-            margin-left: 0;
-            width: 100%;
+        .tabs-navigation {
+            flex-direction: column;
+            border-bottom: none;
         }
+
         .tabs-navigation li {
-            flex: 1 1 auto; /* Allow tabs to shrink/grow */
+            width: 100%;
+            text-align: center;
         }
+
         .tabs-navigation a {
-            padding: 10px 5px; /* Reduce padding on mobile */
-            font-size: 14px;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 0.75rem;
+            font-size: 1rem;
+        }
+
+        .tabs-navigation .tab-header.active a {
+            border-bottom-color: #e5e7eb;
+            border-left: 4px solid #009640;
         }
     }
 </style>
-
-<!-- Polyfill for Declarative Shadow DOM (for older browsers) -->
-<script>
-    (function() {
-        if (HTMLTemplateElement.prototype.hasOwnProperty('shadowRootMode')) return;
-        document.querySelectorAll('template[shadowrootmode]').forEach(t => {
-            const mode = t.getAttribute('shadowrootmode');
-            const shadowRoot = t.parentNode.attachShadow({ mode });
-            shadowRoot.appendChild(t.content);
-            t.remove();
-        });
-    })();
-</script>
 
 <section>
     <?= $block->getChildHtml('product_options_wrapper_bottom') ?>
 </section>
 
-
-<div id="tabs-description">
-    <div class="tabs-container" data-content-type="tabs" data-appearance="default" data-active-tab=""
-         data-element="main">
-        <ul role="tablist" style="text-align: center;" class="tabs-navigation" data-element="navigation">
-            <li role="tab" class="tab-header active" data-element="headers"><a href="#tab_1" class="tab-title"><span
-                        class="tab-title">Trawa z Rolki</span></a></li>
-            <li role="tab" class="tab-header" data-element="headers"><a href="#tab_2" class="tab-title"><span
-                        class="tab-title">O Producencie</span></a></li>
-            <li role="tab" class="tab-header" data-element="headers"><a href="#tab_3" class="tab-title"><span
-                        class="tab-title">Pielęgnacja Trawnika</span></a></li>
-            <li role="tab" class="tab-header" data-element="headers"><a href="#tab_4" class="tab-title"><span
-                        class="tab-title">Zakładanie Trawnika</span></a></li>
-            <li role="tab" class="tab-header" data-element="headers"><a href="#tab_5" class="tab-title"><span
-                        class="tab-title">Logistyka</span></a></li>
+<div id="tabs-description" class="mt-12 bg-white rounded-t-xl shadow-sm border border-gray-100 overflow-hidden">
+    <div class="tabs-container">
+        <ul role="tablist" class="tabs-navigation bg-gray-50" data-element="navigation">
+            <li role="tab" class="tab-header active"><a href="#tab_1">Trawa z Rolki</a></li>
+            <li role="tab" class="tab-header"><a href="#tab_2">O Producencie</a></li>
+            <li role="tab" class="tab-header"><a href="#tab_3">Pielęgnacja Trawnika</a></li>
+            <li role="tab" class="tab-header"><a href="#tab_4">Zakładanie Trawnika</a></li>
+            <li role="tab" class="tab-header"><a href="#tab_5">Logistyka</a></li>
         </ul>
-        <div id="tab-content" class="tabs-content" data-element="content" style="width: 100%;">
-            <div data-content-type="tab-item" data-appearance="default" data-tab-name="Trawa z Rolki"
-                 data-background-images="{}"
-                 data-element="main" id="tab_1" style="padding: 0">
-                <?= $renderGrassInfo('grassinfo1.phtml') ?>
+
+        <div id="tab-content" class="tabs-content font-sans text-gray-700 leading-relaxed">
+
+            <!-- TAB 1: TRAWA Z ROLKI -->
+            <div id="tab_1" class="tab-pane">
+                <!-- Hero -->
+                <div class="bg-white py-12 px-4 sm:px-6 lg:px-8 text-center">
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-6">TRAWA Z ROLKI OD PRODUCENTA</h2>
+                    <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                        Jako najlepszy na rynku producent oferujemy Państwu trawnik z rolki, który może zachwycić już po
+                        kilku godzinach od jego założenia.
+                        Intensywny, głęboki zielony kolor zachęca do odpoczynku, a także do zabawy.
+                    </p>
+                </div>
+
+                <!-- Benefits Cards -->
+                <div class="bg-gray-50 py-16 px-4 sm:px-6 lg:px-8">
+                    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <!-- Card 1 -->
+                        <div
+                            class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-100">
+                            <div class="flex justify-center mb-6">
+                                <div class="p-4 bg-green-50 rounded-full">
+                                    <img
+                                        src="https://pub.gardenlawn.pl/media/images/grass/5574607_football_grass_soccer_sport_sports_icon.svg"
+                                        alt="Ikona trawy" class="w-16 h-16 object-contain">
+                                </div>
+                            </div>
+                            <h3 class="text-2xl font-bold text-center mb-6 text-gray-800">ZALETY <span
+                                    class="<?= $greenText ?>">TRAWY</span></h3>
+                            <ul class="space-y-3 list-none pl-0">
+                                <li class="flex items-start"><?= $iconCheck ?><span>Jakość i starannie wyselekcjonowane gatunki traw</span>
+                                </li>
+                                <li class="flex items-start"><?= $iconCheck ?><span>Odporna na intensywną eksploatację i wydeptywanie</span>
+                                </li>
+                                <li class="flex items-start"><?= $iconCheck ?><span>Oszczędność czasu przy wykładaniu – szybki montaż</span>
+                                </li>
+                                <li class="flex items-start"><?= $iconCheck ?><span>Po wyłożeniu, natychmiast gotowa do użytku</span>
+                                </li>
+                                <li class="flex items-start"><?= $iconCheck ?><span>Wysoka aklimatyzacja w naszych warunkach</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- Card 2 -->
+                        <div
+                            class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-100">
+                            <div class="flex justify-center mb-6">
+                                <div class="p-4 bg-green-50 rounded-full">
+                                    <img src="https://pub.gardenlawn.pl/media/images/grass/2867914_information_icon.svg"
+                                         alt="Ikona info" class="w-16 h-16 object-contain">
+                                </div>
+                            </div>
+                            <h3 class="text-2xl font-bold text-center mb-6 text-gray-800">DLACZEGO <span
+                                    class="<?= $greenText ?>">WARTO</span>?</h3>
+                            <ul class="space-y-3 list-none pl-0">
+                                <li class="flex items-start"><?= $iconCheck ?><span>Trawa wycinana z gruntu hodowana na plantacji od 12-18 miesięcy</span>
+                                </li>
+                                <li class="flex items-start"><?= $iconCheck ?><span>Posiada zwarty i mocny system korzeniowy</span>
+                                </li>
+                                <li class="flex items-start"><?= $iconCheck ?><span>Siatka biodegradowalna zapewnia stabilność rolki</span>
+                                </li>
+                                <li class="flex items-start"><?= $iconCheck ?>
+                                    <span>Łatwe i szybkie wykonanie trawnika</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Applications Icons -->
+                <div class="bg-white py-16 px-4 sm:px-6 lg:px-8">
+                    <div class="max-w-7xl mx-auto">
+                        <h2 class="text-3xl font-bold text-center text-gray-900 mb-12">ZASTOSOWANIE</h2>
+                        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 mb-12">
+                            <?php
+                            $apps = [
+                                'Trawniki przydomowe', 'Zieleń miejska', 'Plac zabaw', 'Tereny inwestycyjne', 'Pasy zieleni'
+                            ];
+                            foreach ($apps as $app): ?>
+                                <div
+                                    class="flex flex-col items-center p-6 bg-gray-50 rounded-xl hover:bg-green-50 transition-colors duration-300 cursor-default">
+                                    <div class="w-12 h-12 mb-3 text-[#009640]">
+                                        <svg fill="currentColor" viewBox="0 0 20 20" class="w-full h-full">
+                                            <path fill-rule="evenodd"
+                                                  d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                  clip-rule="evenodd"/>
+                                        </svg>
+                                    </div>
+                                    <span class="font-bold text-sm uppercase text-center"><?= $app ?></span>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                        <p class="text-center text-gray-600 max-w-4xl mx-auto">
+                            <b>Specjalizujemy się w produkcji darni rolowanej oraz montażu trawnika z rolki na wielu
+                                płaszczyznach.</b><br>
+                            Trawa rolowana idealnie sprawdzi się jako trawnik przydomowy, zieleń miejska, na placach
+                            zabaw, kortach tenisowych, murawach piłkarskich czy polach golfowych.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Care Dark Section -->
+                <div class="relative py-20 bg-gray-800 text-white">
+                    <div class="absolute inset-0 overflow-hidden">
+                        <img src="https://pub.gardenlawn.pl/media/images/grass/trawa-1200x800.webp" alt="Trawa tło"
+                             class="w-full h-full object-cover opacity-30">
+                    </div>
+                    <div class="relative max-w-4xl mx-auto px-4 text-center">
+                        <h2 class="text-3xl md:text-4xl font-bold mb-4">Trawa w rolce</h2>
+                        <p class="text-xl italic mb-8">Czynności pielęgnacyjne po rozłożeniu</p>
+                        <p class="text-lg text-gray-200 mb-8">Aby trawniki z rolki mogły długo zachwycać swoim wyglądem
+                            oraz zachować dobry stan należy <span
+                                class="font-bold text-white">odpowiednio o nie dbać</span>.</p>
+                        <div class="bg-black/40 backdrop-blur-sm p-8 rounded-xl border border-white/10 text-left">
+                            <p class="mb-4">Trawnik w rolkach może być używany już kilka godzin po jego rozłożeniu,
+                                jednak warto dać odpocząć trawie kilka dni. Przez pierwszy okres po rozłożeniu – od
+                                siedmiu do dziesięciu dni - trawa powinna być intensywnie podlewana.</p>
+                            <p>Do pierwszego koszenia trawnika z rolki można przystąpić po upływie jednego tygodnia.
+                                Trawnik z rolki może być w pełni użytkowany po upływie 4-6 tygodni.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Detailed Care -->
+                <div class="bg-white py-16 px-4 sm:px-6 lg:px-8">
+                    <div class="max-w-7xl mx-auto">
+                        <h2 class="text-3xl font-bold text-center text-gray-900 mb-12">Trawnik z rolki -
+                            pielęgnacja</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                            <div class="bg-gray-50 p-8 rounded-xl border border-gray-100">
+                                <h3 class="text-xl font-bold mb-4">Koszenie</h3>
+                                <p>Począwszy od marca, aż do listopada należy go regularnie kosić. Pierwsze koszenie w
+                                    marcu, ostatnie pod koniec października.</p>
+                            </div>
+                            <div class="bg-[#009640] text-white p-8 rounded-xl shadow-lg">
+                                <h3 class="text-xl font-bold mb-4">Nawożenie</h3>
+                                <p>Trawa z rolki powinna być nawożona około 3-6 razy w ciągu roku. Dla każdej pory roku
+                                    powinna być stosowana inna mieszanka nawozu.</p>
+                            </div>
+                            <div class="bg-[#009640] text-white p-8 rounded-xl shadow-lg">
+                                <h3 class="text-xl font-bold mb-4">Zabiegi</h3>
+                                <p>Wertykulacja dwa razy do roku (wiosna/jesień). Warto również przynajmniej raz w roku
+                                    poddać zabiegowi napowietrzania (aeracja).</p>
+                            </div>
+                            <div class="bg-gray-50 p-8 rounded-xl border border-gray-100">
+                                <h3 class="text-xl font-bold mb-4">Nawadnianie</h3>
+                                <p>Nie rzadziej niż 1-2 razy w tygodniu. Podlewać rano. Optymalna ilość wody to 10-20
+                                    litrów na 1 m2.</p>
+                            </div>
+                        </div>
+
+                        <div class="text-center bg-gray-50 p-8 rounded-2xl">
+                            <h3 class="text-2xl font-bold mb-4">Ile kosztuje trawa z rolki?</h3>
+                            <p class="max-w-3xl mx-auto mb-6">Cena zależy od rodzaju i metrażu. Koszt jest wyższy niż
+                                przy wysiewie, ale efekt natychmiastowy. Naszą ofertę kierujemy do klientów
+                                indywidualnych oraz branży budownictwa sportowego.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- First Mowing -->
+                <div class="bg-gray-900 text-white py-16 px-4 sm:px-6 lg:px-8">
+                    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                        <div>
+                            <h2 class="text-3xl font-bold mb-6">Pierwsze koszenie</h2>
+                            <p class="mb-4 font-bold text-green-400">W momencie, kiedy trawa zrośnie się z podłożem,
+                                przychodzi moment pierwszego koszenia.</p>
+                            <p class="mb-4">Można to sprawdzić poprzez delikatne pociągnięcie za kępę trawy. Zanim
+                                przystąpi się do koszenia, należy sprawdzić ostrość noży kosiarki.</p>
+                            <p>Kosiarkę należy ustawić na wysokość 4 centymetrów, a jednorazowo nie należy ścinać więcej
+                                niż 1/3 wysokości.</p>
+                        </div>
+                        <div>
+                            <img src="https://pub.gardenlawn.pl/media/images/grass/kosiarka.webp" alt="Kosiarka"
+                                 class="rounded-xl shadow-lg w-full h-auto max-h-[400px] object-contain mx-auto">
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div data-content-type="tab-item" data-appearance="default" data-tab-name="O Producencie"
-                 data-background-images="{}"
-                 data-element="main" id="tab_2" style="padding: 0; display: none;">
-                <?= $renderGrassInfo('grassinfo2.phtml') ?>
+
+            <!-- TAB 2: O PRODUCENCIE -->
+            <div id="tab_2" class="tab-pane" style="display: none;">
+                <div class="bg-white py-16 px-4 sm:px-6 lg:px-8">
+                    <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                        <div>
+                            <h2 class="text-3xl font-bold text-gray-900 mb-6">Lider w Europie</h2>
+                            <p class="text-lg text-gray-600 mb-6 leading-relaxed">
+                                <b>Trawnik Producent</b> to firma z ponad 26-letnią tradycją. Jesteśmy największą w tej
+                                części Europy plantacją darni.
+                                Na blisko 350 hektarowej powierzchni produkujemy najwyższej jakości trawę rolowaną.
+                            </p>
+                            <div class="bg-green-50 p-6 rounded-xl border-l-4 border-[#009640]">
+                                <p class="font-medium text-gray-800">Jesteśmy liderem w branży budowy profesjonalnych
+                                    obiektów sportowych, których domeną są naturalne i hybrydowe nawierzchnie
+                                    trawiaste.</p>
+                            </div>
+                        </div>
+                        <div class="relative">
+                            <div class="absolute -inset-4 bg-green-100 rounded-2xl transform rotate-2"></div>
+                            <img
+                                src="https://pub.gardenlawn.pl/media/images/grass/Naszprodukttobardzotrwayisolidnytrawnikzrolki.webp"
+                                alt="Produkcja"
+                                class="relative rounded-xl shadow-lg w-full h-auto max-h-[500px] object-contain mx-auto">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gray-900 text-white py-16 px-4">
+                    <div class="max-w-7xl mx-auto text-center mb-12">
+                        <h2 class="text-3xl font-bold">Innowacyjność</h2>
+                        <p class="text-gray-400 mt-4">Przewaga dzięki technologii</p>
+                    </div>
+                    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="bg-gray-800 p-8 rounded-2xl border border-gray-700">
+                            <h3 class="text-xl font-bold text-green-400 mb-4">Maszyny Trebro AutoStack II</h3>
+                            <p class="text-gray-300">Pierwszy w Polsce kombajn umożliwiający zbieranie darni z jeszcze
+                                większą wydajnością i precyzją. Rolki są mocniejsze i bardziej spójne.</p>
+                        </div>
+                        <div class="bg-gray-800 p-8 rounded-2xl border border-gray-700">
+                            <h3 class="text-xl font-bold text-green-400 mb-4">Komora Próżniowa Vacuum</h3>
+                            <p class="text-gray-300">Rolki poddawane są procesowi wstępnego schładzania próżniowego do
+                                4°C. Gwarantuje to świeżość i doskonałą jakość na dłużej.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white py-16 px-4 sm:px-6 lg:px-8">
+                    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                        <div>
+                            <h2 class="text-3xl font-bold mb-6">PRACUJEMY DLA NAJWIĘKSZYCH</h2>
+                            <p class="mb-6 text-lg">Wysoka jakość, odpowiednia cena i szybka dostawa oraz szybko rosnąca
+                                baza klientów jest dobrym dowodem na to, że jesteśmy liderem w Europie.</p>
+                            <p class="text-green-600 font-bold">Nasz produkt to bardzo trwały i solidny trawnik, który
+                                ma wiele zastosowań.</p>
+                        </div>
+                        <div class="grid grid-cols-1 gap-4">
+                            <img src="https://pub.gardenlawn.pl/media/images/grass/o-nas-z31.webp" alt="Realizacja"
+                                 class="rounded-lg shadow-md w-full h-auto max-h-[300px] object-contain mx-auto">
+                            <img
+                                src="https://pub.gardenlawn.pl/media/images/grass/petar-tonchev-c-5-QE5kBYk-unsplash-scaled.webp"
+                                alt="Stadion"
+                                class="rounded-lg shadow-md w-full h-auto max-h-[300px] object-contain mx-auto">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gray-50 py-16 px-4 text-center">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-12">NAGRODY I WYRÓŻNIENIA</h2>
+                    <div class="flex flex-wrap justify-center items-center gap-8 max-w-7xl mx-auto">
+                        <img src="https://pub.gardenlawn.pl/media/images/grass/KLJ2024-zotoPNGSMALL-1024x1024.webp"
+                             class="h-24 object-contain" alt="Nagroda">
+                        <img src="https://pub.gardenlawn.pl/media/images/grass/nagroda-4-1.webp"
+                             class="h-20 object-contain" alt="Nagroda">
+                        <img src="https://pub.gardenlawn.pl/media/images/grass/nagroda-5-1.webp"
+                             class="h-20 object-contain" alt="Nagroda">
+                        <img src="https://pub.gardenlawn.pl/media/images/grass/nagroda-3-1.webp"
+                             class="h-20 object-contain" alt="Nagroda">
+                        <img src="https://pub.gardenlawn.pl/media/images/grass/nagroda-1-1.webp"
+                             class="h-16 object-contain" alt="Nagroda">
+                    </div>
+                </div>
             </div>
-            <div data-content-type="tab-item" data-appearance="default" data-tab-name="Pielęgnacja Trawnika"
-                 data-background-images="{}"
-                 data-element="main" id="tab_3" style="padding: 0; display: none;">
-                <?= $renderGrassInfo('grassinfo3.phtml') ?>
+
+            <!-- TAB 3: PIELĘGNACJA TRAWNIKA (grassinfo3 - Grupa Trawnik) -->
+            <div id="tab_3" class="tab-pane" style="display: none;">
+                <div class="bg-white py-16 px-4 sm:px-6 lg:px-8">
+                    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                        <div>
+                            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">GRUPA TRAWNIK</h2>
+                            <h3 class="text-xl font-bold <?= $greenText ?> mb-6">Posiadamy 25-letnie doświadczenie w
+                                branży</h3>
+                            <p class="mb-6 text-lg">Od 1998 r. do dziś staliśmy się specjalistami w dziedzinie
+                                powszechnie stosowanej trawy naturalnej oraz nowoczesnej naturalnej hybrydowej.</p>
+                            <p class="mb-6">Działamy kompleksowo, zarządzając projektem od początku do końca: od
+                                podbudowy, drenażu, instalacji grzewczej, po serwis.</p>
+                            <blockquote class="border-l-4 border-[#009640] pl-4 italic text-gray-600">Wszystkie etapy
+                                realizacji wykonywane są przez naszą wyszkoloną załogę.
+                            </blockquote>
+                        </div>
+                        <div class="space-y-4">
+                            <img
+                                src="https://pub.gardenlawn.pl/media/images/grass/grupa-tranwik-projektuje-instaluje.webp"
+                                alt="Grupa Trawnik"
+                                class="rounded-xl shadow-lg w-full h-auto max-h-[400px] object-contain mx-auto">
+                            <img
+                                src="https://pub.gardenlawn.pl/media/images/grass/murawa-sportowa-arena-gdask-realizacja-hybrid-sport-1.webp"
+                                alt="Arena"
+                                class="rounded-xl shadow-lg w-full hidden md:block h-auto max-h-[400px] object-contain mx-auto">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gray-800 text-white py-16 px-4 sm:px-6 lg:px-8">
+                    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                        <div>
+                            <h2 class="text-3xl font-bold mb-6">POZNAJ NASZE MOŻLIWOŚCI</h2>
+                            <p class="mb-6">System naturalnych hybrydowych muraw sportowych ROYAL Hybrid to wysoka
+                                jakość, wysokie osiągi sportowe i trwałość na długie lata.</p>
+                            <p class="text-green-400 font-bold mb-6">Nasze innowacyjne boiska piłkarskie zostały
+                                zaprojektowane w taki sposób, aby zminimalizować ryzyko kontuzji graczy.</p>
+                            <p>Nawierzchnia hybrydowa traktowana jest przez piłkarzy jak naturalna (70% trawa naturalna,
+                                30% włókna).</p>
+                        </div>
+                        <div class="space-y-4">
+                            <img src="https://pub.gardenlawn.pl/media/images/grass/StadionPGE.webp" alt="PGE"
+                                 class="rounded-lg shadow-md w-full h-auto max-h-[300px] object-contain mx-auto">
+                            <img
+                                src="https://pub.gardenlawn.pl/media/images/grass/petar-tonchev-c-5-QE5kBYk-unsplash-scaled.webp"
+                                alt="Boisko"
+                                class="rounded-lg shadow-md w-full h-auto max-h-[300px] object-contain mx-auto">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gray-50 py-12 text-center">
+                    <div class="max-w-4xl mx-auto px-4">
+                        <img src="https://pub.gardenlawn.pl/media/images/grass/grupa-trawnik.webp" alt="Logo"
+                             class="h-32 mx-auto mb-6 object-contain">
+                        <h3 class="text-2xl font-bold <?= $greenText ?>">W GRUPIE TRAWNIK WIEMY Z DOŚWIADCZENIA, ŻE
+                            KAŻDY SPORT I KAŻDY PROJEKT JEST WYJĄTKOWY</h3>
+                    </div>
+                </div>
+
+                <div class="bg-white py-16 px-4 sm:px-6 lg:px-8">
+                    <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+                        <div class="p-6 bg-white rounded-xl shadow-sm border border-gray-100">
+                            <img src="https://pub.gardenlawn.pl/media/images/grass/cropped-trawnikproducent.webp"
+                                 class="h-16 mx-auto mb-4 object-contain" alt="Logo">
+                            <h4 class="font-bold <?= $greenText ?>">Trawnik Producent</h4>
+                            <p class="text-sm text-gray-600">Produkcja traw ogrodowych</p>
+                        </div>
+                        <div class="p-6 bg-white rounded-xl shadow-sm border border-gray-100">
+                            <img src="https://pub.gardenlawn.pl/media/images/grass/trawnik-finance.webp"
+                                 class="h-16 mx-auto mb-4 object-contain" alt="Logo">
+                            <h4 class="font-bold text-purple-700">Trawnik Finanse</h4>
+                            <p class="text-sm text-gray-600">Opcje finansowania</p>
+                        </div>
+                        <div class="p-6 bg-white rounded-xl shadow-sm border border-gray-100">
+                            <img src="https://pub.gardenlawn.pl/media/images/grass/hybrid-sport-logo.webp"
+                                 class="h-16 mx-auto mb-4 object-contain" alt="Logo">
+                            <h4 class="font-bold text-green-500">Hybrid Sport</h4>
+                            <p class="text-sm text-gray-600">Projekty inwestycji</p>
+                        </div>
+                        <div class="p-6 bg-white rounded-xl shadow-sm border border-gray-100">
+                            <img src="https://pub.gardenlawn.pl/media/images/grass/hybrid-service-logo.webp"
+                                 class="h-16 mx-auto mb-4 object-contain" alt="Logo">
+                            <h4 class="font-bold text-orange-500">Hybrid Service</h4>
+                            <p class="text-sm text-gray-600">Pielęgnacja murawy</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div data-content-type="tab-item" data-appearance="default" data-tab-name="Zakładanie Trawnika"
-                 data-background-images="{}"
-                 data-element="main" id="tab_4" style="padding: 0; display: none;">
-                <?= $renderGrassInfo('grassinfo4.phtml') ?>
+
+            <!-- TAB 4: ZAKŁADANIE TRAWNIKA (grassinfo4) -->
+            <div id="tab_4" class="tab-pane" style="display: none;">
+                <div class="bg-white py-16 px-4 sm:px-6 lg:px-8">
+                    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                        <div>
+                            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">TRAWA OGRODOWA</h2>
+                            <p class="mb-6 font-bold">Oprócz wielkości plantacji, naszą cechą wyróżniającą jest wysoka
+                                jakość produkowanej trawy. Jest to jedyna w Polsce plantacja całkowicie nawadniana.</p>
+                            <p class="mb-6">Posiada ponad 20 km rurociągów, własne studnie głębinowe oraz zbiorniki
+                                retencyjne. Zapewnia to najwyższą klasę produktów niezależnie od pogody.</p>
+                            <p class="mb-6">Trawa w rolkach posiada wbudowaną w korzeń siatkę biodegradowalną. System
+                                korzeniowy w połączeniu z siatką tworzy mocną i zwartą konstrukcję.</p>
+                        </div>
+                        <div>
+                            <img src="https://pub.gardenlawn.pl/media/images/grass/Trawaogrodowawrolce.webp"
+                                 alt="Trawa ogrodowa"
+                                 class="rounded-xl shadow-lg w-full h-auto object-contain max-h-[500px] mx-auto">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gray-50 py-16 px-4 sm:px-6 lg:px-8">
+                    <div class="max-w-7xl mx-auto">
+                        <h2 class="text-3xl font-bold text-center <?= $greenText ?> mb-8">Zalety trawy ogrodowej</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                            <img
+                                src="https://pub.gardenlawn.pl/media/images/grass/trawa-w-rolce-producent-trawy-ogrodowej.webp"
+                                alt="Producent"
+                                class="rounded-xl shadow-md w-full h-auto max-h-[400px] object-contain mx-auto">
+                            <div>
+                                <ul class="space-y-4 list-none pl-0">
+                                    <li class="flex items-start"><?= $iconCheck ?>
+                                        <span>Doskonała jakość trawy ogrodowej</span></li>
+                                    <li class="flex items-start"><?= $iconCheck ?><span>Starannie wyselekcjonowane gatunki traw</span>
+                                    </li>
+                                    <li class="flex items-start"><?= $iconCheck ?><span>Odporne na intensywną eksploatację i wydeptywanie</span>
+                                    </li>
+                                    <li class="flex items-start"><?= $iconCheck ?><span>Oszczędność czasu przy wykładaniu - szybki montaż</span>
+                                    </li>
+                                    <li class="flex items-start"><?= $iconCheck ?><span>Po wyłożeniu, natychmiast gotowa do użytku</span>
+                                    </li>
+                                    <li class="flex items-start"><?= $iconCheck ?><span>Wysoka aklimatyzacja w naszych warunkach</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gray-800 text-white py-16 px-4 sm:px-6 lg:px-8">
+                    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                        <div>
+                            <h2 class="text-3xl font-bold mb-6">BUDOWA SYSTEMU</h2>
+                            <p class="mb-6">Trawa rolowana STRONG posiada wbudowaną w korzeń siatkę biodegradowalną.
+                                System korzeniowy w połączeniu z siatką tworzy mocną i zwartą konstrukcję.</p>
+                            <h3 class="text-xl font-bold text-green-300 mb-4">Jak odpowiednio przygotować podłoże?</h3>
+                            <p>Przed rozwinięciem trawy w rolce należy spulchnić podłoże – do 2-3 centymetrów. Trawa z
+                                rolki powinna zostać rozłożona w przeciągu jednego lub dwóch dni.</p>
+                        </div>
+                        <div>
+                            <img src="https://pub.gardenlawn.pl/media/images/grass/strong-przekroj-pl-1.webp"
+                                 alt="Przekrój"
+                                 class="rounded-lg shadow-md w-full bg-white p-2 h-auto object-contain mx-auto">
+                            <p class="mt-4 text-sm text-gray-300">Trawa do ogrodu STRONG sprawdza się idealnie na
+                                nierównych terenach (np. na skarpach).</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white py-16 px-4 sm:px-6 lg:px-8">
+                    <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-4 mb-16">
+                        <div class="bg-gray-100 rounded-lg overflow-hidden h-64">
+                            <img
+                                src="https://pub.gardenlawn.pl/media/images/grass/henrique-paim-sew5dUh0_bg-unsplash-scaled.webp"
+                                class="w-full h-full object-contain" alt="Galeria">
+                        </div>
+                        <div class="bg-gray-100 rounded-lg overflow-hidden h-64">
+                            <img
+                                src="https://pub.gardenlawn.pl/media/images/grass/WhatsAppImage2021-08-02at20.10.33.webp"
+                                class="w-full h-full object-contain" alt="Galeria">
+                        </div>
+                        <div class="bg-gray-100 rounded-lg overflow-hidden h-64">
+                            <img
+                                src="https://pub.gardenlawn.pl/media/images/grass/petar-tonchev-c-5-QE5kBYk-unsplash-scaled.webp"
+                                class="w-full h-full object-contain" alt="Galeria">
+                        </div>
+                    </div>
+
+                    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                        <div class="bg-gray-50 p-8 rounded-xl border border-gray-200">
+                            <h3 class="text-2xl font-bold mb-6">JAK ROZKŁADAĆ</h3>
+                            <ul class="space-y-4 list-none pl-0">
+                                <li class="flex items-start"><?= $iconCheck ?><span>Ściśle obok siebie, pierwszy pas w miejscu gdzie trawnik jest najdłuższy.</span>
+                                </li>
+                                <li class="flex items-start"><?= $iconCheck ?><span>Pasy trawy należy dokładnie przycisnąć do podłoża i ubić wałem.</span>
+                                </li>
+                                <li class="flex items-start"><?= $iconCheck ?><span>Zewnętrzne krawędzie należy obsypać ziemią, aby nie obsychały.</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="bg-gray-50 p-8 rounded-xl border border-gray-200">
+                            <h3 class="text-2xl font-bold mb-6">DLACZEGO WARTO?</h3>
+                            <ul class="space-y-4 list-none pl-0">
+                                <li class="flex items-start"><?= $iconCheck ?><span>Trawa wycinana z gruntu hodowana jest na plantacji od 12 – 18 miesięcy</span>
+                                </li>
+                                <li class="flex items-start"><?= $iconCheck ?><span>Posiada zwarty i mocny system korzeniowy</span>
+                                </li>
+                                <li class="flex items-start"><?= $iconCheck ?><span>Siatka biodegradowalna zapewnia stabilność rolki</span>
+                                </li>
+                                <li class="flex items-start"><?= $iconCheck ?><span>Szybki efekt w krótkim czasie</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div data-content-type="tab-item" data-appearance="default" data-tab-name="Logistyka"
-                 data-background-images="{}"
-                 data-element="main" id="tab_5" style="padding: 0; display: none;">
-                <?= $renderGrassInfo('grassinfo5.phtml') ?>
+
+            <!-- TAB 5: LOGISTYKA -->
+            <div id="tab_5" class="tab-pane" style="display: none;">
+                <div class="bg-white py-16 px-4 sm:px-6 lg:px-8">
+                    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                        <div>
+                            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">TRAWNIK PRODUCENT</h2>
+                            <h3 class="text-xl font-bold <?= $greenText ?> mb-6">Posiadamy 25-letnie doświadczenie w
+                                branży</h3>
+                            <p class="mb-6 text-lg">Prosto z plantacji na palety transportowe trafia trawa zawinięta w
+                                rolkę i niemal natychmiast ładowana jest do samochodu dostawcy.</p>
+                            <p class="mb-6 font-bold">Wysyłamy naszą trawę na wskazany adres na terenie całej Polski
+                                oraz poza jej granicami. W cenie transportu gotowy produkt pakujemy na palety
+                                transportowe i profesjonalnie zabezpieczamy.</p>
+                        </div>
+                        <div>
+                            <img
+                                src="https://pub.gardenlawn.pl/media/images/grass/15c1af1f7ce71626695f0b8d49ce1620a3647e81d25d89aa129338b7c5381fcdff256627eddb645d2a99303a29633d16c1184cefa8388173383518_1280.webp"
+                                alt="Transport"
+                                class="rounded-xl shadow-lg w-full h-auto object-contain max-h-[500px] mx-auto">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gray-900 text-white py-16 px-4 sm:px-6 lg:px-8">
+                    <div class="max-w-7xl mx-auto text-center">
+                        <h2 class="text-3xl font-bold mb-12">NASZE OFERTY TRANSPORTU</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-gray-800">
+                            <div class="bg-white p-8 rounded-xl shadow-lg">
+                                <h4 class="text-xl font-bold <?= $greenText ?> mb-2">Transport własny</h4>
+                                <p>Indywidualny odbiór towaru prosto z naszych plantacji.</p>
+                            </div>
+                            <div class="bg-white p-8 rounded-xl shadow-lg">
+                                <h4 class="text-xl font-bold <?= $greenText ?> mb-2">Transport Kurier</h4>
+                                <p>Palety z trawą wysyłamy przesyłką kurierską.</p>
+                            </div>
+                            <div class="bg-white p-8 rounded-xl shadow-lg">
+                                <h4 class="text-xl font-bold <?= $greenText ?> mb-2">Transport Trawnik</h4>
+                                <p>Większe zamówienia wysyłamy spedycją.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white py-16 px-4 sm:px-6 lg:px-8">
+                    <div class="max-w-7xl mx-auto">
+                        <h2 class="text-3xl font-bold mb-8">NASZA PLANTACJA</h2>
+                        <p class="mb-8 text-lg">Trawa przed wysyłką nie jest w żaden sposób magazynowana. Specjalnie dla
+                            Ciebie nasi specjaliści przy użyciu najwyższej jakości sprzętu zbiorą trawę wprost z
+                            plantacji.</p>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                            <div class="bg-gray-100 rounded-lg overflow-hidden h-40">
+                                <img
+                                    src="https://pub.gardenlawn.pl/media/images/grass/trawnik-producent-plantacja-trawy.webp"
+                                    class="w-full h-full object-contain" alt="Plantacja">
+                            </div>
+                            <div class="bg-gray-100 rounded-lg overflow-hidden h-40">
+                                <img
+                                    src="https://pub.gardenlawn.pl/media/images/grass/odzywka-do-tranwikw-na-wiosn-1.webp"
+                                    class="w-full h-full object-contain" alt="Odżywka">
+                            </div>
+                            <div class="bg-gray-100 rounded-lg overflow-hidden h-40">
+                                <img src="https://pub.gardenlawn.pl/media/images/grass/trawnik-producent-farma.webp"
+                                     class="w-full h-full object-contain" alt="Farma">
+                            </div>
+                            <div class="bg-gray-100 rounded-lg overflow-hidden h-40">
+                                <img src="https://pub.gardenlawn.pl/media/images/grass/transport-trawy.webp"
+                                     class="w-full h-full object-contain" alt="Transport">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gray-50 py-16 px-4 sm:px-6 lg:px-8">
+                    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
+                        <!-- Kurier -->
+                        <div>
+                            <h2 class="text-2xl font-bold mb-6">TRANSPORT KURIER</h2>
+                            <div class="bg-white rounded-lg shadow-sm overflow-hidden border border-gray-200">
+                                <table class="min-w-full divide-y divide-gray-200">
+                                    <tbody class="bg-white divide-y divide-gray-200">
+                                    <tr>
+                                        <td class="px-6 py-4 font-bold bg-green-50 text-green-800 w-1/3">1 paleta</td>
+                                        <td class="px-6 py-4">35m2 trawy z rolki</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 font-bold bg-green-50 text-green-800">Wymiary</td>
+                                        <td class="px-6 py-4">120x80cm x wys.150cm</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 font-bold bg-green-50 text-green-800">Waga 1 rolki</td>
+                                        <td class="px-6 py-4">ok. 25 kg</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 font-bold bg-green-50 text-green-800">Waga 1 palety</td>
+                                        <td class="px-6 py-4">do 1000 kg</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <p class="mt-4 italic text-sm">Wysyłki kurierskie realizowane są od wtorku do czwartku.</p>
+                        </div>
+                        <!-- Własny -->
+                        <div>
+                            <h2 class="text-2xl font-bold mb-6">TRANSPORT WŁASNY</h2>
+                            <div class="bg-white rounded-lg shadow-sm overflow-hidden border border-gray-200">
+                                <table class="min-w-full divide-y divide-gray-200">
+                                    <tbody class="bg-white divide-y divide-gray-200">
+                                    <tr>
+                                        <td class="px-6 py-4 font-bold bg-green-50 text-green-800 w-1/3">1 paleta</td>
+                                        <td class="px-6 py-4">40 m2 trawy z rolki</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 font-bold bg-green-50 text-green-800">Wymiary</td>
+                                        <td class="px-6 py-4">120x80cm x wys.150cm</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 font-bold bg-green-50 text-green-800">Waga 1 rolki</td>
+                                        <td class="px-6 py-4">ok. 25 kg</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 font-bold bg-green-50 text-green-800">Waga 1 palety</td>
+                                        <td class="px-6 py-4">do 1000 kg</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <p class="mt-4 italic text-sm">Odbiór od poniedziałku do piątku.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gray-800 text-white py-16 px-4 text-center">
+                    <h2 class="text-3xl font-bold mb-6">TRANSPORT TRAWNIK PRODUCENT</h2>
+                    <p class="text-lg mb-6 max-w-3xl mx-auto">Wychodząc naprzeciw naszym klientom większe zamówienia
+                        wysyłamy spedycją. Do 12 palet/14 ton możemy zorganizować samochód typu solówka. Max 22
+                        palety/24ton to duże auto typu firana.</p>
+                    <p class="font-bold text-green-400 text-xl">Koszt dostawy wyceniamy indywidualnie.</p>
+                </div>
             </div>
+
         </div>
     </div>
 </div>
 
 <script>
     document.querySelectorAll('.tabs-navigation a').forEach(tab => {
-        tab.addEventListener('click', function(e) {
+        tab.addEventListener('click', function (e) {
             e.preventDefault();
-
-            // Remove active class from all headers
             document.querySelectorAll('.tabs-navigation .tab-header').forEach(h => h.classList.remove('active'));
-            // Add active class to clicked header parent
             this.parentElement.classList.add('active');
-
-            // Hide all tab contents
-            document.querySelectorAll('.tabs-content > div').forEach(c => c.style.display = 'none');
-
-            // Show target tab content
+            document.querySelectorAll('.tabs-content > div.tab-pane').forEach(c => c.style.display = 'none');
             const targetId = this.getAttribute('href').substring(1);
             const targetContent = document.getElementById(targetId);
             if (targetContent) {

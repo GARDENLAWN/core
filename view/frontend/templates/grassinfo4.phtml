@@ -1,752 +1,124 @@
-<!DOCTYPE html>
-<html lang="pl-PL" class="u-responsive-xl skrollr skrollr-desktop" style="display: table; margin: auto; width: 100%;">
-<head>
-    <style type="text/css">
-        .u-clearfix { margin: 0 !important; }
-        body { overflow: hidden !important; -ms-overflow-style: none !important; scrollbar-width: none !important; }
-        ::-webkit-scrollbar { display: none !important; width: 0px !important; height: 0px !important; background-color: transparent !important; }
-        ::-webkit-scrollbar-button, ::-webkit-scrollbar-thumb, ::-webkit-scrollbar-track, ::-webkit-scrollbar-corner { background-color: transparent !important; }
-    </style>
+<?php
+/** @var \Magento\Framework\View\Element\Template $block */
+$greenColor = 'text-[#009640]';
+$iconCheck = '<svg class="w-5 h-5 ' . $greenColor . ' mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>';
+?>
+<div class="space-y-16 py-8 text-gray-700 font-sans">
 
-    <script type="text/javascript" async="" src="/static/frontend/GardenLawn/Hyvatheme/pl_PL/files/grass/js.js"></script>
-    <script>(function (html) { html.className = html.className.replace(/\bno-js\b/, 'js') })(document.documentElement);</script>
+    <!-- Intro -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">TRAWA OGRODOWA</h2>
+                <p class="mb-6 font-bold">
+                    Oprócz wielkości plantacji, naszą cechą wyróżniającą jest wysoka jakość produkowanej trawy. Jest to jedyna w Polsce plantacja całkowicie nawadniana.
+                </p>
+                <p class="mb-6">
+                    Posiada ponad 20 km rurociągów, własne studnie głębinowe oraz zbiorniki retencyjne. Zapewnia to najwyższą klasę produktów niezależnie od pogody.
+                </p>
+                <p class="mb-6">
+                    Trawa w rolkach posiada wbudowaną w korzeń siatkę biodegradowalną. System korzeniowy w połączeniu z siatką tworzy mocną i zwartą konstrukcję.
+                </p>
+                <p class="font-bold text-gray-900">
+                    To doskonały produkt do zagospodarowania nierównych i płaskich terenów, takich jak place zabaw, skwery czy przydomowe ogrody.
+                </p>
+            </div>
+            <div>
+                <img src="https://pub.gardenlawn.pl/media/images/grass/Trawaogrodowawrolce.webp" alt="Trawa ogrodowa" class="rounded-xl shadow-lg w-full h-auto object-cover">
+            </div>
+        </div>
+    </section>
 
-    <script data-cfasync="false" data-pagespeed-no-defer="" type="text/javascript">
-        var gtm4wp_datalayer_name = "dataLayer";
-        var dataLayer = dataLayer || [];
-    </script>
+    <!-- Advantages -->
+    <section class="bg-gray-50 py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center <?= $greenColor ?> mb-8">Zalety trawy ogrodowej</h2>
+            <div class="w-24 h-1 bg-[#009640] mx-auto mb-12"></div>
 
-    <title>TRAWA OGRODOWA - Trawnik Producent</title>
-    <link rel="canonical" href="https://trawnikproducent.pl/trawa-ogrodowa/">
-    <meta property="og:description" content="TRAWNIK OGRODOWY - Oprócz wielkości plantacji, naszą cechą wyróżniającą jest wysoka jakość produkowanej trawy.">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <img src="https://pub.gardenlawn.pl/media/images/grass/trawa-w-rolce-producent-trawy-ogrodowej.webp" alt="Producent trawy" class="rounded-xl shadow-md w-full">
+                </div>
+                <div>
+                    <p class="mb-6 text-lg">Trawa rolowana pochodzi ze starannie wyselekcjonowanych gatunków traw, idealnie spełnia oczekiwania przydomowych ogrodów.</p>
+                    <ul class="space-y-4">
+                        <li class="flex items-start"><?= $iconCheck ?><span>Doskonała jakość trawy ogrodowej</span></li>
+                        <li class="flex items-start"><?= $iconCheck ?><span>Starannie wyselekcjonowane gatunki traw</span></li>
+                        <li class="flex items-start"><?= $iconCheck ?><span>Odporne na intensywną eksploatację i wydeptywanie</span></li>
+                        <li class="flex items-start"><?= $iconCheck ?><span>Oszczędność czasu przy wykładaniu - szybki montaż</span></li>
+                        <li class="flex items-start"><?= $iconCheck ?><span>Po wyłożeniu, natychmiast gotowa do użytku</span></li>
+                        <li class="flex items-start"><?= $iconCheck ?><span>Wysoka aklimatyzacja w naszych warunkach klimatycznych</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <script type="application/ld+json" class="yoast-schema-graph">{
-            "@context": "https://schema.org",
-            "@graph": [
-                {
-                    "@type": "WebSite",
-                    "@id": "https://trawnikproducent.pl/#website",
-                    "url": "https://trawnikproducent.pl/",
-                    "name": "Trawnik Producent",
-                    "inLanguage": "pl-PL"
-                },
-                {
-                    "@type": "WebPage",
-                    "@id": "https://trawnikproducent.pl/trawa-ogrodowa/#webpage",
-                    "url": "https://trawnikproducent.pl/trawa-ogrodowa/",
-                    "name": "TRAWA OGRODOWA - Trawnik Producent",
-                    "isPartOf": { "@id": "https://trawnikproducent.pl/#website" },
-                    "inLanguage": "pl-PL"
-                },
-                {
-                    "@type": "BreadcrumbList",
-                    "@id": "https://trawnikproducent.pl/trawa-ogrodowa/#breadcrumb",
-                    "itemListElement": [
-                        { "@type": "ListItem", "position": 1, "name": "Strona główna", "item": "https://trawnikproducent.pl/" },
-                        { "@type": "ListItem", "position": 2, "name": "TRAWA OGRODOWA" }
-                    ]
-                }
-            ]
-        }</script>
-
-    <link rel="dns-prefetch" href="https://www.google.com/">
-    <link rel="alternate" type="application/rss+xml" title="Trawnik Producent » Kanał z wpisami" href="https://trawnikproducent.pl/feed/">
-
-    <script type="application/ld+json">{
-            "@context": "http:\/\/schema.org",
-            "@type": "Organization",
-            "name": "Trawnik Producent",
-            "url": "https:\/\/trawnikproducent.pl\/",
-            "logo": "https://pub.gardenlawn.pl/media/images/grass/cropped-trawnikproducent.webp"
-        }</script>
-    <script type="application/ld+json">{
-            "@context": "http:\/\/schema.org",
-            "@type": "Article",
-            "headline": "TRAWA OGRODOWA",
-            "author": { "@type": "Person", "name": "anna" },
-            "publisher": {
-                "@type": "Organization",
-                "name": "Trawnik Producent",
-                "logo": {
-                    "@type": "ImageObject",
-                    "url": "https://pub.gardenlawn.pl/media/images/grass/cropped-trawnikproducent.webp",
-                    "width": 240,
-                    "height": 138
-                }
-            }
-        }</script>
-
-    <link rel="stylesheet" id="wp-block-library-css" href="/static/frontend/GardenLawn/Hyvatheme/pl_PL/files/grass/style.min.css" type="text/css" media="all">
-    <link rel="stylesheet" id="contact-form-7-css" href="/static/frontend/GardenLawn/Hyvatheme/pl_PL/files/grass/styles.css" type="text/css" media="all">
-    <link rel="stylesheet" id="formcraft-common-css" href="/static/frontend/GardenLawn/Hyvatheme/pl_PL/files/grass/formcraft-common.css" type="text/css" media="all">
-    <link rel="stylesheet" id="formcraft-form-css" href="/static/frontend/GardenLawn/Hyvatheme/pl_PL/files/grass/form.css" type="text/css" media="all">
-    <link rel="stylesheet" id="rt-tpg-css" href="/static/frontend/GardenLawn/Hyvatheme/pl_PL/files/grass/thepostgrid.css" type="text/css" media="all">
-    <link rel="stylesheet" id="theme-style-css" href="/static/frontend/GardenLawn/Hyvatheme/pl_PL/files/grass/style.css" type="text/css" media="all">
-    <link rel="stylesheet" id="theme-media-css" href="/static/frontend/GardenLawn/Hyvatheme/pl_PL/files/grass/media.css" type="text/css" media="all">
-
-    <script type="text/javascript" src="/static/frontend/GardenLawn/Hyvatheme/pl_PL/files/grass/jquery.min.js" id="jquery-core-js"></script>
-    <script type="text/javascript" src="/static/frontend/GardenLawn/Hyvatheme/pl_PL/files/grass/jquery-migrate.min.js" id="jquery-migrate-js"></script>
-    <script type="text/javascript" src="/static/frontend/GardenLawn/Hyvatheme/pl_PL/files/grass/fc_modal.js" id="fc-modal-js"></script>
-    <script type="text/javascript" src="/static/frontend/GardenLawn/Hyvatheme/pl_PL/files/grass/tooltip.min.js" id="tooltip-js"></script>
-    <script type="text/javascript" src="/static/frontend/GardenLawn/Hyvatheme/pl_PL/files/grass/awesomplete.min.js" id="awesomplete-js"></script>
-
-    <link id="u-theme-google-font" rel="stylesheet" href="/static/frontend/GardenLawn/Hyvatheme/pl_PL/files/grass/css.css">
-
-    <style>
-        /* SECTION 3 */
-        .u-section-3 .u-sheet-1 { min-height: 776px; }
-        .u-section-3 .u-layout-wrap-1 { margin-top: 61px; margin-bottom: 15px; }
-        .u-section-3 .u-layout-cell-1 { min-height: 700px; }
-        .u-section-3 .u-container-layout-1 { padding: 30px 30px 14px; }
-        .u-section-3 .u-text-1 { animation-duration: 1000ms; margin: 0; }
-        .u-section-3 .u-text-2 { margin: 14px 29px 0 0; }
-        .u-section-3 .u-btn-1 { letter-spacing: 1px; border-style: solid; font-weight: 700; text-transform: uppercase; margin: 42px auto 0 0; padding: 7px 56px 7px 55px; }
-        .u-section-3 .u-layout-cell-2 { min-height: 700px; }
-        .u-section-3 .u-container-layout-2 { padding: 11px 30px 9px; }
-        .u-section-3 .u-image-1 { height: 597px; margin-top: 19px; margin-bottom: 0; }
-
-        @media (max-width: 1199px) {
-            .u-section-3 .u-sheet-1 { min-height: 430px; }
-            .u-section-3 .u-layout-wrap-1 { position: relative; }
-            .u-section-3 .u-layout-cell-1 { min-height: 577px; }
-            .u-section-3 .u-text-2 { margin-right: 0; }
-            .u-section-3 .u-layout-cell-2 { min-height: 606px; }
-            .u-section-3 .u-image-1 { height: 480px; }
-        }
-        @media (max-width: 991px) {
-            .u-section-3 .u-sheet-1 { min-height: 353px; }
-            .u-section-3 .u-layout-cell-1 { min-height: 100px; }
-            .u-section-3 .u-layout-cell-2 { min-height: 925px; }
-            .u-section-3 .u-image-1 { height: 788px; }
-        }
-        @media (max-width: 767px) {
-            .u-section-3 .u-sheet-1 { min-height: 1147px; }
-            .u-section-3 .u-layout-wrap-1 { margin-top: 22px; }
-            .u-section-3 .u-container-layout-1 { padding-top: 26px; padding-left: 10px; padding-right: 10px; }
-            .u-section-3 .u-text-1, .u-section-3 .u-text-2 { width: auto; }
-            .u-section-3 .u-layout-cell-2 { min-height: 509px; }
-            .u-section-3 .u-container-layout-2 { padding-top: 0; padding-left: 10px; padding-right: 10px; }
-            .u-section-3 .u-image-1 { height: 459px; }
-        }
-        @media (max-width: 575px) {
-            .u-section-3 .u-sheet-1 { min-height: 922px; }
-            .u-section-3 .u-layout-cell-2 { min-height: 320px; }
-            .u-section-3 .u-image-1 { height: 282px; }
-        }
-
-        /* SECTION 4 */
-        .u-section-4 { background-image: none; }
-        .u-section-4 .u-sheet-1 { min-height: 85px; }
-        .u-section-4 .u-layout-wrap-1 { margin-top: 8px; margin-bottom: 0; }
-        .u-section-4 .u-layout-cell-1 { min-height: 77px; }
-        .u-section-4 .u-container-layout-1 { padding: 0 30px 9px; }
-        .u-section-4 .u-text-1 { animation-duration: 1000ms; font-size: 1.625rem; margin: 20px 0 0; }
-        .u-section-4 .u-line-1 { transform-origin: left center 0px; height: 2px; width: 1080px; margin: 8px auto 0 -8px; }
-
-        @media (max-width: 1199px) {
-            .u-section-4 .u-sheet-1 { min-height: 81px; }
-            .u-section-4 .u-layout-cell-1 { min-height: 69px; }
-            .u-section-4 .u-container-layout-1 { padding-bottom: 8px; }
-            .u-section-4 .u-line-1 { width: 880px; margin-left: 0; }
-        }
-        @media (max-width: 991px) {
-            .u-section-4 .u-sheet-1 { min-height: 93px; }
-            .u-section-4 .u-layout-wrap-1 { margin-bottom: 27px; }
-            .u-section-4 .u-layout-cell-1 { min-height: 54px; }
-            .u-section-4 .u-container-layout-1 { padding-top: 0; padding-bottom: 0; }
-            .u-section-4 .u-line-1 { width: 660px; }
-        }
-        @media (max-width: 767px) {
-            .u-section-4 .u-sheet-1 { min-height: 94px; }
-            .u-section-4 .u-layout-wrap-1 { margin-top: 0; margin-bottom: 0; }
-            .u-section-4 .u-layout-cell-1 { min-height: 82px; }
-            .u-section-4 .u-container-layout-1 { padding-left: 10px; padding-right: 10px; }
-            .u-section-4 .u-line-1 { width: 520px; }
-        }
-        @media (max-width: 575px) {
-            .u-section-4 .u-sheet-1 { min-height: 100px; }
-            .u-section-4 .u-layout-wrap-1 { position: relative; }
-            .u-section-4 .u-layout-cell-1 { min-height: 52px; }
-            .u-section-4 .u-text-1 { width: auto; font-size: 1.5rem; }
-            .u-section-4 .u-line-1 { width: 320px; }
-        }
-
-        /* SECTION 5 */
-        .u-section-5 .u-sheet-1 { min-height: 338px; }
-        .u-section-5 .u-layout-wrap-1 { margin-top: -1px; margin-bottom: 28px; }
-        .u-section-5 .u-layout-cell-1 { min-height: 311px; }
-        .u-section-5 .u-container-layout-1 { padding: 30px 30px 25px; }
-        .u-section-5 .u-image-1 { width: 312px; height: 256px; margin: 0 auto; }
-        .u-section-5 .u-layout-cell-2 { min-height: 311px; background-image: none; }
-        .u-section-5 .u-container-layout-2 { padding: 30px 30px 18px; }
-        .u-section-5 .u-text-1 { margin: 0 20px 0 0; }
-        .u-section-5 .u-text-2 { margin: 20px 20px 0 0; }
-        .u-section-5 .u-list-icon-1, .u-section-5 .u-list-icon-2, .u-section-5 .u-list-icon-3, .u-section-5 .u-list-icon-4, .u-section-5 .u-list-icon-5, .u-section-5 .u-list-icon-6 { color: rgb(50, 190, 166) !important; }
-
-        @media (max-width: 1199px) {
-            .u-section-5 .u-sheet-1 { min-height: 284px; }
-            .u-section-5 .u-layout-wrap-1 { margin-bottom: 0; }
-            .u-section-5 .u-layout-cell-1 { min-height: 295px; }
-            .u-section-5 .u-image-1 { height: 102px; margin-top: 47px; margin-right: initial; margin-left: initial; width: auto; }
-            .u-section-5 .u-layout-cell-2 { min-height: 295px; }
-            .u-section-5 .u-container-layout-2 { padding-top: 17px; padding-bottom: 25px; }
-            .u-section-5 .u-text-1 { width: auto; margin-right: 33px; }
-            .u-section-5 .u-text-2 { width: auto; margin-top: 15px; margin-right: 33px; margin-bottom: -32px; }
-        }
-        @media (max-width: 991px) {
-            .u-section-5 .u-sheet-1 { min-height: 370px; }
-            .u-section-5 .u-layout-cell-1, .u-section-5 .u-layout-cell-2 { min-height: 370px; }
-            .u-section-5 .u-image-1 { height: 73px; margin-top: 0; width: auto; margin-right: initial; margin-left: initial; }
-            .u-section-5 .u-text-1 { margin-right: 0; }
-            .u-section-5 .u-text-2 { margin-top: 26px; margin-right: 0; margin-bottom: 0; }
-        }
-        @media (max-width: 767px) {
-            .u-section-5 .u-sheet-1 { min-height: 501px; }
-            .u-section-5 .u-layout-wrap-1 { margin-bottom: 12px; }
-            .u-section-5 .u-layout-cell-1 { min-height: 177px; }
-            .u-section-5 .u-container-layout-1 { padding-left: 10px; padding-right: 10px; padding-bottom: 15px; }
-            .u-section-5 .u-image-1 { height: 154px; width: 361px; margin-top: -22px; margin-right: auto; margin-left: 0; }
-            .u-section-5 .u-layout-cell-2 { min-height: 312px; }
-            .u-section-5 .u-container-layout-2 { padding: 13px 10px 12px; }
-            .u-section-5 .u-text-2 { margin-top: 15px; }
-        }
-        @media (max-width: 575px) {
-            .u-section-5 .u-sheet-1 { min-height: 667px; }
-            .u-section-5 .u-layout-wrap-1 { margin-top: 10px; margin-bottom: 0; }
-            .u-section-5 .u-layout-cell-1 { min-height: 185px; }
-            .u-section-5 .u-image-1 { height: 136px; margin-top: 0; margin-right: initial; margin-left: initial; width: auto; }
-            .u-section-5 .u-layout-cell-2 { min-height: 196px; }
-            .u-section-5 .u-container-layout-1 { padding-bottom: 24px; }
-            .u-section-5 .u-text-1 { font-size: 1.25rem; margin-top: 20px; }
-        }
-
-        /* SECTION 6 */
-        .u-section-6 .u-sheet-1 { min-height: 611px; }
-        .u-section-6 .u-layout-wrap-1 { margin-top: 30px; margin-bottom: 30px; }
-        .u-section-6 .u-layout-cell-1, .u-section-6 .u-layout-cell-2 { min-height: 629px; }
-        .u-section-6 .u-container-layout-1 { padding: 30px 30px 23px; }
-        .u-section-6 .u-text-1 { animation-duration: 1000ms; margin: 0; }
-        .u-section-6 .u-text-2 { background-image: none; font-weight: 400; margin: 35px 35px 0 1px; }
-        .u-section-6 .u-text-3 { font-size: 1.25rem; margin: 35px 83px 0 0; }
-        .u-section-6 .u-text-4 { margin: 24px 36px 0 0; }
-        .u-section-6 .u-btn-1 { letter-spacing: 1px; border-style: solid; font-weight: 700; text-transform: uppercase; margin: 35px auto 0 0; padding: 7px 56px 7px 55px; }
-        .u-section-6 .u-container-layout-2 { padding: 30px; }
-        .u-section-6 .u-image-1 { height: 216px; width: 473px; margin: 39px auto 0; }
-        .u-section-6 .u-line-1 { transform-origin: left center 0px; height: 2px; width: 510px; margin: 88px auto 0 0; }
-        .u-section-6 .u-text-5 { font-weight: 700; margin: 28px 39px 0; }
-        .u-section-6 .u-line-2 { transform-origin: left center 0px; height: 2px; width: 510px; margin: 27px auto 0 0; }
-
-        @media (max-width: 1199px) {
-            .u-section-6 .u-sheet-1 { min-height: 707px; }
-            .u-section-6 .u-layout-wrap-1 { margin-bottom: 0; }
-            .u-section-6 .u-layout-cell-1, .u-section-6 .u-layout-cell-2 { min-height: 714px; }
-            .u-section-6 .u-container-layout-1 { padding-bottom: 22px; }
-            .u-section-6 .u-text-2 { margin-top: 20px; margin-left: 0; margin-right: 0; }
-            .u-section-6 .u-text-3 { width: auto; margin-top: 27px; margin-right: 0; }
-            .u-section-6 .u-text-4 { width: auto; margin-right: 0; }
-            .u-section-6 .u-btn-1 { margin-bottom: -72px; }
-            .u-section-6 .u-container-layout-2 { padding-bottom: 26px; }
-            .u-section-6 .u-image-1 { height: 185px; margin-top: 0; margin-right: initial; margin-left: initial; width: auto; }
-            .u-section-6 .u-line-1 { margin-top: 23px; width: 410px; }
-            .u-section-6 .u-text-5 { width: auto; margin-top: 20px; margin-left: 0; margin-right: 0; }
-            .u-section-6 .u-line-2 { margin-top: 30px; width: 410px; }
-        }
-        @media (max-width: 991px) {
-            .u-section-6 .u-sheet-1 { min-height: 894px; }
-            .u-section-6 .u-layout-wrap-1 { margin-bottom: 30px; }
-            .u-section-6 .u-layout-cell-1, .u-section-6 .u-layout-cell-2 { min-height: 834px; }
-            .u-section-6 .u-text-3 { margin-top: 18px; }
-            .u-section-6 .u-text-4 { margin-top: 30px; }
-            .u-section-6 .u-btn-1 { margin-top: 20px; margin-bottom: 0; }
-            .u-section-6 .u-container-layout-2 { padding-bottom: 0; }
-            .u-section-6 .u-image-1 { height: 135px; width: auto; margin-right: initial; margin-left: initial; }
-            .u-section-6 .u-line-1 { margin-top: 30px; width: 300px; }
-            .u-section-6 .u-text-5 { margin-top: 37px; }
-            .u-section-6 .u-line-2 { margin-top: 41px; width: 300px; }
-        }
-        @media (max-width: 767px) {
-            .u-section-6 .u-sheet-1 { min-height: 986px; }
-            .u-section-6 .u-layout-wrap-1 { margin-top: 26px; }
-            .u-section-6 .u-layout-cell-1 { min-height: 648px; }
-            .u-section-6 .u-container-layout-1 { padding-left: 10px; padding-right: 10px; }
-            .u-section-6 .u-text-1, .u-section-6 .u-text-2 { width: auto; }
-            .u-section-6 .u-text-1 { margin-top: 17px; } .u-section-6 .u-text-2 { margin-top: 8px; }
-            .u-section-6 .u-text-3, .u-section-6 .u-btn-1 { margin-top: 30px; }
-            .u-section-6 .u-layout-cell-2 { min-height: 534px; }
-            .u-section-6 .u-container-layout-2 { padding-top: 15px; padding-left: 10px; padding-right: 10px; }
-            .u-section-6 .u-image-1 { height: 234px; margin-top: 27px; width: auto; margin-right: initial; margin-left: initial; }
-            .u-section-6 .u-line-1 { margin-top: 72px; margin-right: initial; margin-left: initial; width: auto; }
-            .u-section-6 .u-text-5 { margin-top: 26px; }
-            .u-section-6 .u-line-2 { margin-top: 25px; margin-right: initial; margin-left: initial; width: auto; }
-        }
-        @media (max-width: 575px) {
-            .u-section-6 .u-sheet-1 { min-height: 1268px; }
-            .u-section-6 .u-layout-cell-1 { min-height: 757px; }
-            .u-section-6 .u-text-2 { margin-top: 20px; }
-            .u-section-6 .u-text-4 { margin-top: 32px; }
-            .u-section-6 .u-btn-1 { margin-top: 28px; }
-            .u-section-6 .u-layout-cell-2 { min-height: 311px; }
-            .u-section-6 .u-image-1 { height: 144px; margin-top: 20px; width: auto; margin-right: initial; margin-left: initial; }
-            .u-section-6 .u-line-1 { margin-top: 50px; width: auto; margin-right: initial; margin-left: initial; }
-            .u-section-6 .u-text-5 { margin-top: 28px; }
-            .u-section-6 .u-line-2 { margin-top: 30px; width: auto; margin-right: initial; margin-left: initial; }
-        }
-
-        /* SECTION 7 */
-        .u-section-7 .u-sheet-1 { min-height: 339px; }
-        .u-section-7 .u-layout-wrap-1 { margin-top: 0; margin-bottom: 40px; }
-        .u-section-7 .u-layout-cell-1 { min-height: 299px; }
-        .u-section-7 .u-container-layout-1 { padding: 30px 30px 23px; }
-        .u-section-7 .u-gallery-1 { margin-top: 0; margin-bottom: 0; height: 227px; }
-        .u-section-7 .u-gallery-inner-1 { grid-template-columns: repeat(3, auto); grid-gap: 10px; }
-        .u-section-7 .u-over-slide-1, .u-section-7 .u-over-slide-2, .u-section-7 .u-over-slide-3 { background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)); padding: 20px; }
-
-        @media (max-width: 1199px) { .u-section-7 .u-sheet-1 { min-height: 286px; } .u-section-7 .u-layout-wrap-1 { margin-top: -186px; margin-bottom: -146px; } .u-section-7 .u-layout-cell-1 { min-height: 247px; } .u-section-7 .u-container-layout-1 { padding-bottom: 22px; } .u-section-7 .u-gallery-1 { height: 185px; } }
-        @media (max-width: 991px) { .u-section-7 .u-sheet-1 { min-height: 469px; } .u-section-7 .u-layout-wrap-1 { margin-top: -13px; margin-bottom: 29px; } .u-section-7 .u-layout-cell-1 { min-height: 453px; } .u-section-7 .u-gallery-1 { height: 416px; } .u-section-7 .u-gallery-inner-1 { grid-template-columns: repeat(2, auto); } }
-        @media (max-width: 767px) { .u-section-7 .u-sheet-1 { min-height: 1041px; } .u-section-7 .u-layout-wrap-1 { margin-bottom: 20px; } .u-section-7 .u-layout-cell-1 { min-height: 1034px; } .u-section-7 .u-container-layout-1 { padding-left: 10px; padding-right: 10px; } .u-section-7 .u-gallery-1 { height: 983px; } .u-section-7 .u-gallery-inner-1 { grid-template-columns: repeat(1, auto); } }
-        @media (max-width: 575px) { .u-section-7 .u-sheet-1 { min-height: 689px; } .u-section-7 .u-layout-wrap-1 { margin-bottom: 30px; } .u-section-7 .u-layout-cell-1 { min-height: 672px; } .u-section-7 .u-gallery-1 { height: 605px; } }
-
-        /* SECTION 8 */
-        .u-section-8 .u-sheet-1 { min-height: 504px; }
-        .u-section-8 .u-layout-wrap-1 { margin-top: 60px; margin-bottom: 20px; }
-        .u-section-8 .u-layout-cell-1 { background-image: none; min-height: 477px; }
-        .u-section-8 .u-container-layout-1 { padding: 30px; }
-        .u-section-8 .u-text-1 { animation-duration: 1000ms; font-weight: 700; margin: 0 90px 0 0; }
-        .u-section-8 .u-text-2 { margin: 20px 68px 0 0; }
-        .u-section-8 .u-list-icon-1 { color: rgb(50, 190, 166) !important; }
-        .u-section-8 .u-layout-cell-2 { animation-duration: 1000ms; min-height: 477px; }
-        .u-section-8 .u-image-1 {
-            /* Zaktualizowany URL tła */
-            background-image: url("https://pub.gardenlawn.pl/media/images/grass/Trawa-z-rolki-do-ogrodu.webp");
-        }
-        .u-section-8 .u-container-layout-2 { padding: 30px 0 18px; }
-
-        @media (max-width: 1199px) { .u-section-8 .u-sheet-1 { min-height: 508px; } .u-section-8 .u-layout-cell-1 { min-height: 393px; } .u-section-8 .u-text-1 { width: auto; margin-top: 20px; margin-right: 53px; margin-left: 27px; } .u-section-8 .u-text-2 { width: auto; margin-top: 17px; margin-right: 60px; margin-left: 20px; } .u-section-8 .u-layout-cell-2 { background-position: 50% 50%; min-height: 393px; } }
-        @media (max-width: 991px) { .u-section-8 .u-sheet-1 { min-height: 560px; } .u-section-8 .u-layout-wrap-1 { position: relative; } .u-section-8 .u-layout-cell-1 { min-height: 100px; } .u-section-8 .u-text-1 { margin-top: 0; margin-right: 24px; margin-left: 32px; } .u-section-8 .u-text-2 { margin-left: 28px; margin-right: 28px; } .u-section-8 .u-layout-cell-2 { min-height: 301px; } .u-section-8 .u-container-layout-2 { padding-left: 0; padding-right: 0; } }
-        @media (max-width: 767px) { .u-section-8 .u-sheet-1 { min-height: 773px; } .u-section-8 .u-layout-cell-1 { min-height: 406px; } .u-section-8 .u-container-layout-1 { padding-left: 10px; padding-right: 10px; } .u-section-8 .u-layout-cell-2 { min-height: 311px; } .u-section-8 .u-container-layout-2 { padding-top: 13px; padding-bottom: 32px; } }
-        @media (max-width: 575px) { .u-section-8 .u-sheet-1 { min-height: 858px; } .u-section-8 .u-layout-cell-1 { min-height: 500px; } .u-section-8 .u-text-1 { margin-right: 31px; margin-left: 24px; } .u-section-8 .u-text-2 { margin-top: 24px; margin-left: 24px; margin-right: 24px; } .u-section-8 .u-layout-cell-2 { min-height: 314px; } .u-section-8 .u-container-layout-2 { padding-bottom: 0; } }
-
-        /* SECTION 9 */
-        .u-section-9 .u-sheet-1 { min-height: 533px; }
-        .u-section-9 .u-layout-wrap-1 { margin-top: 20px; margin-bottom: 60px; }
-        .u-section-9 .u-layout-cell-1 { min-height: 477px; }
-        .u-section-9 .u-image-1 {
-            /* Zaktualizowany URL tła */
-            background-image: url("https://pub.gardenlawn.pl/media/images/grass/the-lawn-g0b4c64740_1920.webp");
-            background-position: 50% 50%;
-        }
-        .u-section-9 .u-container-layout-1 { padding: 30px 0 18px; }
-        .u-section-9 .u-layout-cell-2 { animation-duration: 1000ms; min-height: 477px; }
-        .u-section-9 .u-container-layout-2 { padding: 30px; }
-        .u-section-9 .u-text-1 { animation-duration: 1000ms; font-weight: 700; margin: 0 90px 0 0; }
-        .u-section-9 .u-text-2 { margin: 20px 68px 0 0; }
-        .u-section-9 .u-list-icon-1 { color: rgb(50, 190, 166) !important; }
-
-        @media (max-width: 1199px) { .u-section-9 .u-sheet-1 { min-height: 508px; } .u-section-9 .u-layout-cell-1 { background-position: 50% 50%; animation-duration: 1000ms; min-height: 393px; } .u-section-9 .u-layout-cell-2 { min-height: 393px; } .u-section-9 .u-text-1 { width: auto; margin-top: 20px; margin-right: 53px; margin-left: 27px; } .u-section-9 .u-text-2 { width: auto; margin-top: 17px; margin-right: 60px; margin-left: 20px; } }
-        @media (max-width: 991px) { .u-section-9 .u-sheet-1 { min-height: 560px; } .u-section-9 .u-layout-wrap-1 { position: relative; } .u-section-9 .u-layout-cell-1 { min-height: 301px; } .u-section-9 .u-container-layout-1 { padding-left: 0; padding-right: 0; } .u-section-9 .u-layout-cell-2 { min-height: 100px; } .u-section-9 .u-text-1 { margin-top: 0; margin-right: 24px; margin-left: 32px; } .u-section-9 .u-text-2 { margin-left: 28px; margin-right: 28px; } }
-        @media (max-width: 767px) { .u-section-9 .u-sheet-1 { min-height: 686px; } .u-section-9 .u-layout-wrap-1 { margin-bottom: 47px; } .u-section-9 .u-layout-cell-1 { min-height: 291px; } .u-section-9 .u-container-layout-1 { padding-top: 13px; padding-bottom: 32px; } .u-section-9 .u-container-layout-2 { padding-left: 10px; padding-right: 10px; } }
-        @media (max-width: 575px) { .u-section-9 .u-sheet-1 { min-height: 858px; } .u-section-9 .u-layout-cell-1 { min-height: 279px; } .u-section-9 .u-container-layout-1 { padding-bottom: 0; } .u-section-9 .u-text-1 { margin-right: 31px; margin-left: 24px; } .u-section-9 .u-text-2 { margin-top: 24px; margin-left: 24px; margin-right: 24px; } }
-    </style>
-
-    <meta name="abstract" content="Trawnik Producent to firma z ponad 17 letnią tradycją, specjalizująca się w produkcji darni rolowanej na potrzeby zarówno klientów indywidualnych jak i branży budownictwa sportowego.">
-    <link rel="icon" href="https://pub.gardenlawn.pl/media/images/grass/cropped-favicon.webp">
-
-    <style type="text/css" id="wp-custom-css">
-        .rt-detail { background: #e5e5e5 !important; }
-    </style>
-
-    <style>
-        .u-body, h1, h2, h3, h4, h5, h6, .u-custom-font.u-text-font, .u-custom-font.u-heading-font { font-family: 'Open Sans', sans-serif !important; }
-        .u-body { color: #111111; background-color: #ffffff; }
-
-        /* Custom Color 2 (Green) */
-        .u-custom-color-2, .u-text-custom-color-2 { color: #009640 !important; }
-        .u-border-custom-color-2 { border-color: #009640 !important; }
-
-        /* Custom Color 3 (Dark Background) */
-        .u-custom-color-3 { background-color: #282d30; color: #ffffff; }
-
-        /* Custom Color 9 (Light Text/Accents) */
-        .u-text-custom-color-9 { color: #e7fff2 !important; }
-
-        /* Standard Colors */
-        .u-white { background-color: #ffffff; color: #111111; }
-        .u-text-black { color: #000000 !important; }
-        .u-image-round { border-radius: 25px; }
-
-        /* Helpers */
-        h1.u-title { font-size: 3rem; margin: 20px 0; font-weight: 700; line-height: 1.1; }
-        h2.u-subtitle { font-size: 2.25rem; margin: 20px 0; font-weight: 400; line-height: 1.1; }
-        a { text-decoration: underline; font-weight: 600; color: #009640; }
-        a:hover { color: #00873a; }
-
-        .u-btn { font-weight: 700; text-transform: uppercase; border-radius: 50px; background-color: #009640; color: #ffffff; padding: 12px 45px; margin: 19px 0 20px; }
-        .u-btn:hover { background-color: #98cb40; color: #ffffff; }
-
-        @media (max-width: 767px) { h1.u-title { font-size: 3.75rem; } }
-        @media (max-width: 575px) { h1.u-title { font-size: 3rem; } h2.u-subtitle { font-size: 1.5rem; } }
-        html { font-size: 16px; }
-    </style>
-
-    <style id="cky-style">
-        .cky-overlay{background:#000000;opacity:0.4;position:fixed;top:0;left:0;width:100%;height:100%;z-index:99999999}.cky-hide{display:none}.cky-btn-revisit-wrapper{display:flex;align-items:center;justify-content:center;background:#0056a7;width:45px;height:45px;border-radius:50%;position:fixed;z-index:999999;cursor:pointer}.cky-revisit-bottom-left{bottom:15px;left:15px}.cky-revisit-bottom-right{bottom:15px;right:15px}.cky-btn-revisit-wrapper .cky-btn-revisit{display:flex;align-items:center;justify-content:center;background:none;border:none;cursor:pointer;position:relative;margin:0;padding:0}.cky-btn-revisit-wrapper .cky-btn-revisit img{max-width:fit-content;margin:0;height:30px;width:30px}.cky-consent-container{position:fixed;width:440px;box-sizing:border-box;z-index:9999999;border-radius:6px}.cky-consent-container .cky-consent-bar{background:#ffffff;border:1px solid;padding:20px 26px;box-shadow:0 -1px 10px 0 #acabab4d;border-radius:6px}.cky-box-bottom-left{bottom:40px;left:40px}.cky-box-bottom-right{bottom:40px;right:40px}.cky-notice .cky-title{color:#212121;font-weight:700;font-size:18px;line-height:24px;margin:0 0 12px 0}.cky-notice-des{color:#212121;font-size:14px;line-height:24px;font-weight:400}.cky-btn{flex:auto;max-width:100%;font-size:14px;font-family:inherit;line-height:24px;padding:8px;font-weight:500;border-radius:2px;cursor:pointer;text-align:center;min-height:0}.cky-btn:hover{opacity:0.8}.cky-btn-accept{background:#1863dc;color:#ffffff;border:2px solid #1863dc}.cky-btn-reject{color:#1863dc;background:transparent;border:2px solid #1863dc}
-        @media (max-width: 576px) { .cky-box-bottom-left, .cky-box-bottom-right { bottom: 0; left: 0; width: 100%; } .cky-consent-container .cky-consent-bar { padding: 20px 0; } .cky-notice-btn-wrapper { flex-direction: column; } }
-    </style>
-</head>
-
-<body class="u-body" style="display: table-cell; margin: auto;">
-<div class="cky-overlay cky-hide"></div>
-<style>
-    .u-header { background-image: none; }
-    .u-header .u-sheet-1 { min-height: 93px; }
-    .u-header .u-image-1 { animation-duration: 1000ms; margin: 6px auto 0 8px; }
-    .u-header .u-logo-image-1 { max-width: 136px; max-height: 136px; }
-    .u-header .u-menu-1 { margin: -44px auto 0; }
-    .u-header .u-nav-1 { font-size: 0.9375rem; letter-spacing: 0px; font-weight: 700; text-transform: uppercase; }
-    .u-header .u-menu-close-1 { height: 28px; margin: 35px 40px 0 188px; }
-    .u-header .u-nav-2 { font-size: 1rem; font-weight: 700; height: 324px; margin: 29px 0 0 auto; }
-    .u-header .u-image-2 { width: 125px; height: 60px; margin: 19px auto 0 20px; }
-    .u-header .u-social-icons-1 { white-space: nowrap; height: 31px; min-height: 16px; width: 113px; min-width: 68px; margin: -41px 1px 35px auto; }
-    .u-header .u-icon-1, .u-header .u-icon-2 { height: 32px; } .u-header .u-icon-3 { height: 31px; }
-
-    @media (max-width: 1199px) {
-        .u-header .u-sheet-1 { min-height: 70px; }
-        .u-header .u-image-1 { margin-left: 0; }
-        .u-header .u-logo-image-1 { max-width: 111px; max-height: 111px; }
-        .u-header .u-menu-1 { margin-top: -36px; }
-        .u-header .u-menu-close-1 { margin-top: 39px; margin-right: 36px; margin-left: 192px; }
-        .u-header .u-nav-2 { height: 340px; margin-top: 25px; margin-left: initial; margin-right: initial; }
-        .u-header .u-social-icons-1 { margin-bottom: 17px; }
-    }
-    @media (max-width: 991px) {
-        .u-header .u-sheet-1 { min-height: 82px; }
-        .u-header .u-image-1 { margin-top: 9px; width: auto; }
-        .u-header .u-menu-1 { width: auto; margin-top: -48px; margin-right: 0; }
-        .u-header .u-menu-close-1 { margin-top: 44px; margin-right: 42px; margin-left: 186px; }
-        .u-header .u-nav-2 { margin-top: 20px; margin-left: initial; margin-right: initial; }
-        .u-header .u-social-icons-1 { margin-top: -37px; margin-right: auto; margin-bottom: 35px; }
-    }
-    @media (max-width: 767px) {
-        .u-header .u-sheet-1 { min-height: 68px; }
-        .u-header .u-image-1 { margin-top: 7px; }
-        .u-header .u-menu-close-1 { width: 22px; }
-        .u-header .u-social-icons-1 { margin-bottom: 13px; margin-left: 206px; }
-    }
-    @media (max-width: 575px) {
-        .u-header .u-sheet-1 { min-height: 66px; }
-        .u-header .u-image-1 { margin-top: 10px; }
-        .u-header .u-logo-image-1 { max-width: 91px; max-height: 91px; }
-        .u-header .u-menu-1 { margin-top: -42px; }
-        .u-header .u-nav-2 { width: 232px; margin-right: 0; margin-left: auto; }
-        .u-header .u-social-icons-1 { margin: -41px 104px 17px auto; }
-    }
-</style>
-
-<section class="u-clearfix u-white u-section-3" id="sec-2b5d">
-    <div class="u-clearfix u-sheet u-sheet-1">
-        <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
-            <div class="u-gutter-0 u-layout">
-                <div class="u-layout-row">
-                    <div class="u-container-style u-layout-cell u-size-30 u-layout-cell-1">
-                        <div class="u-container-layout u-valign-top u-container-layout-1">
-                            <h2 class="u-text u-text-1 animated zoomIn-played" data-animation-name="zoomIn"
-                                data-animation-duration="1000" data-animation-delay="0" data-animation-direction=""
-                                style="will-change: transform, opacity; animation-duration: 1000ms;">TRAWA OGRODOWA<br>
-                            </h2>
-                            <p class="u-text u-text-2">
-                    <span style="font-weight: 700;">Oprócz wielkości plantacji, naszą cechą wyróżniającą jest wysoka jakość produkowanej trawy. Wynika to z najwyższej jakości zastosowanych materiałów produkcyjnych oraz właściwości technologicznych plantacji – jest to jedyna w Polsce plantacja całkowicie nawadniana. <br>
-                    </span>
-                                <br>Posiada ponad 20 km rurociągów, własne studnie głębinowe oraz zbiorniki retencyjne.
-                                Zapewnia to najwyższą klasę produktów niezależnie od panujących warunków pogodowych.<br>
-                                <br>Trawa w rolkach posiada wbudowaną w korzeń siatkę biodegradowalną, która jest
-                                niewidoczna. System korzeniowy w połączeniu z siatką tworzy mocną i zwartą konstrukcję,
-                                sprawdzającą się doskonale na nawierzchniach intensywnie użytkowanych i eksploatowanych.
-                                <br>
-                                <br>
-                                <span style="font-weight: 700;">To doskonały produkt do zagospodarowania nierównych i płaskich terenów,
-takich jak place zabaw, skwery, przydomowe ogrody czy elementy zielonej architektury. </span>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="u-container-style u-layout-cell u-size-30 u-layout-cell-2">
-                        <div class="u-container-layout u-container-layout-2">
-                            <img src="https://pub.gardenlawn.pl/media/images/grass/Trawaogrodowawrolce.webp" alt="" class="u-expanded-width u-image u-image-round u-radius-25 u-image-1" data-image-width="723" data-image-height="1175">
-                        </div>
+    <!-- System Structure (Dark) -->
+    <section class="bg-gray-800 text-white py-16 rounded-xl">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-3xl font-bold mb-6">BUDOWA SYSTEMU</h2>
+                    <p class="mb-6">
+                        Trawa rolowana STRONG posiada wbudowaną w korzeń siatkę biodegradowalną. System korzeniowy w połączeniu z siatką tworzy mocną i zwartą konstrukcję.
+                    </p>
+                    <h3 class="text-xl font-bold text-green-300 mb-4">Jak odpowiednio przygotować podłoże?</h3>
+                    <p>
+                        Przed rozwinięciem trawy w rolce należy spulchnić podłoże – do 2-3 centymetrów. Trawa z rolki powinna zostać rozłożona w przeciągu jednego lub dwóch dni.
+                    </p>
+                </div>
+                <div>
+                    <img src="https://pub.gardenlawn.pl/media/images/grass/strong-przekroj-pl-1.webp" alt="Przekrój" class="rounded-lg shadow-md w-full bg-white p-2">
+                    <div class="mt-6 border-t border-green-500 pt-4">
+                        <p class="text-sm">Trawa do ogrodu STRONG sprawdza się idealnie na nierównych terenach (np. na skarpach).</p>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<section class="u-clearfix u-white u-section-4" id="carousel_c4de">
-    <div class="u-clearfix u-sheet u-sheet-1">
-        <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
-            <div class="u-gutter-0 u-layout">
-                <div class="u-layout-row">
-                    <div class="u-container-style u-layout-cell u-size-60 u-layout-cell-1">
-                        <div class="u-container-layout u-container-layout-1">
-                            <h2 class="u-text u-text-custom-color-2 u-text-1 animated zoomIn-played"
-                                data-animation-name="zoomIn" data-animation-duration="1000" data-animation-delay="0"
-                                data-animation-direction=""
-                                style="will-change: transform, opacity; animation-duration: 1000ms;">Zalety trawy
-                                ogrodowej<br>
-                            </h2>
-                            <div class="u-border-2 u-border-custom-color-2 u-line u-line-horizontal u-line-1"></div>
-                        </div>
-                    </div>
-                </div>
+    <!-- Gallery Grid -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            <img src="https://pub.gardenlawn.pl/media/images/grass/henrique-paim-sew5dUh0_bg-unsplash-scaled.webp" class="rounded-lg shadow-sm hover:shadow-md transition-shadow w-full h-64 object-cover" alt="Galeria 1">
+            <img src="https://pub.gardenlawn.pl/media/images/grass/WhatsAppImage2021-08-02at20.10.33.webp" class="rounded-lg shadow-sm hover:shadow-md transition-shadow w-full h-64 object-cover" alt="Galeria 2">
+            <img src="https://pub.gardenlawn.pl/media/images/grass/petar-tonchev-c-5-QE5kBYk-unsplash-scaled.webp" class="rounded-lg shadow-sm hover:shadow-md transition-shadow w-full h-64 object-cover" alt="Galeria 3">
+        </div>
+    </section>
+
+    <!-- How to Lay -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div class="bg-white p-8 rounded-xl border border-gray-200 shadow-sm">
+                <h3 class="text-2xl font-bold mb-6">JAK ROZKŁADAĆ</h3>
+                <ul class="space-y-4">
+                    <li class="flex items-start"><?= $iconCheck ?><span>Ściśle obok siebie, pierwszy pas w miejscu gdzie trawnik jest najdłuższy.</span></li>
+                    <li class="flex items-start"><?= $iconCheck ?><span>Pasy trawy należy dokładnie przycisnąć do podłoża i ubić wałem.</span></li>
+                    <li class="flex items-start"><?= $iconCheck ?><span>Zewnętrzne krawędzie należy obsypać ziemią, aby nie obsychały.</span></li>
+                </ul>
+            </div>
+            <div class="h-full min-h-[300px] rounded-xl bg-cover bg-center shadow-lg" style="background-image: url('https://pub.gardenlawn.pl/media/images/grass/trawa-w-rolce-producent-trawy-ogrodowej.webp');"></div>
+        </div>
+    </section>
+
+    <!-- Why Worth It -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div class="h-full min-h-[300px] rounded-xl bg-cover bg-center shadow-lg order-2 md:order-1" style="background-image: url('https://pub.gardenlawn.pl/media/images/grass/the-lawn-g0b4c64740_1920.webp');"></div>
+            <div class="bg-white p-8 rounded-xl border border-gray-200 shadow-sm order-1 md:order-2">
+                <h3 class="text-2xl font-bold mb-6">DLACZEGO WARTO?</h3>
+                <ul class="space-y-4">
+                    <li class="flex items-start"><?= $iconCheck ?><span>Trawa wycinana z gruntu hodowana jest na plantacji od 12 – 18 miesięcy</span></li>
+                    <li class="flex items-start"><?= $iconCheck ?><span>Posiada zwarty i mocny system korzeniowy</span></li>
+                    <li class="flex items-start"><?= $iconCheck ?><span>Siatka biodegradowalna zapewnia stabilność rolki</span></li>
+                    <li class="flex items-start"><?= $iconCheck ?><span>Można założyć przez dłuższy okres roku</span></li>
+                    <li class="flex items-start"><?= $iconCheck ?><span>Szybki efekt w krótkim czasie</span></li>
+                    <li class="flex items-start"><?= $iconCheck ?><span>Idealna na nierównych terenach</span></li>
+                    <li class="flex items-start"><?= $iconCheck ?><span>Wysoka aklimatyzacja w naszych warunkach</span></li>
+                </ul>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<section class="u-clearfix u-section-5" id="sec-6940">
-    <div class="u-clearfix u-sheet u-valign-middle-md u-sheet-1">
-        <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
-            <div class="u-layout">
-                <div class="u-layout-row">
-                    <div class="u-container-style u-layout-cell u-left-cell u-size-20 u-layout-cell-1">
-                        <div class="u-container-layout u-valign-top u-container-layout-1">
-                            <img src="https://pub.gardenlawn.pl/media/images/grass/trawa-w-rolce-producent-trawy-ogrodowej.webp" alt="" class="u-expanded-width-lg u-expanded-width-md u-expanded-width-xs u-image u-image-contain u-image-default u-image-1" data-image-width="884" data-image-height="933">
-                        </div>
-                    </div>
-                    <div class="u-align-left-xs u-container-style u-layout-cell u-right-cell u-size-40 u-white u-layout-cell-2">
-                        <div class="u-container-layout u-valign-top-md u-valign-top-sm u-valign-top-xl u-container-layout-2">
-                            <p class="u-text u-text-1">Trawa rolowana pochodzi ze starannie wyselekcjonowanych gatunków traw, idealnie spełnia oczekiwania przydomowych ogrodów.</p>
-                            <ul class="u-custom-list u-spacing-4 u-text u-text-2">
-                                <li style="margin-left: 1.7em;">
-                                    <div class="u-list-icon u-text-custom-color-2 u-list-icon-1">
-                                        <div class="u-svg-content" style="font-size: 0.9em; margin: -0.9em;"><img draggable="false" role="img" class="emoji" alt="✔" src="https://pub.gardenlawn.pl/media/images/grass/2714.svg"></div>
-                                    </div>
-                                    doskonała jakość trawy ogrodowej,
-                                </li>
-                                <li style="margin-left: 1.7em;">
-                                    <div class="u-list-icon u-text-custom-color-2 u-list-icon-2">
-                                        <div class="u-svg-content" style="font-size: 0.9em; margin: -0.9em;"><img draggable="false" role="img" class="emoji" alt="✔" src="https://pub.gardenlawn.pl/media/images/grass/2714.svg"></div>
-                                    </div>
-                                    starannie wyselekcjonowane gatunki traw,
-                                </li>
-                                <li style="margin-left: 1.7em;">
-                                    <div class="u-list-icon u-text-custom-color-2 u-list-icon-3">
-                                        <div class="u-svg-content" style="font-size: 0.9em; margin: -0.9em;"><img draggable="false" role="img" class="emoji" alt="✔" src="https://pub.gardenlawn.pl/media/images/grass/2714.svg"></div>
-                                    </div>
-                                    odporne na intensywną eksploatację i wydeptywanie,
-                                </li>
-                                <li style="margin-left: 1.7em;">
-                                    <div class="u-list-icon u-text-custom-color-2 u-list-icon-4">
-                                        <div class="u-svg-content" style="font-size: 0.9em; margin: -0.9em;"><img draggable="false" role="img" class="emoji" alt="✔" src="https://pub.gardenlawn.pl/media/images/grass/2714.svg"></div>
-                                    </div>
-                                    oszczędność czasu przy wykładaniu - szybki montaż,
-                                </li>
-                                <li style="margin-left: 1.7em;">
-                                    <div class="u-list-icon u-text-custom-color-2 u-list-icon-5">
-                                        <div class="u-svg-content" style="font-size: 0.9em; margin: -0.9em;"><img draggable="false" role="img" class="emoji" alt="✔" src="https://pub.gardenlawn.pl/media/images/grass/2714.svg"></div>
-                                    </div>
-                                    po wyłożeniu, natychmiast gotowa do użytku,
-                                </li>
-                                <li style="margin-left: 1.7em;">
-                                    <div class="u-list-icon u-text-custom-color-2 u-list-icon-6">
-                                        <div class="u-svg-content" style="font-size: 0.9em; margin: -0.9em;"><img draggable="false" role="img" class="emoji" alt="✔" src="https://pub.gardenlawn.pl/media/images/grass/2714.svg"></div>
-                                    </div>
-                                    wysoka aklimatyzacja w naszych warunkach klimatycznych.
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="u-clearfix u-custom-color-3 u-section-6" id="carousel_2ebb" style="width: fit-content">
-    <div class="u-clearfix u-sheet u-valign-middle-md u-valign-middle-xl u-sheet-1">
-        <div class="u-clearfix u-expanded-width u-gutter-0 u-layout-wrap u-layout-wrap-1">
-            <div class="u-layout">
-                <div class="u-layout-row">
-                    <div class="u-container-style u-layout-cell u-left-cell u-size-30 u-layout-cell-1">
-                        <div class="u-container-layout u-container-layout-1">
-                            <h2 class="u-text u-text-1 backstage animated zoomIn" data-animation-name="zoomIn"
-                                data-animation-duration="1000" data-animation-delay="0" data-animation-direction=""
-                                style="will-change: transform, opacity; animation-duration: 1000ms;">BUDOWA SYSTEMU</h2>
-                            <p class="u-text u-text-2">Trawa rolowana STRONG posiada wbudowaną w korzeń siatkę biodegradowalną. System korzeniowy w połączeniu z siatką tworzy mocną i zwartą konstrukcję, sprawdzającą się doskonale na nawierzchniach intensywnie użytkowanych i eksploatowanych. To doskonały produkt do zagospodarowania nierównych i płaskich terenów takich jak place zabaw, skwery, przydomowe ogrody czy elementy zielonej architektury.</p>
-                            <h3 class="u-text u-text-custom-color-9 u-text-3">Jak odpowiednio przyg​oto​wać podłoże pod trawę z rolki? </h3>
-                            <p class="u-text u-text-4">Przed rozwinięciem trawy w rolce należy także spulchnić podłoże – do 2-3 centymetrów. Pozwoli to na stworzenie lepszego podłoża dla korzeni i wzrostu trawy. Trawa z rolki rozłożona zostaje w przeciągu jednego lub dwóch dni, tak aby nie doprowadzić do wyschnięcia trawnika.</p>
-                        </div>
-                    </div>
-                    <div class="u-align-center-md u-align-center-sm u-align-center-xs u-container-style u-layout-cell u-right-cell u-size-30 u-layout-cell-2">
-                        <div class="u-container-layout u-valign-top-lg u-valign-top-md u-container-layout-2">
-                            <img src="https://pub.gardenlawn.pl/media/images/grass/strong-przekroj-pl-1.webp" alt="" class="u-expanded-width-lg u-expanded-width-md u-expanded-width-sm u-expanded-width-xs u-image u-image-default u-image-1" data-image-width="1259" data-image-height="564">
-                            <div class="u-border-2 u-border-custom-color-2 u-expanded-width-sm u-expanded-width-xs u-line u-line-horizontal u-line-1"></div>
-                            <p class="u-text u-text-5">Trawa do ogrodu STRONG sprawdza się idealnie na nierównych terenach (np. na skarpach), jednak przed jej rozłożeniem warto wcześniej odpowiednio wyrównać teren oraz oczyścić go z kamieni, kawałków korzeni, liści oraz chwastów. </p>
-                            <div class="u-border-2 u-border-custom-color-2 u-expanded-width-sm u-expanded-width-xs u-line u-line-horizontal u-line-2"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="u-clearfix u-custom-color-3 u-section-7" id="carousel_0d9f" style="width: fit-content">
-    <div class="u-clearfix u-sheet u-valign-middle-lg u-valign-middle-xl u-sheet-1">
-        <div class="u-clearfix u-expanded-width u-gutter-0 u-layout-wrap u-layout-wrap-1">
-            <div class="u-layout">
-                <div class="u-layout-row">
-                    <div class="u-container-style u-layout-cell u-left-cell u-size-60 u-layout-cell-1">
-                        <div class="u-container-layout u-valign-top-lg u-valign-top-xl u-container-layout-1">
-                            <div class="u-expanded-width u-gallery u-layout-grid u-lightbox u-show-text-on-hover u-gallery-1" data-pswp-uid="1">
-                                <div class="u-gallery-inner u-gallery-inner-1">
-                                    <div class="u-effect-fade u-effect-hover-zoom u-gallery-item u-radius-25 u-shape-round" data-pswp-item-id="0">
-                                        <div class="u-back-slide" data-image-width="2560" data-image-height="1920">
-                                            <img class="u-back-image u-expanded" src="https://pub.gardenlawn.pl/media/images/grass/henrique-paim-sew5dUh0_bg-unsplash-scaled.webp">
-                                        </div>
-                                        <div class="u-over-slide u-shading u-over-slide-1">
-                                            <h3 class="u-gallery-heading"></h3>
-                                            <p class="u-gallery-text"></p>
-                                        </div>
-                                    </div>
-                                    <div class="u-effect-fade u-effect-hover-zoom u-gallery-item u-radius-25 u-shape-round" data-pswp-item-id="1">
-                                        <div class="u-back-slide" data-image-width="1600" data-image-height="1200">
-                                            <img class="u-back-image u-expanded" src="https://pub.gardenlawn.pl/media/images/grass/WhatsAppImage2021-08-02at20.10.33.webp">
-                                        </div>
-                                        <div class="u-over-slide u-shading u-over-slide-2">
-                                            <h3 class="u-gallery-heading"></h3>
-                                            <p class="u-gallery-text"></p>
-                                        </div>
-                                    </div>
-                                    <div class="u-effect-fade u-effect-hover-zoom u-gallery-item u-radius-25 u-shape-round" data-pswp-item-id="2">
-                                        <div class="u-back-slide" data-image-width="2560" data-image-height="1440">
-                                            <img class="u-back-image u-expanded" src="https://pub.gardenlawn.pl/media/images/grass/petar-tonchev-c-5-QE5kBYk-unsplash-scaled.webp">
-                                        </div>
-                                        <div class="u-over-slide u-shading u-over-slide-3">
-                                            <h3 class="u-gallery-heading"></h3>
-                                            <p class="u-gallery-text"></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="u-clearfix u-section-8" id="carousel_3668">
-    <div class="u-clearfix u-sheet u-valign-bottom u-sheet-1">
-        <div class="u-clearfix u-expanded-width u-gutter-34 u-layout-wrap u-layout-wrap-1">
-            <div class="u-layout">
-                <div class="u-layout-row">
-                    <div class="u-align-left u-container-style u-layout-cell u-left-cell u-radius-25 u-shape-round u-size-30 u-white u-layout-cell-1">
-                        <div class="u-border-4 u-border-custom-color-2 u-container-layout u-valign-middle-lg u-valign-middle-md u-valign-middle-xl u-valign-top-sm u-valign-top-xs u-container-layout-1">
-                            <h4 class="u-text u-text-1 backstage animated zoomIn" data-animation-name="zoomIn"
-                                data-animation-duration="1000" data-animation-delay="0" data-animation-direction=""
-                                style="will-change: transform, opacity; animation-duration: 1000ms;">
-                                <font style="">JAK ROZKŁADAĆ<br></font>
-                            </h4>
-                            <ul class="u-custom-list u-spacing-4 u-text u-text-2">
-                                <li style="margin-left: 1.7em;">
-                                    <div class="u-list-icon u-text-custom-color-2 u-list-icon-1">
-                                        <div class="u-svg-content" style="font-size: 0.9em; margin: -0.9em;"><img draggable="false" role="img" class="emoji" alt="✔" src="https://pub.gardenlawn.pl/media/images/grass/2714.svg"></div>
-                                    </div>
-                                    ściśle obok siebie, pierwszy pas trawy STRONG należy rozłożyć w miejscu, gdzie trawnik ma być najdłuższy – kolejne pasy rozwija się od połowy długości już ułożonych – tak, aby łączenia sąsiadujących ze sobą pasów nie tworzyły jednej linii, <br>
-                                </li>
-                                <li style="margin-left: 1.7em;">
-                                    <div class="u-list-icon u-text-custom-color-2 u-list-icon-1">
-                                        <div class="u-svg-content" style="font-size: 0.9em; margin: -0.9em;"><img draggable="false" role="img" class="emoji" alt="✔" src="https://pub.gardenlawn.pl/media/images/grass/2714.svg"></div>
-                                    </div>
-                                    pasy trawy należy dokładnie przycisnąć do podłoża – np. za pomocą deski, następnie trzeba ubić je wałem, <br>
-                                </li>
-                                <li style="margin-left: 1.7em;">
-                                    <div class="u-list-icon u-text-custom-color-2 u-list-icon-1">
-                                        <div class="u-svg-content" style="font-size: 0.9em; margin: -0.9em;"><img draggable="false" role="img" class="emoji" alt="✔" src="https://pub.gardenlawn.pl/media/images/grass/2714.svg"></div>
-                                    </div>
-                                    zewnętrzne krawędzie z rolki narażone są na obsychanie – istotne jest, aby odpowiednio obsypać je ziemią.
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="u-align-left-xs u-container-style u-effect-hover-zoom u-layout-cell u-radius-25 u-right-cell u-shape-round u-size-30 u-layout-cell-2" data-image-width="700" data-image-height="467">
-                        <div class="u-background-effect u-border-4 u-border-custom-color-2 u-expanded">
-                            <div class="u-background-effect-image u-expanded u-image u-image-1" data-image-width="700" data-image-height="467"></div>
-                        </div>
-                        <div class="u-container-layout u-valign-bottom-sm u-container-layout-2"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="u-clearfix u-section-9" id="carousel_a80e">
-    <div class="u-clearfix u-sheet u-sheet-1">
-        <div class="u-clearfix u-expanded-width u-gutter-34 u-layout-wrap u-layout-wrap-1">
-            <div class="u-layout">
-                <div class="u-layout-row">
-                    <div class="u-container-style u-effect-hover-zoom u-layout-cell u-left-cell u-radius-25 u-shape-round u-size-30 u-layout-cell-1" data-image-width="700" data-image-height="467">
-                        <div class="u-background-effect u-border-4 u-border-custom-color-2 u-expanded">
-                            <div class="u-background-effect-image u-expanded u-image u-image-1" data-image-width="1920" data-image-height="1280"></div>
-                        </div>
-                        <div class="u-container-layout u-valign-bottom-sm u-container-layout-1"></div>
-                    </div>
-                    <div class="u-align-left u-container-style u-layout-cell u-radius-25 u-right-cell u-shape-round u-size-30 u-white u-layout-cell-2">
-                        <div class="u-border-4 u-border-custom-color-2 u-container-layout u-valign-middle-lg u-valign-middle-md u-valign-middle-xl u-valign-top-sm u-valign-top-xs u-container-layout-2">
-                            <h4 class="u-text u-text-1 backstage animated zoomIn" data-animation-name="zoomIn"
-                                data-animation-duration="1000" data-animation-delay="0" data-animation-direction=""
-                                style="will-change: transform, opacity; animation-duration: 1000ms;">DLACZEGO WARTO?</h4>
-                            <ul class="u-custom-list u-spacing-4 u-text u-text-2">
-                                <li style="margin-left: 1.7em;">
-                                    <div class="u-list-icon u-text-custom-color-2 u-list-icon-1">
-                                        <div class="u-svg-content" style="font-size: 0.9em; margin: -0.9em;"><img draggable="false" role="img" class="emoji" alt="✔" src="https://pub.gardenlawn.pl/media/images/grass/2714.svg"></div>
-                                    </div>
-                                    trawa wycinana z gruntu hodowana jest na plantacji od 12 – 18 miesięcy,&nbsp;
-                                </li>
-                                <li style="margin-left: 1.7em;">
-                                    <div class="u-list-icon u-text-custom-color-2 u-list-icon-1">
-                                        <div class="u-svg-content" style="font-size: 0.9em; margin: -0.9em;"><img draggable="false" role="img" class="emoji" alt="✔" src="https://pub.gardenlawn.pl/media/images/grass/2714.svg"></div>
-                                    </div>
-                                    posiada zwarty i mocny system korzeniowy, <br>
-                                </li>
-                                <li style="margin-left: 1.7em;">
-                                    <div class="u-list-icon u-text-custom-color-2 u-list-icon-1">
-                                        <div class="u-svg-content" style="font-size: 0.9em; margin: -0.9em;"><img draggable="false" role="img" class="emoji" alt="✔" src="https://pub.gardenlawn.pl/media/images/grass/2714.svg"></div>
-                                    </div>
-                                    siatka biodegradowalna zapewnia stabilność rolki i łatwe wykładanie,
-                                </li>
-                                <li style="margin-left: 1.7em;">
-                                    <div class="u-list-icon u-text-custom-color-2 u-list-icon-1">
-                                        <div class="u-svg-content" style="font-size: 0.9em; margin: -0.9em;"><img draggable="false" role="img" class="emoji" alt="✔" src="https://pub.gardenlawn.pl/media/images/grass/2714.svg"></div>
-                                    </div>
-                                    można założyć przez dłuższy okres roku, <br>
-                                </li>
-                                <li style="margin-left: 1.7em;">
-                                    <div class="u-list-icon u-text-custom-color-2 u-list-icon-1">
-                                        <div class="u-svg-content" style="font-size: 0.9em; margin: -0.9em;"><img draggable="false" role="img" class="emoji" alt="✔" src="https://pub.gardenlawn.pl/media/images/grass/2714.svg"></div>
-                                    </div>
-                                    szybki efekt w krótkim czasie,
-                                </li>
-                                <li style="margin-left: 1.7em;">
-                                    <div class="u-list-icon u-text-custom-color-2 u-list-icon-1">
-                                        <div class="u-svg-content" style="font-size: 0.9em; margin: -0.9em;"><img draggable="false" role="img" class="emoji" alt="✔" src="https://pub.gardenlawn.pl/media/images/grass/2714.svg"></div>
-                                    </div>
-                                    idealna na nierównych terenach,
-                                </li>
-                                <li style="margin-left: 1.7em;">
-                                    <div class="u-list-icon u-text-custom-color-2 u-list-icon-1">
-                                        <div class="u-svg-content" style="font-size: 0.9em; margin: -0.9em;"><img draggable="false" role="img" class="emoji" alt="✔" src="https://pub.gardenlawn.pl/media/images/grass/2714.svg"></div>
-                                    </div>
-                                    wysoka aklimatyzacja w naszych warunkach klimatycznych
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-</body>
-</html>
+</div>

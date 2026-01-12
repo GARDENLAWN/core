@@ -1,604 +1,175 @@
-<!DOCTYPE html>
-<html lang="pl-PL" class="u-responsive-xl skrollr skrollr-desktop" style="display: table; margin: auto; width: 100%;">
-<head>
-    <style type="text/css">
-        .u-clearfix { margin: 0 !important; }
-        body { overflow: hidden !important; -ms-overflow-style: none !important; scrollbar-width: none !important; }
-        ::-webkit-scrollbar { display: none !important; width: 0px !important; height: 0px !important; background-color: transparent !important; }
-        ::-webkit-scrollbar-button, ::-webkit-scrollbar-thumb, ::-webkit-scrollbar-track, ::-webkit-scrollbar-corner { background-color: transparent !important; }
-    </style>
+<?php
+/** @var \Magento\Framework\View\Element\Template $block */
+$greenColor = 'text-[#009640]';
+?>
+<div class="space-y-16 py-8 text-gray-700 font-sans">
 
-    <script type="text/javascript" async="" src="/static/frontend/GardenLawn/Hyvatheme/pl_PL/files/grass/js.js"></script>
-    <script>(function (html) { html.className = html.className.replace(/\bno-js\b/, 'js') })(document.documentElement);</script>
+    <!-- Intro -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">TRAWNIK PRODUCENT</h2>
+                <h3 class="text-xl font-bold <?= $greenColor ?> mb-6">Posiadamy 25-letnie doświadczenie w branży</h3>
+                <p class="mb-6 text-lg">
+                    Prosto z plantacji na palety transportowe trafia trawa zawinięta w rolkę i niemal natychmiast ładowana jest do samochodu dostawcy.
+                </p>
+                <p class="mb-6 font-bold">
+                    Wysyłamy naszą trawę na wskazany adres na terenie całej Polski oraz poza jej granicami. W cenie transportu gotowy produkt pakujemy na palety transportowe i profesjonalnie zabezpieczamy.
+                </p>
+                <p>Dodatkowo nasi Klienci mogą odebrać zamówienie prosto z naszej plantacji.</p>
+            </div>
+            <div>
+                <img src="https://pub.gardenlawn.pl/media/images/grass/15c1af1f7ce71626695f0b8d49ce1620a3647e81d25d89aa129338b7c5381fcdff256627eddb645d2a99303a29633d16c1184cefa8388173383518_1280.webp" alt="Transport" class="rounded-xl shadow-lg w-full h-auto object-cover">
+            </div>
+        </div>
+    </section>
 
-    <script data-cfasync="false" data-pagespeed-no-defer="" type="text/javascript">
-        var gtm4wp_datalayer_name = "dataLayer";
-        var dataLayer = dataLayer || [];
-    </script>
-
-    <title>LOGISTYKA - Trawnik Producent</title>
-    <link rel="canonical" href="https://trawnikproducent.pl/logistyka/">
-    <meta property="og:description" content="TRANSPORT - Prosto z plantacji na palety transportowe trafia trawa zawinięta w rolkę.">
-
-    <script type="application/ld+json" class="yoast-schema-graph">{
-            "@context": "https://schema.org",
-            "@graph": [
-                {
-                    "@type": "WebSite",
-                    "@id": "https://trawnikproducent.pl/#website",
-                    "url": "https://trawnikproducent.pl/",
-                    "name": "Trawnik Producent",
-                    "inLanguage": "pl-PL"
-                },
-                {
-                    "@type": "WebPage",
-                    "@id": "https://trawnikproducent.pl/logistyka/#webpage",
-                    "url": "https://trawnikproducent.pl/logistyka/",
-                    "name": "LOGISTYKA - Trawnik Producent",
-                    "isPartOf": { "@id": "https://trawnikproducent.pl/#website" },
-                    "inLanguage": "pl-PL"
-                },
-                {
-                    "@type": "BreadcrumbList",
-                    "@id": "https://trawnikproducent.pl/logistyka/#breadcrumb",
-                    "itemListElement": [
-                        { "@type": "ListItem", "position": 1, "name": "Strona główna", "item": "https://trawnikproducent.pl/" },
-                        { "@type": "ListItem", "position": 2, "name": "LOGISTYKA" }
-                    ]
-                }
-            ]
-        }</script>
-
-    <link rel="dns-prefetch" href="https://www.google.com/">
-    <link rel="alternate" type="application/rss+xml" title="Trawnik Producent » Kanał z wpisami" href="https://trawnikproducent.pl/feed/">
-
-    <script type="application/ld+json">{
-            "@context": "http:\/\/schema.org",
-            "@type": "Organization",
-            "name": "Trawnik Producent",
-            "url": "https:\/\/trawnikproducent.pl\/",
-            "logo": "https://pub.gardenlawn.pl/media/images/grass/cropped-trawnikproducent.webp"
-        }</script>
-    <script type="application/ld+json">{
-            "@context": "http:\/\/schema.org",
-            "@type": "Article",
-            "headline": "LOGISTYKA",
-            "author": { "@type": "Person", "name": "anna" },
-            "publisher": {
-                "@type": "Organization",
-                "name": "Trawnik Producent",
-                "logo": {
-                    "@type": "ImageObject",
-                    "url": "https://pub.gardenlawn.pl/media/images/grass/cropped-trawnikproducent.webp",
-                    "width": 240,
-                    "height": 138
-                }
-            }
-        }</script>
-
-    <link rel="stylesheet" id="wp-block-library-css" href="/static/frontend/GardenLawn/Hyvatheme/pl_PL/files/grass/style.min.css" type="text/css" media="all">
-    <link rel="stylesheet" id="contact-form-7-css" href="/static/frontend/GardenLawn/Hyvatheme/pl_PL/files/grass/styles.css" type="text/css" media="all">
-    <link rel="stylesheet" id="formcraft-common-css" href="/static/frontend/GardenLawn/Hyvatheme/pl_PL/files/grass/formcraft-common.css" type="text/css" media="all">
-    <link rel="stylesheet" id="formcraft-form-css" href="/static/frontend/GardenLawn/Hyvatheme/pl_PL/files/grass/form.css" type="text/css" media="all">
-    <link rel="stylesheet" id="rt-tpg-css" href="/static/frontend/GardenLawn/Hyvatheme/pl_PL/files/grass/thepostgrid.css" type="text/css" media="all">
-    <link rel="stylesheet" id="theme-style-css" href="/static/frontend/GardenLawn/Hyvatheme/pl_PL/files/grass/style.css" type="text/css" media="all">
-    <link rel="stylesheet" id="theme-media-css" href="/static/frontend/GardenLawn/Hyvatheme/pl_PL/files/grass/media.css" type="text/css" media="all">
-
-    <script type="text/javascript" src="/static/frontend/GardenLawn/Hyvatheme/pl_PL/files/grass/jquery.min.js" id="jquery-core-js"></script>
-    <script type="text/javascript" src="/static/frontend/GardenLawn/Hyvatheme/pl_PL/files/grass/jquery-migrate.min.js" id="jquery-migrate-js"></script>
-
-    <link id="u-theme-google-font" rel="stylesheet" href="/static/frontend/GardenLawn/Hyvatheme/pl_PL/files/grass/css.css">
-
-    <style>
-        /* SECTION 3 */
-        .u-section-3 { background-image: none; }
-        .u-section-3 .u-sheet-1 { min-height: 428px; }
-        .u-section-3 .u-layout-wrap-1 { margin-top: 0; margin-bottom: 0; }
-        .u-section-3 .u-layout-cell-1 { min-height: 644px; }
-        .u-section-3 .u-container-layout-1 { padding: 30px 30px 34px; }
-        .u-section-3 .u-text-1 { animation-duration: 1000ms; font-size: 2.25rem; font-weight: 700; margin: 0; }
-        .u-section-3 .u-text-2 { text-transform: uppercase; font-weight: 700; margin: 19px 29px 0 0; }
-        .u-section-3 .u-text-3 { margin: 29px 29px 0 0; }
-        .u-section-3 .u-layout-cell-2 { min-height: 644px; }
-        .u-section-3 .u-container-layout-2 { padding: 30px; }
-        .u-section-3 .u-image-1 { height: 530px; margin-top: 0; margin-bottom: 0; }
-
-        @media (max-width: 1199px) { .u-section-3 .u-sheet-1, .u-section-3 .u-layout-cell-1, .u-section-3 .u-layout-cell-2 { min-height: 593px; } .u-section-3 .u-image-1 { height: 514px; } }
-        @media (max-width: 991px) { .u-section-3 .u-sheet-1 { min-height: 523px; } .u-section-3 .u-layout-cell-1 { min-height: 100px; } .u-section-3 .u-layout-cell-2 { min-height: 454px; } .u-section-3 .u-image-1 { height: 376px; } }
-        @media (max-width: 767px) { .u-section-3 .u-sheet-1 { min-height: 1149px; } .u-section-3 .u-layout-cell-1 { min-height: 458px; } .u-section-3 .u-layout-cell-2 { min-height: 636px; } .u-section-3 .u-image-1 { height: 522px; } }
-        @media (max-width: 575px) { .u-section-3 .u-sheet-1 { min-height: 598px; } .u-section-3 .u-text-1 { font-size: 1.875rem; } .u-section-3 .u-layout-cell-2 { min-height: 287px; } .u-section-3 .u-image-1 { height: 241px; margin-top: -14px; } }
-
-        /* SECTION 4 */
-        .u-section-4 {
-            /* Zaktualizowany URL tła */
-            background-image: linear-gradient(0deg, rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.75)), url("https://pub.gardenlawn.pl/media/images/grass/trawnik-tlo.webp");
-            background-position: 50% 50%;
-        }
-        .u-section-4 .u-sheet-1 { min-height: 546px; }
-        .u-section-4 .u-text-1 { font-weight: 700; background-image: none; margin: 92px 0 0; }
-        .u-section-4 .u-list-1 { margin-top: 45px; margin-bottom: 60px; }
-        .u-section-4 .u-repeater-1 { grid-template-columns: repeat(3, calc(33.3333% - 13.3333px)); min-height: 215px; grid-gap: 20px; }
-        .u-section-4 .u-container-layout-1, .u-section-4 .u-container-layout-2, .u-section-4 .u-container-layout-3 { padding: 30px; }
-        .u-section-4 .u-icon-1, .u-section-4 .u-icon-2, .u-section-4 .u-icon-3 { height: 74px; width: 74px; transition-duration: 1.5s; margin: 0 auto; }
-        .u-section-4 .u-text-2, .u-section-4 .u-text-4, .u-section-4 .u-text-6 { font-weight: 700; text-transform: uppercase; font-size: 1.25rem; margin: 26px 0 0; }
-        .u-section-4 .u-text-3, .u-section-4 .u-text-5, .u-section-4 .u-text-7 { font-weight: 600; margin: 16px 0 0; }
-
-        @media (max-width: 1199px) { .u-section-4 .u-repeater-1 { min-height: 176px; } }
-        @media (max-width: 991px) { .u-section-4 .u-sheet-1 { min-height: 779px; } .u-section-4 .u-repeater-1 { grid-template-columns: repeat(2, calc(50% - 9.99997px)); min-height: 431px; } }
-        @media (max-width: 767px) { .u-section-4 .u-sheet-1 { min-height: 1019px; } .u-section-4 .u-repeater-1 { grid-template-columns: 100%; } }
-        @media (max-width: 575px) { .u-section-4 .u-sheet-1 { min-height: 1028px; } }
-
-        /* SECTION 5 */
-        .u-section-5 .u-sheet-1 { min-height: 682px; }
-        .u-section-5 .u-layout-wrap-1 { margin: 60px auto 0 0; }
-        .u-section-5 .u-layout-cell-1, .u-section-5 .u-layout-cell-2 { min-height: 202px; }
-        .u-section-5 .u-container-layout-1, .u-section-5 .u-container-layout-2 { padding: 30px; }
-        .u-section-5 .u-text-1 { font-weight: 700; font-size: 1.875rem; margin: 0; }
-        .u-section-5 .u-text-2 { margin: 20px 0 0; }
-        .u-section-5 .u-gallery-1 { height: 357px; grid-template-columns: repeat(4, auto); margin-top: 20px; margin-bottom: 60px; grid-gap: 20px; }
-        .u-section-5 .u-gallery-inner-1 { grid-template-columns: repeat(4, auto); grid-gap: 20px; }
-        .u-section-5 .u-over-slide-1, .u-section-5 .u-over-slide-2, .u-section-5 .u-over-slide-3, .u-section-5 .u-over-slide-4 { background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)); padding: 20px; }
-
-        @media (max-width: 1199px) { .u-section-5 .u-sheet-1 { min-height: 587px; } .u-section-5 .u-layout-cell-1, .u-section-5 .u-layout-cell-2 { min-height: 167px; } .u-section-5 .u-gallery-1 { height: 294px; } }
-        @media (max-width: 991px) { .u-section-5 .u-sheet-1 { min-height: 938px; } .u-section-5 .u-layout-cell-1, .u-section-5 .u-layout-cell-2 { min-height: 100px; } .u-section-5 .u-gallery-1 { height: 901px; } .u-section-5 .u-gallery-inner-1 { grid-template-columns: repeat(2, auto); } }
-        @media (max-width: 767px) { .u-section-5 .u-sheet-1 { min-height: 1418px; } .u-section-5 .u-layout-cell-1 { min-height: 375px; } .u-section-5 .u-gallery-1 { height: 1003px; margin-bottom: 40px; } .u-section-5 .u-gallery-inner-1 { grid-template-columns: repeat(1, auto); } }
-        @media (max-width: 575px) { .u-section-5 .u-sheet-1 { min-height: 1179px; } .u-section-5 .u-layout-cell-1 { min-height: 408px; } .u-section-5 .u-gallery-1 { height: 632px; margin-top: 4px; } }
-
-        /* SECTION 6 */
-        .u-section-6 .u-sheet-1 { min-height: 632px; }
-        .u-section-6 .u-layout-wrap-1 { margin-top: 40px; margin-bottom: 38px; }
-        .u-section-6 .u-layout-cell-1, .u-section-6 .u-layout-cell-2 { min-height: 552px; }
-        .u-section-6 .u-container-layout-1 { padding: 30px 30px 23px; }
-        .u-section-6 .u-text-1 { animation-duration: 1000ms; font-weight: 700; margin: 0; }
-        .u-section-6 .u-text-2 { margin: 26px 47px 0 0; }
-        .u-section-6 .u-table-1 { width: 450px; margin: 36px auto 0 0; }
-        .u-section-6 .u-container-layout-2 { padding: 30px; }
-        .u-section-6 .u-image-1 { height: 383px; margin-top: 0; margin-bottom: 0; }
-        .u-section-6 .u-text-3 { margin: 15px 18px 0 42px; }
-
-        @media (max-width: 1199px) { .u-section-6 .u-sheet-1 { min-height: 430px; } .u-section-6 .u-layout-cell-1, .u-section-6 .u-layout-cell-2 { min-height: 455px; } .u-section-6 .u-table-1 { width: 410px; } .u-section-6 .u-image-1 { height: 308px; } }
-        @media (max-width: 991px) { .u-section-6 .u-sheet-1 { min-height: 353px; } .u-section-6 .u-layout-cell-1 { min-height: 100px; } .u-section-6 .u-table-1 { width: 300px; } .u-section-6 .u-layout-cell-2 { min-height: 658px; } .u-section-6 .u-image-1 { height: 312px; } }
-        @media (max-width: 767px) { .u-section-6 .u-sheet-1 { min-height: 1094px; } .u-section-6 .u-layout-cell-1 { min-height: 524px; } .u-section-6 .u-layout-cell-2 { min-height: 505px; } .u-section-6 .u-image-1 { height: 317px; width: 520px; margin-right: auto; margin-left: -10px; } }
-        @media (max-width: 575px) { .u-section-6 .u-sheet-1 { min-height: 359px; } .u-section-6 .u-layout-cell-1 { min-height: 100px; } .u-section-6 .u-layout-cell-2 { min-height: 368px; } .u-section-6 .u-image-1 { height: 196px; width: auto; margin: 0 auto; } }
-
-        /* SECTION 7 */
-        .u-section-7 .u-sheet-1 { min-height: 632px; }
-        .u-section-7 .u-layout-wrap-1 { margin-top: 40px; margin-bottom: 38px; }
-        .u-section-7 .u-layout-cell-1, .u-section-7 .u-layout-cell-2 { min-height: 688px; }
-        .u-section-7 .u-container-layout-1 { padding: 30px 30px 23px; }
-        .u-section-7 .u-text-1 { animation-duration: 1000ms; margin: 0; }
-        .u-section-7 .u-text-2 { margin: 26px 47px 0 0; }
-        .u-section-7 .u-table-1 { width: 450px; margin: 36px auto 0 0; }
-        .u-section-7 .u-table-body-1 { background-image: none; }
-        .u-section-7 .u-container-layout-2 { padding: 30px; }
-        .u-section-7 .u-image-1 { height: 383px; margin-top: 79px; margin-bottom: 0; }
-        .u-section-7 .u-text-3 { margin: 15px 18px 0 42px; }
-
-        @media (max-width: 1199px) { .u-section-7 .u-sheet-1 { min-height: 430px; } .u-section-7 .u-layout-cell-1, .u-section-7 .u-layout-cell-2 { min-height: 567px; } .u-section-7 .u-table-1 { width: 410px; } .u-section-7 .u-image-1 { height: 308px; } }
-        @media (max-width: 991px) { .u-section-7 .u-sheet-1 { min-height: 353px; } .u-section-7 .u-layout-cell-1 { min-height: 100px; } .u-section-7 .u-table-1 { width: 300px; } .u-section-7 .u-layout-cell-2 { min-height: 658px; } .u-section-7 .u-image-1 { height: 312px; } }
-        @media (max-width: 767px) { .u-section-7 .u-sheet-1 { min-height: 1074px; } .u-section-7 .u-layout-cell-1 { min-height: 524px; } .u-section-7 .u-layout-cell-2 { min-height: 532px; } .u-section-7 .u-image-1 { height: 317px; margin-top: 0; } }
-        @media (max-width: 575px) { .u-section-7 .u-sheet-1 { min-height: 359px; } .u-section-7 .u-layout-cell-1 { min-height: 100px; } .u-section-7 .u-layout-cell-2 { min-height: 368px; } .u-section-7 .u-image-1 { height: 196px; } }
-
-        /* SECTION 8 */
-        .u-section-8 .u-sheet-1 { min-height: 260px; }
-        .u-section-8 .u-layout-wrap-1 { margin-top: 40px; margin-bottom: -334px; }
-        .u-section-8 .u-layout-cell-1 { min-height: 200px; }
-        .u-section-8 .u-container-layout-1 { padding: 30px 30px 23px; }
-        .u-section-8 .u-text-1 { animation-duration: 1000ms; margin: 0; }
-        .u-section-8 .u-text-2 { margin: 26px 0 0; }
-
-        @media (max-width: 1199px) { .u-section-8 .u-sheet-1 { min-height: 430px; } .u-section-8 .u-layout-cell-1 { min-height: 165px; } }
-        @media (max-width: 991px) { .u-section-8 .u-sheet-1 { min-height: 353px; } .u-section-8 .u-layout-cell-1 { min-height: 100px; } }
-        @media (max-width: 767px) { .u-section-8 .u-sheet-1 { min-height: 1094px; } }
-        @media (max-width: 575px) { .u-section-8 .u-sheet-1 { min-height: 339px; } }
-
-        /* SECTION 9 */
-        .u-section-9 .u-sheet-1 { min-height: 411px; }
-        .u-section-9 .u-layout-wrap-1 { margin-top: 40px; margin-bottom: 40px; }
-        .u-section-9 .u-layout-cell-1, .u-section-9 .u-layout-cell-2 { min-height: 331px; }
-        .u-section-9 .u-container-layout-1, .u-section-9 .u-container-layout-2 { padding: 30px 30px 23px; }
-        .u-section-9 .u-table-1, .u-section-9 .u-table-2 { width: 450px; margin: 0 auto 0 0; }
-
-        @media (max-width: 1199px) { .u-section-9 .u-sheet-1 { min-height: 430px; } .u-section-9 .u-layout-cell-1, .u-section-9 .u-layout-cell-2 { min-height: 273px; } .u-section-9 .u-table-1 { width: 410px; } .u-section-9 .u-table-2 { width: 253px; } }
-        @media (max-width: 991px) { .u-section-9 .u-sheet-1 { min-height: 353px; } .u-section-9 .u-layout-cell-1, .u-section-9 .u-layout-cell-2 { min-height: 100px; } .u-section-9 .u-table-1 { width: 300px; } .u-section-9 .u-table-2 { width: 180px; } }
-        @media (max-width: 767px) { .u-section-9 .u-sheet-1 { min-height: 1094px; } .u-section-9 .u-container-layout-1, .u-section-9 .u-container-layout-2 { padding-left: 10px; padding-right: 10px; } .u-section-9 .u-table-1 { margin-top: 250px; margin-right: initial; margin-left: initial; width: auto; } .u-section-9 .u-table-2 { margin-right: initial; margin-left: initial; width: auto; } }
-        @media (max-width: 575px) { .u-section-9 .u-sheet-1 { min-height: 329px; } .u-section-9 .u-layout-cell-1, .u-section-9 .u-layout-cell-2 { min-height: 311px; } .u-section-9 .u-container-layout-1 { padding-top: 20px; } .u-section-9 .u-table-1 { margin-top: -11px; margin-right: initial; margin-left: initial; width: auto; } .u-section-9 .u-table-2 { margin-top: -30px; margin-right: initial; margin-left: initial; width: auto; } }
-    </style>
-
-    <meta name="abstract" content="Trawnik Producent to firma z ponad 17 letnią tradycją, specjalizująca się w produkcji darni rolowanej.">
-    <link rel="icon" href="https://pub.gardenlawn.pl/media/images/grass/cropped-favicon.webp">
-
-    <style type="text/css" id="wp-custom-css">
-        .rt-detail { background: #e5e5e5 !important; }
-    </style>
-
-    <style>
-        .u-body, h1, h2, h3, h4, h5, h6, .u-custom-font.u-text-font, .u-custom-font.u-heading-font { font-family: 'Open Sans', sans-serif !important; }
-        .u-body { color: #111111; background-color: #ffffff; }
-
-        /* Specific Colors Used in Tables and Text */
-        .u-custom-color-2 { color: #ffffff; background-color: #009640; } /* Green */
-        .u-text-custom-color-2 { color: #009640 !important; }
-        .u-border-custom-color-2 { border-color: #009640 !important; }
-
-        .u-custom-color-19 { border-color: #207946 !important; } /* Table borders */
-        .u-border-custom-color-19 { border-color: #207946 !important; }
-
-        .u-custom-color-16 { border-color: #e7f0eb !important; }
-        .u-border-custom-color-16 { border-color: #e7f0eb !important; }
-
-        .u-custom-color-17 { background-color: rgba(231, 240, 235, 0.27); } /* Table body bg */
-
-        .u-grey-dark-1 { border-color: #454545 !important; }
-        .u-border-grey-dark-1 { border-color: #454545 !important; }
-
-        .u-grey-60 { border-color: #666666 !important; }
-        .u-border-grey-60 { border-color: #666666 !important; }
-
-        .u-palette-1-base { color: #478ac9 !important; } /* Icon color */
-        .u-palette-5-light-3 { background-color: #f5f7fa; } /* Section 6 bg */
-        .u-grey-80 { background-color: #333333; color: #ffffff; } /* Section 8 & 9 bg */
-
-        /* Standard Colors */
-        .u-white { background-color: #ffffff; color: #111111; }
-        .u-text-black { color: #000000 !important; }
-        .u-text-white { color: #ffffff !important; }
-        .u-image-round { border-radius: 25px; }
-
-        /* Typography */
-        h1.u-title { font-size: 3rem; margin: 20px 0; font-weight: 700; line-height: 1.1; }
-        h2.u-subtitle { font-size: 2.25rem; margin: 20px 0; font-weight: 400; line-height: 1.1; }
-        a { text-decoration: underline; font-weight: 600; color: #009640; }
-        a:hover { color: #00873a; }
-        blockquote { font-style: italic; padding-left: 33px; border-width: 2px; margin-top: 20px; }
-
-        @media (max-width: 767px) { h1.u-title { font-size: 3.75rem; } }
-        @media (max-width: 575px) { h1.u-title { font-size: 3rem; } h2.u-subtitle { font-size: 1.5rem; } }
-        html { font-size: 16px; }
-    </style>
-
-    <style id="cky-style">
-        .cky-overlay{background:#000000;opacity:0.4;position:fixed;top:0;left:0;width:100%;height:100%;z-index:99999999}.cky-hide{display:none}.cky-btn-revisit-wrapper{display:flex;align-items:center;justify-content:center;background:#0056a7;width:45px;height:45px;border-radius:50%;position:fixed;z-index:999999;cursor:pointer}.cky-revisit-bottom-left{bottom:15px;left:15px}.cky-revisit-bottom-right{bottom:15px;right:15px}.cky-btn-revisit-wrapper .cky-btn-revisit{display:flex;align-items:center;justify-content:center;background:none;border:none;cursor:pointer;position:relative;margin:0;padding:0}.cky-btn-revisit-wrapper .cky-btn-revisit img{max-width:fit-content;margin:0;height:30px;width:30px}.cky-consent-container{position:fixed;width:440px;box-sizing:border-box;z-index:9999999;border-radius:6px}.cky-consent-container .cky-consent-bar{background:#ffffff;border:1px solid;padding:20px 26px;box-shadow:0 -1px 10px 0 #acabab4d;border-radius:6px}.cky-box-bottom-left{bottom:40px;left:40px}.cky-box-bottom-right{bottom:40px;right:40px}.cky-notice .cky-title{color:#212121;font-weight:700;font-size:18px;line-height:24px;margin:0 0 12px 0}.cky-notice-des{color:#212121;font-size:14px;line-height:24px;font-weight:400}.cky-btn{flex:auto;max-width:100%;font-size:14px;font-family:inherit;line-height:24px;padding:8px;font-weight:500;border-radius:2px;cursor:pointer;text-align:center;min-height:0}.cky-btn:hover{opacity:0.8}.cky-btn-accept{background:#1863dc;color:#ffffff;border:2px solid #1863dc}.cky-btn-reject{color:#1863dc;background:transparent;border:2px solid #1863dc}
-        @media (max-width: 576px) { .cky-box-bottom-left, .cky-box-bottom-right { bottom: 0; left: 0; width: 100%; } .cky-consent-container .cky-consent-bar { padding: 20px 0; } .cky-notice-btn-wrapper { flex-direction: column; } }
-    </style>
-</head>
-
-<body class="u-body u-sticky-scroll" style="display: table-cell; margin: auto;">
-<div class="cky-overlay cky-hide"></div>
-<style>
-    .u-header { background-image: none; }
-    .u-header .u-sheet-1 { min-height: 93px; }
-    .u-header .u-image-1 { animation-duration: 1000ms; margin: 6px auto 0 8px; }
-    .u-header .u-logo-image-1 { max-width: 136px; max-height: 136px; }
-    .u-header .u-menu-1 { margin: -44px auto 0; }
-    .u-header .u-nav-1 { font-size: 0.9375rem; letter-spacing: 0px; font-weight: 700; text-transform: uppercase; }
-    .u-header .u-menu-close-1 { height: 28px; margin: 35px 40px 0 188px; }
-    .u-header .u-nav-2 { font-size: 1rem; font-weight: 700; height: 324px; margin: 29px 0 0 auto; }
-    .u-header .u-image-2 { width: 125px; height: 60px; margin: 19px auto 0 20px; }
-    .u-header .u-social-icons-1 { white-space: nowrap; height: 31px; min-height: 16px; width: 113px; min-width: 68px; margin: -41px 1px 35px auto; }
-    .u-header .u-icon-1, .u-header .u-icon-2 { height: 32px; } .u-header .u-icon-3 { height: 31px; }
-
-    @media (max-width: 1199px) {
-        .u-header .u-sheet-1 { min-height: 70px; }
-        .u-header .u-image-1 { margin-left: 0; }
-        .u-header .u-logo-image-1 { max-width: 111px; max-height: 111px; }
-        .u-header .u-menu-1 { margin-top: -36px; }
-        .u-header .u-menu-close-1 { margin-top: 39px; margin-right: 36px; margin-left: 192px; }
-        .u-header .u-nav-2 { height: 340px; margin-top: 25px; margin-left: initial; margin-right: initial; }
-        .u-header .u-social-icons-1 { margin-bottom: 17px; }
-    }
-    @media (max-width: 991px) {
-        .u-header .u-sheet-1 { min-height: 82px; }
-        .u-header .u-image-1 { margin-top: 9px; width: auto; }
-        .u-header .u-menu-1 { width: auto; margin-top: -48px; margin-right: 0; }
-        .u-header .u-menu-close-1 { margin-top: 44px; margin-right: 42px; margin-left: 186px; }
-        .u-header .u-nav-2 { margin-top: 20px; margin-left: initial; margin-right: initial; }
-        .u-header .u-social-icons-1 { margin-top: -37px; margin-right: auto; margin-bottom: 35px; }
-    }
-    @media (max-width: 767px) {
-        .u-header .u-sheet-1 { min-height: 68px; }
-        .u-header .u-image-1 { margin-top: 7px; }
-        .u-header .u-menu-close-1 { width: 22px; }
-        .u-header .u-social-icons-1 { margin-bottom: 13px; margin-left: 206px; }
-    }
-    @media (max-width: 575px) {
-        .u-header .u-sheet-1 { min-height: 66px; }
-        .u-header .u-image-1 { margin-top: 10px; }
-        .u-header .u-logo-image-1 { max-width: 91px; max-height: 91px; }
-        .u-header .u-menu-1 { margin-top: -42px; }
-        .u-header .u-nav-2 { width: 232px; margin-right: 0; margin-left: auto; }
-        .u-header .u-social-icons-1 { margin: -41px 104px 17px auto; }
-    }
-</style>
-
-<section class="u-clearfix u-white u-section-3" id="logistyka">
-    <div class="u-clearfix u-sheet u-valign-middle-lg u-valign-middle-md u-valign-middle-sm u-valign-middle-xs u-sheet-1">
-        <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
-            <div class="u-gutter-0 u-layout">
-                <div class="u-layout-row">
-                    <div class="u-container-style u-layout-cell u-size-30 u-layout-cell-1">
-                        <div class="u-container-layout u-valign-middle u-container-layout-1">
-                            <h2 class="u-align-center-xs u-text u-text-1 animated zoomIn-played" data-animation-name="zoomIn" data-animation-duration="1000" data-animation-delay="0" data-animation-direction="" style="will-change: transform, opacity; animation-duration: 1000ms;">TRAWNIK PRODUCENT<br></h2>
-                            <h4 class="u-align-center-xs u-text u-text-custom-color-2 u-text-2">Posiadamy 25-letnie<br>doświadczenie w branży</h4>
-                            <p class="u-text u-text-3">Prosto z plantacji na palety transportowe trafia trawa zawinięta w rolkę i niemal natychmiast ładowana jest do samochodu dostawcy. Dzięki temu nie zwiększamy czasu, w którym trawa pozbawiona jest gruntu. <br><br>
-                                <span style="font-weight: 700;">Wysyłamy naszą trawę na wskazany adres na terenie całej Polski oraz poza jej granicami. W</span>
-                                <span style="font-weight: 700;">cenie transportu gotowy produkt pakujemy na palety transportowe i profesjonalnie zabezpieczamy. </span>
-                                <br><br>Dodatkowo nasi Klienci mogą odebrać zamówienie prosto z naszej plantacji.<br>
-                            </p>
-                        </div>
+    <!-- Transport Offers (Dark) -->
+    <section class="relative py-20 bg-gray-900 text-white rounded-xl overflow-hidden">
+        <div class="absolute inset-0">
+            <img src="https://pub.gardenlawn.pl/media/images/grass/trawnik-tlo.webp" alt="Tło" class="w-full h-full object-cover opacity-20">
+        </div>
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl font-bold mb-12">NASZE OFERTY TRANSPORTU</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- 1 -->
+                <div class="bg-white text-gray-800 p-8 rounded-xl shadow-lg">
+                    <div class="w-16 h-16 mx-auto mb-4 bg-green-100 rounded-full flex items-center justify-center text-green-600">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
                     </div>
-                    <div class="u-container-style u-layout-cell u-size-30 u-layout-cell-2">
-                        <div class="u-container-layout u-valign-middle-lg u-valign-middle-md u-valign-middle-xl u-container-layout-2">
-                            <img src="https://pub.gardenlawn.pl/media/images/grass/15c1af1f7ce71626695f0b8d49ce1620a3647e81d25d89aa129338b7c5381fcdff256627eddb645d2a99303a29633d16c1184cefa8388173383518_1280.webp" alt="" class="u-expanded-width u-image u-image-round u-radius-25 u-image-1" data-image-width="1280" data-image-height="853">
-                        </div>
+                    <h4 class="text-xl font-bold <?= $greenColor ?> mb-2">Transport własny</h4>
+                    <p>Indywidualny odbiór towaru prosto z naszych plantacji.</p>
+                </div>
+                <!-- 2 -->
+                <div class="bg-white text-gray-800 p-8 rounded-xl shadow-lg">
+                    <div class="w-16 h-16 mx-auto mb-4 bg-green-100 rounded-full flex items-center justify-center text-green-600">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
                     </div>
+                    <h4 class="text-xl font-bold <?= $greenColor ?> mb-2">Transport Kurier</h4>
+                    <p>Palety z trawą wysyłamy przesyłką kurierską.</p>
+                </div>
+                <!-- 3 -->
+                <div class="bg-white text-gray-800 p-8 rounded-xl shadow-lg">
+                    <div class="w-16 h-16 mx-auto mb-4 bg-green-100 rounded-full flex items-center justify-center text-green-600">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                    </div>
+                    <h4 class="text-xl font-bold <?= $greenColor ?> mb-2">Transport Trawnik</h4>
+                    <p>Większe zamówienia wysyłamy spedycją.</p>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<section class="u-align-center u-clearfix u-container-align-center u-image u-shading u-section-4" id="carousel_c586" data-image-width="1920" data-image-height="1037">
-    <style>
-        .u-section-4 {
-            /* Background Updated to WebP */
-            background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url("https://pub.gardenlawn.pl/media/images/grass/trawnik-tlo.webp");
-        }
-    </style>
-    <div class="u-clearfix u-sheet u-sheet-1">
-        <h2 class="u-align-center u-text u-text-black u-text-1 animated customAnimationIn" data-animation-name="customAnimationIn" data-animation-duration="1500" data-animation-delay="0" style="will-change: auto; animation-duration: 1500ms;">NASZE OFERTY TRANSPORTU</h2>
-        <div class="u-expanded-width u-list u-list-1">
-            <div class="u-repeater u-repeater-1">
-                <div class="u-align-center u-border-2 u-border-custom-color-2 u-container-style u-list-item u-radius-20 u-repeater-item u-shape-round u-video-cover u-white u-list-item-1 animated customAnimationInUp">
-                    <div class="u-container-layout u-similar-container u-valign-top u-container-layout-1">
-                        <span class="u-align-center u-file-icon u-hover-feature u-icon u-icon-circle u-text-palette-1-base u-icon-1"><img src="https://pub.gardenlawn.pl/media/images/grass/svg-gobbler.svg" alt=""></span>
-                        <h4 class="u-align-center u-text u-text-custom-color-2 u-text-2">Transport własny </h4>
-                        <p class="u-align-center u-text u-text-3">Indywidualny odbiór towaru prosto z naszych plantacji.</p>
-                    </div>
-                </div>
-                <div class="u-align-center u-border-2 u-border-custom-color-2 u-container-style u-list-item u-radius-20 u-repeater-item u-shape-round u-video-cover u-white u-list-item-2 animated customAnimationInUp">
-                    <div class="u-container-layout u-similar-container u-container-layout-2">
-                        <span class="u-align-center u-file-icon u-hover-feature u-icon u-icon-circle u-text-palette-1-base u-icon-2"><img src="https://pub.gardenlawn.pl/media/images/grass/svg-gobbler.svg" alt=""></span>
-                        <h4 class="u-align-center u-text u-text-custom-color-2 u-text-4">Transport Kurier<br></h4>
-                        <p class="u-align-center u-text u-text-5">Palety z trawą wysyłamy przesyłką kurierską.</p>
-                    </div>
-                </div>
-                <div class="u-align-center u-border-2 u-border-custom-color-2 u-container-style u-list-item u-radius-20 u-repeater-item u-shape-round u-video-cover u-white u-list-item-3 animated customAnimationInUp">
-                    <div class="u-container-layout u-similar-container u-container-layout-3">
-                        <span class="u-align-center u-file-icon u-hover-feature u-icon u-icon-circle u-text-palette-1-base u-icon-3"><img src="https://pub.gardenlawn.pl/media/images/grass/svg-gobbler.svg" alt=""></span>
-                        <h4 class="u-align-center u-text u-text-custom-color-2 u-text-6">Transport Trawnik<br></h4>
-                        <p class="u-align-center u-text u-text-7">Większe zamówienia wysyłamy spedycją, Transport Trawnik Producent.<br></p>
-                    </div>
-                </div>
+    <!-- Plantation Gallery -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-12">
+            <div class="lg:col-span-1">
+                <h2 class="text-3xl font-bold mb-2">NASZA PLANTACJA</h2>
+                <h5 class="text-lg text-gray-600 mb-6">Przygotowanie trawy do wysyłki</h5>
+                <p>
+                    Trawa przed wysyłką nie jest w żaden sposób magazynowana. Specjalnie dla Ciebie nasi specjaliści przy użyciu najwyższej jakości sprzętu zbiorą trawę wprost z plantacji.
+                </p>
+            </div>
+            <div class="lg:col-span-2 grid grid-cols-2 gap-4">
+                <img src="https://pub.gardenlawn.pl/media/images/grass/trawnik-producent-plantacja-trawy.webp" class="rounded-lg shadow-sm w-full h-48 object-cover" alt="Plantacja">
+                <img src="https://pub.gardenlawn.pl/media/images/grass/odzywka-do-tranwikw-na-wiosn-1.webp" class="rounded-lg shadow-sm w-full h-48 object-cover" alt="Odżywka">
+                <img src="https://pub.gardenlawn.pl/media/images/grass/trawnik-producent-farma.webp" class="rounded-lg shadow-sm w-full h-48 object-cover" alt="Farma">
+                <img src="https://pub.gardenlawn.pl/media/images/grass/transport-trawy.webp" class="rounded-lg shadow-sm w-full h-48 object-cover" alt="Transport">
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<section class="u-clearfix u-section-5" id="sec-92f8">
-    <div class="u-clearfix u-sheet u-sheet-1">
-        <div class="u-clearfix u-expanded-width u-gutter-8 u-layout-wrap u-layout-wrap-1">
-            <div class="u-layout">
-                <div class="u-layout-row">
-                    <div class="u-container-style u-layout-cell u-left-cell u-size-24 u-layout-cell-1">
-                        <div class="u-container-layout u-valign-top u-container-layout-1">
-                            <h2 class="u-custom-font u-text u-text-1">NASZA PLANTACJA<br></h2>
-                            <h5 class="u-text u-text-2">Przygotowanie trawy do wysyłki</h5>
-                        </div>
-                    </div>
-                    <div class="u-container-style u-layout-cell u-right-cell u-size-36 u-layout-cell-2">
-                        <div class="u-container-layout u-valign-top-lg u-valign-top-md u-valign-top-sm u-valign-top-xl u-container-layout-2">
-                            <p class="u-text u-text-3">Trawa przed wysyłką nie jest w żaden sposób magazynowana. Oznacza to, że specjalnie dla Ciebie nasi specjaliści przy użyciu najwyższej jakości sprzętu zbiorą trawę wprost z plantacji. Dzięki temu możesz mieć pewność, że produkt, który otrzymasz będzie świeży i nie wysuszy się w transporcie.<br></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="u-expanded-width u-gallery u-layout-grid u-lightbox u-show-text-on-hover u-gallery-1" data-pswp-uid="1">
-            <div class="u-gallery-inner u-gallery-inner-1">
-                <div class="u-effect-fade u-effect-hover-zoom u-gallery-item u-radius-25 u-shape-round" data-pswp-item-id="0">
-                    <div class="u-back-slide" data-image-width="1024" data-image-height="615">
-                        <img class="u-back-image u-expanded" src="https://pub.gardenlawn.pl/media/images/grass/trawnik-producent-plantacja-trawy.webp">
-                    </div>
-                    <div class="u-over-slide u-shading u-over-slide-1"><h3 class="u-gallery-heading"></h3><p class="u-gallery-text"></p></div>
-                </div>
-                <div class="u-effect-fade u-effect-hover-zoom u-gallery-item u-radius-25 u-shape-round" data-pswp-item-id="1">
-                    <div class="u-back-slide" data-image-width="768" data-image-height="862">
-                        <img class="u-back-image u-expanded" src="https://pub.gardenlawn.pl/media/images/grass/odzywka-do-tranwikw-na-wiosn-1.webp">
-                    </div>
-                    <div class="u-over-slide u-shading u-over-slide-2"><h3 class="u-gallery-heading"></h3><p class="u-gallery-text"></p></div>
-                </div>
-                <div class="u-effect-fade u-effect-hover-zoom u-gallery-item u-radius-25 u-shape-round" data-pswp-item-id="2">
-                    <div class="u-back-slide" data-image-width="1024" data-image-height="615">
-                        <img class="u-back-image u-expanded" src="https://pub.gardenlawn.pl/media/images/grass/trawnik-producent-farma.webp">
-                    </div>
-                    <div class="u-over-slide u-shading u-over-slide-3"><h3 class="u-gallery-heading"></h3><p class="u-gallery-text"></p></div>
-                </div>
-                <div class="u-effect-fade u-effect-hover-zoom u-gallery-item u-radius-25 u-shape-round" data-pswp-item-id="3">
-                    <div class="u-back-slide" data-image-width="1200" data-image-height="800">
-                        <img class="u-back-image u-expanded" src="https://pub.gardenlawn.pl/media/images/grass/transport-trawy.webp">
-                    </div>
-                    <div class="u-over-slide u-shading u-over-slide-4"><h3 class="u-gallery-heading"></h3><p class="u-gallery-text"></p></div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+    <!-- Courier Transport Details -->
+    <section class="bg-gray-50 py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-3xl font-bold mb-6">TRANSPORT KURIER</h2>
+                    <p class="mb-6">Wychodząc naprzeciw naszym Klientom trawę wysyłamy przesyłką kurierską. Koszt dostawy uzależniony jest od ilości zamawianych palet.</p>
 
-<section class="u-clearfix u-palette-5-light-3 u-section-6" id="transport-kurier">
-    <div class="u-clearfix u-sheet u-sheet-1">
-        <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
-            <div class="u-layout">
-                <div class="u-layout-row">
-                    <div class="u-container-style u-layout-cell u-left-cell u-size-30 u-layout-cell-1">
-                        <div class="u-container-layout u-valign-middle-lg u-valign-middle-md u-valign-middle-xl u-container-layout-1">
-                            <h2 class="u-text u-text-1 backstage animated zoomIn" data-animation-name="zoomIn" data-animation-duration="1000" data-animation-delay="0" style="will-change: transform, opacity; animation-duration: 1000ms;">TRANSPORT KURIER</h2>
-                            <p class="u-align-left u-text u-text-2">Wychodząc naprzeciw naszym Klientom trawę wysyłamy przesyłką kurierską. Koszt dostawy uzależniony jest od ilości zamawianych palet.<br><br><br><span style="font-weight: 700;">INFORMACJE DOTYCZĄCE PRZESYŁEK KURIERSKICH:</span></p>
-                            <div class="u-expanded-width-sm u-expanded-width-xs u-table u-table-responsive u-table-1">
-                                <table class="u-table-entity">
-                                    <colgroup><col width="47.3%"><col width="52.7%"></colgroup>
-                                    <tbody class="u-table-body">
-                                    <tr style="height: 79px;">
-                                        <td class="u-border-1 u-border-custom-color-19 u-custom-color-2 u-first-column u-table-cell"><b>1 paleta</b></td>
-                                        <td class="u-border-1 u-border-custom-color-19 u-table-cell"> 35m2 trawy z rolki (35 rolek x 1m2</td>
-                                    </tr>
-                                    <tr style="height: 79px;">
-                                        <td class="u-border-1 u-border-custom-color-19 u-custom-color-2 u-first-column u-table-cell"><b>Wymiary palety</b><br></td>
-                                        <td class="u-border-1 u-border-custom-color-19 u-table-cell">120x80cm x wys.150cm</td>
-                                    </tr>
-                                    <tr style="height: 52px;">
-                                        <td class="u-border-1 u-border-custom-color-19 u-custom-color-2 u-first-column u-table-cell"><b>Waga 1 rolki</b><br></td>
-                                        <td class="u-border-1 u-border-custom-color-19 u-table-cell">ok.25 kg</td>
-                                    </tr>
-                                    <tr style="height: 52px;">
-                                        <td class="u-border-1 u-border-custom-color-19 u-custom-color-2 u-first-column u-table-cell"><b>Waga 1 palety</b></td>
-                                        <td class="u-border-1 u-border-custom-color-19 u-table-cell">do 1000 kg</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+                    <div class="bg-white rounded-lg shadow-sm overflow-hidden border border-gray-200">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap font-bold bg-green-50 text-green-800 w-1/3">1 paleta</td>
+                                    <td class="px-6 py-4">35m2 trawy z rolki (35 rolek x 1m2)</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap font-bold bg-green-50 text-green-800">Wymiary</td>
+                                    <td class="px-6 py-4">120x80cm x wys.150cm</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap font-bold bg-green-50 text-green-800">Waga 1 rolki</td>
+                                    <td class="px-6 py-4">ok. 25 kg</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap font-bold bg-green-50 text-green-800">Waga 1 palety</td>
+                                    <td class="px-6 py-4">do 1000 kg</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <div class="u-align-left-xs u-container-style u-layout-cell u-right-cell u-size-30 u-layout-cell-2">
-                        <div class="u-container-layout u-valign-middle-lg u-valign-middle-xl u-valign-top-md u-valign-top-sm u-valign-top-xs u-container-layout-2">
-                            <img src="https://pub.gardenlawn.pl/media/images/grass/paleta.webp" alt="" class="u-expanded-width-lg u-expanded-width-md u-expanded-width-xl u-expanded-width-xs u-image u-image-contain u-image-default u-image-1" data-image-width="479" data-image-height="439">
-                            <blockquote class="u-text u-text-3">Wysyłki zleconym przez nas transportem kurierskim realizowane są <span style="font-weight: 700;">od wtorku do czwartku</span>.</blockquote>
-                        </div>
-                    </div>
+                </div>
+                <div>
+                    <img src="https://pub.gardenlawn.pl/media/images/grass/paleta.webp" alt="Paleta" class="rounded-xl shadow-md w-full mb-6">
+                    <p class="italic text-center bg-white p-4 rounded-lg border border-gray-200">
+                        Wysyłki zleconym przez nas transportem kurierskim realizowane są <span class="font-bold">od wtorku do czwartku</span>.
+                    </p>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<section class="u-clearfix u-white u-section-7" id="transport-wlasny">
-    <div class="u-clearfix u-sheet u-sheet-1">
-        <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
-            <div class="u-layout">
-                <div class="u-layout-row">
-                    <div class="u-container-style u-layout-cell u-left-cell u-size-30 u-layout-cell-1">
-                        <div class="u-container-layout u-container-layout-1">
-                            <h2 class="u-text u-text-1 backstage animated zoomIn" data-animation-name="zoomIn" data-animation-duration="1000" data-animation-delay="0" style="will-change: transform, opacity; animation-duration: 1000ms;">TRANSPORT WE WŁASNYM ZAKRESIE<br></h2>
-                            <p class="u-align-left u-text u-text-2">Trawnik Producent, umożliwia naszym klientom, indywidualny odbiór towaru prosto z naszych plantacji.&nbsp;<br>Gwarantujemy dobrze zabezpieczony towar na palecie, który dodatkowo jest owinięty specjalną siatką, uniemożliwiając w ten sposób, przemieszczanie się rolek trawy.&nbsp;Posiadając specjalistyczny sprzęt, jesteśmy przygotowani na sprawne i bezpieczne załadunki. <br><br><span style="font-weight: 700;">INFORMACJE DOTYCZĄCE PALET I WYMIARÓW:<br></span></p>
-                            <div class="u-align-left u-expanded-width-sm u-expanded-width-xs u-table u-table-responsive u-table-1">
-                                <table class="u-table-entity">
-                                    <colgroup><col width="47.3%"><col width="52.7%"></colgroup>
-                                    <tbody class="u-custom-color-17 u-table-body u-table-body-1">
-                                    <tr style="height: 79px;">
-                                        <td class="u-border-1 u-border-custom-color-16 u-custom-color-2 u-first-column u-table-cell"><b>1 paleta</b></td>
-                                        <td class="u-border-1 u-border-custom-color-2 u-table-cell"> 40 m2 trawy z rolki (40 rolek x 1m2</td>
-                                    </tr>
-                                    <tr style="height: 79px;">
-                                        <td class="u-border-1 u-border-custom-color-16 u-custom-color-2 u-first-column u-table-cell"><b>Wymiary palety</b><br></td>
-                                        <td class="u-border-1 u-border-custom-color-2 u-table-cell">120x80cm x wys.150cm</td>
-                                    </tr>
-                                    <tr style="height: 52px;">
-                                        <td class="u-border-1 u-border-custom-color-16 u-custom-color-2 u-first-column u-table-cell"><b>Waga 1 rolki</b><br></td>
-                                        <td class="u-border-1 u-border-custom-color-2 u-table-cell">ok.25 kg</td>
-                                    </tr>
-                                    <tr style="height: 52px;">
-                                        <td class="u-border-1 u-border-custom-color-16 u-custom-color-2 u-first-column u-table-cell"><b>Waga 1 palety</b></td>
-                                        <td class="u-border-1 u-border-custom-color-2 u-table-cell">do 1000 kg</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="u-align-left-xs u-container-style u-layout-cell u-right-cell u-size-30 u-layout-cell-2">
-                        <div class="u-container-layout u-valign-top-md u-valign-top-sm u-valign-top-xs u-container-layout-2">
-                            <img src="https://pub.gardenlawn.pl/media/images/grass/paleta.webp" alt="" class="u-expanded-width u-image u-image-contain u-image-default u-image-1" data-image-width="479" data-image-height="439">
-                            <blockquote class="u-text u-text-3">Odbiór towaru od poniedziałku do piątku (preferowany wcześniejszy kontakt telefoniczny)</blockquote>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+    <!-- Own Transport Details -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div class="order-2 md:order-1">
+                <h2 class="text-3xl font-bold mb-6">TRANSPORT WE WŁASNYM ZAKRESIE</h2>
+                <p class="mb-6">
+                    Trawnik Producent umożliwia indywidualny odbiór towaru prosto z naszych plantacji. Gwarantujemy dobrze zabezpieczony towar na palecie.
+                </p>
 
-<section class="u-clearfix u-grey-80 u-section-8" id="transport-trawnik" style="width: fit-content">
-    <div class="u-clearfix u-sheet u-sheet-1">
-        <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
-            <div class="u-layout">
-                <div class="u-layout-row">
-                    <div class="u-align-center u-container-style u-layout-cell u-left-cell u-size-60 u-layout-cell-1">
-                        <div class="u-container-layout u-container-layout-1">
-                            <h2 class="u-text u-text-1 backstage animated zoomIn" data-animation-name="zoomIn" data-animation-duration="1000" data-animation-delay="0" style="will-change: transform, opacity; animation-duration: 1000ms;">TRANSPORT TRAWNIK PRODUCENT</h2>
-                            <p class="u-text u-text-2">Wychodząc naprzeciw naszym klientom większe zamówienia wysyłamy spedycją. Do 12 palet/14 ton możemy zorganizować samochód typu solówka z możliwością rozładunku u klienta. Max 22 palety/24ton jest to duże auto typu firana / rozładunek wtedy po stronie klienta. <br><br>
-                                <span class="u-text-white" style="font-weight: 700; font-size: 1.125rem;">Koszt dostawy wyceniamy indywidualnie przy każdym zamówieniu.</span>
-                            </p>
-                        </div>
-                    </div>
+                <div class="bg-white rounded-lg shadow-sm overflow-hidden border border-gray-200">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap font-bold bg-green-50 text-green-800 w-1/3">1 paleta</td>
+                                <td class="px-6 py-4">40 m2 trawy z rolki (40 rolek x 1m2)</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap font-bold bg-green-50 text-green-800">Wymiary</td>
+                                <td class="px-6 py-4">120x80cm x wys.150cm</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap font-bold bg-green-50 text-green-800">Waga 1 rolki</td>
+                                <td class="px-6 py-4">ok. 25 kg</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap font-bold bg-green-50 text-green-800">Waga 1 palety</td>
+                                <td class="px-6 py-4">do 1000 kg</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
+            <div class="order-1 md:order-2">
+                <img src="https://pub.gardenlawn.pl/media/images/grass/paleta.webp" alt="Paleta" class="rounded-xl shadow-md w-full mb-6">
+                <p class="italic text-center bg-gray-50 p-4 rounded-lg border border-gray-200">
+                    Odbiór towaru od poniedziałku do piątku (preferowany wcześniejszy kontakt telefoniczny).
+                </p>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<section class="u-clearfix u-grey-80 u-section-9" id="transport-trawnik-1" style="width: fit-content">
-    <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
-        <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
-            <div class="u-layout">
-                <div class="u-layout-row">
-                    <div class="u-container-style u-layout-cell u-left-cell u-size-30 u-layout-cell-1">
-                        <div class="u-container-layout u-valign-top-lg u-valign-top-md u-valign-top-sm u-valign-top-xl u-container-layout-1">
-                            <div class="u-expanded-width-sm u-expanded-width-xs u-table u-table-responsive u-table-1">
-                                <table class="u-table-entity">
-                                    <colgroup><col width="47.3%"><col width="52.7%"></colgroup>
-                                    <tbody class="u-table-body">
-                                    <tr style="height: 61px;">
-                                        <td class="u-border-1 u-border-grey-dark-1 u-custom-color-2 u-first-column u-table-cell"><b>1 paleta</b></td>
-                                        <td class="u-border-1 u-border-grey-60 u-table-cell"> 50 m2 trawy z rolki (50 rolek x 1m2</td>
-                                    </tr>
-                                    <tr style="height: 79px;">
-                                        <td class="u-border-1 u-border-grey-dark-1 u-custom-color-2 u-first-column u-table-cell"><b>Wymiary palety</b><br></td>
-                                        <td class="u-border-1 u-border-grey-60 u-table-cell"><b></b> 120x120cm x wys.150cm</td>
-                                    </tr>
-                                    <tr style="height: 52px;">
-                                        <td class="u-border-1 u-border-grey-dark-1 u-custom-color-2 u-first-column u-table-cell"><b>Waga 1 rolki</b><br></td>
-                                        <td class="u-border-1 u-border-grey-60 u-table-cell">ok.25 kg</td>
-                                    </tr>
-                                    <tr style="height: 52px;">
-                                        <td class="u-border-1 u-border-grey-dark-1 u-custom-color-2 u-first-column u-table-cell"><b>Waga 1 palety</b></td>
-                                        <td class="u-border-1 u-border-grey-60 u-table-cell">do 1300 kg</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="u-container-style u-layout-cell u-left-cell u-size-30 u-layout-cell-2">
-                        <div class="u-container-layout u-container-layout-2">
-                            <div class="u-expanded-width-sm u-expanded-width-xs u-table u-table-responsive u-table-2">
-                                <table class="u-table-entity">
-                                    <colgroup><col width="47.3%"><col width="52.7%"></colgroup>
-                                    <tbody class="u-table-body">
-                                    <tr style="height: 80px;">
-                                        <td class="u-border-1 u-border-grey-dark-1 u-custom-color-2 u-first-column u-table-cell"><b>1 paleta</b></td>
-                                        <td class="u-border-1 u-border-grey-60 u-table-cell"> 40 m2 trawy z rolki (40 rolek x 1m2</td>
-                                    </tr>
-                                    <tr style="height: 79px;">
-                                        <td class="u-border-1 u-border-grey-dark-1 u-custom-color-2 u-first-column u-table-cell"><b>Wymiary palety</b><br></td>
-                                        <td class="u-border-1 u-border-grey-60 u-table-cell">120x80cm x wys.150cm</td>
-                                    </tr>
-                                    <tr style="height: 52px;">
-                                        <td class="u-border-1 u-border-grey-dark-1 u-custom-color-2 u-first-column u-table-cell"><b>Waga 1 rolki</b><br></td>
-                                        <td class="u-border-1 u-border-grey-60 u-table-cell">ok.25 kg</td>
-                                    </tr>
-                                    <tr style="height: 52px;">
-                                        <td class="u-border-1 u-border-grey-dark-1 u-custom-color-2 u-first-column u-table-cell"><b>Waga 1 palety</b></td>
-                                        <td class="u-border-1 u-border-grey-60 u-table-cell">do 1000 kg</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <!-- Trawnik Transport (Dark) -->
+    <section class="bg-gray-800 text-white py-16 rounded-xl mb-8">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-6">TRANSPORT TRAWNIK PRODUCENT</h2>
+            <p class="text-lg mb-6">
+                Wychodząc naprzeciw naszym klientom większe zamówienia wysyłamy spedycją. Do 12 palet/14 ton możemy zorganizować samochód typu solówka z możliwością rozładunku u klienta.
+            </p>
+            <p class="font-bold text-green-400 text-xl">Koszt dostawy wyceniamy indywidualnie przy każdym zamówieniu.</p>
         </div>
-    </div>
-</section>
-</body>
-</html>
+    </section>
+
+</div>

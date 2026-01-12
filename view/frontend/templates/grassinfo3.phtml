@@ -1,538 +1,92 @@
-<!DOCTYPE html>
-<html lang="pl-PL" class="u-responsive-xl skrollr skrollr-desktop" style="display: table; margin: auto; width: 100%;">
-<head>
-    <style type="text/css">
-        .u-clearfix { margin: 0 !important; }
-        body { overflow: hidden !important; -ms-overflow-style: none !important; scrollbar-width: none !important; }
-        ::-webkit-scrollbar { display: none !important; width: 0px !important; height: 0px !important; background-color: transparent !important; }
-        ::-webkit-scrollbar-button, ::-webkit-scrollbar-thumb, ::-webkit-scrollbar-track, ::-webkit-scrollbar-corner { background-color: transparent !important; }
-    </style>
+<?php
+/** @var \Magento\Framework\View\Element\Template $block */
+$greenColor = 'text-[#009640]';
+?>
+<div class="space-y-16 py-8 text-gray-700 font-sans">
 
-    <script type="text/javascript" async="" src="/static/frontend/GardenLawn/Hyvatheme/pl_PL/files/grass/js.js"></script>
-    <script>(function (html) { html.className = html.className.replace(/\bno-js\b/, 'js') })(document.documentElement);</script>
+    <!-- Group Intro -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">GRUPA TRAWNIK</h2>
+                <h3 class="text-xl font-bold <?= $greenColor ?> mb-6">Posiadamy 25-letnie doświadczenie w branży</h3>
+                <p class="mb-6 text-lg">
+                    Od 1998 r. do dziś staliśmy się specjalistami w dziedzinie powszechnie stosowanej trawy naturalnej oraz nowoczesnej naturalnej hybrydowej.
+                </p>
+                <p class="mb-6">
+                    Działamy kompleksowo, zarządzając projektem od początku do końca. Możesz liczyć na nasz zespół: od podbudowy, drenażu, instalacji grzewczej, po serwis.
+                </p>
+                <blockquote class="border-l-4 border-[#009640] pl-4 italic text-gray-600 my-6">
+                    Wszystkie etapy realizacji wykonywane są przez naszą wyszkoloną załogę, wspieraną przez doświadczonych kierowników budowy.
+                </blockquote>
+            </div>
+            <div class="space-y-4">
+                <img src="https://pub.gardenlawn.pl/media/images/grass/grupa-tranwik-projektuje-instaluje.webp" alt="Projektowanie" class="rounded-xl shadow-lg w-full">
+                <img src="https://pub.gardenlawn.pl/media/images/grass/murawa-sportowa-arena-gdask-realizacja-hybrid-sport-1.webp" alt="Arena Gdańsk" class="rounded-xl shadow-lg w-full hidden md:block">
+            </div>
+        </div>
+    </section>
 
-    <script data-cfasync="false" data-pagespeed-no-defer="" type="text/javascript">
-        var gtm4wp_datalayer_name = "dataLayer";
-        var dataLayer = dataLayer || [];
-    </script>
-
-    <title>GRUPA TRAWNIK - Trawnik Producent</title>
-    <link rel="canonical" href="https://trawnikproducent.pl/grupa-trawnik/">
-    <meta property="og:description" content="GRUPA TRAWNIK - Posiadamy 25-letnie doświadczenie w branży.">
-
-    <script type="application/ld+json" class="yoast-schema-graph">{
-            "@context": "https://schema.org",
-            "@graph": [
-                {
-                    "@type": "WebSite",
-                    "@id": "https://trawnikproducent.pl/#website",
-                    "url": "https://trawnikproducent.pl/",
-                    "name": "Trawnik Producent",
-                    "inLanguage": "pl-PL"
-                },
-                {
-                    "@type": "WebPage",
-                    "@id": "https://trawnikproducent.pl/grupa-trawnik/#webpage",
-                    "url": "https://trawnikproducent.pl/grupa-trawnik/",
-                    "name": "GRUPA TRAWNIK - Trawnik Producent",
-                    "isPartOf": { "@id": "https://trawnikproducent.pl/#website" },
-                    "inLanguage": "pl-PL"
-                },
-                {
-                    "@type": "BreadcrumbList",
-                    "@id": "https://trawnikproducent.pl/grupa-trawnik/#breadcrumb",
-                    "itemListElement": [
-                        { "@type": "ListItem", "position": 1, "name": "Strona główna", "item": "https://trawnikproducent.pl/" },
-                        { "@type": "ListItem", "position": 2, "name": "GRUPA TRAWNIK" }
-                    ]
-                }
-            ]
-        }</script>
-
-    <link rel="dns-prefetch" href="https://www.google.com/">
-    <link rel="alternate" type="application/rss+xml" title="Trawnik Producent » Kanał z wpisami" href="https://trawnikproducent.pl/feed/">
-
-    <script type="application/ld+json">{
-            "@context": "http:\/\/schema.org",
-            "@type": "Organization",
-            "name": "Trawnik Producent",
-            "url": "https:\/\/trawnikproducent.pl\/",
-            "logo": "https://pub.gardenlawn.pl/media/images/grass/cropped-trawnikproducent.webp"
-        }</script>
-    <script type="application/ld+json">{
-            "@context": "http:\/\/schema.org",
-            "@type": "Article",
-            "headline": "GRUPA TRAWNIK",
-            "author": { "@type": "Person", "name": "anna" },
-            "publisher": {
-                "@type": "Organization",
-                "name": "Trawnik Producent",
-                "logo": {
-                    "@type": "ImageObject",
-                    "url": "https://pub.gardenlawn.pl/media/images/grass/cropped-trawnikproducent.webp",
-                    "width": 240,
-                    "height": 138
-                }
-            }
-        }</script>
-
-    <link rel="stylesheet" id="wp-block-library-css" href="/static/frontend/GardenLawn/Hyvatheme/pl_PL/files/grass/style.min.css" type="text/css" media="all">
-    <link rel="stylesheet" id="contact-form-7-css" href="/static/frontend/GardenLawn/Hyvatheme/pl_PL/files/grass/styles.css" type="text/css" media="all">
-    <link rel="stylesheet" id="formcraft-common-css" href="/static/frontend/GardenLawn/Hyvatheme/pl_PL/files/grass/formcraft-common.css" type="text/css" media="all">
-    <link rel="stylesheet" id="formcraft-form-css" href="/static/frontend/GardenLawn/Hyvatheme/pl_PL/files/grass/form.css" type="text/css" media="all">
-    <link rel="stylesheet" id="rt-tpg-css" href="/static/frontend/GardenLawn/Hyvatheme/pl_PL/files/grass/thepostgrid.css" type="text/css" media="all">
-    <link rel="stylesheet" id="theme-style-css" href="/static/frontend/GardenLawn/Hyvatheme/pl_PL/files/grass/style.css" type="text/css" media="all">
-    <link rel="stylesheet" id="theme-media-css" href="/static/frontend/GardenLawn/Hyvatheme/pl_PL/files/grass/media.css" type="text/css" media="all">
-
-    <script type="text/javascript" src="/static/frontend/GardenLawn/Hyvatheme/pl_PL/files/grass/jquery.min.js" id="jquery-core-js"></script>
-    <script type="text/javascript" src="/static/frontend/GardenLawn/Hyvatheme/pl_PL/files/grass/jquery-migrate.min.js" id="jquery-migrate-js"></script>
-
-    <link id="u-theme-google-font" rel="stylesheet" href="/static/frontend/GardenLawn/Hyvatheme/pl_PL/files/grass/css.css">
-
-    <style>
-        /* SECTION 2 */
-        .u-section-2 {
-            /* Zaktualizowany URL tła */
-            background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://pub.gardenlawn.pl/media/images/grass/grupa-trawnik-turowo.webp');
-            background-position: 50% 50%;
-        }
-        .u-section-2 .u-sheet-1 { min-height: 720px; }
-        .u-section-2 .u-text-1 { font-size: 3.75rem; animation-duration: 1000ms; margin: 251px 0 0; }
-        .u-section-2 .u-btn-1 { letter-spacing: 1px; border-style: solid; font-weight: 700; text-transform: uppercase; margin: 37px auto 60px; padding: 12px 86px 13px 85px; }
-
-        @media (max-width: 1199px) {
-            .u-section-2 { background-position: 50% 50%; }
-            .u-section-2 .u-sheet-1 { min-height: 500px; }
-            .u-section-2 .u-text-1 { width: 531px; margin-top: 162px; margin-left: auto; margin-right: auto; }
-        }
-        @media (max-width: 991px) {
-            .u-section-2 .u-sheet-1 { min-height: 531px; }
-            .u-section-2 .u-text-1 { width: 407px; margin-top: 141px; }
-            .u-section-2 .u-btn-1 { margin-top: 33px; }
-        }
-        @media (max-width: 767px) {
-            .u-section-2 .u-sheet-1 { min-height: 550px; }
-            .u-section-2 .u-text-1 { font-size: 2.5rem; width: auto; margin-top: 165px; margin-left: 0; margin-right: 0; }
-            .u-section-2 .u-btn-1 { margin-top: 36px; }
-        }
-        @media (max-width: 575px) {
-            .u-section-2 .u-sheet-1 { min-height: 450px; }
-            .u-section-2 .u-text-1 { margin-top: 151px; margin-left: 25px; margin-right: 25px; }
-            .u-section-2 .u-btn-1 { margin-top: 25px; padding: 9px 61px 11px 60px; }
-        }
-
-        /* SECTION 3 */
-        .u-section-3 { background-image: none; }
-        .u-section-3 .u-sheet-1 { min-height: 801px; }
-        .u-section-3 .u-layout-wrap-1 { margin-top: 61px; margin-bottom: 40px; }
-        .u-section-3 .u-layout-cell-1 { min-height: 720px; }
-        .u-section-3 .u-container-layout-1 { padding: 30px 30px 34px; }
-        .u-section-3 .u-text-1 { animation-duration: 1000ms; margin: 0; }
-        .u-section-3 .u-text-2 { text-transform: uppercase; margin: 19px 29px 0 0; }
-        .u-section-3 .u-text-3 { margin: 30px 29px 0 0; }
-        .u-section-3 .u-text-4 { margin: 20px 29px 0 0; }
-        .u-section-3 .u-layout-cell-2 { min-height: 700px; }
-        .u-section-3 .u-container-layout-2 { padding: 30px; }
-        .u-section-3 .u-image-1 { height: 344px; margin-top: 0; margin-bottom: 0; }
-        .u-section-3 .u-image-2 { height: 286px; margin-top: 30px; margin-bottom: 0; }
-
-        @media (max-width: 1199px) {
-            .u-section-3 .u-sheet-1 { min-height: 675px; }
-            .u-section-3 .u-layout-wrap-1 { position: relative; }
-            .u-section-3 .u-layout-cell-1 { min-height: 594px; }
-            .u-section-3 .u-text-2, .u-section-3 .u-text-3, .u-section-3 .u-text-4 { margin-right: 0; }
-            .u-section-3 .u-layout-cell-2 { min-height: 737px; }
-            .u-section-3 .u-image-1 { height: 277px; }
-            .u-section-3 .u-image-2 { height: 369px; }
-        }
-        @media (max-width: 991px) {
-            .u-section-3 .u-sheet-1 { min-height: 523px; }
-            .u-section-3 .u-layout-cell-1 { min-height: 100px; }
-            .u-section-3 .u-container-layout-1 { padding-bottom: 30px; }
-            .u-section-3 .u-layout-cell-2 { min-height: 565px; }
-            .u-section-3 .u-image-1 { height: 203px; }
-            .u-section-3 .u-image-2 { height: 270px; }
-        }
-        @media (max-width: 767px) {
-            .u-section-3 .u-sheet-1 { min-height: 813px; }
-            .u-section-3 .u-layout-wrap-1 { margin-top: 30px; }
-            .u-section-3 .u-container-layout-1, .u-section-3 .u-container-layout-2 { padding-left: 10px; padding-right: 10px; }
-            .u-section-3 .u-layout-cell-2 { min-height: 440px; }
-            .u-section-3 .u-image-1 { height: 352px; }
-            .u-section-3 .u-image-2 { height: 468px; }
-        }
-        @media (max-width: 575px) {
-            .u-section-3 .u-sheet-1 { min-height: 598px; }
-            .u-section-3 .u-text-1 { width: auto; }
-            .u-section-3 .u-layout-cell-2 { min-height: 277px; }
-            .u-section-3 .u-image-1 { height: 217px; }
-            .u-section-3 .u-image-2 { height: 288px; }
-        }
-
-        /* SECTION 4 */
-        .u-section-4 { background-image: none; }
-        .u-section-4 .u-sheet-1 { min-height: 618px; }
-        .u-section-4 .u-layout-wrap-1 { margin-top: 60px; margin-bottom: 60px; }
-        .u-section-4 .u-layout-cell-1 { min-height: 498px; }
-        .u-section-4 .u-container-layout-1 { padding: 30px 30px 23px; }
-        .u-section-4 .u-text-1 { animation-duration: 1000ms; margin: 0; }
-        .u-section-4 .u-text-2 { margin: 28px 47px 0 0; }
-        .u-section-4 .u-text-3 { font-weight: 700; margin: 35px 60px 0 0; }
-        .u-section-4 .u-layout-cell-2 { min-height: 642px; }
-        .u-section-4 .u-container-layout-2 { padding: 30px; }
-        .u-section-4 .u-image-1 { height: 260px; margin-top: 0; margin-bottom: 0; margin-left: 0; }
-        .u-section-4 .u-image-2 { height: 260px; margin-top: 26px; margin-bottom: 0; margin-left: 0; }
-
-        @media (max-width: 1199px) {
-            .u-section-4 .u-sheet-1 { min-height: 430px; }
-            .u-section-4 .u-layout-wrap-1 { position: relative; }
-            .u-section-4 .u-layout-cell-1 { min-height: 725px; }
-            .u-section-4 .u-text-2 { margin-top: 20px; margin-right: 0; }
-            .u-section-4 .u-text-3 { width: auto; margin-right: 100px; }
-            .u-section-4 .u-layout-cell-2 { min-height: 529px; }
-            .u-section-4 .u-image-1 { height: 209px; margin-left: initial; }
-            .u-section-4 .u-image-2 { height: 209px; margin-top: 48px; margin-left: initial; }
-        }
-        @media (max-width: 991px) {
-            .u-section-4 .u-sheet-1 { min-height: 353px; }
-            .u-section-4 .u-layout-cell-1 { min-height: 100px; }
-            .u-section-4 .u-text-3 { margin-top: 60px; margin-right: 0; }
-            .u-section-4 .u-layout-cell-2 { min-height: 405px; }
-            .u-section-4 .u-image-1, .u-section-4 .u-image-2 { height: 153px; margin-left: initial; }
-            .u-section-4 .u-image-1 { margin-top: 10px; }
-        }
-        @media (max-width: 767px) {
-            .u-section-4 .u-sheet-1 { min-height: 450px; }
-            .u-section-4 .u-layout-wrap-1 { margin-top: 30px; }
-            .u-section-4 .u-container-layout-1, .u-section-4 .u-container-layout-2 { padding-left: 10px; padding-right: 10px; }
-            .u-section-4 .u-text-3 { margin-top: 35px; }
-            .u-section-4 .u-layout-cell-2 { min-height: 608px; }
-            .u-section-4 .u-image-1, .u-section-4 .u-image-2 { height: 265px; margin-left: initial; }
-            .u-section-4 .u-image-1 { margin-top: -21px; }
-            .u-section-4 .u-image-2 { margin-top: 35px; }
-        }
-        @media (max-width: 575px) {
-            .u-section-4 .u-sheet-1 { min-height: 339px; }
-            .u-section-4 .u-text-3 { margin-top: 33px; }
-            .u-section-4 .u-layout-cell-2 { min-height: 383px; }
-            .u-section-4 .u-image-1, .u-section-4 .u-image-2 { height: 163px; margin-left: initial; }
-            .u-section-4 .u-image-1 { margin-top: 0; }
-            .u-section-4 .u-image-2 { margin-top: 25px; }
-        }
-
-        /* SECTION 5 */
-        .u-section-5 .u-sheet-1 { min-height: 423px; }
-        .u-section-5 .u-layout-wrap-1 { margin-top: 28px; margin-bottom: 0; }
-        .u-section-5 .u-layout-cell-1 { min-height: 404px; }
-        .u-section-5 .u-container-layout-1 { padding: 30px; }
-        .u-section-5 .u-image-1 { width: 306px; height: 264px; margin: 0 auto 0 387px; }
-        .u-section-5 .u-text-1 { animation-duration: 1000ms; width: 676px; font-weight: 700; margin: 22px auto 0; }
-
-        @media (max-width: 1199px) {
-            .u-section-5 .u-sheet-1 { min-height: 166px; }
-            .u-section-5 .u-layout-cell-1 { min-height: 392px; }
-            .u-section-5 .u-image-1 { width: 261px; height: 225px; margin-left: 310px; }
-            .u-section-5 .u-text-1 { margin-top: 16px; font-size: 1.5rem; }
-        }
-        @media (max-width: 991px) {
-            .u-section-5 .u-sheet-1 { min-height: 252px; }
-            .u-section-5 .u-layout-wrap-1 { margin-top: 2px; margin-bottom: 22px; }
-            .u-section-5 .u-layout-cell-1 { min-height: 382px; }
-            .u-section-5 .u-container-layout-1 { padding-top: 21px; padding-bottom: 13px; }
-            .u-section-5 .u-image-1 { margin-top: 13px; margin-left: 200px; }
-            .u-section-5 .u-text-1 { width: auto; margin-top: 30px; }
-        }
-        @media (max-width: 767px) {
-            .u-section-5 .u-sheet-1 { min-height: 400px; }
-            .u-section-5 .u-layout-wrap-1 { margin-bottom: -278px; }
-            .u-section-5 .u-layout-cell-1 { min-height: 375px; }
-            .u-section-5 .u-container-layout-1 { padding-left: 10px; padding-right: 10px; }
-            .u-section-5 .u-image-1 { margin-top: 0; margin-left: auto; }
-            .u-section-5 .u-text-1 { margin-top: 16px; }
-        }
-        @media (max-width: 575px) {
-            .u-section-5 .u-sheet-1 { min-height: 327px; }
-            .u-section-5 .u-layout-wrap-1 { margin-top: 10px; }
-            .u-section-5 .u-layout-cell-1 { min-height: 408px; }
-            .u-section-5 .u-container-layout-1 { padding-bottom: 24px; }
-            .u-section-5 .u-text-1 { font-size: 1.25rem; margin-top: 20px; }
-        }
-
-        /* SECTION 6 */
-        .u-section-6 .u-sheet-1 { min-height: 320px; }
-        .u-section-6 .u-layout-wrap-1 { margin-bottom: 12px; margin-top: 0; }
-        .u-section-6 .u-layout-cell-1, .u-section-6 .u-layout-cell-2, .u-section-6 .u-layout-cell-3, .u-section-6 .u-layout-cell-4 { min-height: 300px; }
-        .u-section-6 .u-container-layout-1, .u-section-6 .u-container-layout-2, .u-section-6 .u-container-layout-3, .u-section-6 .u-container-layout-4 { padding: 0 30px; }
-        .u-section-6 .u-image-1 { height: 93px; margin-top: 5px; margin-bottom: 0; margin-left: 0; }
-        .u-section-6 .u-image-2 { height: 87px; margin-top: 5px; margin-bottom: 0; margin-left: 0; }
-        .u-section-6 .u-image-3 { height: 122px; margin-top: 0; margin-bottom: 0; margin-left: 0; }
-        .u-section-6 .u-image-4 { height: 117px; margin-top: 0; margin-bottom: 0; margin-left: 0; }
-        .u-section-6 .u-text-1, .u-section-6 .u-text-3, .u-section-6 .u-text-5, .u-section-6 .u-text-7 { animation-duration: 1000ms; font-size: 1.5rem; font-weight: 700; margin-bottom: 0; }
-        .u-section-6 .u-text-1 { margin-top: 24px; } .u-section-6 .u-text-3 { margin-top: 30px; } .u-section-6 .u-text-5 { margin-top: 0; } .u-section-6 .u-text-7 { margin-top: 5px; }
-        .u-section-6 .u-text-2, .u-section-6 .u-text-4, .u-section-6 .u-text-6, .u-section-6 .u-text-8 { font-size: 1.125rem; margin: 17px 0 0; }
-
-        @media (max-width: 1199px) {
-            .u-section-6 .u-sheet-1 { min-height: 267px; }
-            .u-section-6 .u-layout-wrap-1 { margin-bottom: -151px; position: relative; }
-            .u-section-6 .u-layout-cell-1, .u-section-6 .u-layout-cell-2, .u-section-6 .u-layout-cell-3, .u-section-6 .u-layout-cell-4 { min-height: 247px; }
-            .u-section-6 .u-image-1 { height: 72px; } .u-section-6 .u-image-2 { height: 55px; } .u-section-6 .u-image-3 { height: 95px; } .u-section-6 .u-image-4 { height: 91px; }
-            .u-section-6 .u-image-1, .u-section-6 .u-image-2, .u-section-6 .u-image-3, .u-section-6 .u-image-4 { margin-left: initial; }
-        }
-        @media (max-width: 991px) {
-            .u-section-6 .u-sheet-1 { min-height: 462px; }
-            .u-section-6 .u-layout-wrap-1 { margin-bottom: 50px; }
-            .u-section-6 .u-layout-cell-1, .u-section-6 .u-layout-cell-2 { min-height: 200px; }
-            .u-section-6 .u-layout-cell-3 { min-height: 211px; } .u-section-6 .u-layout-cell-4 { min-height: 212px; }
-            .u-section-6 .u-container-layout-1, .u-section-6 .u-container-layout-2, .u-section-6 .u-container-layout-3, .u-section-6 .u-container-layout-4 { padding-top: 0; padding-bottom: 0; }
-            .u-section-6 .u-image-1 { height: 91px; } .u-section-6 .u-image-2 { height: 90px; } .u-section-6 .u-image-3 { height: 136px; } .u-section-6 .u-image-4 { height: 132px; }
-            .u-section-6 .u-image-1, .u-section-6 .u-image-2, .u-section-6 .u-image-3, .u-section-6 .u-image-4 { margin-left: initial; }
-        }
-        @media (max-width: 767px) {
-            .u-section-6 .u-sheet-1 { min-height: 936px; }
-            .u-section-6 .u-layout-wrap-1 { margin-top: 1px; margin-bottom: 1px; }
-            .u-section-6 .u-layout-cell-1 { min-height: 228px; }
-            .u-section-6 .u-layout-cell-2 { min-height: 233px; }
-            .u-section-6 .u-layout-cell-3 { min-height: 230px; }
-            .u-section-6 .u-layout-cell-4 { min-height: 245px; }
-            .u-section-6 .u-container-layout-1, .u-section-6 .u-container-layout-2, .u-section-6 .u-container-layout-3, .u-section-6 .u-container-layout-4 { padding-left: 10px; padding-right: 10px; }
-            .u-section-6 .u-image-1, .u-section-6 .u-image-2 { height: 125px; margin-left: initial; }
-            .u-section-6 .u-text-1, .u-section-6 .u-text-3, .u-section-6 .u-text-4, .u-section-6 .u-text-6, .u-section-6 .u-text-8 { width: auto; }
-            .u-section-6 .u-text-1 { margin-top: 17px; } .u-section-6 .u-text-3, .u-section-6 .u-text-4, .u-section-6 .u-text-8 { margin-top: 8px; } .u-section-6 .u-text-5 { width: auto; margin-top: -12px; } .u-section-6 .u-text-6 { margin-top: 11px; } .u-section-6 .u-text-7 { width: auto; margin-top: -9px; }
-            .u-section-6 .u-image-3 { height: 135px; width: 345px; margin-left: 88px; margin-right: 88px; }
-            .u-section-6 .u-image-4 { height: 130px; width: 405px; margin-left: auto; margin-right: auto; }
-        }
-        @media (max-width: 575px) {
-            .u-section-6 .u-sheet-1 { min-height: 887px; }
-            .u-section-6 .u-layout-wrap-1 { margin-top: 10px; margin-bottom: 30px; }
-            .u-section-6 .u-layout-cell-1 { min-height: 222px; }
-            .u-section-6 .u-layout-cell-2 { min-height: 221px; }
-            .u-section-6 .u-layout-cell-3 { min-height: 100px; }
-            .u-section-6 .u-layout-cell-4 { min-height: 212px; }
-            .u-section-6 .u-container-layout-1 { padding-bottom: 24px; }
-            .u-section-6 .u-image-1, .u-section-6 .u-image-2 { height: 110px; margin-left: initial; }
-            .u-section-6 .u-image-2 { margin-top: 0; }
-            .u-section-6 .u-image-3 { height: 125px; width: 320px; margin-left: 0; margin-right: 0; }
-            .u-section-6 .u-text-1 { margin-top: 0; margin-right: 10px; margin-left: -10px; }
-            .u-section-6 .u-text-5, .u-section-6 .u-text-7 { margin-top: -12px; }
-            .u-section-6 .u-image-4 { height: 128px; margin-right: initial; margin-left: initial; width: auto; }
-            .u-section-6 .u-text-8 { margin-top: 5px; }
-        }
-    </style>
-
-
-    <meta name="abstract" content="Trawnik Producent to firma z ponad 17 letnią tradycją, specjalizująca się w produkcji darni rolowanej.">
-    <link rel="icon" href="https://pub.gardenlawn.pl/media/images/grass/cropped-favicon.webp">
-
-    <style type="text/css" id="wp-custom-css">
-        .rt-detail { background: #e5e5e5 !important; }
-    </style>
-
-    <style>
-        .u-body, h1, h2, h3, h4, h5, h6, .u-custom-font.u-text-font, .u-custom-font.u-heading-font { font-family: 'Open Sans', sans-serif !important; }
-        .u-body { color: #111111; background-color: #ffffff; }
-
-        /* Specific Brand Colors (Used in Section 6 & Text) */
-        .u-custom-color-2 { color: #ffffff; background-color: #009640; } /* Standard Green */
-        .u-text-custom-color-2 { color: #009640 !important; }
-        .u-border-custom-color-2 { border-color: #009640 !important; }
-
-        .u-custom-color-14 { background-color: #792587; } /* Purple - Trawnik Finanse */
-        .u-text-custom-color-14 { color: #792587 !important; }
-
-        .u-custom-color-11 { background-color: #3ab447; } /* Light Green - Hybrid Sport */
-        .u-text-custom-color-11 { color: #3ab447 !important; }
-
-        .u-custom-color-13 { background-color: #f57921; } /* Orange - Hybrid Service */
-        .u-text-custom-color-13 { color: #f57921 !important; }
-
-        /* Standard Colors */
-        .u-white { background-color: #ffffff; color: #111111; }
-        .u-grey-80 { background-color: #333333; color: #ffffff; }
-        .u-text-black { color: #000000 !important; }
-
-        /* Typography Helpers */
-        h1.u-title { font-size: 3rem; margin: 20px 0; font-weight: 700; line-height: 1.1; }
-        h2.u-subtitle { font-size: 2.25rem; margin: 20px 0; font-weight: 400; line-height: 1.1; }
-        a { text-decoration: underline; font-weight: 600; color: #009640; }
-        a:hover { color: #00873a; }
-        blockquote { font-style: italic; padding-left: 33px; border-width: 2px; margin-top: 20px; }
-
-        /* Buttons */
-        .u-btn {
-            font-weight: 700; text-transform: uppercase; border-radius: 50px;
-            padding: 12px 45px; margin: 19px 0 20px; background-color: #009640; color: #ffffff;
-        }
-        .u-btn:hover { background-color: #98cb40; color: #ffffff; }
-
-        @media (max-width: 767px) { h1.u-title { font-size: 3.75rem; } }
-        @media (max-width: 575px) { h1.u-title { font-size: 3rem; } h2.u-subtitle { font-size: 1.5rem; } }
-        html { font-size: 16px; }
-    </style>
-
-    <style id="cky-style">
-        .cky-overlay{background:#000000;opacity:0.4;position:fixed;top:0;left:0;width:100%;height:100%;z-index:99999999}.cky-hide{display:none}.cky-btn-revisit-wrapper{display:flex;align-items:center;justify-content:center;background:#0056a7;width:45px;height:45px;border-radius:50%;position:fixed;z-index:999999;cursor:pointer}.cky-revisit-bottom-left{bottom:15px;left:15px}.cky-revisit-bottom-right{bottom:15px;right:15px}.cky-btn-revisit-wrapper .cky-btn-revisit{display:flex;align-items:center;justify-content:center;background:none;border:none;cursor:pointer;position:relative;margin:0;padding:0}.cky-btn-revisit-wrapper .cky-btn-revisit img{max-width:fit-content;margin:0;height:30px;width:30px}.cky-consent-container{position:fixed;width:440px;box-sizing:border-box;z-index:9999999;border-radius:6px}.cky-consent-container .cky-consent-bar{background:#ffffff;border:1px solid;padding:20px 26px;box-shadow:0 -1px 10px 0 #acabab4d;border-radius:6px}.cky-box-bottom-left{bottom:40px;left:40px}.cky-box-bottom-right{bottom:40px;right:40px}.cky-notice .cky-title{color:#212121;font-weight:700;font-size:18px;line-height:24px;margin:0 0 12px 0}.cky-notice-des{color:#212121;font-size:14px;line-height:24px;font-weight:400}.cky-btn{flex:auto;max-width:100%;font-size:14px;font-family:inherit;line-height:24px;padding:8px;font-weight:500;border-radius:2px;cursor:pointer;text-align:center;min-height:0}.cky-btn:hover{opacity:0.8}.cky-btn-accept{background:#1863dc;color:#ffffff;border:2px solid #1863dc}.cky-btn-reject{color:#1863dc;background:transparent;border:2px solid #1863dc}
-        @media (max-width: 576px) { .cky-box-bottom-left, .cky-box-bottom-right { bottom: 0; left: 0; width: 100%; } .cky-consent-container .cky-consent-bar { padding: 20px 0; } .cky-notice-btn-wrapper { flex-direction: column; } }
-    </style>
-</head>
-
-<body class="u-body u-sticky-scroll" style="display: table-cell; margin: auto;">
-<div class="cky-overlay cky-hide"></div>
-<style>
-    .u-header { background-image: none; }
-    .u-header .u-sheet-1 { min-height: 93px; }
-    .u-header .u-image-1 { animation-duration: 1000ms; margin: 6px auto 0 8px; }
-    .u-header .u-logo-image-1 { max-width: 136px; max-height: 136px; }
-    .u-header .u-menu-1 { margin: -44px auto 0; }
-    .u-header .u-nav-1 { font-size: 0.9375rem; letter-spacing: 0px; font-weight: 700; text-transform: uppercase; }
-    .u-header .u-menu-close-1 { height: 28px; margin: 35px 40px 0 188px; }
-    .u-header .u-nav-2 { font-size: 1rem; font-weight: 700; height: 324px; margin: 29px 0 0 auto; }
-    .u-header .u-image-2 { width: 125px; height: 60px; margin: 19px auto 0 20px; }
-    .u-header .u-social-icons-1 { white-space: nowrap; height: 31px; min-height: 16px; width: 113px; min-width: 68px; margin: -41px 1px 35px auto; }
-    .u-header .u-icon-1, .u-header .u-icon-2 { height: 32px; } .u-header .u-icon-3 { height: 31px; }
-
-    @media (max-width: 1199px) {
-        .u-header .u-sheet-1 { min-height: 70px; }
-        .u-header .u-image-1 { margin-left: 0; }
-        .u-header .u-logo-image-1 { max-width: 111px; max-height: 111px; }
-        .u-header .u-menu-1 { margin-top: -36px; }
-        .u-header .u-menu-close-1 { margin-top: 39px; margin-right: 36px; margin-left: 192px; }
-        .u-header .u-nav-2 { height: 340px; margin-top: 25px; margin-left: initial; margin-right: initial; }
-        .u-header .u-social-icons-1 { margin-bottom: 17px; }
-    }
-    @media (max-width: 991px) {
-        .u-header .u-sheet-1 { min-height: 82px; }
-        .u-header .u-image-1 { margin-top: 9px; width: auto; }
-        .u-header .u-menu-1 { width: auto; margin-top: -48px; margin-right: 0; }
-        .u-header .u-menu-close-1 { margin-top: 44px; margin-right: 42px; margin-left: 186px; }
-        .u-header .u-nav-2 { margin-top: 20px; margin-left: initial; margin-right: initial; }
-        .u-header .u-social-icons-1 { margin-top: -37px; margin-right: auto; margin-bottom: 35px; }
-    }
-    @media (max-width: 767px) {
-        .u-header .u-sheet-1 { min-height: 68px; }
-        .u-header .u-image-1 { margin-top: 7px; }
-        .u-header .u-menu-close-1 { width: 22px; }
-        .u-header .u-social-icons-1 { margin-bottom: 13px; margin-left: 206px; }
-    }
-    @media (max-width: 575px) {
-        .u-header .u-sheet-1 { min-height: 66px; }
-        .u-header .u-image-1 { margin-top: 10px; }
-        .u-header .u-logo-image-1 { max-width: 91px; max-height: 91px; }
-        .u-header .u-menu-1 { margin-top: -42px; }
-        .u-header .u-nav-2 { width: 232px; margin-right: 0; margin-left: auto; }
-        .u-header .u-social-icons-1 { margin: -41px 104px 17px auto; }
-    }
-</style>
-
-<section class="u-clearfix u-white u-section-3" id="sec-2b5d">
-    <div class="u-clearfix u-sheet u-sheet-1">
-        <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
-            <div class="u-gutter-0 u-layout">
-                <div class="u-layout-row">
-                    <div class="u-container-style u-layout-cell u-size-30 u-layout-cell-1">
-                        <div class="u-container-layout u-valign-top u-container-layout-1">
-                            <h2 class="u-text u-text-1 animated zoomIn-played" data-animation-name="zoomIn"
-                                data-animation-duration="1000" data-animation-delay="0" data-animation-direction=""
-                                style="will-change: transform, opacity; animation-duration: 1000ms;">GRUPA TRAWNIK</h2>
-                            <h4 class="u-text u-text-custom-color-2 u-text-2">Posiadamy 25-letnie<br>doświadczenie w branży</h4>
-                            <p class="u-text u-text-3">Od 1998 r. do dziś staliśmy się specjalistami w dziedzinie powszechnie stosowanej trawy naturalnej oraz nowoczesnej naturalnej hybrydowej.<br><br>Działamy kompleksowo, zarządzając projektem od początku do końca, a nawet jeszcze dalej, bo zapewniamy obsługę serwisową i szkoleniową w zakresie konserwacji i pielęgnacji murawy. Możesz liczyć na nasz zespół, który pomoże Ci dokonać wyboru najbardziej odpowiedniego systemu dla Twojego obiektu sportowego: od podbudowy, drenażu, instalacji grzewczej, rozłożenia murawy aż po serwis. <br></p>
-                            <blockquote class="u-border-2 u-border-custom-color-2 u-indent-31 u-text u-text-4">Wszystkie etapy realizacji wykonywane są przez naszą wyszkoloną załogę, wspieraną przez doświadczonych kierowników budowy. Często pracujemy w bardzo napiętych terminach, dostarczając kompleksowe rozwiązania, z jakimi inne firmy sobie nie radzą, gwarantując wysoką jakość naszego produktu.</blockquote>
-                        </div>
-                    </div>
-                    <div class="u-container-style u-layout-cell u-size-30 u-layout-cell-2">
-                        <div class="u-container-layout u-valign-bottom-xs u-container-layout-2">
-                            <img src="https://pub.gardenlawn.pl/media/images/grass/grupa-tranwik-projektuje-instaluje.webp" alt="" class="u-expanded-width u-image u-image-contain u-image-round u-radius-25 u-image-1" data-image-width="1200" data-image-height="812">
-                            <img src="https://pub.gardenlawn.pl/media/images/grass/murawa-sportowa-arena-gdask-realizacja-hybrid-sport-1.webp" alt="" class="u-expanded-width u-hidden-sm u-hidden-xs u-image u-image-round u-radius-25 u-image-2" data-image-width="1200" data-image-height="820">
-                        </div>
-                    </div>
+    <!-- Capabilities Section (Dark) -->
+    <section class="bg-gray-800 text-white py-16 rounded-xl">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-3xl font-bold mb-6">POZNAJ NASZE MOŻLIWOŚCI</h2>
+                    <p class="mb-6">
+                        System naturalnych hybrydowych muraw sportowych ROYAL Hybrid to wysoka jakość, wysokie osiągi sportowe i trwałość na długie lata.
+                    </p>
+                    <p class="mb-6 font-bold text-green-400">
+                        Nasze innowacyjne boiska piłkarskie zostały zaprojektowane w taki sposób, aby zminimalizować ryzyko kontuzji graczy.
+                    </p>
+                    <p>
+                        Nawierzchnia hybrydowa traktowana jest przez piłkarzy jak naturalna (70% trawa naturalna, 30% włókna).
+                    </p>
+                </div>
+                <div class="space-y-4">
+                    <img src="https://pub.gardenlawn.pl/media/images/grass/StadionPGE.webp" alt="PGE Narodowy" class="rounded-lg shadow-md w-full">
+                    <img src="https://pub.gardenlawn.pl/media/images/grass/petar-tonchev-c-5-QE5kBYk-unsplash-scaled.webp" alt="Boisko" class="rounded-lg shadow-md w-full">
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<section class="u-clearfix u-grey-80 u-section-4" id="carousel_2ebb" style="width: fit-content">
-    <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
-        <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
-            <div class="u-layout">
-                <div class="u-layout-row">
-                    <div class="u-container-style u-layout-cell u-left-cell u-size-30 u-layout-cell-1">
-                        <div class="u-container-layout u-valign-bottom-lg u-valign-bottom-md u-valign-bottom-sm u-valign-bottom-xs u-container-layout-1">
-                            <h2 class="u-text u-text-1 animated zoomIn-played" data-animation-name="zoomIn"
-                                data-animation-duration="1000" data-animation-delay="0" data-animation-direction=""
-                                style="will-change: transform, opacity; animation-duration: 1000ms;">POZNAJ NASZE MOŻLIWOŚCI<br></h2>
-                            <p class="u-align-left u-text u-text-2">System naturalnych hybrydowych muraw sportowych ROYAL Hybrid to wysoka jakość, wysokie osiągi sportowe i trwałość na długie lata. <br><br>
-                                <span style="font-weight: 700;">Nasze innowacyjne boiska piłkarskie zostały zaprojektowane w taki sposób, aby zminimalizować ryzyko kontuzji graczy, przy jednoczesnym zachowaniu komfortu gry.</span>
-                                <br><br> Nawierzchnia hybrydowa traktowana jest przez piłkarzy jak naturalna, gdyż 70% to właśnie naturalna trawa osadzona na macie z włókien monofilowych (30%), co znacząco wydłuża czas gry zarówno w ciągu doby, jak i w całym sezonie. Mocna tkana struktura wzmocnienia pozwala na swobodny przerost korzeni, cyrkulację powietrza i wody oraz wykonywanie standardowych czynności serwisowych.
-                            </p>
-                            <p class="u-text u-text-3">Dzięki szerokiemu gronu Klientów z sektora samorządowego, sportu, rekreacji i edukacji rozumiemy wyzwania związane z wysoką jakością. </p>
-                        </div>
-                    </div>
-                    <div class="u-align-center-lg u-align-center-md u-align-center-sm u-align-center-xl u-align-left-xs u-container-style u-layout-cell u-right-cell u-size-30 u-layout-cell-2">
-                        <div class="u-container-layout u-valign-middle u-container-layout-2">
-                            <img src="https://pub.gardenlawn.pl/media/images/grass/StadionPGE.webp" alt="" class="u-expanded-width u-image u-image-round u-radius-25 u-image-1" data-image-width="1216" data-image-height="811">
-                            <img src="https://pub.gardenlawn.pl/media/images/grass/petar-tonchev-c-5-QE5kBYk-unsplash-scaled.webp" alt="" class="u-expanded-width u-image u-image-round u-radius-25 u-image-2" data-image-width="2560" data-image-height="1440">
-                        </div>
-                    </div>
-                </div>
+    <!-- Experience Banner -->
+    <section class="bg-gray-50 py-12">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <img src="https://pub.gardenlawn.pl/media/images/grass/grupa-trawnik.webp" alt="Logo Grupa Trawnik" class="h-32 mx-auto mb-6 object-contain">
+            <h3 class="text-2xl font-bold <?= $greenColor ?>">W GRUPIE TRAWNIK WIEMY Z DOŚWIADCZENIA, ŻE KAŻDY SPORT I KAŻDY PROJEKT JEST WYJĄTKOWY</h3>
+        </div>
+    </section>
+
+    <!-- Companies Grid -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+            <!-- 1 -->
+            <div class="p-6 bg-white rounded-xl shadow-sm border border-gray-100">
+                <img src="https://pub.gardenlawn.pl/media/images/grass/cropped-trawnikproducent.webp" alt="Trawnik Producent" class="h-16 mx-auto mb-4 object-contain">
+                <h4 class="font-bold <?= $greenColor ?> mb-2">Trawnik Producent</h4>
+                <p class="text-sm text-gray-600">Produkcja traw ogrodowych</p>
+            </div>
+            <!-- 2 -->
+            <div class="p-6 bg-white rounded-xl shadow-sm border border-gray-100">
+                <img src="https://pub.gardenlawn.pl/media/images/grass/trawnik-finance.webp" alt="Trawnik Finanse" class="h-16 mx-auto mb-4 object-contain">
+                <h4 class="font-bold text-purple-700 mb-2">Trawnik Finanse</h4>
+                <p class="text-sm text-gray-600">Opcje finansowania projektów</p>
+            </div>
+            <!-- 3 -->
+            <div class="p-6 bg-white rounded-xl shadow-sm border border-gray-100">
+                <img src="https://pub.gardenlawn.pl/media/images/grass/hybrid-sport-logo.webp" alt="Hybrid Sport" class="h-16 mx-auto mb-4 object-contain">
+                <h4 class="font-bold text-green-500 mb-2">Hybrid Sport</h4>
+                <p class="text-sm text-gray-600">Przygotowanie projektu inwestycji</p>
+            </div>
+            <!-- 4 -->
+            <div class="p-6 bg-white rounded-xl shadow-sm border border-gray-100">
+                <img src="https://pub.gardenlawn.pl/media/images/grass/hybrid-service-logo.webp" alt="Hybrid Service" class="h-16 mx-auto mb-4 object-contain">
+                <h4 class="font-bold text-orange-500 mb-2">Hybrid Service</h4>
+                <p class="text-sm text-gray-600">Kompleksowa pielęgnacja murawy</p>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<section class="u-clearfix u-section-5" id="carousel_0443">
-    <div class="u-clearfix u-sheet u-sheet-1">
-        <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
-            <div class="u-layout">
-                <div class="u-layout-row">
-                    <div class="u-align-center u-container-style u-layout-cell u-left-cell u-size-60 u-layout-cell-1">
-                        <div class="u-container-layout u-valign-bottom-lg u-valign-bottom-md u-valign-bottom-sm u-valign-bottom-xl u-container-layout-1">
-                            <img src="https://pub.gardenlawn.pl/media/images/grass/grupa-trawnik.webp" alt="" class="u-image u-image-contain u-image-default u-image-1" data-image-width="449" data-image-height="452">
-                            <h4 class="u-text u-text-custom-color-2 u-text-1">W GRUPIE TRAWNIK WIEMY Z DOŚWIADCZENIA, ŻE KAŻDY SPORT I KAŻDY PROJEKT JEST WYJĄTKOWY</h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="u-clearfix u-section-6" id="sec-6940">
-    <div class="u-clearfix u-sheet u-valign-middle-sm u-sheet-1">
-        <div class="u-clearfix u-expanded-width u-gutter-0 u-layout-wrap u-layout-wrap-1">
-            <div class="u-gutter-0 u-layout">
-                <div class="u-layout-row">
-                    <div class="u-align-center u-container-style u-layout-cell u-size-15 u-size-30-md u-layout-cell-1">
-                        <div class="u-container-layout u-container-layout-1">
-                            <img src="https://pub.gardenlawn.pl/media/images/grass/cropped-trawnikproducent.webp" alt="" class="u-expanded-width u-image u-image-contain u-image-default u-image-1" data-image-width="240" data-image-height="138">
-                            <h3 class="u-text u-text-custom-color-2 u-text-1">Trawnik Producent<br></h3>
-                            <p class="u-text u-text-2">Produkcja traw ogrodowych</p>
-                        </div>
-                    </div>
-                    <div class="u-align-center u-container-style u-layout-cell u-size-15 u-size-30-md u-layout-cell-2">
-                        <div class="u-container-layout u-valign-middle-xs u-container-layout-2">
-                            <img src="https://pub.gardenlawn.pl/media/images/grass/trawnik-finance.webp" alt="" class="u-expanded-width u-image u-image-contain u-image-default u-image-2" data-image-width="304" data-image-height="175">
-                            <h3 class="u-text u-text-custom-color-14 u-text-3">Trawnik Finanse</h3>
-                            <p class="u-text u-text-4"><i></i> Opcje finansowania projektów</p>
-                        </div>
-                    </div>
-                    <div class="u-align-center u-container-style u-layout-cell u-size-15 u-size-30-md u-layout-cell-3">
-                        <div class="u-container-layout u-valign-top-lg u-valign-top-md u-valign-top-xl u-container-layout-3">
-                            <img src="https://pub.gardenlawn.pl/media/images/grass/hybrid-sport-logo.webp" alt="" class="u-expanded-width-lg u-expanded-width-md u-expanded-width-xl u-image u-image-contain u-image-default u-image-3" data-image-width="296" data-image-height="147">
-                            <h3 class="u-text u-text-custom-color-11 u-text-5">Hybrid Spor<span style="font-weight: 700;"></span>t</h3>
-                            <p class="u-text u-text-6">Przygotowanie projektu inwestycji</p>
-                        </div>
-                    </div>
-                    <div class="u-align-center u-container-style u-layout-cell u-size-15 u-size-30-md u-layout-cell-4">
-                        <div class="u-container-layout u-valign-top-lg u-valign-top-md u-valign-top-xl u-container-layout-4">
-                            <img src="https://pub.gardenlawn.pl/media/images/grass/hybrid-service-logo.webp" alt="" class="u-expanded-width-lg u-expanded-width-md u-expanded-width-xl u-expanded-width-xs u-image u-image-contain u-image-default u-image-4" data-image-width="296" data-image-height="147">
-                            <h3 class="u-text u-text-custom-color-13 u-text-7">Hybrid Service</h3>
-                            <p class="u-text u-text-8">Kompleksowa pielęgnacja murawy</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-</body>
-</html>
+</div>
