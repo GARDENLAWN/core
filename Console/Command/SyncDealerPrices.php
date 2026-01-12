@@ -16,6 +16,7 @@ use Magento\Catalog\Api\Data\ProductTierPriceInterfaceFactory;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Store\Model\ScopeInterface;
 use Magento\Framework\Exception\LocalizedException;
+use GardenLawn\Core\Model\PriceCalculator;
 
 class SyncDealerPrices extends Command
 {
@@ -37,6 +38,8 @@ class SyncDealerPrices extends Command
     private $scopeConfig;
     /** @var CurrencyFactory */
     private $currencyFactory;
+    /** @var PriceCalculator */
+    private $priceCalculator;
 
     public function __construct(
         AppState $appState,
@@ -46,7 +49,8 @@ class SyncDealerPrices extends Command
         ProductTierPriceManagementInterface $tierPriceManagement,
         ProductTierPriceInterfaceFactory $tierPriceFactory,
         ScopeConfigInterface $scopeConfig,
-        CurrencyFactory $currencyFactory
+        CurrencyFactory $currencyFactory,
+        PriceCalculator $priceCalculator
     ) {
         $this->appState = $appState;
         $this->productRepository = $productRepository;
@@ -56,13 +60,14 @@ class SyncDealerPrices extends Command
         $this->tierPriceFactory = $tierPriceFactory;
         $this->scopeConfig = $scopeConfig;
         $this->currencyFactory = $currencyFactory;
+        $this->priceCalculator = $priceCalculator;
         parent::__construct();
     }
 
     protected function configure()
     {
         $this->setName('gardenlawn:dealer:sync-prices')
-            ->setDescription('Syncs dealer_price attribute to tier prices for B2B customer groups.');
+            ->setDescription('Syncs dealer_price attribute to tier prices for B2B customer groups and updates main price.');
         parent::configure();
     }
 
@@ -112,16 +117,18 @@ class SyncDealerPrices extends Command
                     continue;
                 }
 
+                // Calculate Main Price using shared logic
+                $calculationResult = $this->priceCalculator->calculateFinalPrice($dealerPricePln);
+                $finalMainPriceNet = $calculationResult['net_final'];
+
                 // Use ProductRepository to save which is more reliable for tier prices
                 $productToSave = $this->productRepository->get($product->getSku(), true, null, true);
                 $existingTierPrices = $productToSave->getTierPrices() ?? [];
+                $currentMainPrice = (float)$productToSave->getPrice();
 
                 // Filter out ALL existing dealer prices (qty = 1)
-                // This ensures that if a group was removed from config, its price is also removed.
                 $newTierPrices = [];
                 foreach ($existingTierPrices as $price) {
-                    // Keep price ONLY if qty != 1.
-                    // We assume qty=1 is reserved for our dealer price logic.
                     if ((float)$price->getQty() != 1) {
                         $newTierPrices[] = $price;
                     }
@@ -136,13 +143,17 @@ class SyncDealerPrices extends Command
                     $newTierPrices[] = $tierPrice;
                 }
 
-                // Optimization: Check if tier prices actually changed before saving
-                if ($this->areTierPricesEqual($existingTierPrices, $newTierPrices)) {
+                // Optimization: Check if data actually changed before saving
+                $tierPricesChanged = !$this->areTierPricesEqual($existingTierPrices, $newTierPrices);
+                $mainPriceChanged = abs($currentMainPrice - $finalMainPriceNet) > 0.0001;
+
+                if (!$tierPricesChanged && !$mainPriceChanged) {
                     $progressBar->advance();
                     continue;
                 }
 
                 $productToSave->setTierPrices($newTierPrices);
+                $productToSave->setPrice($finalMainPriceNet);
                 $this->productRepository->save($productToSave);
 
             } catch (\Exception $e) {
@@ -197,20 +208,12 @@ class SyncDealerPrices extends Command
         }
     }
 
-    /**
-     * Compare two arrays of Tier Prices to check if they are effectively the same.
-     *
-     * @param \Magento\Catalog\Api\Data\ProductTierPriceInterface[] $existing
-     * @param \Magento\Catalog\Api\Data\ProductTierPriceInterface[] $new
-     * @return bool
-     */
     private function areTierPricesEqual(array $existing, array $new): bool
     {
         if (count($existing) !== count($new)) {
             return false;
         }
 
-        // Helper to generate a unique key for a tier price
         $generateKey = function ($price) {
             return sprintf(
                 '%s-%s-%s',

@@ -19,8 +19,12 @@
             <general>
                 <enabled>0</enabled>
             </general>
+            <price_calculation>
+                <factor>1.5</factor>
+                <tax_rate>23</tax_rate>
+                <rounding_rules>{"_1":{"price_limit":"50","rounding_target":"0.99","rounding_method":"nearest"},"_2":{"price_limit":"200","rounding_target":"0.99","rounding_method":"up"},"_3":{"price_limit":"999999","rounding_target":"0.99","rounding_method":"up"}}</rounding_rules>
+            </price_calculation>
         </gardenlawn_core>
-        <!-- Twoje istniejące konfiguracje dla SVG/WebP poniżej -->
         <cms>
             <wysiwyg>
                 <allowed_extensions>jpeg,jpg,png,gif,webp,avif,svg</allowed_extensions>

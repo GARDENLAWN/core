@@ -50,6 +50,25 @@
                     <comment>Select customer groups that should get the dealer price.</comment>
                 </field>
             </group>
+            <group id="price_calculation" translate="label" type="text" sortOrder="28" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Main Price Calculation</label>
+                <field id="factor" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Price Factor</label>
+                    <validate>validate-number validate-greater-than-zero</validate>
+                    <comment>Multiplier for dealer_price to calculate main price (e.g. 1.5).</comment>
+                </field>
+                <field id="tax_rate" translate="label comment" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Tax Rate (%)</label>
+                    <validate>validate-number validate-zero-or-greater</validate>
+                    <comment>Tax rate used to calculate gross price for rounding (e.g. 23).</comment>
+                </field>
+                <field id="rounding_rules" translate="label" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Rounding Rules</label>
+                    <frontend_model>GardenLawn\Core\Block\Adminhtml\Form\Field\RoundingRanges</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                    <comment>Define rounding rules based on GROSS price ranges.</comment>
+                </field>
+            </group>
             <group id="cleanup" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
                 <label>Database Cleanup</label>
                 <field id="enabled" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
