@@ -1,0 +1,22 @@
+<?php
+
+declare(strict_types=1);
+
+use GardenLawn\Core\ViewModel\VideoSlider;
+use Hyva\Theme\ViewModel\Slider;
+use Magento\Framework\View\Element\Template;
+
+/** @var Template $block */
+/** @var Slider $sliderViewModel */
+/** @var VideoSlider $videoSliderViewModel */
+
+$sliderViewModel = $block->getData('sliderViewModel');
+$videoSliderViewModel = $block->getData('videoSliderViewModel');
+
+$items = $videoSliderViewModel->getVideoData();
+$itemsTemplate = 'GardenLawn_Core::slider-youtube-item.phtml';
+
+?>
+<div class="video-slider-container mb-6">
+    <?= $sliderViewModel->getSliderForItems($itemsTemplate, $items, 'GardenLawn_Core::slider-php.phtml')->toHtml() ?>
+</div>

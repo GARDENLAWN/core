@@ -1,0 +1,69 @@
+<?php
+
+declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+use Hyva\Theme\Model\ViewModelRegistry;
+use Hyva\Theme\ViewModel\HyvaCsp;
+
+/** @var Template $block */
+/** @var array $item */
+/** @var ViewModelRegistry $viewModels */
+/** @var HyvaCsp $hyvaCsp */
+
+$hyvaCsp = $viewModels->require(HyvaCsp::class);
+
+$divId = $item['divId'] ?? uniqid('video_');
+$videoId = $item['videoId'] ?? '';
+
+?>
+<div class="slider-item w-full px-2">
+    <?php if ($videoId): ?>
+        <div id="<?= $block->escapeHtmlAttr($divId) ?>" class="w-full aspect-video bg-gray-200"></div>
+
+        <div x-data="gardenLawnYoutubePlayer('<?= $block->escapeJs($divId) ?>', '<?= $block->escapeJs($videoId) ?>')"
+             x-intersect.once="loadPlayer">
+        </div>
+    <?php endif; ?>
+</div>
+
+<script>
+    function gardenLawnYoutubePlayer(divId, videoId) {
+        return {
+            divId: divId,
+            videoId: videoId,
+            loadPlayer() {
+                if (typeof YT !== 'undefined' && YT.Player) {
+                    this.createPlayer();
+                } else {
+                    if (!window.youtubeApiLoading) {
+                        window.youtubeApiLoading = true;
+                        var tag = document.createElement('script');
+                        tag.src = "https://www.youtube.com/iframe_api";
+                        var firstScriptTag = document.getElementsByTagName('script')[0];
+                        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+                        window.onYouTubeIframeAPIReady = function() {
+                            window.dispatchEvent(new CustomEvent('youtube-api-ready'));
+                        };
+                    }
+                    window.addEventListener('youtube-api-ready', () => {
+                        this.createPlayer();
+                    });
+                }
+            },
+            createPlayer() {
+                 new YT.Player(this.divId, {
+                    height: '100%',
+                    width: '100%',
+                    videoId: this.videoId,
+                    playerVars: {
+                        'playsinline': 1,
+                        'rel': 0
+                    }
+                });
+            }
+        }
+    }
+</script>
+<?php $hyvaCsp->registerInlineScript() ?>
