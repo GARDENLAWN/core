@@ -2,7 +2,18 @@
 
 /** @var Template $block */
 
+use Hyva\Theme\Model\ViewModelRegistry;
+use Hyva\Theme\ViewModel\Slider;
+use Magento\Framework\App\ObjectManager;
 use Magento\Framework\View\Element\Template;
+
+$sliderViewModel = $block->getData('sliderViewModel');
+if (!$sliderViewModel) {
+    // Fallback if not passed via layout
+    /** @var ViewModelRegistry $viewModels */
+    $viewModels = ObjectManager::getInstance()->get(ViewModelRegistry::class);
+    $sliderViewModel = $viewModels->require(Slider::class);
+}
 
 $itemsVideo1 = [
     ['divId' => 'gardenlighting_video1', 'videoId' => '53Iz2uHDYrE'],
@@ -10,13 +21,19 @@ $itemsVideo1 = [
     ['divId' => 'gardenlighting_video3', 'videoId' => 'UtSeV5e1fjU'],
     ['divId' => 'gardenlighting_video4', 'videoId' => 'iGyPUnknuWA']
 ];
+
+$videoGroups = [$itemsVideo1];
+
+$itemsTemplate = 'GardenLawn_Core::slider-youtube-item.phtml';
+$sliderTemplate = 'GardenLawn_Core::slider-php.phtml';
+
 ?>
 <div class="div-bordered-blue flex flex-col gap-6">
-    <?php foreach ($itemsVideo1 as $videoItem): ?>
-        <?= $block->getLayout()
-            ->createBlock(Template::class)
-            ->setTemplate('GardenLawn_Core::slider-youtube-item.phtml')
-            ->setData('item', $videoItem)
-            ->toHtml() ?>
+    <?php foreach ($videoGroups as $group): ?>
+        <?php if (!empty($group)): ?>
+            <div class="video-slider-container">
+                <?= $sliderViewModel->getSliderForItems($itemsTemplate, $group, $sliderTemplate)->toHtml() ?>
+            </div>
+        <?php endif; ?>
     <?php endforeach; ?>
 </div>
