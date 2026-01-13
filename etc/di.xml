@@ -166,4 +166,8 @@
         <plugin name="gardenlawn_core_santander_rates_view_model_plugin"
                 type="GardenLawn\Core\Plugin\Payment\SantanderRatesViewModelPlugin" sortOrder="10"/>
     </type>
+    <type name="Aurora\Santander\ViewModel\Installment">
+        <plugin name="gardenlawn_core_santander_installment_view_model_plugin"
+                type="GardenLawn\Core\Plugin\Payment\SantanderInstallmentViewModelPlugin" sortOrder="10"/>
+    </type>
 </config>
