@@ -41,7 +41,11 @@ $sliderTemplate = 'GardenLawn_Core::slider-php.phtml';
     <?php foreach ($videoGroups as $group): ?>
         <?php if (!empty($group)): ?>
             <div class="video-slider-container">
-                <?= $sliderViewModel->getSliderForItems($itemsTemplate, $group, $sliderTemplate)->toHtml() ?>
+                <?= $sliderViewModel->getSliderForItems($itemsTemplate, $group, $sliderTemplate)
+                    ->setData('max_visible', 1)
+                    ->setData('maybe_purged_tailwind_slide_item_classes', 'w-full')
+                    ->setData('maybe_purged_tailwind_section_classes', 'text-gray-700 body-font')
+                    ->toHtml() ?>
             </div>
         <?php endif; ?>
     <?php endforeach; ?>
