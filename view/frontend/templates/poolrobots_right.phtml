@@ -3,22 +3,17 @@
 declare(strict_types=1);
 
 use GardenLawn\Core\ViewModel\PoolRobotsGallery;
-use GardenLawn\Core\ViewModel\VideoSlider;
 use Hyva\Theme\Model\ViewModelRegistry;
-use Hyva\Theme\ViewModel\HyvaCsp;
 use Hyva\Theme\ViewModel\Slider;
 use Magento\Framework\View\Element\Template;
 
 /** @var Template $block */
 /** @var ViewModelRegistry $viewModels */
-/** @var HyvaCsp $hyvaCsp */
 
 $sliderViewModel = $viewModels->require(Slider::class);
 $poolRobotsGalleryViewModel = $viewModels->require(PoolRobotsGallery::class);
-$videoSliderViewModel = $viewModels->require(VideoSlider::class);
-$hyvaCsp = $viewModels->require(HyvaCsp::class);
 
-$itemsTemplate = 'GardenLawn_Core::slider-item.phtml';
+$itemsTemplate = 'GardenLawn_Core::slider-youtube-item.phtml';
 $items = $poolRobotsGalleryViewModel->getImages();
 
 $itemsVideo = [
@@ -31,25 +26,12 @@ $itemsVideo = [
 ?>
 <div class="md:w-1/3">
     <div class="div-bordered-blue flex flex-col gap-6">
-        <div id="my-gallery" x-data="gardenLawnHyvathemePoolrobotsRight" x-effect="initPhotoSwipe">
-            <?= $sliderViewModel->getSliderForItems($itemsTemplate, $items)->toHtml() ?>
-        </div>
-
-        <?= $block->getLayout()
-            ->createBlock(Template::class)
-            ->setTemplate('GardenLawn_Core::video-slider.phtml')
-            ->setData('sliderViewModel', $sliderViewModel)
-            ->setData('videoSliderViewModel', $videoSliderViewModel->setVideoData($itemsVideo))
-            ->toHtml() ?>
+        <?php foreach ($itemsVideo as $videoItem): ?>
+            <?= $block->getLayout()
+                ->createBlock(Template::class)
+                ->setTemplate('GardenLawn_Core::slider-youtube-item.phtml')
+                ->setData('item', $videoItem)
+                ->toHtml() ?>
+        <?php endforeach; ?>
     </div>
 </div>
-<script>
-<?php /** Generated with hyva-csp-helper.php */ ?>
-function gardenLawnHyvathemePoolrobotsRight() {
-    return Object.assign(
-        gardenLawnCorePoolrobotsRight.call(this)
-    )
-}
-window.addEventListener('alpine:init', () => Alpine.data('gardenLawnHyvathemePoolrobotsRight', gardenLawnHyvathemePoolrobotsRight), {once: true});
-</script>
-<?php $hyvaCsp->registerInlineScript() ?>

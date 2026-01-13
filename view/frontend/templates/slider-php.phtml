@@ -48,107 +48,113 @@ $slideItemClasses = $block->getData('maybe_purged_tailwind_slide_item_classes') 
 <script>
     'use strict';
 
-    if (typeof initSliderComponent === 'undefined') {
-        window.initSliderComponent = function() {
-            return {
-                active: 0,
-                itemCount: 0,
-                getSlider() {
-                    return this.$root.querySelector('.js_slides');
-                },
-                pageSize: 4,
-                pageFillers: 0,
-                calcPageSize() {
-                    const slider = this.getSlider();
-                    if (slider) {
-                        this.itemCount = slider.querySelectorAll('.js_slide').length;
-                        this.pageSize = Math.round(slider.clientWidth / slider.querySelector('.js_slide').clientWidth);
-                        this.pageFillers = (
-                            this.pageSize * Math.ceil(this.itemCount / this.pageSize)
-                        ) - this.itemCount;
-                    }
-                },
-                calcActive() {
-                    const slider = this.getSlider();
-                    if (slider) {
-                        const sliderItems = this.itemCount + this.pageFillers;
-                        const calculatedActiveSlide = slider.scrollLeft / (slider.scrollWidth / sliderItems);
-                        this.active = Math.round(calculatedActiveSlide / this.pageSize) * this.pageSize;
-                    }
-                },
-                scrollPrevious() {
-                    this.scrollTo(this.active - this.pageSize);
-                },
-                scrollNext() {
-                    this.scrollTo(this.active + this.pageSize);
-                },
-                scrollTo(idx) {
-                    if (idx instanceof Event) {
-                        idx = this.$el.dataset.index;
-                    }
-                    const slider = this.getSlider();
-                    if (slider) {
-                        const slideWidth = slider.scrollWidth / (this.itemCount + this.pageFillers);
-                        slider.scrollLeft = Math.floor(slideWidth) * idx;
-                        this.active = idx;
-                    }
-                },
-                onResize() {
-                    this.calcPageSize();
-                    this.$nextTick(() => this.calcActive())
-                },
-                isItemCountGtPageSize() {
-                    return this.itemCount > this.pageSize;
-                },
-                bulletClasses() {
-                    const dataIndex = this.$el.closest('[data-index]').dataset.index;
-                    const index = dataIndex ? parseInt(dataIndex) : 0;
-
-                    return {
-                        'bg-opacity-100': this.active === index,
-                        'bg-opacity-25': this.active !== index,
-                        'hidden': (this.pageSize !== 1 && !!(index % this.pageSize))
-                    };
-                },
-                isPreviousSlideButtonDisabled() {
-                    return this.active === 0;
-                },
-                previousSlideButtonClasses() {
-                    return {
-                        'opacity-25 pointer-events-none': this.isPreviousSlideButtonDisabled()
-                    }
-                },
-                isNextSlideButtonDisabled() {
-                    return this.active >= this.itemCount - this.pageSize;
-                },
-                nextSlideButtonClasses() {
-                    return {
-                        'opacity-25 pointer-events-none': this.isNextSlideButtonDisabled()
-                    }
-                },
-                showDummySlide() {
-                    return this.pageFillers > this.$el.dataset.dummySlideNumber;
-                },
-                scrollToSlideButtonClasses() {
-                    return '';
-                },
-                scrollToSlideButtonAriaCurrent() {
-                    const dataIndex = this.$el.dataset.index;
-                    const index = dataIndex ? parseInt(dataIndex) : 0;
-                    return this.active === index;
-                },
-                scrollToSlideButtonAriaLabel() {
-                    const dataIndex = this.$el.dataset.index;
-                    const index = dataIndex ? parseInt(dataIndex) : 0;
-                    return '<?= $escaper->escapeJs(__('Go to slide')) ?> ' + (index + 1);
+    window.initGardenLawnSlider = function() {
+        return {
+            active: 0,
+            itemCount: 0,
+            getSlider() {
+                return this.$root.querySelector('.js_slides');
+            },
+            pageSize: 4,
+            pageFillers: 0,
+            calcPageSize() {
+                const slider = this.getSlider();
+                if (slider) {
+                    this.itemCount = slider.querySelectorAll('.js_slide').length;
+                    this.pageSize = Math.round(slider.clientWidth / slider.querySelector('.js_slide').clientWidth);
+                    this.pageFillers = (
+                        this.pageSize * Math.ceil(this.itemCount / this.pageSize)
+                    ) - this.itemCount;
                 }
+            },
+            calcActive() {
+                const slider = this.getSlider();
+                if (slider) {
+                    const sliderItems = this.itemCount + this.pageFillers;
+                    const calculatedActiveSlide = slider.scrollLeft / (slider.scrollWidth / sliderItems);
+                    this.active = Math.round(calculatedActiveSlide / this.pageSize) * this.pageSize;
+                }
+            },
+            scrollPrevious() {
+                this.scrollTo(this.active - this.pageSize);
+            },
+            scrollNext() {
+                this.scrollTo(this.active + this.pageSize);
+            },
+            scrollTo(idx) {
+                if (idx instanceof Event) {
+                    idx = this.$el.dataset.index;
+                }
+                const slider = this.getSlider();
+                if (slider) {
+                    const slideWidth = slider.scrollWidth / (this.itemCount + this.pageFillers);
+                    slider.scrollLeft = Math.floor(slideWidth) * idx;
+                    this.active = idx;
+                }
+            },
+            onResize() {
+                this.calcPageSize();
+                this.$nextTick(() => this.calcActive())
+            },
+            isItemCountGtPageSize() {
+                return this.itemCount > this.pageSize;
+            },
+            bulletClasses() {
+                const dataIndex = this.$el.closest('[data-index]').dataset.index;
+                const index = dataIndex ? parseInt(dataIndex) : 0;
+
+                return {
+                    'bg-opacity-100': this.active === index,
+                    'bg-opacity-25': this.active !== index,
+                    'hidden': (this.pageSize !== 1 && !!(index % this.pageSize))
+                };
+            },
+            isPreviousSlideButtonDisabled() {
+                return this.active === 0;
+            },
+            previousSlideButtonClasses() {
+                return {
+                    'opacity-25 pointer-events-none': this.isPreviousSlideButtonDisabled()
+                }
+            },
+            isNextSlideButtonDisabled() {
+                return this.active >= this.itemCount - this.pageSize;
+            },
+            nextSlideButtonClasses() {
+                return {
+                    'opacity-25 pointer-events-none': this.isNextSlideButtonDisabled()
+                }
+            },
+            showDummySlide() {
+                return this.pageFillers > this.$el.dataset.dummySlideNumber;
+            },
+            scrollToSlideButtonClasses() {
+                return '';
+            },
+            scrollToSlideButtonAriaCurrent() {
+                const dataIndex = this.$el.dataset.index;
+                const index = dataIndex ? parseInt(dataIndex) : 0;
+                return this.active === index;
+            },
+            scrollToSlideButtonAriaLabel() {
+                const dataIndex = this.$el.dataset.index;
+                const index = dataIndex ? parseInt(dataIndex) : 0;
+                return '<?= $escaper->escapeJs(__('Go to slide')) ?> ' + (index + 1);
             }
         }
-        window.addEventListener('alpine:init', () => Alpine.data('initSliderComponent', initSliderComponent), {once: true})
     }
+
+    const registerGardenLawnSlider = () => {
+        if (typeof Alpine !== 'undefined') {
+            Alpine.data('initGardenLawnSlider', initGardenLawnSlider);
+        } else {
+            document.addEventListener('alpine:init', () => Alpine.data('initGardenLawnSlider', initGardenLawnSlider), {once: true});
+        }
+    };
+    registerGardenLawnSlider();
 </script>
 <section class="<?= $escaper->escapeHtmlAttr($sliderSectionClasses) ?>"
-         x-data="initSliderComponent"
+         x-data="initGardenLawnSlider"
          x-defer="intersect"
          x-init="calcPageSize"
          @resize.window.debounce="onResize"
@@ -203,12 +209,12 @@ $slideItemClasses = $block->getData('maybe_purged_tailwind_slide_item_classes') 
                     <?php for ($i=0; $i < $itemCount; $i++): ?>
                         <button type="button"
                                 data-index="<?= (int) $i ?>"
-                                :class="scrollToSlideButtonClasses"
-                                :aria-current="scrollToSlideButtonAriaCurrent"
-                                :aria-label="scrollToSlideButtonAriaLabel"
+                                :class="scrollToSlideButtonClasses()"
+                                :aria-current="scrollToSlideButtonAriaCurrent()"
+                                :aria-label="scrollToSlideButtonAriaLabel()"
                                 @click="scrollTo">
                             <span class="shrink-0 block w-3 h-3 m-1 bg-black bg-opacity-25 rounded-full shadow cursor-pointer"
-                                :class="bulletClasses"
+                                :class="bulletClasses()"
                                 @click="scrollTo">
                             </span>
                         </button>

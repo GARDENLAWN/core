@@ -2,16 +2,9 @@
 
 declare(strict_types=1);
 
-use GardenLawn\Core\ViewModel\VideoSlider;
-use Hyva\Theme\Model\ViewModelRegistry;
-use Hyva\Theme\ViewModel\Slider;
 use Magento\Framework\View\Element\Template;
 
 /** @var Template $block */
-/** @var ViewModelRegistry $viewModels */
-
-$sliderViewModel = $viewModels->require(Slider::class);
-$videoSliderViewModel = $viewModels->require(VideoSlider::class);
 
 $videoGroups = [
     [
@@ -34,15 +27,21 @@ $videoGroups = [
         ['divId' => 'lawnsseed_video11', 'videoId' => 'sLMuuN2_e5w']
     ]
 ];
+
+$allVideos = [];
+foreach ($videoGroups as $group) {
+    foreach ($group as $video) {
+        $allVideos[] = $video;
+    }
+}
 ?>
 <div class="md:w-1/3">
     <div class="div-bordered-blue flex flex-col gap-6">
-        <?php foreach ($videoGroups as $itemsVideo): ?>
+        <?php foreach ($allVideos as $videoItem): ?>
             <?= $block->getLayout()
                 ->createBlock(Template::class)
-                ->setTemplate('GardenLawn_Core::video-slider.phtml')
-                ->setData('sliderViewModel', $sliderViewModel)
-                ->setData('videoSliderViewModel', $videoSliderViewModel->setVideoData($itemsVideo))
+                ->setTemplate('GardenLawn_Core::slider-youtube-item.phtml')
+                ->setData('item', $videoItem)
                 ->toHtml() ?>
         <?php endforeach; ?>
     </div>
