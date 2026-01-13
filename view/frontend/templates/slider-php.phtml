@@ -105,7 +105,7 @@ $slideItemClasses = $block->getData('maybe_purged_tailwind_slide_item_classes') 
                     const index = dataIndex ? parseInt(dataIndex) : 0;
 
                     return {
-                        'bg-blue-600 scale-125': this.active === index,
+                        'bg-primary scale-125': this.active === index,
                         'bg-gray-300 hover:bg-gray-400': this.active !== index,
                         'hidden': (this.pageSize !== 1 && !!(index % this.pageSize))
                     };
