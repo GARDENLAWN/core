@@ -28,14 +28,12 @@ foreach ($videoGroups as $group) {
     }
 }
 ?>
-<div class="lg:w-1/3">
-    <div class="div-bordered-blue flex flex-col gap-6">
-        <?php foreach ($allVideos as $videoItem): ?>
-            <?= $block->getLayout()
-                ->createBlock(Template::class)
-                ->setTemplate('GardenLawn_Core::slider-youtube-item.phtml')
-                ->setData('item', $videoItem)
-                ->toHtml() ?>
-        <?php endforeach; ?>
-    </div>
+<div class="div-bordered-blue flex flex-col gap-6">
+    <?php foreach ($allVideos as $videoItem): ?>
+        <?= $block->getLayout()
+            ->createBlock(Template::class)
+            ->setTemplate('GardenLawn_Core::slider-youtube-item.phtml')
+            ->setData('item', $videoItem)
+            ->toHtml() ?>
+    <?php endforeach; ?>
 </div>
