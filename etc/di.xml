@@ -160,4 +160,10 @@
     <!-- Override the SelectBuilder globally so both Sync and StockIndexer use it -->
     <preference for="Magento\InventoryConfigurableProductIndexer\Indexer\SelectBuilder"
                 type="GardenLawn\Core\Model\InventoryConfigurableProductIndexer\Indexer\SelectBuilder"/>
+
+    <!-- Santander B2B Restriction -->
+    <type name="Aurora\Santander\ViewModel\Rates">
+        <plugin name="gardenlawn_core_santander_rates_view_model_plugin"
+                type="GardenLawn\Core\Plugin\Payment\SantanderRatesViewModelPlugin" sortOrder="10"/>
+    </type>
 </config>
