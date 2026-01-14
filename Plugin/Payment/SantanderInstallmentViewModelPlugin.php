@@ -6,27 +6,17 @@ namespace GardenLawn\Core\Plugin\Payment;
 use Aurora\Santander\ViewModel\Installment;
 use Aurora\Santander\ViewModel\Rates;
 use Magento\Catalog\Model\Product;
-use Magento\Customer\Model\Session;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Store\Model\ScopeInterface;
-use Magento\Checkout\Model\Session as CheckoutSession;
+use Magento\Framework\App\Http\Context as HttpContext;
+use Magento\Customer\Model\Context as CustomerContext;
 
 class SantanderInstallmentViewModelPlugin
 {
     /**
-     * @var Session
-     */
-    private Session $customerSession;
-
-    /**
      * @var ScopeConfigInterface
      */
     private ScopeConfigInterface $scopeConfig;
-
-    /**
-     * @var CheckoutSession
-     */
-    private CheckoutSession $checkoutSession;
 
     /**
      * @var Rates
@@ -34,21 +24,23 @@ class SantanderInstallmentViewModelPlugin
     private Rates $ratesViewModel;
 
     /**
-     * @param Session $customerSession
+     * @var HttpContext
+     */
+    private HttpContext $httpContext;
+
+    /**
      * @param ScopeConfigInterface $scopeConfig
-     * @param CheckoutSession $checkoutSession
      * @param Rates $ratesViewModel
+     * @param HttpContext $httpContext
      */
     public function __construct(
-        Session $customerSession,
         ScopeConfigInterface $scopeConfig,
-        CheckoutSession $checkoutSession,
-        Rates $ratesViewModel
+        Rates $ratesViewModel,
+        HttpContext $httpContext
     ) {
-        $this->customerSession = $customerSession;
         $this->scopeConfig = $scopeConfig;
-        $this->checkoutSession = $checkoutSession;
         $this->ratesViewModel = $ratesViewModel;
+        $this->httpContext = $httpContext;
     }
 
     /**
@@ -73,18 +65,8 @@ class SantanderInstallmentViewModelPlugin
 
         $b2bGroupsArray = explode(',', $b2bGroups);
 
-        $customerGroupId = null;
-        try {
-            if ($this->checkoutSession->getQuoteId()) {
-                $customerGroupId = $this->checkoutSession->getQuote()->getCustomerGroupId();
-            }
-        } catch (\Exception $e) {
-            // Ignore
-        }
-
-        if ($customerGroupId === null && $this->customerSession->isLoggedIn()) {
-            $customerGroupId = $this->customerSession->getCustomer()->getGroupId();
-        }
+        // Use HttpContext to get customer group ID (works with FPC)
+        $customerGroupId = $this->httpContext->getValue(CustomerContext::CONTEXT_GROUP);
 
         if ($customerGroupId === null || !in_array((string)$customerGroupId, $b2bGroupsArray)) {
             return;

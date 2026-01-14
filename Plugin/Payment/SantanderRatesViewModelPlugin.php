@@ -4,41 +4,33 @@ declare(strict_types=1);
 namespace GardenLawn\Core\Plugin\Payment;
 
 use Aurora\Santander\ViewModel\Rates;
-use Magento\Customer\Model\Session;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Store\Model\ScopeInterface;
-use Magento\Checkout\Model\Session as CheckoutSession;
+use Magento\Framework\App\Http\Context as HttpContext;
+use Magento\Customer\Model\Context as CustomerContext;
 
 class SantanderRatesViewModelPlugin
 {
-    /**
-     * @var Session
-     */
-    private Session $customerSession;
-
     /**
      * @var ScopeConfigInterface
      */
     private ScopeConfigInterface $scopeConfig;
 
     /**
-     * @var CheckoutSession
+     * @var HttpContext
      */
-    private CheckoutSession $checkoutSession;
+    private HttpContext $httpContext;
 
     /**
-     * @param Session $customerSession
      * @param ScopeConfigInterface $scopeConfig
-     * @param CheckoutSession $checkoutSession
+     * @param HttpContext $httpContext
      */
     public function __construct(
-        Session $customerSession,
         ScopeConfigInterface $scopeConfig,
-        CheckoutSession $checkoutSession
+        HttpContext $httpContext
     ) {
-        $this->customerSession = $customerSession;
         $this->scopeConfig = $scopeConfig;
-        $this->checkoutSession = $checkoutSession;
+        $this->httpContext = $httpContext;
     }
 
     /**
@@ -65,21 +57,10 @@ class SantanderRatesViewModelPlugin
 
         $b2bGroupsArray = explode(',', $b2bGroups);
 
-        // Try to get customer group from checkout session quote first, then customer session
-        $customerGroupId = null;
-        try {
-            if ($this->checkoutSession->getQuoteId()) {
-                $customerGroupId = $this->checkoutSession->getQuote()->getCustomerGroupId();
-            }
-        } catch (\Exception $e) {
-            // Ignore if quote not available
-        }
+        // Use HttpContext to get customer group ID (works with FPC)
+        $customerGroupId = $this->httpContext->getValue(CustomerContext::CONTEXT_GROUP);
 
-        if ($customerGroupId === null && $this->customerSession->isLoggedIn()) {
-            $customerGroupId = $this->customerSession->getCustomer()->getGroupId();
-        }
-
-        // If we still don't have a group ID (e.g. guest), assume NOT B2B (unless guest is configured as B2B which is rare)
+        // If group ID is not set in context (e.g. not logged in), it usually returns 0 (NOT_LOGGED_IN)
         if ($customerGroupId === null) {
             return $result;
         }
