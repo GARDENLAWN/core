@@ -19,11 +19,7 @@
             <module name="Mageplaza_SocialLogin"/>
             <module name="Hyva_Checkout"/>
             <module name="Magento_Cms"/>
-            <module name="Magento_MediaGalleryUi"/>
-            <module name="Magento_AwsS3"/>
-            <module name="Magento_RemoteStorage"/>
             <module name="Magento_Ui"/>
-            <module name="Aurora_Santander"/>
             <module name="Amasty_ImportCore"/>
             <module name="Magento_InventoryConfigurableProductIndexer"/>
         </sequence>

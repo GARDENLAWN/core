@@ -5,7 +5,6 @@
     <preference for="Magento\Framework\App\ResourceConnection\Config\Proxy"
                 type="Magento\Framework\App\ResourceConnection\Config"/>
     <preference for="Magento\Framework\Event\Manager\Proxy" type="Magento\Framework\Event\Manager"/>
-    <preference for="Magento\AwsS3\Driver\AwsS3" type="GardenLawn\Core\Plugin\AwsS3\Driver\AwsS3Plugin"/>
     <preference for="Magento\Newsletter\Model\Subscriber" type="GardenLawn\Core\Model\Newsletter\Subscriber" />
     <type name="Magento\Theme\Model\View\Design">
         <arguments>
@@ -97,38 +96,6 @@
             </argument>
         </arguments>
     </type>
-    <type name="Magento\Framework\File\Uploader">
-        <plugin name="gardenlawn_core_framework_file_uploader"
-                type="GardenLawn\Core\Plugin\Framework\File\UploaderPlugin" sortOrder="10"/>
-    </type>
-    <type name="Magento\Framework\Image\Adapter\Gd2">
-        <plugin name="gardenlawn_core_webp_support" type="GardenLawn\Core\Plugin\Framework\Image\Adapter\Gd2Plugin"/>
-    </type>
-    <type name="Magento\Catalog\Model\View\Asset\Image">
-        <plugin name="gardenlawn_core_catalog_asset_image_webp"
-                type="GardenLawn\Core\Plugin\Catalog\Model\View\Asset\ImagePlugin"/>
-        <plugin name="gardenlawn_core_catalog_asset_image_transformation_webp"
-                type="GardenLawn\Core\Plugin\Catalog\Model\View\Asset\ImageTransformationPlugin"/>
-    </type>
-    <!--
-    <type name="Magento\Catalog\Model\View\Asset\ImageFactory">
-        <plugin name="gardenlawn_core_catalog_asset_image_factory_webp"
-                type="GardenLawn\Core\Plugin\Catalog\Model\View\Asset\ImageFactoryPlugin"/>
-    </type>
-    -->
-    <!-- Add allowed extensions to WYSIWYG uploader & trigger post-upload sync -->
-    <type name="Magento\Cms\Model\Wysiwyg\Images\Storage">
-        <plugin name="gardenlawn_core_wysiwyg_storage_plugin"
-                type="GardenLawn\Core\Plugin\Cms\Model\Wysiwyg\Images\StoragePlugin" sortOrder="10"/>
-        <plugin name="gardenlawn_core_wysiwyg_storage_resize_file_plugin"
-                type="GardenLawn\Core\Plugin\Cms\Model\Wysiwyg\Images\StorageResizeFilePlugin" sortOrder="20"/>
-    </type>
-    <!-- Whitelist modern image formats in the protected extension validator -->
-    <type name="Magento\MediaStorage\Model\File\Validator\NotProtectedExtension">
-        <plugin name="gardenlawn_core_whitelist_modern_image_formats"
-                type="GardenLawn\Core\Plugin\MediaStorage\Model\File\Validator\NotProtectedExtensionPlugin"
-                sortOrder="10"/>
-    </type>
     <type name="Magento\Framework\Console\CommandList">
         <arguments>
             <argument name="commands" xsi:type="array">
@@ -160,14 +127,4 @@
     <!-- Override the SelectBuilder globally so both Sync and StockIndexer use it -->
     <preference for="Magento\InventoryConfigurableProductIndexer\Indexer\SelectBuilder"
                 type="GardenLawn\Core\Model\InventoryConfigurableProductIndexer\Indexer\SelectBuilder"/>
-
-    <!-- Santander B2B Restriction -->
-    <type name="Aurora\Santander\ViewModel\Rates">
-        <plugin name="gardenlawn_core_santander_rates_view_model_plugin"
-                type="GardenLawn\Core\Plugin\Payment\SantanderRatesViewModelPlugin" sortOrder="10"/>
-    </type>
-    <type name="Aurora\Santander\ViewModel\Installment">
-        <plugin name="gardenlawn_core_santander_installment_view_model_plugin"
-                type="GardenLawn\Core\Plugin\Payment\SantanderInstallmentViewModelPlugin" sortOrder="10"/>
-    </type>
 </config>
