@@ -1,40 +1,41 @@
 <?php
+declare(strict_types=1);
 
 namespace GardenLawn\Core\Plugin;
 
 use Magento\Sales\CustomerData\LastOrderedItems;
-use Magento\Catalog\Api\ProductRepositoryInterface;
+use Magento\Catalog\Model\ResourceModel\Product\CollectionFactory;
 use Magento\Catalog\Helper\Image;
 use Magento\Store\Model\StoreManagerInterface;
 
 class LastOrderedItemsPlugin
 {
     /**
-     * @var ProductRepositoryInterface
+     * @var CollectionFactory
      */
-    protected $productRepository;
+    private CollectionFactory $productCollectionFactory;
 
     /**
      * @var Image
      */
-    protected $imageHelper;
+    private Image $imageHelper;
 
     /**
      * @var StoreManagerInterface
      */
-    protected $storeManager;
+    private StoreManagerInterface $storeManager;
 
     /**
-     * @param ProductRepositoryInterface $productRepository
+     * @param CollectionFactory $productCollectionFactory
      * @param Image $imageHelper
      * @param StoreManagerInterface $storeManager
      */
     public function __construct(
-        ProductRepositoryInterface $productRepository,
+        CollectionFactory $productCollectionFactory,
         Image $imageHelper,
         StoreManagerInterface $storeManager
     ) {
-        $this->productRepository = $productRepository;
+        $this->productCollectionFactory = $productCollectionFactory;
         $this->imageHelper = $imageHelper;
         $this->storeManager = $storeManager;
     }
@@ -46,23 +47,48 @@ class LastOrderedItemsPlugin
      * @param array $result
      * @return array
      */
-    public function afterGetSectionData(LastOrderedItems $subject, array $result)
+    public function afterGetSectionData(LastOrderedItems $subject, array $result): array
     {
-        if (isset($result['items'])) {
-            foreach ($result['items'] as &$item) {
-                if (isset($item['product_id'])) {
-                    try {
-                        $product = $this->productRepository->getById($item['product_id']);
-                        $imageUrl = $this->imageHelper->init($product, 'product_small_image')
-                            ->resize(75)
-                            ->getUrl();
-                        $item['image'] = $imageUrl;
-                    } catch (\Exception $e) {
-                        $item['image'] = '';
-                    }
-                }
+        if (empty($result['items'])) {
+            return $result;
+        }
+
+        $productIds = [];
+        foreach ($result['items'] as $item) {
+            if (isset($item['product_id'])) {
+                $productIds[] = $item['product_id'];
             }
         }
+
+        if (empty($productIds)) {
+            return $result;
+        }
+
+        try {
+            $collection = $this->productCollectionFactory->create();
+            $collection->addIdFilter($productIds)
+                ->addAttributeToSelect(['small_image', 'name'])
+                ->addStoreFilter($this->storeManager->getStore()->getId());
+
+            $products = [];
+            foreach ($collection as $product) {
+                $products[$product->getId()] = $product;
+            }
+
+            foreach ($result['items'] as &$item) {
+                $item['image'] = ''; // Default empty
+                if (isset($item['product_id']) && isset($products[$item['product_id']])) {
+                    $product = $products[$item['product_id']];
+                    $imageUrl = $this->imageHelper->init($product, 'product_small_image')
+                        ->resize(75)
+                        ->getUrl();
+                    $item['image'] = $imageUrl;
+                }
+            }
+        } catch (\Exception $e) {
+            // Log error if needed, but keep silent for frontend
+        }
+
         return $result;
     }
 }

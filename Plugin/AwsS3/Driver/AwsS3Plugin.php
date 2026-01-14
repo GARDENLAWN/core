@@ -77,8 +77,20 @@ class AwsS3Plugin extends CoreAwsS3
     public function filePutContents($path, $content, $mode = null): bool|int
     {
         $path = $this->callPrivateMethod('normalizeRelativePath', [$path, true]);
-        // phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged
-        $isImageContent = (false !== ($imageSize = @getimagesizefromstring($content)));
+
+        // Optimization: Check extension first to avoid expensive getimagesizefromstring on non-image files
+        $extension = strtolower(pathinfo($path, PATHINFO_EXTENSION));
+        $imageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'avif', 'svg'];
+        $isImageExtension = in_array($extension, $imageExtensions);
+
+        $isImageContent = false;
+        $imageSize = false;
+
+        if ($isImageExtension) {
+            // phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged
+            $isImageContent = (false !== ($imageSize = @getimagesizefromstring($content)));
+        }
+
         $config = $this->getExtendedConfig(null, $isImageContent);
 
         if ($isImageContent) {

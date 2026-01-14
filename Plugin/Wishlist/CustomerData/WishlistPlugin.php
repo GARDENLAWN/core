@@ -15,12 +15,12 @@ class WishlistPlugin
     /**
      * @var WishlistHelper
      */
-    private $wishlistHelper;
+    private WishlistHelper $wishlistHelper;
 
     /**
      * @var ItemResolverInterface
      */
-    private $itemResolver;
+    private ItemResolverInterface $itemResolver;
 
     /**
      * @param WishlistHelper $wishlistHelper
@@ -41,25 +41,33 @@ class WishlistPlugin
      * @param array $result
      * @return array
      */
-    public function afterGetSectionData(Wishlist $subject, array $result)
+    public function afterGetSectionData(Wishlist $subject, array $result): array
     {
         if (empty($result['items'])) {
             return $result;
         }
 
         $wishlist = $this->wishlistHelper->getWishlist();
+        if (!$wishlist->getId()) {
+            return $result;
+        }
+
+        // Eager load products for wishlist items to avoid loop loading
         $items = $wishlist->getItemCollection();
+        // Add attributes to select if needed, though getFinalProduct usually handles loading
+        // $items->addAttributeToSelect(['call_for_price', 'sku']);
+
+        // Map product ID to wishlist item for faster lookup
+        $wishlistItemsByProductId = [];
+        foreach ($items as $wishlistItem) {
+            $wishlistItemsByProductId[$wishlistItem->getProductId()] = $wishlistItem;
+        }
 
         foreach ($result['items'] as &$itemData) {
-            // Find the corresponding item in the collection
-            // Note: This is a bit inefficient (O(n^2)), but wishlist sizes are usually small.
-            // A better approach would be to map by ID if possible, but section data doesn't always expose item ID cleanly in the same way.
-            // However, section data items usually have 'image' url which contains product ID or we can try to match by product ID if exposed.
-
-            // Let's try to find the item by product ID which is usually part of the add_to_cart_params
-            // "add_to_cart_params": "{\"action\":\".../checkout/cart/add/uenc/.../product/2876/\",\"data\":{\"product\":\"2876\",\"uenc\":\"...\"}}"
+            $itemData['call_for_price'] = false; // Default
 
             $productId = null;
+            // Try to extract product ID from add_to_cart_params
             if (isset($itemData['add_to_cart_params'])) {
                 $params = json_decode($itemData['add_to_cart_params'], true);
                 if (isset($params['data']['product'])) {
@@ -67,19 +75,17 @@ class WishlistPlugin
                 }
             }
 
-            if ($productId) {
-                foreach ($items as $wishlistItem) {
-                    if ($wishlistItem->getProductId() == $productId) {
-                        $product = $this->itemResolver->getFinalProduct($wishlistItem);
-                        $itemData['call_for_price'] = (bool)$product->getData('call_for_price');
-                        $itemData['product_sku'] = $product->getSku(); // Useful for contact form
-                        break;
-                    }
-                }
+            // Fallback: sometimes image URL contains ID, or product_id might be exposed in future versions
+            if (!$productId && isset($itemData['product_id'])) {
+                $productId = $itemData['product_id'];
             }
 
-            if (!isset($itemData['call_for_price'])) {
-                $itemData['call_for_price'] = false;
+            if ($productId && isset($wishlistItemsByProductId[$productId])) {
+                $wishlistItem = $wishlistItemsByProductId[$productId];
+                $product = $this->itemResolver->getFinalProduct($wishlistItem);
+
+                $itemData['call_for_price'] = (bool)$product->getData('call_for_price');
+                $itemData['product_sku'] = $product->getSku();
             }
         }
 

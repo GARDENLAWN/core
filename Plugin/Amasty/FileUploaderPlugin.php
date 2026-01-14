@@ -8,7 +8,7 @@ use Psr\Log\LoggerInterface;
 
 class FileUploaderPlugin
 {
-    private $logger;
+    private LoggerInterface $logger;
 
     public function __construct(LoggerInterface $logger = null)
     {
@@ -21,7 +21,7 @@ class FileUploaderPlugin
      * @param FileUploader $subject
      * @return void
      */
-    public function afterInitialize(FileUploader $subject)
+    public function afterInitialize(FileUploader $subject): void
     {
         // 1. Add extensions to allowed list
         $subject->setAllowedExtensions(['webp', 'avif', 'svg']);
@@ -64,9 +64,7 @@ class FileUploaderPlugin
             }
         } catch (\Exception $e) {
             // Log warning but don't break the import
-            if ($this->logger) {
-                $this->logger->warning('FileUploaderPlugin: Could not inject MIME types: ' . $e->getMessage());
-            }
+            $this->logger->warning('FileUploaderPlugin: Could not inject MIME types: ' . $e->getMessage());
         }
     }
 
