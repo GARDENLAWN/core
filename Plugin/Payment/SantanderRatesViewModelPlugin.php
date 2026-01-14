@@ -61,10 +61,13 @@ class SantanderRatesViewModelPlugin
         $customerGroupId = $this->httpContext->getValue(CustomerContext::CONTEXT_GROUP);
 
         // If group ID is not set in context (e.g. not logged in), it usually returns 0 (NOT_LOGGED_IN)
+        // However, when logging out, sometimes the context might still hold the old value or 0.
+        // If it is null, we assume NOT_LOGGED_IN (0).
         if ($customerGroupId === null) {
-            return $result;
+            $customerGroupId = 0;
         }
 
+        // Ensure we are comparing strings
         if (in_array((string)$customerGroupId, $b2bGroupsArray)) {
             foreach ($result as $key => $option) {
                 $percent = isset($option['percent']) ? (float)str_replace(',', '.', (string)$option['percent']) : 0.0;

@@ -68,7 +68,11 @@ class SantanderInstallmentViewModelPlugin
         // Use HttpContext to get customer group ID (works with FPC)
         $customerGroupId = $this->httpContext->getValue(CustomerContext::CONTEXT_GROUP);
 
-        if ($customerGroupId === null || !in_array((string)$customerGroupId, $b2bGroupsArray)) {
+        if ($customerGroupId === null) {
+            $customerGroupId = 0;
+        }
+
+        if (!in_array((string)$customerGroupId, $b2bGroupsArray)) {
             return;
         }
 
