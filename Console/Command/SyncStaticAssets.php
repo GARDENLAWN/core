@@ -63,6 +63,15 @@ class SyncStaticAssets extends Command
             $version = trim($staticDir->readFile($versionFilePath));
 
             $filesToUpload = [];
+            $existingS3Files = [];
+
+            // Fetch existing files from S3 to avoid re-uploading
+            $output->writeln("<info>Fetching existing files from S3...</info>");
+            // Add trailing slash to ensure we match the directory exactly
+            $s3Objects = $this->s3Adapter->listObjectsByStorageType('static', 'version' . $version . '/');
+            foreach ($s3Objects as $key) {
+                $existingS3Files[$key] = true;
+            }
 
             // First, gather all files to get a total count
             foreach ($themes as $theme) {
@@ -87,21 +96,26 @@ class SyncStaticAssets extends Command
                 $files = $staticDir->readRecursively($themePath);
                 foreach ($files as $file) {
                     if ($staticDir->isFile($file)) {
-                        $filesToUpload[] = [
-                            'sourcePath' => $staticDir->getAbsolutePath($file),
-                            'destinationPath' => 'version' . $version . '/' . $file,
-                        ];
+                        $destinationPath = 'version' . $version . '/' . $file;
+                        $fullS3Key = $this->s3Adapter->getPrefixedPath('static', $destinationPath);
+
+                        if (!isset($existingS3Files[$fullS3Key])) {
+                            $filesToUpload[] = [
+                                'sourcePath' => $staticDir->getAbsolutePath($file),
+                                'destinationPath' => $destinationPath,
+                            ];
+                        }
                     }
                 }
             }
 
             if (empty($filesToUpload)) {
-                $output->writeln("<warning>No files found to upload.</warning>");
+                $output->writeln("<info>All files are already synchronized.</info>");
                 return Cli::RETURN_SUCCESS;
             }
 
             // Setup and run the progress bar
-            $output->writeln("<info>Uploading files...</info>");
+            $output->writeln("<info>Uploading " . count($filesToUpload) . " files...</info>");
             $progressBar = new ProgressBar($output, count($filesToUpload));
             $progressBar->setFormat('%current%/%max% [%bar%] %percent:3s%% %elapsed:6s%/%estimated:-6s% %memory:6s%');
             $progressBar->start();
