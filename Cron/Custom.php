@@ -5,10 +5,10 @@ namespace GardenLawn\Core\Cron;
 use Aws\S3\S3Client;
 use Exception;
 use GardenLawn\Core\Api\Data\ScraperService;
-use GardenLawn\Core\Utils\Logger;
 use GardenLawn\Core\Utils\Utils;
 use Magento\Framework\App\ObjectManager;
 use Magento\Framework\DB\Adapter\AdapterInterface;
+use Magento\Framework\Module\Dir\Reader;
 
 class Custom
 {
@@ -34,31 +34,35 @@ class Custom
         ScraperService::prepareAutomowJsonData();
 
         try {
+            /** @var Reader $reader */
+            $reader = $this->objectManager->get(Reader::class);
+            $moduleDir = $reader->getModuleDir('', 'GardenLawn_Core');
+            $configsDir = $moduleDir . '/Configs';
 
-            $string = file_get_contents(BP . "/app/code/GardenLawn/Core/Configs/export-images.json");
+            $string = file_get_contents($configsDir . "/export-images.json");
             $string = json_decode($string);
             $string = json_encode($string);
-            file_put_contents(BP . "/app/code/GardenLawn/Core/Configs/export-images.json", $string);
+            file_put_contents($configsDir . "/export-images.json", $string);
 
-            $string = file_get_contents(BP . "/app/code/GardenLawn/Core/Configs/automow_prepared_data.json");
+            $string = file_get_contents($configsDir . "/automow_prepared_data.json");
             $string = json_decode($string);
             $string = json_encode($string);
-            file_put_contents(BP . "/app/code/GardenLawn/Core/Configs/automow_prepared_data.json", $string);
+            file_put_contents($configsDir . "/automow_prepared_data.json", $string);
 
-            $string = file_get_contents(BP . "/app/code/GardenLawn/Core/Configs/automow_prepared_configurable_data.json");
+            $string = file_get_contents($configsDir . "/automow_prepared_configurable_data.json");
             $string = json_decode($string);
             $string = json_encode($string);
-            file_put_contents(BP . "/app/code/GardenLawn/Core/Configs/automow_prepared_configurable_data.json", $string);
+            file_put_contents($configsDir . "/automow_prepared_configurable_data.json", $string);
 
-            $string = file_get_contents(BP . "/app/code/GardenLawn/Core/Configs/automow_prepared_single_data.json");
+            $string = file_get_contents($configsDir . "/automow_prepared_single_data.json");
             $string = json_decode($string);
             $string = json_encode($string);
-            file_put_contents(BP . "/app/code/GardenLawn/Core/Configs/automow_prepared_single_data.json", $string);
+            file_put_contents($configsDir . "/automow_prepared_single_data.json", $string);
 
-            $string = file_get_contents(BP . "/app/code/GardenLawn/Core/Configs/automow_prepared_description_data_processed.json");
+            $string = file_get_contents($configsDir . "/automow_prepared_description_data_processed.json");
             $string = json_decode($string);
             $string = json_encode($string);
-            file_put_contents(BP . "/app/code/GardenLawn/Core/Configs/automow_prepared_description_data_processed.json", $string);
+            file_put_contents($configsDir . "/automow_prepared_description_data_processed.json", $string);
         } catch (Exception) {
         }
     }
