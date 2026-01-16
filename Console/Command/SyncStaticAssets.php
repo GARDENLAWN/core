@@ -124,17 +124,6 @@ class SyncStaticAssets extends Command
                             continue;
                         }
 
-                        // Check if the same file (same path suffix and size) exists in ANY other version folder
-                        // If so, we can copy it instead of uploading (server-side copy is faster)
-                        // For now, the requirement is just to skip if identical.
-                        // But since the version folder CHANGED, the path is different.
-                        // The user asked: "nawet jak wersja sie zmienia to zmiana jest nazwy folderu ale pliki identyczne sa ponijane bo isntieja"
-                        // This implies we should COPY the file from the old version to the new version if it exists.
-                        // OR, if the user means we should just NOT upload it and somehow reuse it?
-                        // Magento static signing relies on the path containing the version.
-                        // So the file MUST exist at the new path.
-                        // To optimize, we can COPY from old version to new version on S3 side.
-
                         $relativePath = $file;
                         $lookupKey = $relativePath . '_' . $localFileSize;
 
@@ -142,39 +131,6 @@ class SyncStaticAssets extends Command
                             // Found an identical file in another version folder!
                             $sourceKey = $existingS3Files[$lookupKey];
 
-                            // We can perform a server-side copy
-                            // But S3Adapter doesn't have a simple copy method exposed publicly that takes full keys easily in this context without some work.
-                            // Let's add a copyObject method to S3Adapter or use what we have.
-                            // Actually, the user said "pliki identyczne sa pomijane bo istnieja".
-                            // If the URL changes (due to version), the file MUST exist at the new URL.
-                            // So we cannot "skip" creating it. We must create it.
-                            // But we can optimize by COPYING instead of UPLOADING.
-
-                            // Let's assume for now we just upload to be safe and simple,
-                            // UNLESS the user implies that we should just check if it exists in the NEW location.
-                            // But the user said "nawet jak wersja sie zmienia... pliki identyczne sa pomijane".
-                            // This is tricky. If version changes, the path changes. So the file DOES NOT exist at the new path.
-                            // If we skip it, 404.
-
-                            // INTERPRETATION:
-                            // Maybe the user means: If I run sync, and the file is already there (from previous run of THIS version), skip it.
-                            // AND if I run sync for a NEW version, but the file content is same as OLD version,
-                            // maybe we can do a server-side copy?
-
-                            // Let's implement Server-Side Copy for optimization if found in another version.
-                            // This saves bandwidth.
-
-                            // However, looking at the request: "usuwane musza byc te ktorych juz nie ma"
-                            // This implies cleanup of OLD versions or files that are no longer in the current theme?
-                            // Usually "sync" implies making destination match source.
-                            // So we should delete files in the CURRENT version folder that are not in source.
-                            // And maybe delete OLD version folders entirely?
-
-                            // Let's stick to the most robust interpretation:
-                            // 1. Ensure all needed files for CURRENT version exist in S3 (Upload or Copy).
-                            // 2. Delete files in S3 that are NOT needed (e.g. old versions).
-
-                            // Let's add copy capability to S3Adapter first.
                              $filesToUpload[] = [
                                 'sourcePath' => $staticDir->getAbsolutePath($file),
                                 'destinationPath' => $destinationPath,
@@ -191,23 +147,15 @@ class SyncStaticAssets extends Command
             }
 
             // Identify files to delete (cleanup old versions or stale files)
-            // The user said: "usuwane musza byc te ktorych juz nie ma"
-            // This usually means: Delete anything in S3 that is NOT in the list of files we just processed for the CURRENT version.
-            // AND also delete entire folders of OLD versions?
-            // Let's assume we want to keep ONLY the current version in S3 to save space/cleanup.
-
             $filesToDelete = [];
             foreach ($allS3Files as $key => $size) {
-                // Check if this file belongs to one of the themes we are processing?
-                // Or just clean up everything that is not in the current version map?
-                // If we run this command for ONLY "Magento/luma", we shouldn't delete "Magento/backend".
-                // So we need to be careful.
-
                 // Filter by themes being processed
                 $belongsToProcessedTheme = false;
                 foreach ($themes as $theme) {
                     $theme = trim($theme, " \t\n\r\0\x0B,");
-                    if (strpos($key, 'frontend/' . $theme) !== false || strpos($key, 'adminhtml/' . $theme) !== false) {
+                    // Ensure we match the full theme directory by appending '/'
+                    // This prevents matching "Magento/luma" against "Magento/luma-child"
+                    if (strpos($key, 'frontend/' . $theme . '/') !== false || strpos($key, 'adminhtml/' . $theme . '/') !== false) {
                         $belongsToProcessedTheme = true;
                         break;
                     }
@@ -241,17 +189,6 @@ class SyncStaticAssets extends Command
                 $progressBar = new ProgressBar($output, count($filesToUpload));
                 $progressBar->setFormat('%current%/%max% [%bar%] %percent:3s%% %elapsed:6s%/%estimated:-6s% %memory:6s%');
                 $progressBar->start();
-
-                // We need to modify uploadStaticFiles to handle "copy" optimization or do it here.
-                // Since uploadStaticFiles takes an array, let's modify it to handle the 'copyFromS3Key' hint if possible,
-                // or just iterate here.
-                // To keep S3Adapter clean, let's just use a loop here or add a smart method.
-                // Actually, S3Adapter::uploadStaticFiles uses CommandPool for concurrency.
-                // We should probably extend that to support CopyObject commands.
-
-                // For now, let's just use the existing uploadStaticFiles but we need to handle the copy logic.
-                // I will update S3Adapter to support a "smart sync" or just handle it here.
-                // Updating S3Adapter to support 'copySource' in the file array is best.
 
                 $this->s3Adapter->uploadStaticFiles($filesToUpload, function () use ($progressBar) {
                     $progressBar->advance();
