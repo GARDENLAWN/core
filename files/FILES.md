@@ -77,6 +77,19 @@ cd /var/www/html/magento
     # */15 * * * * /root/scripts/monitor_services.sh >> /var/log/monitor_services.log 2>&1
     ```
 
-## 5. php.ini (Pełny config - Opcjonalnie)
+## 5. get_token.py (Trans.eu Auto-Login)
+*   **Opis:** Skrypt Selenium do automatycznego logowania i pobierania tokena JWT z platformy Trans.eu. Obsługuje MFA (interaktywnie) i zapisuje sesję.
+*   **Lokalizacja:** `vendor/gardenlawn/transeu/scripts/get_token.py`
+*   **Wymagania:**
+    *   Python 3
+    *   Biblioteka Selenium (`pip install selenium`)
+    *   Google Chrome
+    *   ChromeDriver (zgodny z wersją Chrome)
+*   **Użycie:**
+    ```bash
+    python3 vendor/gardenlawn/transeu/scripts/get_token.py <login> <hasło>
+    ```
+
+## 6. php.ini (Pełny config - Opcjonalnie)
 *   **Opis:** Pełny plik konfiguracyjny PHP. Używać tylko w razie potrzeby zastąpienia całego `/etc/php.ini`.
 *   **Lokalizacja:** `vendor/gardenlawn/core/files/php.ini`
