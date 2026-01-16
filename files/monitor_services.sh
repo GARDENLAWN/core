@@ -2,7 +2,7 @@
 
 # Konfiguracja
 ADMIN_EMAIL="marcin.piechota@gardenlawn.pl" # Zmień na swój adres e-mail
-SERVICES=("php-fpm" "mariadb" "nginx" "redis6" "opensearch" "varnish" "crond" "supervisord")
+SERVICES=("php-fpm" "mariadb" "nginx" "redis6" "opensearch" "varnish" "crond" "supervisor")
 
 # Pobierz nazwę hosta dla jasności w mailu
 HOSTNAME=$(hostname)
