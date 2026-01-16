@@ -1,0 +1,20 @@
+# Główna grupa (default) - e-maile, czyszczenie logów, sitemapy
+* * * * * /usr/bin/php /var/www/html/magento/bin/magento cron:run --group=default
+
+# Grupa indeksująca (index) - tylko reindeksacja
+* * * * * /usr/bin/php /var/www/html/magento/bin/magento cron:run --group=index
+
+# Opcjonalnie: consumers (jeśli nie używasz Supervisora)
+# * * * * * /usr/bin/php /var/www/html/magento/bin/magento cron:run --group=consumers
+
+# GardenLawn Base group
+* * * * * /usr/bin/php /var/www/html/magento/bin/magento cron:run --group=gardenlawn_base
+
+# GardenLawn Company group
+* * * * * /usr/bin/php /var/www/html/magento/bin/magento cron:run --group=gardenlawn_company
+
+# InPost Pay group
+* * * * * /usr/bin/php /var/www/html/magento/bin/magento cron:run --group=inpostpay
+
+# Aurora Santander group
+* * * * * /usr/bin/php /var/www/html/magento/bin/magento cron:run --group=Santander
