@@ -17,4 +17,4 @@
 * * * * * /usr/bin/php /var/www/html/magento/bin/magento cron:run --group=inpostpay
 
 # Aurora Santander group
-* * * * * /usr/bin/php /var/www/html/magento/bin/magento cron:run --group=Santander
+* * * * * /usr/bin/php /var/www/html/magento/bin/magento cron:run --group=santander
