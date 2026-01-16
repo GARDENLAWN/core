@@ -69,8 +69,8 @@ class SyncStaticAssets extends Command
             $output->writeln("<info>Fetching existing files from S3...</info>");
             // Add trailing slash to ensure we match the directory exactly
             $s3Objects = $this->s3Adapter->listObjectsByStorageType('static', 'version' . $version . '/');
-            foreach ($s3Objects as $key) {
-                $existingS3Files[$key] = true;
+            foreach ($s3Objects as $object) {
+                $existingS3Files[$object['Key']] = $object['Size'];
             }
 
             // First, gather all files to get a total count
@@ -98,13 +98,17 @@ class SyncStaticAssets extends Command
                     if ($staticDir->isFile($file)) {
                         $destinationPath = 'version' . $version . '/' . $file;
                         $fullS3Key = $this->s3Adapter->getPrefixedPath('static', $destinationPath);
+                        $localFileSize = $staticDir->stat($file)['size'];
 
-                        if (!isset($existingS3Files[$fullS3Key])) {
-                            $filesToUpload[] = [
-                                'sourcePath' => $staticDir->getAbsolutePath($file),
-                                'destinationPath' => $destinationPath,
-                            ];
+                        // Check if file exists in S3 and has the same size
+                        if (isset($existingS3Files[$fullS3Key]) && $existingS3Files[$fullS3Key] == $localFileSize) {
+                            continue;
                         }
+
+                        $filesToUpload[] = [
+                            'sourcePath' => $staticDir->getAbsolutePath($file),
+                            'destinationPath' => $destinationPath,
+                        ];
                     }
                 }
             }
