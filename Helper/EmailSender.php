@@ -6,6 +6,7 @@ use Magento\Framework\App\Helper\Context;
 use Magento\Framework\Mail\Template\TransportBuilder;
 use Magento\Framework\Translate\Inline\StateInterface;
 use Magento\Store\Model\StoreManagerInterface;
+use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
 use Psr\Log\LoggerInterface;
 
 class EmailSender extends AbstractHelper
@@ -14,19 +15,22 @@ class EmailSender extends AbstractHelper
     protected $inlineTranslation;
     protected $storeManager;
     protected $logger;
+    protected $timezone;
 
     public function __construct(
         Context $context,
         TransportBuilder $transportBuilder,
         StateInterface $inlineTranslation,
         StoreManagerInterface $storeManager,
-        LoggerInterface $logger
+        LoggerInterface $logger,
+        TimezoneInterface $timezone
     ) {
         parent::__construct($context);
         $this->transportBuilder = $transportBuilder;
         $this->inlineTranslation = $inlineTranslation;
         $this->storeManager = $storeManager;
         $this->logger = $logger;
+        $this->timezone = $timezone;
     }
 
     public function sendTokenRefreshError($errorMessage)
@@ -46,6 +50,9 @@ class EmailSender extends AbstractHelper
                 'email' => $this->scopeConfig->getValue('trans_email/ident_general/email') ?? 'noreply@example.com'
             ];
 
+            // Get current date in store timezone (or specific locale if needed)
+            $date = $this->timezone->date()->format('Y-m-d H:i:s');
+
             $transport = $this->transportBuilder
                 ->setTemplateIdentifier('trans_eu_token_error')
                 ->setTemplateOptions([
@@ -54,7 +61,7 @@ class EmailSender extends AbstractHelper
                 ])
                 ->setTemplateVars([
                     'error_message' => $errorMessage,
-                    'date' => date('Y-m-d H:i:s')
+                    'date' => $date
                 ])
                 ->setFrom($sender)
                 ->addTo($recipientEmail)
