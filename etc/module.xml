@@ -4,7 +4,8 @@
  * Copyright © GardenLawn. All rights reserved.
  */
 -->
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
     <module name="GardenLawn_Core" setup_version="1.0.0">
         <sequence>
             <module name="Magento_Backend"/>
@@ -20,6 +21,7 @@
             <module name="Hyva_Checkout"/>
             <module name="Magento_Cms"/>
             <module name="Magento_Ui"/>
+            <module name="Amasty_Base"/>
             <module name="Amasty_ImportCore"/>
             <module name="Magento_InventoryConfigurableProductIndexer"/>
         </sequence>

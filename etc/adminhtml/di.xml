@@ -7,4 +7,8 @@
             </argument>
         </arguments>
     </type>
+    <type name="Amasty\Base\ViewModel\LicenseRegistration">
+        <plugin name="GardenLawn_Core_Plugin_Amasty_Base_ViewModel_LicenseRegistration"
+                type="GardenLawn\Core\Plugin\Amasty\Base\ViewModel\LicenseRegistrationPlugin" />
+    </type>
 </config>
