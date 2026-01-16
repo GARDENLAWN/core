@@ -18,12 +18,15 @@ fi
 send_email() {
     local subject="$1"
     local body="$2"
-    # Sprawdzamy czy sendmail istnieje, zeby uniknac bledu sh
-    if [ -f /usr/sbin/sendmail ] || [ -f /usr/bin/msmtp ]; then
-        php -r "mail('$ADMIN_EMAIL', '$subject', '$body', 'From: root@$HOSTNAME');"
-    else
-        echo "[$DATE] BRAK SENDMAILA! Nie moge wyslac powiadomienia: $subject"
-    fi
+    # Logujemy zamiast wysyłać maila
+    echo "[$DATE] [MAIL SKIPPED] Subject: $subject | Body: $body"
+
+    # Odkomentuj poniższe, aby włączyć wysyłkę maili
+    # if [ -f /usr/sbin/sendmail ] || [ -f /usr/bin/msmtp ]; then
+    #     php -r "mail('$ADMIN_EMAIL', '$subject', '$body', 'From: root@$HOSTNAME');"
+    # else
+    #     echo "[$DATE] BRAK SENDMAILA! Nie moge wyslac powiadomienia: $subject"
+    # fi
 }
 
 check_and_restart() {
@@ -32,8 +35,8 @@ check_and_restart() {
     if [ $? -ne 0 ]; then
         echo "[$DATE] UWAGA: Usługa $service nie działa. Próba restartu..."
         systemctl restart "$service"
-        echo "Czekam 15 sekund..."
-        sleep 15
+        echo "Czekam 30 sekund..."
+        sleep 30
 
         systemctl is-active --quiet "$service"
         if [ $? -eq 0 ]; then
