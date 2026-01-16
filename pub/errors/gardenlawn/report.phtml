@@ -1,0 +1,42 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+?>
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wystąpił błąd</title>
+    <link rel="stylesheet" href="<?php echo $this->getBaseUrl() ?>css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+        </div>
+        <h1>Wystąpił błąd</h1>
+        <p>
+            Wystąpił błąd podczas przetwarzania Twojego żądania.
+        </p>
+        <?php if ($this->showErrorMsg()): ?>
+            <p style="background-color: #fee2e2; color: #b91c1c; padding: 1rem; border-radius: 0.5rem; font-size: 0.875rem; text-align: left; overflow-x: auto;">
+                <?php echo $this->getErrorMessage() ?>
+            </p>
+        <?php endif; ?>
+        <p>
+            Numer raportu błędu: <strong><?php echo $this->getReportId() ?></strong>
+        </p>
+        <p>
+            Prosimy o kontakt z administratorem i podanie powyższego numeru.
+        </p>
+        <div class="footer">
+            &copy; <?php echo date('Y') ?> GardenLawn. Wszelkie prawa zastrzeżone.
+        </div>
+    </div>
+</body>
+</html>

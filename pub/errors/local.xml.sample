@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config>
+    <skin>gardenlawn</skin>
+    <report>
+        <action>print</action>
+        <subject>Store Debug</subject>
+        <email_address></email_address>
+        <trash>leave</trash>
+    </report>
+</config>
