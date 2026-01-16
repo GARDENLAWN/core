@@ -3,7 +3,7 @@
         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
     <group id="gardenlawn_base">
         <job name="gardenlawn_core_custom" instance="GardenLawn\Core\Cron\Custom" method="execute">
-            <schedule>* * * * *</schedule> <!-- Every Sunday at midnight -->
+            <schedule>0 4 * * *</schedule>
         </job>
     </group>
 </config>

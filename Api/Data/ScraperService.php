@@ -5,6 +5,8 @@ namespace GardenLawn\Core\Api\Data;
 use DiDom\Document;
 use DiDom\Exceptions\InvalidSelectorException;
 use Exception;
+use Magento\Framework\App\ObjectManager;
+use Magento\Framework\Module\Dir\Reader;
 use PhpOffice\PhpSpreadsheet\Reader\Xls;
 use stdClass;
 
@@ -196,12 +198,22 @@ class ScraperService
         return $result;
     }
 
+    private static function getConfigsDir(): string
+    {
+        $objectManager = ObjectManager::getInstance();
+        /** @var Reader $reader */
+        $reader = $objectManager->get(Reader::class);
+        $moduleDir = $reader->getModuleDir('', 'GardenLawn_Core');
+        return $moduleDir . '/Configs';
+    }
+
     /**
      * @throws InvalidSelectorException
      */
     public static function saveAutomowJsonData(): void
     {
-        $csvFile = dirname(__DIR__, 2) . "/Configs/AM_Processed.csv";
+        $configsDir = self::getConfigsDir();
+        $csvFile = $configsDir . "/AM_Processed.csv";
         $items = [];
         if (file_exists($csvFile)) {
             $handle = fopen($csvFile, "r");
@@ -284,7 +296,7 @@ class ScraperService
         }
 
         $json = json_encode($items);
-        file_put_contents(BP . "/Configs/automow_data.json", $json);
+        file_put_contents($configsDir . "/automow_data.json", $json);
     }
 
     public static function find($skuExternal, $array)
@@ -299,10 +311,11 @@ class ScraperService
 
     public static function prepareAutomowJsonData(): void
     {
+        $configsDir = self::getConfigsDir();
         $categories = ScraperService::getAmRobotsCategory();
         $linkReplacements = ScraperService::getLinkReplacements();
 
-        $string = file_get_contents(BP . "/Configs/automow_data.json");
+        $string = file_get_contents($configsDir . "/automow_data.json");
         $table = json_decode($string);
         $all = [];
 
@@ -446,7 +459,7 @@ class ScraperService
         // Albo lepiej: wczytajmy mapę relacji z CSV jeszcze raz tutaj, bo w JSON tego nie ma.
 
         $relations = [];
-        $csvFile = dirname(__DIR__, 2) . "/Configs/AM_Processed.csv";
+        $csvFile = $configsDir . "/AM_Processed.csv";
         if (file_exists($csvFile)) {
             $handle = fopen($csvFile, "r");
             $header = fgetcsv($handle, 0, ";");
@@ -571,23 +584,24 @@ class ScraperService
         }
 
         $json = json_encode($all);
-        file_put_contents(dirname(__DIR__, 2) . "/Configs/automow_prepared_data.json", $json);
+        file_put_contents($configsDir . "/automow_prepared_data.json", $json);
 
         $json = json_encode($tableConfigurable);
-        file_put_contents(dirname(__DIR__, 2) . "/Configs/automow_prepared_configurable_data.json", $json);
+        file_put_contents($configsDir . "/automow_prepared_configurable_data.json", $json);
 
         $json = json_encode($tableSimple);
-        file_put_contents(dirname(__DIR__, 2) . "/Configs/automow_prepared_single_data.json", $json);
+        file_put_contents($configsDir . "/automow_prepared_single_data.json", $json);
 
         $json = json_encode($tableDescriptions);
-        file_put_contents(dirname(__DIR__, 2) . "/Configs/automow_prepared_description_data.json", $json);
+        file_put_contents($configsDir . "/automow_prepared_description_data.json", $json);
     }
 
     public static function getAmRobotsCategory(): array
     {
+        $configsDir = self::getConfigsDir();
         $reader = new Xls();
         $reader->setReadDataOnly(true);
-        $spreadsheet = $reader->load(BP . "/Configs/amrobots_category.xls");
+        $spreadsheet = $reader->load($configsDir . "/amrobots_category.xls");
         $worksheet = $spreadsheet->getActiveSheet();
 
         $i = 0;
@@ -699,7 +713,8 @@ class ScraperService
 
     public static function getLinkReplacements(): array
     {
-        $csvFile = dirname(__DIR__, 2) . "/Configs/AM_Desc_remaining_links.csv";
+        $configsDir = self::getConfigsDir();
+        $csvFile = $configsDir . "/AM_Desc_remaining_links.csv";
         $replacements = [];
         if (file_exists($csvFile)) {
             $handle = fopen($csvFile, "r");
