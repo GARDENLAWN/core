@@ -127,4 +127,7 @@
     <!-- Override the SelectBuilder globally so both Sync and StockIndexer use it -->
     <preference for="Magento\InventoryConfigurableProductIndexer\Indexer\SelectBuilder"
                 type="GardenLawn\Core\Model\InventoryConfigurableProductIndexer\Indexer\SelectBuilder"/>
+    <type name="Magento\Framework\Flag">
+        <plugin name="gardenlawn_core_framework_flag_plugin" type="GardenLawn\Core\Plugin\Framework\FlagPlugin" sortOrder="10"/>
+    </type>
 </config>
