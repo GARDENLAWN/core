@@ -3,7 +3,7 @@
 # Konfiguracja
 ADMIN_EMAIL="marcin.piechota@gardenlawn.pl"
 # Dodano supervisor do listy usług systemd
-SERVICES=("php-fpm" "mariadb" "nginx" "redis6" "opensearch" "varnish" "crond" "rabbitmq-server" "supervisor")
+SERVICES=("php-fpm" "mariadb" "nginx" "redis6" "opensearch" "varnish" "crond" "rabbitmq-server")
 
 # Ustalanie ścieżek
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
