@@ -18,15 +18,29 @@ fi
 send_email() {
     local subject="$1"
     local body="$2"
-    # Logujemy zamiast wysyłać maila
-    echo "[$DATE] [MAIL SKIPPED] Subject: $subject | Body: $body"
 
-    # Odkomentuj poniższe, aby włączyć wysyłkę maili
-    # if [ -f /usr/sbin/sendmail ] || [ -f /usr/bin/msmtp ]; then
-    #     php -r "mail('$ADMIN_EMAIL', '$subject', '$body', 'From: root@$HOSTNAME');"
-    # else
-    #     echo "[$DATE] BRAK SENDMAILA! Nie moge wyslac powiadomienia: $subject"
-    # fi
+    # Logujemy zawsze do pliku
+    echo "[$DATE] [MAIL SENT] Subject: $subject | Body: $body"
+
+    # Próba wysyłki maila przez PHP (najbardziej niezawodne w środowisku Magento)
+    if command -v php >/dev/null 2>&1; then
+        php -r "
+            \$to = '$ADMIN_EMAIL';
+            \$subject = '$subject';
+            \$message = '$body';
+            \$headers = 'From: root@$HOSTNAME' . \"\r\n\" .
+                       'Reply-To: root@$HOSTNAME' . \"\r\n\" .
+                       'X-Mailer: PHP/' . phpversion();
+
+            if(mail(\$to, \$subject, \$message, \$headers)) {
+                echo 'Mail sent successfully.';
+            } else {
+                echo 'Mail sending failed. Check sendmail/postfix configuration.';
+            }
+        " >/dev/null 2>&1
+    else
+        echo "[$DATE] [ERROR] PHP not found, cannot send email."
+    fi
 }
 
 check_and_restart() {
@@ -40,9 +54,9 @@ check_and_restart() {
 
         systemctl is-active --quiet "$service"
         if [ $? -eq 0 ]; then
-            send_email "[FIXED] $HOSTNAME: $service zrestartowany" "Usługa $service wstala."
+            send_email "[INFO] $HOSTNAME: $service zrestartowany" "Usługa $service nie działała ($DATE). System automatycznie ją zrestartował i teraz jest OK."
         else
-            send_email "[CRITICAL] $HOSTNAME: $service LEZY!" "Restart $service nieudany."
+            send_email "[ALERT] $HOSTNAME: $service LEZY!" "Usługa $service nie działa ($DATE). Próba automatycznego restartu NIE POWIODŁA SIĘ. Wymagana interwencja."
         fi
     fi
 }
@@ -73,8 +87,8 @@ if ! pgrep -x "supervisord" > /dev/null; then
     sleep 10
 
     if pgrep -x "supervisord" > /dev/null; then
-        send_email "[FIXED] $HOSTNAME: Supervisord uruchomiony" "Supervisord został uruchomiony ponownie."
+        send_email "[INFO] $HOSTNAME: Supervisord uruchomiony" "Supervisord został uruchomiony ponownie ($DATE)."
     else
-        send_email "[CRITICAL] $HOSTNAME: Supervisord LEZY!" "Nie udalo sie uruchomic supervisord."
+        send_email "[ALERT] $HOSTNAME: Supervisord LEZY!" "Nie udalo sie uruchomic supervisord ($DATE)."
     fi
 fi
