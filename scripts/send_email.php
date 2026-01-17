@@ -1,7 +1,25 @@
 <?php
 use Magento\Framework\App\Bootstrap;
 
-require __DIR__ . '/../../../../../app/bootstrap.php';
+// Try to find bootstrap.php in common locations
+$bootstrapPaths = [
+    __DIR__ . '/../../../../../app/bootstrap.php', // app/code/Vendor/Module/scripts/
+    __DIR__ . '/../../../../app/bootstrap.php',    // vendor/vendor/module/scripts/
+];
+
+$bootstrapLoaded = false;
+foreach ($bootstrapPaths as $path) {
+    if (file_exists($path)) {
+        require $path;
+        $bootstrapLoaded = true;
+        break;
+    }
+}
+
+if (!$bootstrapLoaded) {
+    echo "Error: Could not find app/bootstrap.php\n";
+    exit(1);
+}
 
 $bootstrap = Bootstrap::create(BP, $_SERVER);
 $obj = $bootstrap->getObjectManager();
@@ -22,9 +40,6 @@ $subject = $argv[2];
 $bodyHtml = $argv[3];
 
 try {
-    /** @var \Magento\Framework\Mail\Template\TransportBuilder $transportBuilder */
-    $transportBuilder = $obj->get('Magento\Framework\Mail\Template\TransportBuilder');
-
     /** @var \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig */
     $scopeConfig = $obj->get('Magento\Framework\App\Config\ScopeConfigInterface');
 
@@ -32,22 +47,6 @@ try {
     $senderName = $scopeConfig->getValue('trans_email/ident_general/name') ?: 'System Monitor';
     $senderEmail = $scopeConfig->getValue('trans_email/ident_general/email') ?: 'no-reply@gardenlawn.pl';
 
-    $transport = $transportBuilder
-        ->setTemplateIdentifier('design_email_header_template') // Use a default template or create one
-        ->setTemplateOptions([
-            'area' => \Magento\Framework\App\Area::AREA_FRONTEND,
-            'store' => \Magento\Store\Model\Store::DEFAULT_STORE_ID,
-        ])
-        ->setTemplateVars(['content' => $bodyHtml]) // We might need a custom template that accepts 'content' variable
-        ->setFromByScope(['name' => $senderName, 'email' => $senderEmail])
-        ->addTo($to)
-        ->getTransport();
-
-    // Since we are passing full HTML body, we might want to bypass template logic and set body directly
-    // But TransportBuilder is tied to templates.
-    // Alternative: Use Laminas\Mail\Message directly if available, or a simple Transport.
-
-    // Let's try a simpler approach for raw HTML content without Magento templates overhead
     /** @var \Magento\Framework\Mail\TransportInterfaceFactory $transportFactory */
     $transportFactory = $obj->get('Magento\Framework\Mail\TransportInterfaceFactory');
 
