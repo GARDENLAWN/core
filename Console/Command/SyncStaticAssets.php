@@ -96,30 +96,52 @@ class SyncStaticAssets extends Command
                     }
 
                     $vendors = $staticDir->read($area);
+                    $output->writeln("<comment>Scanning area '{$area}': found " . count($vendors) . " entries.</comment>", OutputInterface::VERBOSITY_VERBOSE);
+
                     foreach ($vendors as $vendor) {
                         $vendorPath = $area . '/' . $vendor;
-                        // Skip non-directories or special files
-                        if ($vendor === '.' || $vendor === '..' || !$staticDir->isDirectory($vendorPath)) {
+
+                        // Skip special files
+                        if ($vendor === '.' || $vendor === '..') {
                             continue;
+                        }
+
+                        if (!$staticDir->isDirectory($vendorPath)) {
+                             $output->writeln("<comment>Skipping '{$vendorPath}' - not a directory.</comment>", OutputInterface::VERBOSITY_VERBOSE);
+                             continue;
                         }
 
                         $themeDirs = $staticDir->read($vendorPath);
                         foreach ($themeDirs as $themeName) {
                             $themePath = $vendorPath . '/' . $themeName;
-                            // Skip non-directories or special files
-                            if ($themeName === '.' || $themeName === '..' || !$staticDir->isDirectory($themePath)) {
+
+                            if ($themeName === '.' || $themeName === '..') {
+                                continue;
+                            }
+
+                            if (!$staticDir->isDirectory($themePath)) {
+                                $output->writeln("<comment>Skipping '{$themePath}' - not a directory.</comment>", OutputInterface::VERBOSITY_VERBOSE);
                                 continue;
                             }
 
                             $foundThemes[] = $vendor . '/' . $themeName;
+                            $output->writeln("<info>Found theme: {$vendor}/{$themeName}</info>", OutputInterface::VERBOSITY_VERBOSE);
                         }
                     }
                 }
 
                 if (empty($foundThemes)) {
                     $output->writeln("<error>No themes found in pub/static. Please ensure static content is deployed.</error>");
-                    // Debug info
                     $output->writeln("<comment>Debug: Scanned path: " . $staticDir->getAbsolutePath() . "</comment>");
+
+                    // Fallback: Try to list contents of pub/static to see what's wrong
+                    try {
+                        $rootContents = $staticDir->read('.');
+                        $output->writeln("<comment>Debug: pub/static contents: " . implode(', ', $rootContents) . "</comment>");
+                    } catch (\Exception $e) {
+                        $output->writeln("<error>Debug: Failed to read pub/static contents: " . $e->getMessage() . "</error>");
+                    }
+
                     return Cli::RETURN_FAILURE;
                 }
 
