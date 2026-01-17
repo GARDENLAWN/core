@@ -96,9 +96,11 @@ class SyncStaticAssets extends Command
                     }
 
                     $vendors = $staticDir->read($area);
-                    $output->writeln("<comment>Scanning area '{$area}': found " . count($vendors) . " entries.</comment>", OutputInterface::VERBOSITY_VERBOSE);
+                    $output->writeln("<comment>Scanning area '{$area}': found " . count($vendors) . " entries.</comment>");
 
                     foreach ($vendors as $vendor) {
+                        // Clean up vendor path (remove leading ./)
+                        $vendor = basename($vendor);
                         $vendorPath = $area . '/' . $vendor;
 
                         // Skip special files
@@ -107,12 +109,13 @@ class SyncStaticAssets extends Command
                         }
 
                         if (!$staticDir->isDirectory($vendorPath)) {
-                             $output->writeln("<comment>Skipping '{$vendorPath}' - not a directory.</comment>", OutputInterface::VERBOSITY_VERBOSE);
+                             $output->writeln("<comment>Skipping '{$vendorPath}' - not a directory.</comment>");
                              continue;
                         }
 
                         $themeDirs = $staticDir->read($vendorPath);
                         foreach ($themeDirs as $themeName) {
+                            $themeName = basename($themeName);
                             $themePath = $vendorPath . '/' . $themeName;
 
                             if ($themeName === '.' || $themeName === '..') {
@@ -120,12 +123,12 @@ class SyncStaticAssets extends Command
                             }
 
                             if (!$staticDir->isDirectory($themePath)) {
-                                $output->writeln("<comment>Skipping '{$themePath}' - not a directory.</comment>", OutputInterface::VERBOSITY_VERBOSE);
+                                $output->writeln("<comment>Skipping '{$themePath}' - not a directory.</comment>");
                                 continue;
                             }
 
                             $foundThemes[] = $vendor . '/' . $themeName;
-                            $output->writeln("<info>Found theme: {$vendor}/{$themeName}</info>", OutputInterface::VERBOSITY_VERBOSE);
+                            $output->writeln("<info>Found theme: {$vendor}/{$themeName}</info>");
                         }
                     }
                 }
