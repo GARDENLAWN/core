@@ -13,6 +13,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use GardenLawn\MediaGallery\Model\S3Adapter;
 use Magento\Framework\App\Filesystem\DirectoryList;
 use Magento\Framework\Filesystem;
+use Magento\Framework\Filesystem\DriverPool;
 use Psr\Log\LoggerInterface;
 
 class SyncStaticAssets extends Command
@@ -70,7 +71,9 @@ class SyncStaticAssets extends Command
         $output->writeln("<info>Starting synchronization of static assets for themes to S3...</info>");
 
         try {
-            $staticDir = $this->filesystem->getDirectoryRead(DirectoryList::STATIC_VIEW);
+            // Force usage of local file driver to ensure we read from local disk,
+            // even if remote storage is enabled in configuration.
+            $staticDir = $this->filesystem->getDirectoryRead(DirectoryList::STATIC_VIEW, DriverPool::FILE);
 
             $versionFilePath = 'deployed_version.txt';
             if (!$staticDir->isExist($versionFilePath) || !$staticDir->isFile($versionFilePath)) {
@@ -115,6 +118,8 @@ class SyncStaticAssets extends Command
 
                 if (empty($foundThemes)) {
                     $output->writeln("<error>No themes found in pub/static. Please ensure static content is deployed.</error>");
+                    // Debug info
+                    $output->writeln("<comment>Debug: Scanned path: " . $staticDir->getAbsolutePath() . "</comment>");
                     return Cli::RETURN_FAILURE;
                 }
 
