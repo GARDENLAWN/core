@@ -43,7 +43,7 @@ class SyncStaticAssets extends Command
                 self::THEME_OPTION,
                 null,
                 InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY,
-                'The theme(s) to synchronize (e.g., Magento/luma).'
+                'The theme(s) to synchronize (e.g., Magento/luma). Use "*" to synchronize all available themes.'
             );
         parent::configure();
     }
@@ -63,7 +63,7 @@ class SyncStaticAssets extends Command
         });
 
         if (empty($themes)) {
-            $output->writeln('<error>You must specify at least one theme using --theme option.</error>');
+            $output->writeln('<error>You must specify at least one theme using --theme option (or use "*" for all).</error>');
             return Cli::RETURN_FAILURE;
         }
 
@@ -71,6 +71,47 @@ class SyncStaticAssets extends Command
 
         try {
             $staticDir = $this->filesystem->getDirectoryRead(DirectoryList::STATIC_VIEW);
+
+            // Handle wildcard '*' to select all themes
+            if (in_array('*', $themes)) {
+                $output->writeln("<info>Wildcard '*' detected. Scanning for all available themes...</info>");
+                $foundThemes = [];
+                $areas = ['frontend', 'adminhtml'];
+
+                foreach ($areas as $area) {
+                    if (!$staticDir->isExist($area)) {
+                        continue;
+                    }
+
+                    $vendors = $staticDir->read($area);
+                    foreach ($vendors as $vendor) {
+                        $vendorPath = $area . '/' . $vendor;
+                        // Skip non-directories or special files
+                        if (!$staticDir->isDirectory($vendorPath) || $vendor === '.' || $vendor === '..') {
+                            continue;
+                        }
+
+                        $themeDirs = $staticDir->read($vendorPath);
+                        foreach ($themeDirs as $themeName) {
+                            $themePath = $vendorPath . '/' . $themeName;
+                            // Skip non-directories or special files
+                            if (!$staticDir->isDirectory($themePath) || $themeName === '.' || $themeName === '..') {
+                                continue;
+                            }
+
+                            $foundThemes[] = $vendor . '/' . $themeName;
+                        }
+                    }
+                }
+
+                if (empty($foundThemes)) {
+                    $output->writeln("<warning>No themes found in pub/static.</warning>");
+                    return Cli::RETURN_FAILURE;
+                }
+
+                $themes = array_unique($foundThemes);
+                $output->writeln("<info>Found " . count($themes) . " themes: " . implode(', ', $themes) . "</info>");
+            }
 
             $versionFilePath = 'deployed_version.txt';
             if (!$staticDir->isExist($versionFilePath) || !$staticDir->isFile($versionFilePath)) {
