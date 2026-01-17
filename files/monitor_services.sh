@@ -2,15 +2,22 @@
 
 # Konfiguracja
 ADMIN_EMAIL="marcin.piechota@gardenlawn.pl"
-SERVICES=("php-fpm" "mariadb" "nginx" "redis6" "opensearch" "varnish" "crond")
-SUPERVISOR_CMD="/usr/local/bin/supervisord"
-SUPERVISOR_CONF="/etc/supervisord.conf"
+# Dodano supervisor do listy usług systemd
+SERVICES=("php-fpm" "mariadb" "nginx" "redis6" "opensearch" "varnish" "crond" "rabbitmq-server" "supervisor")
 
 # Ustalanie ścieżek
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 PHP_MAILER_SCRIPT="$SCRIPT_DIR/../scripts/send_email.php"
 
-HOSTNAME=$(hostname)
+# Bezpieczne ustalanie hostname
+if command -v hostname &> /dev/null; then
+    HOSTNAME=$(hostname)
+elif [ -f /etc/hostname ]; then
+    HOSTNAME=$(cat /etc/hostname)
+else
+    HOSTNAME="unknown-host"
+fi
+
 DATE=$(date '+%Y-%m-%d %H:%M:%S')
 DAILY_REPORT=0
 ALL_OK=1
@@ -29,15 +36,6 @@ if [ "$EUID" -ne 0 ]; then
   echo "Ten skrypt musi byc uruchomiony jako root"
   exit 1
 fi
-
-# Funkcja pomocnicza do sprawdzania procesu (zamiast pgrep)
-check_process() {
-    if ps aux | grep -v grep | grep "$1" > /dev/null; then
-        return 0
-    else
-        return 1
-    fi
-}
 
 # Funkcja pomocnicza do dodawania wiersza HTML
 add_html_row() {
@@ -60,6 +58,10 @@ add_html_row() {
             color="#721c24"
             bg_color="#f8d7da"
             ;;
+        "MISSING")
+            color="#6c757d"
+            bg_color="#e2e3e5"
+            ;;
     esac
 
     HTML_ROWS+="<tr>
@@ -76,7 +78,6 @@ send_email() {
     local title="$2"
 
     # Generujemy tylko treść (kontener), bez <html>/<body>, bo to doda send_email.php (z header/footer)
-    # Style inline są bezpieczne
     local html_body="
         <div style='font-family: \"Segoe UI\", Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f6f9; padding: 20px;'>
             <div style='max-width: 650px; margin: 0 auto; background: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.1);'>
@@ -124,24 +125,32 @@ send_email() {
 
 check_and_restart() {
     local service="$1"
-    systemctl is-active --quiet "$service"
-    if [ $? -ne 0 ]; then
-        ALL_OK=0
-        echo "[$DATE] UWAGA: Usługa $service nie działa. Próba restartu..."
-        systemctl restart "$service"
-        echo "Czekam 30 sekund..."
-        sleep 30
-
+    # Sprawdzamy czy usługa w ogóle istnieje w systemie
+    if systemctl list-unit-files | grep -q "^$service.service"; then
         systemctl is-active --quiet "$service"
-        if [ $? -eq 0 ]; then
-            add_html_row "$service" "RESTARTED" "Automatyczny restart udany."
-            send_email "[INFO] $HOSTNAME: $service zrestartowany" "Usługa została przywrócona"
+        if [ $? -ne 0 ]; then
+            ALL_OK=0
+            echo "[$DATE] UWAGA: Usługa $service nie działa. Próba restartu..."
+            systemctl restart "$service"
+            echo "Czekam 30 sekund..."
+            sleep 30
+
+            systemctl is-active --quiet "$service"
+            if [ $? -eq 0 ]; then
+                add_html_row "$service" "RESTARTED" "Automatyczny restart udany."
+                send_email "[INFO] $HOSTNAME: $service zrestartowany" "Usługa została przywrócona"
+            else
+                add_html_row "$service" "FAILED" "Restart nieudany. Wymagana interwencja!"
+                send_email "[ALERT] $HOSTNAME: $service LEZY!" "KRYTYCZNA AWARIA USŁUGI"
+            fi
         else
-            add_html_row "$service" "FAILED" "Restart nieudany. Wymagana interwencja!"
-            send_email "[ALERT] $HOSTNAME: $service LEZY!" "KRYTYCZNA AWARIA USŁUGI"
+            add_html_row "$service" "ACTIVE" "Działa poprawnie."
         fi
     else
-        add_html_row "$service" "ACTIVE" "Działa poprawnie."
+        # Usługa nie istnieje w systemie - logujemy jako MISSING w raporcie dziennym
+        if [ "$DAILY_REPORT" -eq 1 ]; then
+             add_html_row "$service" "MISSING" "Usługa nie zainstalowana w systemie."
+        fi
     fi
 }
 
@@ -149,34 +158,6 @@ check_and_restart() {
 for SERVICE in "${SERVICES[@]}"; do
     check_and_restart "$SERVICE"
 done
-
-# 2. Sprawdzamy Supervisora
-if ! check_process "supervisord"; then
-    ALL_OK=0
-    echo "[$DATE] UWAGA: Supervisord nie działa. Próba uruchomienia..."
-
-    if systemctl list-unit-files | grep -q supervisord.service; then
-        systemctl start supervisord
-    else
-        if [ -f "$SUPERVISOR_CMD" ]; then
-            $SUPERVISOR_CMD -c $SUPERVISOR_CONF
-        else
-            supervisord -c $SUPERVISOR_CONF
-        fi
-    fi
-
-    sleep 10
-
-    if check_process "supervisord"; then
-        add_html_row "supervisord" "RESTARTED" "Proces uruchomiony ponownie."
-        send_email "[INFO] $HOSTNAME: Supervisord uruchomiony" "Supervisord przywrócony"
-    else
-        add_html_row "supervisord" "FAILED" "Nie udało się uruchomić procesu."
-        send_email "[ALERT] $HOSTNAME: Supervisord LEZY!" "AWARIA SUPERVISORD"
-    fi
-else
-    add_html_row "supervisord" "ACTIVE" "Proces działa."
-fi
 
 # 3. Raport dzienny (tylko jeśli wszystko OK i flaga ustawiona)
 if [ "$DAILY_REPORT" -eq 1 ] && [ "$ALL_OK" -eq 1 ]; then
