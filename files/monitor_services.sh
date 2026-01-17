@@ -6,6 +6,11 @@ SERVICES=("php-fpm" "mariadb" "nginx" "redis6" "opensearch" "varnish" "crond")
 SUPERVISOR_CMD="/usr/local/bin/supervisord"
 SUPERVISOR_CONF="/etc/supervisord.conf"
 
+# Ustalanie ścieżek
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+# Zakładamy, że send_email.php jest w ../scripts/ względem tego pliku
+PHP_MAILER_SCRIPT="$SCRIPT_DIR/../scripts/send_email.php"
+
 HOSTNAME=$(hostname)
 DATE=$(date '+%Y-%m-%d %H:%M:%S')
 DAILY_REPORT=0
@@ -111,30 +116,22 @@ send_email() {
     # Logujemy wysyłkę
     echo "[$DATE] [MAIL SENT] Subject: $subject"
 
-    # Kodujemy treść do Base64, aby uniknąć problemów z cudzysłowami w PHP CLI
-    local encoded_body=$(echo "$html_body" | base64 -w 0)
+    if [ -f "$PHP_MAILER_SCRIPT" ]; then
+        # Uruchamiamy skrypt PHP, przekazując argumenty
+        # Uwaga: Przekazujemy HTML jako argument, więc musimy uważać na długość.
+        # Dla bezpieczeństwa można by zapisać do pliku tymczasowego, ale spróbujmy tak.
 
-    if command -v php >/dev/null 2>&1; then
-        php -r "
-            \$to = '$ADMIN_EMAIL';
-            \$subject = '$subject';
-            \$encoded_body = '$encoded_body';
-            \$message = base64_decode(\$encoded_body);
+        php "$PHP_MAILER_SCRIPT" "$ADMIN_EMAIL" "$subject" "$html_body"
 
-            \$headers = 'MIME-Version: 1.0' . \"\r\n\";
-            \$headers .= 'Content-type: text/html; charset=UTF-8' . \"\r\n\";
-            \$headers .= 'From: root@$HOSTNAME' . \"\r\n\";
-            \$headers .= 'Reply-To: root@$HOSTNAME' . \"\r\n\";
-            \$headers .= 'X-Mailer: PHP/' . phpversion();
-
-            if(mail(\$to, \$subject, \$message, \$headers)) {
-                echo 'Mail sent successfully.';
-            } else {
-                echo 'Mail sending failed.';
-            }
-        " >/dev/null 2>&1
+        if [ $? -eq 0 ]; then
+             echo "[$DATE] Mail sent successfully via Magento."
+        else
+             echo "[$DATE] [ERROR] Failed to send mail via Magento script."
+        fi
     else
-        echo "[$DATE] [ERROR] PHP not found, cannot send email."
+        echo "[$DATE] [ERROR] PHP Mailer script not found at: $PHP_MAILER_SCRIPT"
+        # Fallback do starej metody mail()
+        # ... (można dodać fallback, ale jeśli mail() nie działa, to bez sensu)
     fi
 }
 
