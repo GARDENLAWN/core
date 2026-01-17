@@ -52,6 +52,16 @@ class SyncStaticAssets extends Command
     {
         $themes = $input->getOption(self::THEME_OPTION);
 
+        // Ensure themes is an array (handle potential string return)
+        if (!is_array($themes)) {
+            $themes = is_string($themes) ? explode(',', $themes) : [];
+        }
+
+        // Filter empty values
+        $themes = array_filter($themes, function($value) {
+            return !empty(trim((string)$value));
+        });
+
         if (empty($themes)) {
             $output->writeln('<error>You must specify at least one theme using --theme option.</error>');
             return Cli::RETURN_FAILURE;
@@ -108,7 +118,7 @@ class SyncStaticAssets extends Command
 
             // First, gather all files to get a total count
             foreach ($themes as $theme) {
-                $theme = trim($theme, " \t\n\r\0\x0B,");
+                $theme = trim((string)$theme, " \t\n\r\0\x0B,");
                 $output->writeln("<info>Scanning theme: '{$theme}'</info>");
 
                 $frontendPath = 'frontend/' . $theme;
@@ -170,7 +180,7 @@ class SyncStaticAssets extends Command
                 // Filter by themes being processed
                 $belongsToProcessedTheme = false;
                 foreach ($themes as $theme) {
-                    $theme = trim($theme, " \t\n\r\0\x0B,");
+                    $theme = trim((string)$theme, " \t\n\r\0\x0B,");
                     // Ensure we match the full theme directory by appending '/'
                     // This prevents matching "Magento/luma" against "Magento/luma-child"
                     if (strpos($key, 'frontend/' . $theme . '/') !== false || strpos($key, 'adminhtml/' . $theme . '/') !== false) {
