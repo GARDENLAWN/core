@@ -8,7 +8,6 @@ SUPERVISOR_CONF="/etc/supervisord.conf"
 
 # Ustalanie ścieżek
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
-# Zakładamy, że send_email.php jest w ../scripts/ względem tego pliku
 PHP_MAILER_SCRIPT="$SCRIPT_DIR/../scripts/send_email.php"
 
 HOSTNAME=$(hostname)
@@ -30,6 +29,15 @@ if [ "$EUID" -ne 0 ]; then
   echo "Ten skrypt musi byc uruchomiony jako root"
   exit 1
 fi
+
+# Funkcja pomocnicza do sprawdzania procesu (zamiast pgrep)
+check_process() {
+    if ps aux | grep -v grep | grep "$1" > /dev/null; then
+        return 0
+    else
+        return 1
+    fi
+}
 
 # Funkcja pomocnicza do dodawania wiersza HTML
 add_html_row() {
@@ -67,60 +75,41 @@ send_email() {
     local subject="$1"
     local title="$2"
 
-    # Budujemy pełny HTML
+    # Generujemy tylko treść (kontener), bez <html>/<body>, bo to doda send_email.php (z header/footer)
+    # Style inline są bezpieczne
     local html_body="
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <meta charset='UTF-8'>
-        <style>
-            body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f6f9; margin: 0; padding: 20px; }
-            .container { max-width: 650px; margin: 0 auto; background: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-            .header { background: #2c3e50; color: #ffffff; padding: 20px; text-align: center; }
-            .header h1 { margin: 0; font-size: 24px; font-weight: 600; }
-            .header p { margin: 5px 0 0; opacity: 0.8; font-size: 14px; }
-            .content { padding: 20px; }
-            .status-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-            .footer { background: #f8f9fa; padding: 15px; text-align: center; font-size: 12px; color: #888; border-top: 1px solid #eee; }
-        </style>
-    </head>
-    <body>
-        <div class='container'>
-            <div class='header'>
-                <h1>$title</h1>
-                <p>$HOSTNAME | $DATE</p>
-            </div>
-            <div class='content'>
-                <p style='color: #555; margin-bottom: 20px;'>Poniżej znajduje się raport stanu usług systemowych:</p>
-                <table class='status-table'>
-                    <thead>
-                        <tr style='background-color: #f8f9fa; text-align: left;'>
-                            <th style='padding: 10px 15px; color: #555; font-weight: 600; border-bottom: 2px solid #eee;'>Usługa</th>
-                            <th style='padding: 10px 15px; color: #555; font-weight: 600; border-bottom: 2px solid #eee;'>Status</th>
-                            <th style='padding: 10px 15px; color: #555; font-weight: 600; border-bottom: 2px solid #eee;'>Info</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        $HTML_ROWS
-                    </tbody>
-                </table>
-            </div>
-            <div class='footer'>
-                Automatyczny raport z serwera $HOSTNAME
+        <div style='font-family: \"Segoe UI\", Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f6f9; padding: 20px;'>
+            <div style='max-width: 650px; margin: 0 auto; background: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.1);'>
+                <div style='background: #2c3e50; color: #ffffff; padding: 20px; text-align: center;'>
+                    <h1 style='margin: 0; font-size: 24px; font-weight: 600;'>$title</h1>
+                    <p style='margin: 5px 0 0; opacity: 0.8; font-size: 14px;'>$HOSTNAME | $DATE</p>
+                </div>
+                <div style='padding: 20px;'>
+                    <p style='color: #555; margin-bottom: 20px;'>Poniżej znajduje się raport stanu usług systemowych:</p>
+                    <table style='width: 100%; border-collapse: collapse; margin-top: 10px;'>
+                        <thead>
+                            <tr style='background-color: #f8f9fa; text-align: left;'>
+                                <th style='padding: 10px 15px; color: #555; font-weight: 600; border-bottom: 2px solid #eee;'>Usługa</th>
+                                <th style='padding: 10px 15px; color: #555; font-weight: 600; border-bottom: 2px solid #eee;'>Status</th>
+                                <th style='padding: 10px 15px; color: #555; font-weight: 600; border-bottom: 2px solid #eee;'>Info</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            $HTML_ROWS
+                        </tbody>
+                    </table>
+                </div>
+                <div style='background: #f8f9fa; padding: 15px; text-align: center; font-size: 12px; color: #888; border-top: 1px solid #eee;'>
+                    Automatyczny raport z serwera $HOSTNAME
+                </div>
             </div>
         </div>
-    </body>
-    </html>
     "
 
     # Logujemy wysyłkę
     echo "[$DATE] [MAIL SENT] Subject: $subject"
 
     if [ -f "$PHP_MAILER_SCRIPT" ]; then
-        # Uruchamiamy skrypt PHP, przekazując argumenty
-        # Uwaga: Przekazujemy HTML jako argument, więc musimy uważać na długość.
-        # Dla bezpieczeństwa można by zapisać do pliku tymczasowego, ale spróbujmy tak.
-
         php "$PHP_MAILER_SCRIPT" "$ADMIN_EMAIL" "$subject" "$html_body"
 
         if [ $? -eq 0 ]; then
@@ -130,8 +119,6 @@ send_email() {
         fi
     else
         echo "[$DATE] [ERROR] PHP Mailer script not found at: $PHP_MAILER_SCRIPT"
-        # Fallback do starej metody mail()
-        # ... (można dodać fallback, ale jeśli mail() nie działa, to bez sensu)
     fi
 }
 
@@ -148,7 +135,6 @@ check_and_restart() {
         systemctl is-active --quiet "$service"
         if [ $? -eq 0 ]; then
             add_html_row "$service" "RESTARTED" "Automatyczny restart udany."
-            # W przypadku restartu wysyłamy maila natychmiast (ale z tabelą dotychczasowych sprawdzeń)
             send_email "[INFO] $HOSTNAME: $service zrestartowany" "Usługa została przywrócona"
         else
             add_html_row "$service" "FAILED" "Restart nieudany. Wymagana interwencja!"
@@ -165,7 +151,7 @@ for SERVICE in "${SERVICES[@]}"; do
 done
 
 # 2. Sprawdzamy Supervisora
-if ! pgrep -x "supervisord" > /dev/null; then
+if ! check_process "supervisord"; then
     ALL_OK=0
     echo "[$DATE] UWAGA: Supervisord nie działa. Próba uruchomienia..."
 
@@ -181,7 +167,7 @@ if ! pgrep -x "supervisord" > /dev/null; then
 
     sleep 10
 
-    if pgrep -x "supervisord" > /dev/null; then
+    if check_process "supervisord"; then
         add_html_row "supervisord" "RESTARTED" "Proces uruchomiony ponownie."
         send_email "[INFO] $HOSTNAME: Supervisord uruchomiony" "Supervisord przywrócony"
     else
