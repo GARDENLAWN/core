@@ -15,24 +15,30 @@ use Magento\Framework\App\Filesystem\DirectoryList;
 use Magento\Framework\Filesystem;
 use Magento\Framework\Filesystem\DriverPool;
 use Psr\Log\LoggerInterface;
+use GardenLawn\Core\Helper\CommandProgress;
 
 class SyncStaticAssets extends Command
 {
     private const string THEME_OPTION = 'theme';
+    private const string BATCH_SIZE_OPTION = 'batch-size';
+    private const string PROCESS_ID_OPTION = 'process-id';
 
     private S3Adapter $s3Adapter;
     private Filesystem $filesystem;
     private LoggerInterface $logger;
+    private CommandProgress $progressHelper;
 
     public function __construct(
         S3Adapter $s3Adapter,
         Filesystem $filesystem,
         LoggerInterface $logger,
+        CommandProgress $progressHelper,
         string $name = null
     ) {
         $this->s3Adapter = $s3Adapter;
         $this->filesystem = $filesystem;
         $this->logger = $logger;
+        $this->progressHelper = $progressHelper;
         parent::__construct($name);
     }
 
@@ -45,6 +51,19 @@ class SyncStaticAssets extends Command
                 null,
                 InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY,
                 'The theme(s) to synchronize (e.g., Magento/luma). Use "*" to synchronize all available themes.'
+            )
+            ->addOption(
+                self::BATCH_SIZE_OPTION,
+                null,
+                InputOption::VALUE_OPTIONAL,
+                'Number of files to upload in a single batch (default: 1000).',
+                1000
+            )
+            ->addOption(
+                self::PROCESS_ID_OPTION,
+                null,
+                InputOption::VALUE_OPTIONAL,
+                'Process ID for tracking progress.'
             );
         parent::configure();
     }
@@ -52,6 +71,8 @@ class SyncStaticAssets extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $themes = $input->getOption(self::THEME_OPTION);
+        $batchSize = (int)$input->getOption(self::BATCH_SIZE_OPTION);
+        $processId = $input->getOption(self::PROCESS_ID_OPTION);
 
         // Ensure themes is an array (handle potential string return)
         if (!is_array($themes)) {
@@ -65,10 +86,16 @@ class SyncStaticAssets extends Command
 
         if (empty($themes)) {
             $output->writeln('<error>You must specify at least one theme using --theme option (or use "*" for all).</error>');
+            if ($processId) {
+                $this->progressHelper->error($processId, 'You must specify at least one theme using --theme option (or use "*" for all).');
+            }
             return Cli::RETURN_FAILURE;
         }
 
         $output->writeln("<info>Starting synchronization of static assets for themes to S3...</info>");
+        if ($processId) {
+            $this->progressHelper->init($processId, 'Starting synchronization...');
+        }
 
         try {
             // Force usage of local file driver to ensure we read from local disk,
@@ -77,7 +104,11 @@ class SyncStaticAssets extends Command
 
             $versionFilePath = 'deployed_version.txt';
             if (!$staticDir->isExist($versionFilePath) || !$staticDir->isFile($versionFilePath)) {
-                $output->writeln("<error>deployed_version.txt not found in pub/static. Please run 'bin/magento setup:static-content:deploy' first.</error>");
+                $msg = "deployed_version.txt not found in pub/static. Please run 'bin/magento setup:static-content:deploy' first.";
+                $output->writeln("<error>{$msg}</error>");
+                if ($processId) {
+                    $this->progressHelper->error($processId, $msg);
+                }
                 return Cli::RETURN_FAILURE;
             }
             $version = trim($staticDir->readFile($versionFilePath));
@@ -86,6 +117,10 @@ class SyncStaticAssets extends Command
             // Handle wildcard '*' to select all themes
             if (in_array('*', $themes)) {
                 $output->writeln("<info>Wildcard '*' detected. Scanning for all available themes...</info>");
+                if ($processId) {
+                    $this->progressHelper->update($processId, 0, 100, 'Scanning themes...');
+                }
+
                 $foundThemes = [];
                 $areas = ['frontend', 'adminhtml'];
 
@@ -134,7 +169,8 @@ class SyncStaticAssets extends Command
                 }
 
                 if (empty($foundThemes)) {
-                    $output->writeln("<error>No themes found in pub/static. Please ensure static content is deployed.</error>");
+                    $msg = "No themes found in pub/static. Please ensure static content is deployed.";
+                    $output->writeln("<error>{$msg}</error>");
                     $output->writeln("<comment>Debug: Scanned path: " . $staticDir->getAbsolutePath() . "</comment>");
 
                     // Fallback: Try to list contents of pub/static to see what's wrong
@@ -145,6 +181,9 @@ class SyncStaticAssets extends Command
                         $output->writeln("<error>Debug: Failed to read pub/static contents: " . $e->getMessage() . "</error>");
                     }
 
+                    if ($processId) {
+                        $this->progressHelper->error($processId, $msg);
+                    }
                     return Cli::RETURN_FAILURE;
                 }
 
@@ -158,6 +197,10 @@ class SyncStaticAssets extends Command
 
             // Fetch ALL existing files from S3 static directory (across all versions)
             $output->writeln("<info>Fetching all existing static files from S3...</info>");
+            if ($processId) {
+                $this->progressHelper->update($processId, 5, 100, 'Fetching existing S3 files...');
+            }
+
             $s3Objects = $this->s3Adapter->listObjectsByStorageType('static', '');
 
             // Ensure $s3Objects is iterable
@@ -190,6 +233,10 @@ class SyncStaticAssets extends Command
             $currentVersionFiles = [];
 
             // First, gather all files to get a total count
+            if ($processId) {
+                $this->progressHelper->update($processId, 10, 100, 'Scanning local files...');
+            }
+
             foreach ($themes as $theme) {
                 $theme = trim((string)$theme, " \t\n\r\0\x0B,");
                 $output->writeln("<info>Scanning theme: '{$theme}'</info>");
@@ -275,35 +322,62 @@ class SyncStaticAssets extends Command
 
             if (empty($filesToUpload) && empty($filesToDelete)) {
                 $output->writeln("<info>All files are already synchronized.</info>");
+                if ($processId) {
+                    $this->progressHelper->finish($processId, 'All files are already synchronized.');
+                }
                 return Cli::RETURN_SUCCESS;
             }
 
             // Process Deletions
             if (!empty($filesToDelete)) {
                 $output->writeln("<info>Deleting " . count($filesToDelete) . " obsolete files...</info>");
+                if ($processId) {
+                    $this->progressHelper->update($processId, 15, 100, "Deleting " . count($filesToDelete) . " obsolete files...");
+                }
                 $this->s3Adapter->deleteObjects($filesToDelete);
             }
 
             // Process Uploads/Copies
             if (!empty($filesToUpload)) {
-                $output->writeln("<info>Synchronizing " . count($filesToUpload) . " files...</info>");
-                $progressBar = new ProgressBar($output, count($filesToUpload));
+                $totalFiles = count($filesToUpload);
+                $output->writeln("<info>Synchronizing " . $totalFiles . " files...</info>");
+                $progressBar = new ProgressBar($output, $totalFiles);
                 $progressBar->setFormat('%current%/%max% [%bar%] %percent:3s%% %elapsed:6s%/%estimated:-6s% %memory:6s%');
                 $progressBar->start();
 
-                $this->s3Adapter->uploadStaticFiles($filesToUpload, function () use ($progressBar) {
-                    $progressBar->advance();
-                });
+                // Process in batches to avoid memory issues and timeouts
+                $chunks = array_chunk($filesToUpload, $batchSize);
+                $processedCount = 0;
+
+                foreach ($chunks as $chunk) {
+                    $this->s3Adapter->uploadStaticFiles($chunk, function () use ($progressBar) {
+                        $progressBar->advance();
+                    });
+
+                    $processedCount += count($chunk);
+                    if ($processId) {
+                        $this->progressHelper->update($processId, $processedCount, $totalFiles, "Synchronizing files ({$processedCount}/{$totalFiles})...");
+                    }
+
+                    // Optional: Add a small sleep or garbage collection if needed
+                    // gc_collect_cycles();
+                }
 
                 $progressBar->finish();
             }
 
             $output->writeln("\n<info>Synchronization complete.</info>");
+            if ($processId) {
+                $this->progressHelper->finish($processId, 'Synchronization complete.');
+            }
 
             return Cli::RETURN_SUCCESS;
         } catch (Exception $e) {
             $this->logger->error('S3 Static Sync Error: ' . $e->getMessage());
             $output->writeln("<error>An error occurred: {$e->getMessage()}</error>");
+            if ($processId) {
+                $this->progressHelper->error($processId, $e->getMessage());
+            }
             return Cli::RETURN_FAILURE;
         }
     }
