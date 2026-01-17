@@ -76,20 +76,26 @@ class SyncStaticAssets extends Command
             // Fetch ALL existing files from S3 static directory (across all versions)
             $output->writeln("<info>Fetching all existing static files from S3...</info>");
             $s3Objects = $this->s3Adapter->listObjectsByStorageType('static', '');
-            foreach ($s3Objects as $object) {
-                // Key format: static/versionXXXX/frontend/Theme/Name/file.ext
-                $key = $object['Key'];
-                $allS3Files[$key] = $object['Size'];
 
-                // Extract relative path without version prefix to compare content across versions
-                // Expected format: prefix/static/versionXXXX/path/to/file
-                // We want: path/to/file and the size
-                if (preg_match('#/version\d+/(.*)$#', $key, $matches)) {
-                    $relativePath = $matches[1];
-                    // Store mapping of relative path + size => existing S3 key
-                    // This allows us to find if this exact file content exists in ANY version folder
-                    $existingS3Files[$relativePath . '_' . $object['Size']] = $key;
+            // Ensure $s3Objects is iterable
+            if ($s3Objects instanceof \Generator || is_iterable($s3Objects)) {
+                foreach ($s3Objects as $object) {
+                    // Key format: static/versionXXXX/frontend/Theme/Name/file.ext
+                    $key = $object['Key'];
+                    $allS3Files[$key] = $object['Size'];
+
+                    // Extract relative path without version prefix to compare content across versions
+                    // Expected format: prefix/static/versionXXXX/path/to/file
+                    // We want: path/to/file and the size
+                    if (preg_match('#/version\d+/(.*)$#', $key, $matches)) {
+                        $relativePath = $matches[1];
+                        // Store mapping of relative path + size => existing S3 key
+                        // This allows us to find if this exact file content exists in ANY version folder
+                        $existingS3Files[$relativePath . '_' . $object['Size']] = $key;
+                    }
                 }
+            } else {
+                $output->writeln("<warning>No existing static files found in S3 or invalid response.</warning>");
             }
 
             // Track which files we are uploading/keeping for the CURRENT version
