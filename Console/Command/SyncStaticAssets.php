@@ -72,6 +72,14 @@ class SyncStaticAssets extends Command
         try {
             $staticDir = $this->filesystem->getDirectoryRead(DirectoryList::STATIC_VIEW);
 
+            $versionFilePath = 'deployed_version.txt';
+            if (!$staticDir->isExist($versionFilePath) || !$staticDir->isFile($versionFilePath)) {
+                $output->writeln("<error>deployed_version.txt not found in pub/static. Please run 'bin/magento setup:static-content:deploy' first.</error>");
+                return Cli::RETURN_FAILURE;
+            }
+            $version = trim($staticDir->readFile($versionFilePath));
+            $output->writeln("<info>Detected static content version: {$version}</info>");
+
             // Handle wildcard '*' to select all themes
             if (in_array('*', $themes)) {
                 $output->writeln("<info>Wildcard '*' detected. Scanning for all available themes...</info>");
@@ -80,6 +88,7 @@ class SyncStaticAssets extends Command
 
                 foreach ($areas as $area) {
                     if (!$staticDir->isExist($area)) {
+                        $output->writeln("<comment>Area directory '{$area}' does not exist in pub/static.</comment>");
                         continue;
                     }
 
@@ -87,7 +96,7 @@ class SyncStaticAssets extends Command
                     foreach ($vendors as $vendor) {
                         $vendorPath = $area . '/' . $vendor;
                         // Skip non-directories or special files
-                        if (!$staticDir->isDirectory($vendorPath) || $vendor === '.' || $vendor === '..') {
+                        if ($vendor === '.' || $vendor === '..' || !$staticDir->isDirectory($vendorPath)) {
                             continue;
                         }
 
@@ -95,7 +104,7 @@ class SyncStaticAssets extends Command
                         foreach ($themeDirs as $themeName) {
                             $themePath = $vendorPath . '/' . $themeName;
                             // Skip non-directories or special files
-                            if (!$staticDir->isDirectory($themePath) || $themeName === '.' || $themeName === '..') {
+                            if ($themeName === '.' || $themeName === '..' || !$staticDir->isDirectory($themePath)) {
                                 continue;
                             }
 
@@ -105,20 +114,13 @@ class SyncStaticAssets extends Command
                 }
 
                 if (empty($foundThemes)) {
-                    $output->writeln("<warning>No themes found in pub/static.</warning>");
+                    $output->writeln("<error>No themes found in pub/static. Please ensure static content is deployed.</error>");
                     return Cli::RETURN_FAILURE;
                 }
 
                 $themes = array_unique($foundThemes);
                 $output->writeln("<info>Found " . count($themes) . " themes: " . implode(', ', $themes) . "</info>");
             }
-
-            $versionFilePath = 'deployed_version.txt';
-            if (!$staticDir->isExist($versionFilePath) || !$staticDir->isFile($versionFilePath)) {
-                $output->writeln("<error>deployed_version.txt not found in pub/static.</error>");
-                return Cli::RETURN_FAILURE;
-            }
-            $version = trim($staticDir->readFile($versionFilePath));
 
             $filesToUpload = [];
             $existingS3Files = [];
@@ -173,7 +175,7 @@ class SyncStaticAssets extends Command
                 }
 
                 if ($themePath === null) {
-                    $output->writeln("<warning>Theme '{$theme}' not found. Skipping.</warning>");
+                    $output->writeln("<warning>Theme '{$theme}' not found in pub/static. Skipping.</warning>");
                     continue;
                 }
 
