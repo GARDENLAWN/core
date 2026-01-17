@@ -17,6 +17,9 @@ class EmailSender extends AbstractHelper
     protected $logger;
     protected $timezone;
 
+    // Fallback email if config is missing
+    const FALLBACK_EMAIL = 'marcin.piechota@gardenlawn.pl';
+
     public function __construct(
         Context $context,
         TransportBuilder $transportBuilder,
@@ -38,8 +41,8 @@ class EmailSender extends AbstractHelper
         $recipientEmail = $this->scopeConfig->getValue('trans_eu/general/notification_email');
 
         if (!$recipientEmail) {
-            $this->logger->warning('Trans.eu: Notification email not configured. Skipping alert.');
-            return;
+            $recipientEmail = self::FALLBACK_EMAIL;
+            $this->logger->warning('Trans.eu: Notification email not configured. Using fallback: ' . $recipientEmail);
         }
 
         try {
@@ -47,7 +50,7 @@ class EmailSender extends AbstractHelper
 
             $sender = [
                 'name' => 'Trans.eu Integration',
-                'email' => $this->scopeConfig->getValue('trans_email/ident_general/email') ?? 'noreply@example.com'
+                'email' => $this->scopeConfig->getValue('trans_email/ident_general/email') ?? 'marcin.piechota@gardenlawn.pl'
             ];
 
             // Get current date in store timezone (or specific locale if needed)
@@ -75,6 +78,11 @@ class EmailSender extends AbstractHelper
         } catch (\Exception $e) {
             $this->logger->error('Trans.eu: Failed to send error notification: ' . $e->getMessage());
             $this->inlineTranslation->resume();
+
+            // Ostatnia deska ratunku: mail() PHP
+            if (function_exists('mail')) {
+                mail($recipientEmail, 'CRITICAL: Trans.eu Token Error', $errorMessage . "\nDate: " . $date);
+            }
         }
     }
 }
