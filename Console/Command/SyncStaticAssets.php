@@ -80,9 +80,14 @@ class SyncStaticAssets extends Command
             // Ensure $s3Objects is iterable
             if ($s3Objects instanceof \Generator || is_iterable($s3Objects)) {
                 foreach ($s3Objects as $object) {
+                    // Check if $object is an array and has 'Key'
+                    if (!is_array($object) || !isset($object['Key'])) {
+                        continue;
+                    }
+
                     // Key format: static/versionXXXX/frontend/Theme/Name/file.ext
                     $key = $object['Key'];
-                    $allS3Files[$key] = $object['Size'];
+                    $allS3Files[$key] = $object['Size'] ?? 0;
 
                     // Extract relative path without version prefix to compare content across versions
                     // Expected format: prefix/static/versionXXXX/path/to/file
@@ -91,7 +96,7 @@ class SyncStaticAssets extends Command
                         $relativePath = $matches[1];
                         // Store mapping of relative path + size => existing S3 key
                         // This allows us to find if this exact file content exists in ANY version folder
-                        $existingS3Files[$relativePath . '_' . $object['Size']] = $key;
+                        $existingS3Files[$relativePath . '_' . ($object['Size'] ?? 0)] = $key;
                     }
                 }
             } else {
