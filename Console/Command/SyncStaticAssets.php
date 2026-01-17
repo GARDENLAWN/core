@@ -7,7 +7,7 @@ use Exception;
 use Magento\Framework\Console\Cli;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\ProgressBar;
-use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use GardenLawn\MediaGallery\Model\S3Adapter;
@@ -17,7 +17,7 @@ use Psr\Log\LoggerInterface;
 
 class SyncStaticAssets extends Command
 {
-    private const string THEME_ARGUMENT = 'theme';
+    private const string THEME_OPTION = 'theme';
 
     private S3Adapter $s3Adapter;
     private Filesystem $filesystem;
@@ -39,9 +39,10 @@ class SyncStaticAssets extends Command
     {
         $this->setName('gardenlawn:s3:sync-static')
             ->setDescription('Synchronizes static assets for specific themes to S3.')
-            ->addArgument(
-                self::THEME_ARGUMENT,
-                InputArgument::IS_ARRAY | InputArgument::REQUIRED,
+            ->addOption(
+                self::THEME_OPTION,
+                null,
+                InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY,
                 'The theme(s) to synchronize (e.g., Magento/luma).'
             );
         parent::configure();
@@ -49,7 +50,13 @@ class SyncStaticAssets extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $themes = $input->getArgument(self::THEME_ARGUMENT);
+        $themes = $input->getOption(self::THEME_OPTION);
+
+        if (empty($themes)) {
+            $output->writeln('<error>You must specify at least one theme using --theme option.</error>');
+            return Cli::RETURN_FAILURE;
+        }
+
         $output->writeln("<info>Starting synchronization of static assets for themes to S3...</info>");
 
         try {

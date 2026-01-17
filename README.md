@@ -45,10 +45,10 @@ Synchronizes static assets for specific themes with the configured S3 bucket.
 
 **Usage:**
 ```bash
-bin/magento gardenlawn:s3:sync-static <theme>...
+bin/magento gardenlawn:s3:sync-static --theme=<theme>...
 ```
-**Arguments:**
-- `theme`: (Required, array) The theme(s) to synchronize (e.g., Hyva/default-csp Magento/backend GardenLawn/Admintheme GardenLawn/Hyvatheme GardenLawn/Amrobotstheme GardenLawn/Finntheme).
+**Options:**
+- `--theme`: (Required, array) The theme(s) to synchronize (e.g., Hyva/default-csp, Magento/backend, GardenLawn/Admintheme, GardenLawn/Hyvatheme, GardenLawn/Amrobotstheme, GardenLawn/Finntheme).
 
 #### Sync Dealer Prices
 Synchronizes the `dealer_price` (EUR) attribute with native Tier Prices for B2B customer groups, converting the price to the store's base currency (PLN). After running, reindex the price indexer.
@@ -119,4 +119,3 @@ bin/magento gardenlawn:mediagallery:deduplicate-assets [options]
 ```
 **Options:**
 - `--dry-run`: Do not modify the database, only show what would be done.
-```
