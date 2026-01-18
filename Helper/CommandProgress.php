@@ -3,23 +3,30 @@ declare(strict_types=1);
 
 namespace GardenLawn\Core\Helper;
 
-use Magento\Framework\App\CacheInterface;
+use Magento\Framework\App\Filesystem\DirectoryList;
+use Magento\Framework\Filesystem;
 use Magento\Framework\Serialize\SerializerInterface;
+use Psr\Log\LoggerInterface;
 
 class CommandProgress
 {
-    private const CACHE_PREFIX = 'gl_cmd_progress_';
-    private const CACHE_LIFETIME = 3600; // 1 hour
+    private const FILE_PREFIX = 'gl_cmd_progress_';
 
-    private CacheInterface $cache;
+    private Filesystem $filesystem;
     private SerializerInterface $serializer;
+    private LoggerInterface $logger;
+    private DirectoryList $directoryList;
 
     public function __construct(
-        CacheInterface $cache,
-        SerializerInterface $serializer
+        Filesystem $filesystem,
+        SerializerInterface $serializer,
+        LoggerInterface $logger,
+        DirectoryList $directoryList
     ) {
-        $this->cache = $cache;
+        $this->filesystem = $filesystem;
         $this->serializer = $serializer;
+        $this->logger = $logger;
+        $this->directoryList = $directoryList;
     }
 
     public function init(string $processId, string $message = 'Starting...'): void
@@ -35,7 +42,8 @@ class CommandProgress
             'percent' => $total > 0 ? round(($current / $total) * 100) : 0,
             'message' => $message,
             'finished' => false,
-            'error' => false
+            'error' => false,
+            'updated_at' => time()
         ];
         $this->save($processId, $data);
     }
@@ -49,7 +57,8 @@ class CommandProgress
             'message' => $message,
             'finished' => true,
             'error' => false,
-            'output' => $output
+            'output' => $output,
+            'updated_at' => time()
         ];
         $this->save($processId, $data);
     }
@@ -62,27 +71,40 @@ class CommandProgress
             'percent' => 0,
             'message' => $message,
             'finished' => true,
-            'error' => true
+            'error' => true,
+            'updated_at' => time()
         ];
         $this->save($processId, $data);
     }
 
     public function get(string $processId): array
     {
-        $data = $this->cache->load(self::CACHE_PREFIX . $processId);
-        if (!$data) {
-            return ['finished' => true, 'error' => true, 'message' => 'Process not found or expired.'];
+        try {
+            $directory = $this->filesystem->getDirectoryRead(DirectoryList::VAR_DIR);
+            $filePath = 'tmp/' . self::FILE_PREFIX . $processId . '.json';
+
+            if (!$directory->isExist($filePath)) {
+                $this->logger->warning("CommandProgress: File '{$filePath}' not found.");
+                return ['finished' => true, 'error' => true, 'message' => 'Process not found or expired.'];
+            }
+
+            $content = $directory->readFile($filePath);
+            return $this->serializer->unserialize($content);
+        } catch (\Exception $e) {
+            $this->logger->error("CommandProgress: Error reading progress file: " . $e->getMessage());
+            return ['finished' => true, 'error' => true, 'message' => 'Error reading process status.'];
         }
-        return $this->serializer->unserialize($data);
     }
 
     private function save(string $processId, array $data): void
     {
-        $this->cache->save(
-            $this->serializer->serialize($data),
-            self::CACHE_PREFIX . $processId,
-            [],
-            self::CACHE_LIFETIME
-        );
+        try {
+            $directory = $this->filesystem->getDirectoryWrite(DirectoryList::VAR_DIR);
+            $filePath = 'tmp/' . self::FILE_PREFIX . $processId . '.json';
+
+            $directory->writeFile($filePath, $this->serializer->serialize($data));
+        } catch (\Exception $e) {
+            $this->logger->error("CommandProgress: Error saving progress file: " . $e->getMessage());
+        }
     }
 }
