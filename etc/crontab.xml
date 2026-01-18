@@ -5,5 +5,8 @@
         <job name="gardenlawn_core_custom" instance="GardenLawn\Core\Cron\Custom" method="execute">
             <schedule>0 4 * * *</schedule>
         </job>
+        <job name="gardenlawn_core_copy_error_pages" instance="GardenLawn\Core\Cron\CopyErrorPages" method="execute">
+            <schedule>0 3 * * 0</schedule>
+        </job>
     </group>
 </config>
